@@ -233,22 +233,5 @@ function update ()
     d = true;
     //this.cameras.main.scrollX = 800;
     
-    /*if (d) // si déplacement = 1 on va a gauche
-    {
-        this.cameras.main.scrollX -= 0.5;
-
-        if (this.cameras.main.scrollX <= 0) //  on bascule dans l'autre sens au bout
-        {
-            d = 0;
-        }
-    }
-    else //sinon a droite
-    {
-        this.cameras.main.scrollX += 0.5;
-
-        if (this.cameras.main.scrollX >= 800)
-        {
-            d = 1;
-        }
-    }*/
+    
 }
