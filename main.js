@@ -13,7 +13,115 @@ var config = {
 //var globales
 var game = new Phaser.Game(config);
 
+class Machine {
+    constructor(){
+        //Information en entrée
+        this.Employes // modifie la cadence de production
+        this.Normes // Varie les limites de production par rapport aux déchets produits + pollution
+        this.uptimeNRJ //(Principal + Auxilliaire), varie la production et donc tout le reste
+        this.accident // probabilité d'avoir un accident sur cette machine
 
+        //Apparition random fixe a la machine
+        this.panne // possibilité de réparer par probabilité sinon fin de la machine
+        this.coutReparation // cout de réparation sinon suppression de la machine..
+
+        // Modification tout les mois pour le reste
+        this.dechets
+        this.production  
+        this.pollution  
+
+    }
+    //méthode de génération des (déchets + production + pollution) sur le tour prennant en compte 
+    //l'uptime, les employés et leurs accidents et les normes
+
+    //Utilisation de la probablité de panne pour générer la possibilité de réparer ou suppression
+    
+}
+class Energie {
+    constructor(){
+        //Fournisseurs :
+        this.Principal // Renvoi vers un fournisseur
+        this.Auxilliaire
+        
+        this.consomation // Consommation /mois définit par les machines etc
+
+        // rajouter une methode pour calculer le temps d'utilisation de chaque 
+        // et donc le prix total en energie et la pollution produite
+    }
+}
+class Fournisseur {
+    constructor(){
+        this.prix // prix au KW/H
+        this.pollution // pollution produite par KW/H fournit
+
+        this.securite // pour les auxilliaires dangereux
+
+        this.uptime // pourcentage d'uptime ou probabilité de panne, a voir
+    }
+    //Méthode de calcul de l'uptime sur le mois
+}
+class Employe { // Repenser le système d'assignement avec differents postes par machine, +/- accidents/qualité de travail ?
+    constructor(){
+        this.Machine // assigné, retirer ?
+
+        this.qualTravail // définit en fonction de la probabilité d'avoir des accidents,
+                         // les avantages, et les directives de travail 
+
+        this.accident // probabilité d'avoir un accident, varie avec les choix sécurité 
+                      // et par rapport au type de machine et directives
+
+        this.avantages // avantages offerts par l'entreprise
+    }
+    // Méthode de calcul des accidents + impact sur la qualTravail
+    // Méthode d'ajout d'avantages ? ou gérer ça avec une union de proba
+}
+class Commercial {
+    constructor(){
+        this.commission // Commission sur la vente, augmentant les chances de vendre ( par client ? globalement ?)
+        this.prix // prix de vente de l'objet, impact de la commission sur le commercial définit par la relation:
+                  // Salaire / (Commission * prix)  | avec Salaire = salaire d'un employé normal
+    }
+    //Méthode de calcul de l'impact sur les ventes
+}
+/* Variables globales non définies
+ - Salaire d'un employé
+
+    ...
+Environnement :
+    Energie (methode calcul pollution)
+    Machines (pollution + dechets)
+    Respect des Normes (à définir avec les choix + Evenements randoms)
+Vie Sociale :
+    Employe (qualTravail + avantages)
+    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)
+Ventes : Flou pour le moment..
+    Stock de produits
+    Image de marque
+    Parts de marché
+    Pubs
+    Commerciaux (impact sur les ventes)
+Production :
+    Nb(Employes + Robots)
+    cadence de travail(qualTravail - employe.accident + Stocks)
+    Machine(Nb, qualité)
+    uptimeGlobal
+
+    */
+
+
+
+
+//Barres Globales :
+// - Environnement   = (pollutionMachine+NRJ) + déchets + Respect des Normes
+// - Vie Sociale     = qualTravail + avantages + securite
+// - Ventes          = Stock + Image de marque + Parts de marché + Pubs + Commerciaux
+// - Production      = Nb(Employe+Robots) + cadence de travail + Machine(Nb+qualité+UptimeGlobal)
+
+//Magasin : (+/-)
+// - Employés / Robots
+// - Commerciaux + commission ajustable
+// - Prix de vente
+// - Production visée
 
 function preload ()
 {
