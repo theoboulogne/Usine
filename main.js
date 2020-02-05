@@ -427,7 +427,7 @@ class Composant {
             this.Add(0, 1);
         }else if(tmp_Employe>0){
             tmp_Employe--;
-            this..Add(1, 0);
+            this.Add(1, 0);
         }   
     }
     Upgrade(){//utiliser un tableau global en fonction du composant pour tout les parametres
@@ -578,12 +578,21 @@ function create ()
     
         
 
-    var cadre_gauche = new Cadre(10,10,190,270, 50, 0 ,0 ,0 ,0.7); // arrondi élevé en haut a gauche et léger en bas a gauche
+    var cadre_gauche = new Cadre(10,10,620,270, 50, 0 ,0 ,0 ,0.7); // arrondi élevé en haut a gauche et léger en bas a gauche
     var cadre_bureau = new Cadre(250,370,800,280, 50, 50 ,0 ,0 ,1); // arrondi élevé en haut a gauche et léger en bas a gauche
-    var cadre_test = new Cadre(200,10,190,270);
-    var cadre_test1 = new Cadre(390,10,190,270);
+    //var cadre_test = new Cadre(240,10,190,270);
+    //var cadre_test1 = new Cadre(460,10,190,270);
 
-    this.texte = scene.add.text(50, 20, "test", { fontFamily: '"Arial Rounded MT Bold"', color: '#FFFFFF', fontSize: 20 });
+    this.texte = scene.add.text(100, 15, "NRJ", { fontFamily: '"Arial Rounded MT Bold"', color: '#FFFFFF', fontSize: 20 });
+
+    var pollutionPricipale = "pollutionPricipale";
+    var dechetsPrincipale = "dechetsPrincipale";
+    var empreintePollutionPricipale = "empreintePollutionPricipale";
+    var empreinteDechetsPrincipale = "empreinteDechetsPrincipale";
+    
+    this.texte = scene.add.text(30, 45, pollutionPricipale + " / " + dechetsPrincipale , { fontFamily: '"Arial Rounded MT Bold"', color: '#FFFFFF', fontSize: 20 });
+    this.texte = scene.add.text(30, 65, empreintePollutionPricipale + " / " + empreinteDechetsPrincipale , { fontFamily: '"Arial Rounded MT Bold"', color: '#FFFFFF', fontSize: 20 });
+
 
     // taille/position de la camera a gerer
     //this.cameras.main.setSize(1600, 600); 
