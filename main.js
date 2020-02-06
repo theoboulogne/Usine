@@ -13,8 +13,15 @@ var config = {
 //var globales
 var game = new Phaser.Game(config);
 
+let devlog_init_jeu = false;
+let devlog_init_ligne = false;
+let devlog_init_composant = false;
+let devlog_update_jeu = false;
+let devlog_update_ligne = false;
+
 /*To-DO
 - créer class accident pour gérer tout les accidents et les pannes
+-uptime nrj a passer dans la boucle en fonction de la consommationNRJ
 
 - Revoir entièrement la partie accident, panne, securite
 */
@@ -143,7 +150,7 @@ var Choix = (function() {
             return salaire;
         },
         Securite_employes: function() {
-            return securite.smployes;
+            return securite.employes;
         },
         Securite_robot: function() {
             return securite.robots;
@@ -154,70 +161,239 @@ var Choix = (function() {
 
 class Jeu{
     constructor(){
-        //affichage developpeur a faire
+        //Nombre de jours dans un mois
+        this.uptimeMax = 30;
+        //faire varier +1 / -1 ? 
+        // ou retirer des jours pour laisser les wk end off en fonction des choix ?
 
-        this.uptimeMax = 30;//passer en constante ? faire varier +1 / -1 ? retirer des jours pour laisser les wk end off ?
-
-        this.Eco = new Ecologie();
-        this.Empreinte = new Ecologie();
+        if(devlog_init_jeu) console.log("  * - * Initialisation Ecologie Jeu : Eco + Empreinte * - *  ")
+        this.Eco = new Ecologie(); // Initialisation de l'écologie
         this.Eco.pollution = 0;
         this.Eco.dechets = 0;
+        this.Empreinte = new Ecologie();
         this.Empreinte.pollution = 0;
         this.Empreinte.dechets = 0;
 
-        this.CentraleNucleaire = new Fournisseur();
-        this.CentraleNucleaire.prix = 2;
-        this.CentraleNucleaire.pollution = 6;
-        this.CentraleNucleaire.coupure = 0.02;//retirer la variable ?
-        //this.CentraleNucleaire.uptime = (1-this.CentraleNucleaire.coupure)*uptimeMax; // en prenant 30 comme max uptimeNRJ
-        //Uptime random a faire ..
-        
-        this.GenerateurPetrole = new Fournisseur();
-        this.GenerateurPetrole.prix = 8;
-        this.GenerateurPetrole.pollution = 15;
-        this.GenerateurPetrole.coupure = 0.08;
-        //this.GenerateurPetrole.uptime = (1-this.GenerateurPetrole.coupure)*uptimeMax; // en prenant 30 comme max uptimeNRJ
+        if(devlog_init_jeu){
+            console.log("this.Eco.pollution")
+            console.log(this.Eco.pollution)
+            console.log("this.Eco.dechets")
+            console.log(this.Eco.dechets)
+            console.log("this.Empreinte.pollution")
+            console.log(this.Empreinte.pollution)
+            console.log("this.Empreinte.dechets")
+            console.log(this.Empreinte.dechets)
+            console.log("  * - *                   --------                   * - *  ")
+            console.log("")
+        }
 
-        this.Courant = new Energie();
-        this.Courant.Principal = this.CentraleNucleaire;
-        this.Courant.Auxilliaire = this.GenerateurPetrole;
+        if(devlog_init_jeu) console.log("  * - * Initialisation Courant Jeu : Principal + Auxilliaire * - *  ")
+        this.Courant = new Energie();// Initialisation de l'énergie
+        this.Courant.Principal.prix = 2;
+        this.Courant.Principal.pollution = 6;
+        this.Courant.Principal.coupure = 0.5;
+        this.Courant.Auxilliaire.prix = 8;
+        this.Courant.Auxilliaire.pollution = 15;
+        this.Courant.Auxilliaire.coupure = 0.2;
 
-        this.solde = 1000000;
-        this.nbEmployes = 15;
+        if(devlog_init_jeu){
+            console.log("this.Courant.Principal.prix")
+            console.log(this.Courant.Principal.prix)
+            console.log("this.Courant.Principal.pollution")
+            console.log(this.Courant.Principal.pollution)
+            console.log("this.Courant.Principal.coupure")
+            console.log(this.Courant.Principal.coupure)
+            console.log("this.Courant.Principal.uptime(this.uptimeMax)")
+            console.log(this.Courant.Principal.uptime(this.uptimeMax))
+            console.log("this.Courant.Auxilliaire.prix")
+            console.log(this.Courant.Auxilliaire.prix)
+            console.log("this.Courant.Auxilliaire.pollution")
+            console.log(this.Courant.Auxilliaire.pollution)
+            console.log("this.Courant.Auxilliaire.coupure")
+            console.log(this.Courant.Auxilliaire.coupure)
+            console.log("this.Courant.Auxilliaire.uptime(this.uptimeMax)")
+            console.log(this.Courant.Auxilliaire.uptime(this.uptimeMax))
+            console.log("  * - *                       --------                      * - *  ")
+            console.log("")
+        }
+
+        if(devlog_init_jeu) console.log("  * - * Initialisation Ventes Jeu : Variables * - *  ")
+        this.solde = 1000000;// Initialisation des ventes
+
+        if(devlog_init_jeu){
+            console.log("this.solde")
+            console.log(this.solde)
+            console.log("  * - *                --------               * - *  ")
+            console.log("")
+        }
+
+
+        if(devlog_init_jeu)console.log("  * - * Initialisation Production Jeu : Variables * - *  ")
+        this.nbEmployes = 15;// Initialisation de la production
         this.nbRobots = 0;
         this.nbEmployes_dispo = 15;
         this.nbRobots_dispo = 0;
-        this.stock = 0 // production en stock
+        this.stock = 0 // produits en stock
 
-        this.Lignes = [];
-        this.Lignes.push(new Ligne()); // une ligne par défault
+        if(devlog_init_jeu){
+            console.log("this.nbEmployes")
+            console.log(this.nbEmployes)
+            console.log("this.nbRobots")
+            console.log(this.nbRobots)
+            console.log("this.nbEmployes_dispo")
+            console.log(this.nbEmployes_dispo)
+            console.log("this.nbRobots_dispo")
+            console.log(this.nbRobots_dispo)
+            console.log("this.stock")
+            console.log(this.stock)
+            console.log("  * - * Initialisation Production Jeu : Ligne 0 * - *  ")
+        }
+            this.Lignes = [];
+            this.Lignes.push(new Ligne()); // une ligne par défault
 
-        // a voir
-        // Séparer la génération de l'uptime en 30 étapes de calcul proba ou multiplier le pourcentage par l'uptime max
+        if(devlog_init_jeu){
+            console.log("  * - *                 --------                * - *  ")
+            console.log("")
+        }
     }
 
     Update_Mois(){ // Fonctionnement d'un mois
         //Reset des variables de stockage des infos du mois + calcul du nombre de jours de fonctionnement
+        if(devlog_update_jeu) console.log("  * - * Update Mois : Variables * - *  ")
         this.consommationNRJ = 0;
         let uptimeNRJ = this.Courant.Principal.uptime(this.uptimeMax) + ((this.uptimeMax - this.Courant.Principal.uptime(this.uptimeMax))*(1-this.Courant.Auxilliaire.coupure));
+        if(devlog_update_jeu) {
+            console.log("this.consommationNRJ")
+            console.log(this.consommationNRJ)
+            console.log("uptimeNRJ (let)")
+            console.log(uptimeNRJ)
+            console.log("  * - * Update Mois : Journées * - *  ")
+        }
         for(let i=0; i<uptimeNRJ; i++){ // On effectue notre mois
             this.Update_Jour()
         }
         //Calcul et facture de fin de mois
-        this.solde += Choix.Solde()/* + Ventes .. */ - ((this.consommationNRJ * (this.solde_NRJ1() + this.solde_NRJ2())) + this.solde_salaires());
-    }
+        if(devlog_update_jeu){
+            console.log("  * - * Update Mois : Traitement Fin de mois * - *  ")
+            console.log(" -  - Argent -  - ")
+            console.log("= Solde")
+            console.log(this.solde)
+            console.log(" -  -")
+            console.log("+ Choix.Solde()")
+            console.log(Choix.Solde())
+            console.log("- this.consommationNRJ")
+            console.log(this.consommationNRJ)
+            console.log("- this.Courant.solde_NRJ1(this.uptimeMax)")
+            console.log(this.Courant.solde_NRJ1(this.uptimeMax))
+            console.log("- this.Courant.solde_NRJ2(this.uptimeMax)")
+            console.log(this.Courant.solde_NRJ2(this.uptimeMax))
+            console.log("- this.solde_salaires()")
+            console.log(this.solde_salaires())
+        }
 
+        this.solde += Choix.Solde()/* + Ventes .. */ - ((this.consommationNRJ * (this.Courant.solde_NRJ1(this.uptimeMax) + this.Courant.solde_NRJ2(this.uptimeMax))) + this.solde_salaires());
+        
+        if(devlog_update_jeu){
+            console.log("= Total")
+            console.log(this.solde)
+            console.log("  * - *             --------                * - *  ")
+            console.log("")
+        }
+    }
     Update_Jour(){ // Fonctionnement d'une journée
+    if(devlog_update_jeu) console.log(" -  - Update Jour : Debut -  - ")
         for(let i=0; i<24; i++){
-            if(i==6||i==14){// 6 : 00 - Remplis machines | 14 : 00 - Rajoute employes
-                this.add_ouvriers()// definir la marche de la marchine a ce moment la ?
+            if(devlog_update_jeu){
+                console.log(" - Update Jour Heure : " + (i).toString() + " - ")
+                console.log(" - Update Jour  : Gestion des employes - ")
             }
-            if(i==12||i==18){// 12 : 00 - Retire les employes | 18 : 00 - Retire les employes
-                this.retirer_employe() // faire que la fonction augmente nbEmployes
-            } // rajouter retirer_robot aussi
+            if(i==6||i==14){// | 6 : 00 h | 14 : 00 h | -> Rajoute employes + Robots
+                if(devlog_update_jeu){
+                    console.log(" - Ajout Ouvriers Debut - ")
+                    console.log("this.nbEmployes_dispo")
+                    console.log(this.nbEmployes_dispo)
+                    console.log("this.nbRobots_dispo")
+                    console.log(this.nbRobots_dispo)
+                }
+
+                this.add_ouvriers()
+
+                if(devlog_update_jeu){
+                    console.log(" - Ajout Ouvriers Fin - ")
+                    console.log("this.nbEmployes_dispo")
+                    console.log(this.nbEmployes_dispo)
+                    console.log("this.nbRobots_dispo")
+                    console.log(this.nbRobots_dispo)
+                }
+            }// definir la var marche de la machine a ce moment la pour retirer du traitement ?
+            if(i==12||i==18){// | 12 : 00 h | 18 : 00 h | -> Retire les employes 
+                if(devlog_update_jeu){
+                    console.log(" - Retirer Employe Debut - ")
+                    console.log("this.nbEmployes_dispo")
+                    console.log(this.nbEmployes_dispo)
+                }
+
+                this.retirer_employe() // ( on laisse les robots ils tournent 24/24 actuellement, a changer )
+                
+                if(devlog_update_jeu){
+                    console.log(" - Retirer Employe Fin - ")
+                    console.log("this.nbEmployes_dispo")
+                    console.log(this.nbEmployes_dispo)
+                }
+            } 
+            if(devlog_update_jeu){
+                console.log(" - Update Jour  : Consommation - ")
+                console.log(" - Debut - ")
+                console.log("this.consommationNRJ")
+                console.log(this.consommationNRJ)
+            }
+
             this.consommation()
+
+            if(devlog_update_jeu){
+                console.log(" - Fin - ")
+                console.log("this.consommationNRJ")
+                console.log(this.consommationNRJ)
+                console.log(" - Update Jour  : Lignes - ")
+                console.log(" - Debut - ")
+                console.log("this.stock")
+                console.log(this.stock)
+            }
+
             this.Update_Lignes(); 
+
+            if(devlog_update_jeu){
+                console.log(" - Fin - ")
+                console.log("this.stock")
+                console.log(this.stock)
+            }
+            
+            if(devlog_update_jeu){
+                console.log(" - Update Jour  : Ecologie - ")
+                console.log(" - Debut - ")
+                console.log("this.Eco.pollution")
+                console.log(this.Eco.pollution)
+                console.log("this.Eco.dechets")
+                console.log(this.Eco.dechets)
+                console.log("this.Empreinte.pollution")
+                console.log(this.Empreinte.pollution)
+                console.log("this.Empreinte.dechets")
+                console.log(this.Empreinte.dechets)
+            }
+
             this.empreinte()
+
+            if(devlog_update_jeu){
+                console.log(" - Fin - ")
+                console.log("this.Eco.pollution")
+                console.log(this.Eco.pollution)
+                console.log("this.Eco.dechets")
+                console.log(this.Eco.dechets)
+                console.log("this.Empreinte.pollution")
+                console.log(this.Empreinte.pollution)
+                console.log("this.Empreinte.dechets")
+                console.log(this.Empreinte.dechets)
+            }
         }
     }
     Update_Lignes(){ //Fait fonctionner les machines une heure
@@ -229,6 +405,7 @@ class Jeu{
     }
 
     consommation(){ // Récupère la consommation sur une heure
+
         for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += this.Lignes[i].energie();
     }
     empreinte(){ // Récupère les infos écologiques sur une heure
@@ -245,14 +422,8 @@ class Jeu{
         return Math.log((Choix.Salaire()/300) - (17*Choix.Avantages()))
     }
 
-    solde_salaires(){
+    solde_salaires(){ // modifier les salaires pour les week ends
         return (Choix.Salaire()*this.nbEmployes);
-    }
-    solde_NRJ1(){
-        return (this.Courant.Principal.uptime(this.uptimeMax)*(100/this.uptimeMax)*this.Courant.Principal.prix);
-    }
-    solde_NRJ2(){
-        return (this.Courant.Auxilliaire.uptime(this.Courant.Principal.uptime(this.uptimeMax))*(100/this.uptimeMax)*this.Courant.Auxilliaire.prix);
     }
 
     
@@ -296,66 +467,172 @@ class Jeu{
 }
 class Ligne {
     constructor(){
+        //Gestion des Pannes / Accidents
+        this.coutReparation = 8000; // cout de réparation fixe en cas de panne
+        this.accident = 0;
+        this.boolaccident = false;
+        this.boolpanne = false; // possibilité de réparer par probabilité sinon fin de la machine
+        if(devlog_init_ligne){
+            console.log(" -  - Initialisation Pannes / Accidents Ligne : Variables -  - ")
+            console.log("this.coutReparation")
+            console.log(this.coutReparation)
+            console.log("this.accident")
+            console.log(this.accident)
+            console.log("this.boolaccident")
+            console.log(this.boolaccident)
+            console.log("this.boolpanne")
+            console.log(this.boolpanne)
+            console.log(" -  - Initialisation Production Ligne : 5 Composants -  - ")
+        }
+        
         //Composants de la machine
         this.Composant = [];
         for(let i=0; i<5; i++) this.Composant.push(new Composant());
-
-        //Gestion des Pannes / Accidents
-        this.coutReparation = 8000; // cout de réparation fixe en cas de panne
-        this.boolaccident = false;
-        this.boolpanne = false; // possibilité de réparer par probabilité sinon fin de la machine
+        
+        if(devlog_init_ligne) console.log(" -  -                  --  -  --                    -  - ")
     }
-        //consomation minimale possible par défault
-        //this.consomationNRJ = this.Composant[i].consomationNRJ*5*uptimeNRJ// a mettre dans les updates getEnergyDemander(uptimeNRJ); // 0 par defaut, utiliser getenergy
-        //this.Normes // Varie les limites de production par rapport aux déchets produits + pollution, var globale ?
-        //this.uptimeNRJ //(Principal + Auxilliaire), varie la production et donc tout le reste
-
-        //Apparition random fixe a la machine
-
-        // On récupère les infos des composants et on rajoute les infos exterieures
-        //this.dechets
-        //this.production  
-        //this.pollution  
-        //this.accident // probabilité d'avoir un accident sur cette machine
-
-        // probabilité d'avoir un accident a faire, varie avec les choix sécurité 
-        // et par rapport au type de machine et directives
-
-    //méthode de génération des (déchets + production + pollution) sur le tour prennant en compte 
-    //l'uptime, les employés et leurs accidents et les normes
-    //Utilisation de la probablité de panne pour générer la possibilité de réparer ou suppression
-
     
     Update(){
-        //On enregistre des valeurs en tmp
+        if(devlog_update_ligne){
+            console.log(" - Update Jour Ligne  - ")
+            console.log(" - Initialisation - ")
+        }
         let tmp_accident = this.accident;
-        //let tmp_accident = this.accident; si besoin de rajouter des evenements en fonction du nombre d'accident par mois
-        // On initialise les valeurs de stockage
         this.marche = true;
         this.boolaccident = false;
         this.dechets=0;
         this.production=0; 
         this.pollution=0;
+        if(devlog_update_ligne){
+            console.log("tmp_accident")
+            console.log(tmp_accident)
+            console.log("this.marche")
+            console.log(this.marche)
+            console.log("this.boolaccident")
+            console.log(this.boolaccident)
+            console.log("this.dechets")
+            console.log(this.dechets)
+            console.log("this.production")
+            console.log(this.production)
+            console.log("this.pollution")
+            console.log(this.pollution)
+        }
         for(let i=0; i<5; i++){
-                // Utilisation d'une fonction avec variables globales a faire
                 if(this.Composant[i].auto){
+                    if(devlog_update_ligne){
+                        console.log(" - Auto : " + (i).toString() + " - ")
+                        console.log(" - Debut accident - ")
+                        console.log("this.boolpanne")
+                        console.log(this.boolpanne)
+                        console.log("this.boolaccident")
+                        console.log(this.boolaccident)
+                        console.log("tmp_accident")
+                        console.log(tmp_accident)
+                    }
                     if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i]);
+                    if(devlog_update_ligne){
+                        console.log(" - Fin accident - ")
+                        console.log("this.boolpanne")
+                        console.log(this.boolpanne)
+                        console.log("this.boolaccident")
+                        console.log(this.boolaccident)
+                        console.log("tmp_accident")
+                        console.log(tmp_accident)
+                    }
                     if(!this.boolpanne&&!this.boolaccident){ // on revérifie
+                        if(devlog_update_ligne){
+                            console.log(" - Debut production - ")
+                            console.log("this.dechets")
+                            console.log(this.dechets)
+                            console.log("this.production")
+                            console.log(this.production)
+                            console.log("this.pollution")
+                            console.log(this.pollution)
+                            console.log(" - Add - ")
+                            console.log("+ this.Composant[i].production_auto()")
+                            console.log(this.Composant[i].production_auto())
+                            console.log("+ this.Composant[i].dechets_auto()")
+                            console.log(this.Composant[i].dechets_auto())
+                            console.log("+ this.Composant[i].pollution_auto()")
+                            console.log(this.Composant[i].pollution_auto())
+                        }
+
                         this.production += this.Composant[i].production_auto();
                         this.dechets += this.Composant[i].dechets_auto();
                         this.pollution += this.Composant[i].pollution_auto();
+
+                        if(devlog_update_ligne){
+                            console.log(" - Fin production - ")
+                            console.log("this.dechets")
+                            console.log(this.dechets)
+                            console.log("this.production")
+                            console.log(this.production)
+                            console.log("this.pollution")
+                            console.log(this.pollution)
+                        }
                     }
                 }
                 else{
+                    if(devlog_update_ligne) console.log(" - Normal : " + (i).toString() + " - ")
                     if(this.Composant[i].nbRobots+this.Composant[i].nbEmployes == 0) this.marche = false;
                     else{
+                        if(devlog_update_ligne){
+                            console.log(" - Debut accident - ")
+                            console.log("this.boolpanne")
+                            console.log(this.boolpanne)
+                            console.log("this.boolaccident")
+                            console.log(this.boolaccident)
+                            console.log("tmp_accident")
+                            console.log(tmp_accident)
+                        }
                         if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i]);
+                        if(devlog_update_ligne){
+                            console.log(" - Fin accident - ")
+                            console.log("this.boolpanne")
+                            console.log(this.boolpanne)
+                            console.log("this.boolaccident")
+                            console.log(this.boolaccident)
+                            console.log("tmp_accident")
+                            console.log(tmp_accident)
+                        }
                         if(!this.boolpanne&&!this.boolaccident){
+                            if(devlog_update_ligne){
+                                console.log(" - Debut production - ")
+                                console.log("this.dechets")
+                                console.log(this.dechets)
+                                console.log("this.production")
+                                console.log(this.production)
+                                console.log("this.pollution")
+                                console.log(this.pollution)
+                            }
                             let qualTravail = Math.pow(this.cadence_travail(this.Composant[i]), this.Composant[i].nbEmployes) * Math.pow(3.5, this.Composant[i].nbRobots); // on recalcule si il y a eu de nouveaux accidents, rajouter d'autres modif par la suite en fonction des choix possibles
-                            
                             this.production += this.Composant[i].production_normal(qualTravail);//Composant[i].production*tmp_Uptime * (qualTravail^(Composant[i].nbEmployes)) * (3.5^(Composant[i].nbRobots))
                             this.dechets += this.Composant[i].dechets_normal(qualTravail);
                             this.pollution += this.Composant[i].pollution_normal(qualTravail);
+                            
+                            if(devlog_update_ligne){
+                                console.log('QualTravail:')
+                                console.log('cadence')
+                                console.log(this.cadence_travail(this.Composant[i]))
+                                console.log('nbemploye')
+                                console.log(this.Composant[i].nbEmployes)
+                                console.log('cadence^nbemploye')
+                                console.log(Math.pow(this.cadence_travail(this.Composant[i]), this.Composant[i].nbEmployes))
+                                console.log('nbrobot')
+                                console.log(this.Composant[i].nbRobots)
+                                console.log('3.5^nbRobots')
+                                console.log(Math.pow(3.5, this.Composant[i].nbRobots))
+                                
+                                console.log(" - Fin production - ")
+                                console.log("qualTravail")
+                                console.log(qualTravail);
+                                console.log("this.dechets")
+                                console.log(this.dechets)
+                                console.log("this.production")
+                                console.log(this.production)
+                                console.log("this.pollution")
+                                console.log(this.pollution)
+                            }
                         }
                     }
                 }   
@@ -370,13 +647,27 @@ class Ligne {
         this.pollution = 0;
     }
 
-    cadence_travail(composant){ // a changer avec le boulot de thomas..
-        //return 1 + (composant.accident_normal()/*0->2*/) + (avantages/*0->1*/); première formule utilisée
-        return (2-composant.accident_normal()+(2*Choix.Avantages()))/4
+    cadence_travail(composant){ //return 1 + (composant.accident_normal()/*0->2*/) + (avantages/*0->1*/); première formule utilisée
+        console.log('accident')
+        console.log((2-composant.accident_normal()))
+        console.log('avantage')
+        console.log((2*Choix.Avantages()))
+        return (((2-composant.accident_normal())+(2*Choix.Avantages()))/4)
     }
     energie(){
         let tmpNRJ = 0;
-        for(let i=0; i<5; i++) tmpNRJ += this.Composant[i].consomationNRJ * (this.Composant[i].nbEmployes + (2*this.Composant[i].nbRobots));
+        for(let i=0; i<5; i++) {
+            if(this.Composant[i].auto){
+                let m=true;
+                for(let j=0; j<5; j++) {
+                    if(!this.Composant[j].auto&&((this.Composant[j].nbEmployes+this.Composant[j].nbRobots)==0)) m = false;
+                }
+                if(m){
+                    tmpNRJ += this.Composant[i].consomationNRJ;
+                }
+            }
+            tmpNRJ += this.Composant[i].consomationNRJ * (this.Composant[i].nbEmployes + (2*this.Composant[i].nbRobots));
+        }
         return tmpNRJ;
     }
     accident_switch(composant){
@@ -425,13 +716,36 @@ class Composant {
         this.dechets = 8;// remonter dechets de ce composant
         this.pollution = 40;// remonter pollution de ce composant
         this.production = 30;// remonter nbEmployes*production ou production + (nbEmployes*prod/employe) // si pas d'employés on bloque la machine
-        this.accident = 0.08;// remonter accident * (nbEmployes + (2*nbRobots))
+        this.accident = 0.02;// remonter accident * (nbEmployes + (2*nbRobots))
     /* Variables qui évoluent */
         this.nbEmployes = 0;//on Stocke le nombre d'assignés, varie
         this.nbRobots = 0;
+
+        if(devlog_init_composant){
+            console.log(" - Initialisation Composant : Variables - ")
+            console.log("this.carte")
+            console.log(this.carte)
+            console.log("this.auto")
+            console.log(this.auto)
+            console.log("this.consomationNRJ")
+            console.log(this.consomationNRJ)
+            console.log("this.dechets")
+            console.log(this.dechets)
+            console.log("this.pollution")
+            console.log(this.pollution)
+            console.log("this.production")
+            console.log(this.production)
+            console.log("this.accident")
+            console.log(this.accident)
+            console.log("this.nbEmployes")
+            console.log(this.nbEmployes)
+            console.log("this.nbRobots")
+            console.log(this.nbRobots)
+            console.log(" -              -    -    -             - ")
+        }
     }
     accident_normal(){ // ARROW FUNCTION A FAIRE ? 
-        return (this.nbEmployes * (1-this.accident)*Choix.Securite_employes()) + (this.nbRobots * 2*(1-this.accident)*Choix.Securite_robot());
+        return ((this.nbEmployes * (1-this.accident)*Choix.Securite_employes()) + (this.nbRobots * 2*(1-this.accident)*Choix.Securite_robot()));
     }
     production_normal(qualTravail){ 
         return this.production * qualTravail;
@@ -501,10 +815,15 @@ class Ecologie {
     }
 }
 class Energie {
-    constructor(){
-        //Fournisseurs :
-        this.Principal; // Renvoi vers un fournisseur
-        this.Auxilliaire;
+    constructor(){//Fournisseurs :
+        this.Principal = new Fournisseur(); // Renvoi vers un fournisseur
+        this.Auxilliaire = new Fournisseur();
+    }
+    solde_NRJ1(uptimeMax){
+        return (this.Principal.uptime(uptimeMax)*(100/uptimeMax)*this.Principal.prix);
+    }
+    solde_NRJ2(uptimeMax){
+        return (this.Auxilliaire.uptime_Auxilliaire(uptimeMax, this.Principal)*(100/uptimeMax)*this.Auxilliaire.prix);
     }
 }
 class Fournisseur {
@@ -512,11 +831,12 @@ class Fournisseur {
         this.prix; // prix au KW/H
         this.pollution; // pollution produite par KW/H fournit
         this.coupure; // risques de coupure / possibilité de panne
-        //this.uptime; // pourcentage d'uptime  retirer uptime ?? en faire une méthode simplement ?
     }
-    //Méthode de calcul de l'uptime sur le mois
-    uptime(uptimeMax){
+    uptime(uptimeMax){//Méthode de calcul de l'uptime sur le mois
         return (1-this.coupure)*uptimeMax
+    }
+    uptime_Auxilliaire(uptimeMax, Principal){
+        return (this.uptime(uptimeMax - Principal.uptime(uptimeMax)))
     }
 }
 //class Employe { // Repenser le système d'assignement avec differents postes par machine, +/- accidents/qualité de travail ?
@@ -607,7 +927,7 @@ function preload ()
 
 function create ()
 {
-    TEST = new Jeu();
+    TEST = new Jeu(); // console.clear a utiliser
     TEST.Update_Mois();
     scene = this;
     
