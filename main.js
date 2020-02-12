@@ -19,14 +19,135 @@ let devlog_init_composant = false;
 let devlog_update_jeu = false;
 let devlog_update_ligne = false;
 
-/*To-DO
-- créer class accident pour gérer tout les accidents et les pannes
--uptime nrj a passer dans la boucle en fonction de la consommationNRJ
+/*
 
-- Revoir entièrement la partie accident, panne, securite
+-----------------------------------------------------------------------------------
+                                To-DO List :
+|------Légende:------|
+| " - " = à faire    |
+| " * " = implémenté |
+|--------------------|
+
+    Fonctionnalités principales :
+
+/-/ Environnement :
+*    Energie (methode calcul pollution)
+*    Machines (pollution + dechets)
+-   Respect des Normes (à définir avec les choix + Evenements randoms)
+/-/ Vie Sociale :
+*    Employe (qualTravail + avantages)
+*    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)
+/-/ Ventes : à définir
+-   Stock de produits
+-   Image de marque
+-   Parts de marché
+-   Pubs
+-   Commerciaux (impact sur les ventes)
+/-/ Production :
+*    Nb(Employes + Robots)
+*    cadence de travail(qualTravail - employe.accident + Stocks)
+*    Machine(Nb, qualité)
+*    uptimeGlobal
+/-/ 'Magasin' :
+-   nbEmployés / nbRobots
+-   Production visée 
+-   Prix de vente
+-   Gestion de la vente : Commerciaux ou Pubs ou a voir
+
+    Autre :
+
+- créer class accident pour mieux gérer tout les accidents, les pannes et la sécurité
+- Evaluer tout ce qui est améliorable ou non
+
+
+-----------------------------------------------------------------------------------
+
+        -///- Fonctionnement du jeu :
+    
+--------------------------------------------------
+
+    -//- Initialisation des différentes classes :
+    
+--------------------------------------------------
+
+----------------------------------------
+ -/- Joueur :
+-------------
+uptimeMax = 30; Nombre de jours dans un mois, utilisé pour l'initialisation du courant etc..
+solde = 1000000;
+stock = 0; produits en stock
+
+nbEmployes = 15; Nombre total d'ouvriers (Employes + Robots) 
+nbRobots = 0;
+nbEmployes_dispo = 15; Nombre d'ouvriers non assigné (Employes + Robots) :
+nbRobots_dispo = 0;
+
+Eco (empreinte écologique sur le tour)
+Empreinte (empreinte écologique totale)
+    avec empreinte écologique composée de : (dechet, pollution)
+Courant (Gestion de la consommation de l'usine)
+    avec un Fournisseur principal et auxilliaire chacun composé de : (pollution, prix, coupure)
+Lignes (Gestion des Lignes de production) = [] 
+    avec une Ligne au début
+----------------------------------------
+
+----------------------------------------
+ -/- Ligne :
+------------
+coutReparation = 8000;  cout fixe, en cas de panne
+accident = 0; nombres d'accidents au total sur cette ligne de production
+boolaccident = false; accident sur la ligne de prod
+boolpanne = false; panne sur la ligne de prod
+Composant = []
+    avec 5 Composant
+----------------------------------------
+
+----------------------------------------
+ -/- Composant :
+ ---------------
+this.nbEmployes = 0; on Stocke le nombre d'ouvriers assignés, varie au cours d'une journée
+this.nbRobots = 0;
+carte=("");  Caractéristiques fixes au composant
+auto = false; besoin d'un employé sur un composant pour faire marcher la machine ou non
+consomationNRJ = 0.003;
+dechets = 8;
+pollution = 40;
+production = 30;
+this.accident = 0.02;
+----------------------------------------
+
+--------------------------------------------------
+
+    -//- Fonctionnement d'un tour
+
+--------------------------------------------------
+
+- Calcul du temps de fonctionnement de l'énergie en jours en fonction 
+  de la probabilité de panne des fournisseurs
+- On lance l'update de chaque jour en fonction du nombre de jours calculés, 
+  on y effectue sur les 24h :
+    - à 6h et 14h :
+        - on assigne les ouvriers(employés+robots) à chaque composant pour un maximum de 2 par composant
+    - à 12h et 18h :
+        - on retire les employés ( rajouter un système de régulation pour les robots.. )
+    - à chaque heure :
+        - on calcule la consommation énergetique en fonction des ouvriers assignés et des machines
+        - On actualise chaque Ligne de production :
+            - On vérifie qu'il y a assez d'ouvriers pour que la Ligne de production fonctionne
+            - On remonte la production, les déchets et la pollution en fonction du nombre d'ouvriers assignés
+            - On génère a chaque heure une probabilité :
+                - d'accident (coupe la production sur l'heure à partir du composant avec l'accident) 
+                - de panne (nécessite une réparation manuelle) 
+        - On récupère/enregistre les infos écologiques
+- On actualise le solde en fonction du cout de l'énergie et des salaires 
+  (rajouter cout de production + cout fixe + etc)
+
+-----------------------------------------------------------------------------------
+
 */
 
 
+//Test pour l'interface :
 class Cadre {
     constructor(x, y, width, height, topleft=0, topright=0, botleft=0, botright=0, alpha=0.8, depth=0){
         this.graphics = scene.add.graphics();
@@ -110,13 +231,14 @@ class Icone {
     }
 }
 
-function proba(probabi){
-    if(Math.random()<probabi){
+//Jeu :
+
+function proba(probabilite){
+    if(Math.random()<probabilite){
         return 1;
     }
     else return 0;
 }
-
 var Choix = (function() {
 
     let salaire = 1500
@@ -159,7 +281,7 @@ var Choix = (function() {
 
 })();
 
-class Jeu{
+class Joueur{
     constructor(){
         //Nombre de jours dans un mois
         this.uptimeMax = 30;
@@ -187,6 +309,7 @@ class Jeu{
             console.log("")
         }
 
+        //Gérer les fournisseurs principaux coté serveur ?
         if(devlog_init_jeu) console.log("  * - * Initialisation Courant Jeu : Principal + Auxilliaire * - *  ")
         this.Courant = new Energie();// Initialisation de l'énergie
         this.Courant.Principal.prix = 2;
@@ -404,6 +527,7 @@ class Jeu{
         //Récupérer les infos ensuite
     }
 
+    //Faire le même type de fonction pour tout ?
     consommation(){ // Récupère la consommation sur une heure
 
         for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += this.Lignes[i].energie();
@@ -418,10 +542,10 @@ class Jeu{
         this.Empreinte.pollution += this.Eco.pollution;
         this.Empreinte.dechets += this.Eco.dechets;
     }
+
     avantages(){ // si salaire = 3300 -> = 1 | si salaire = 600 -> = 0
         return Math.log((Choix.Salaire()/300) - (17*Choix.Avantages()))
     }
-
     solde_salaires(){ // modifier les salaires pour les week ends
         return (Choix.Salaire()*this.nbEmployes);
     }
@@ -648,10 +772,6 @@ class Ligne {
     }
 
     cadence_travail(composant){ //return 1 + (composant.accident_normal()/*0->2*/) + (avantages/*0->1*/); première formule utilisée
-        console.log('accident')
-        console.log((2-composant.accident_normal()))
-        console.log('avantage')
-        console.log((2*Choix.Avantages()))
         return (((2-composant.accident_normal())+(2*Choix.Avantages()))/4)
     }
     energie(){
@@ -839,6 +959,167 @@ class Fournisseur {
         return (this.uptime(uptimeMax - Principal.uptime(uptimeMax)))
     }
 }
+
+class Ventes{
+    constructor(){
+        this.stockProduits = 0;
+        this.imageMarque = 0;
+        this.imageTourPrec = 0;
+        this.influenceSurImage = 1;
+        this.influenceSurImageTourPrec = 1;
+        this.partsMarche = 0.3;
+        this.influenceSurParts = 1;
+        this.influenceSurPartsTourPrec = 1;
+        this.pubs = 0;
+        this.pubsTourPrec = 0;
+        this.commerciaux = 0;
+        this.commissionsCommerciaux = 0;
+    }
+
+    influenceDesPubs(){
+        
+    if(this.pubs<=this.pubsTourPrec){ //Baisse de la Pub
+        this.influenceSurImage = this.influenceSurImageTourPrec*0.75
+        if(this.pubsTourPrec-this.pubs>0.05){
+            this.influenceSurImage = this.influenceSurImage*0.75
+        }
+    }
+    if(this.pubs == this.pubsTourPrec){  //La Pub reste pareille
+        this.influenceSurImage = this.influenceSurImageTourPrec*1.05
+    }
+    if(this.pubs>=this.pubsTourPrec){  //Augmentation de la Pub
+        this.influenceSurImage = this.influenceSurImageTourPrec*1.25
+        if(this.pubs-this.pubsTourPrec>0.2){
+            this.influenceSurImage = this.influenceSurImage*1.25
+        }    
+    } 
+
+    }
+    influenceDeImageMarque(){
+        if(this.imageMarque<=this.imageTourPrec){ //Baisse de l'image
+            this.influenceSurParts = this.influenceSurPartsTourPrec*0.75
+            if(this.imageTourPrec-this.imageMarque>0.05){
+                this.influenceSurParts = this.influenceSurParts*0.75
+            }
+        }
+        if(this.imageMarque == this.imageTourPrec){  //L'image reste pareille
+            this.influenceSurParts = this.influenceSurPartsTourPrec*1.05
+        }
+        if(this.imageMarque>=this.imageTourPrec){  //Augmentation de l'image
+            this.influenceSurParts = this.influenceSurPartsTourPrec*1.25
+            if(this.imageMarque-this.imageTourPrec>0.2){
+                this.influenceSurParts = this.influenceSurParts*1.25
+            }    
+        }
+    }
+    influenceDuStock(){
+        let nbVentes = 50; //Variable temp; lien à faire avec le nombre de ventes réel
+        if(nbVentes<=this.stockProduits){
+            if(this.stockProduits >= nbVentes*2){
+                this.influenceSurImage = this.influenceSurImageTourPrec*0.75;
+            }
+            if(this.stockProduits >= nbVentes*3){
+                this.influenceSurImage = this.influenceSurImageTourPrec*0.75;
+            }
+        }
+    }
+} 
+
+
+function preload ()
+{
+    // TEST DE TILEMAP POUR L'USINE :
+    // json fichier de config de la texture terre et eau
+    this.load.json('map', 'tilemap/isometric-grass-and-water.json');
+    // sprite fichier image terre et eau
+    this.load.spritesheet('tiles', 'tilemap/isometric-grass-and-water.png', { frameWidth: 64, frameHeight: 64 });
+    // TEST D'AFFICHAGE DE LOGO + BARRE :
+    this.load.image('argent', 'images/argent.png');
+    this.load.image('ecologie', 'images/ecologie.png');
+    this.load.image('machine', 'images/machine.png');
+    this.load.image('progression', 'images/progression.png');
+    this.load.image('salaires', 'images/salaires.png');
+    this.load.image('salarie', 'images/salarie.png');
+}
+
+function create ()
+{
+    TEST = new Joueur(); // On essaye notre jeu
+    TEST.Update_Mois();
+
+    scene = this;
+
+    //Test de tilemap pour l'usine
+    buildMap();
+    //Test d'icones + barre/texte
+    var progression = new Icone('progression', 50,50)
+    progression.barre_progression(1)
+    var ecologie = new Icone('ecologie', 50, 90)
+    ecologie.barre_progression(1)
+    var argent = new Icone('argent', 50, 130)
+    argent.barre_nombre(192000,'$')
+    var salaires = new Icone('salaires', 50, 170)
+    salaires.barre_nombre(8200,'/mois')
+    var machine = new Icone('machine', 40, 250)
+    machine.nombre(5);
+    var salarie = new Icone('salarie', 125, 250)
+    salarie.nombre(2);
+    //Test de cadre pour l'interface
+    var cadre_gauche = new Cadre(10,10,190,270, 50, 0 ,0 ,0 ,0.7); 
+    var cadre_bureau = new Cadre(250,370,800,280, 50, 50 ,0 ,0 ,1);
+
+}
+
+function update ()
+{
+}
+
+
+
+
+// test de tilemap pour l'usine
+function buildMap ()
+{
+    //  Parse the data out of the map
+    var data = scene.cache.json.get('map'); // on récupère le fichier json
+
+    var tilewidth = data.tilewidth; // on définit la taille d'une case
+    var tileheight = data.tileheight;
+
+    tileWidthHalf = tilewidth / 2; //initialisation des variables, *0.5 car scale de .5
+    tileHeightHalf = tileheight / 2;
+
+    var layer = data.layers[0].data; // on récupère la def de la map
+
+    var mapwidth = data.layers[0].width; // taille de la carte en cases
+    var mapheight = data.layers[0].height;
+
+    var centerX = mapwidth * tileWidthHalf; // taille de la carte sur l'écran (pixels ?)
+    var centerY = 16;
+
+    var i = 0;
+
+    for (var y = 0; y < mapheight; y++) // affichage de la carte
+    {
+        for (var x = 0; x < mapwidth; x++)
+        {
+            id = layer[i] - 1; // on récupère l'id de la case
+
+            var tx = 400 + ((x - y) * tileWidthHalf); // on définit la position
+            var ty = (x + y) * tileHeightHalf;
+
+            var tile = scene.add.image(centerX + tx /* définit de la position de l'image */, centerY + ty, 'tiles' /*type ?*/, id/*id de l'animation*/); 
+            //tile.setScale(.5)
+            tile.depth = centerY + ty; //profondeur de l'image
+            
+
+            i++; // on passe a la texture suivante
+        }
+    }
+}
+
+
+
 //class Employe { // Repenser le système d'assignement avec differents postes par machine, +/- accidents/qualité de travail ?
 //    constructor(){
 //        this.Composant
