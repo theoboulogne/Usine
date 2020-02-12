@@ -961,8 +961,30 @@ class Fournisseur {
 }
 
 
-    
-        
+
+
+function preload ()
+{
+    // TEST DE TILEMAP POUR L'USINE :
+    // json fichier de config de la texture terre et eau
+    this.load.json('map', 'tilemap/isometric-grass-and-water.json');
+    // sprite fichier image terre et eau
+    this.load.spritesheet('tiles', 'tilemap/isometric-grass-and-water.png', { frameWidth: 64, frameHeight: 64 });
+    // TEST D'AFFICHAGE DE LOGO + BARRE :
+    this.load.image('argent', 'images/argent.png');
+    this.load.image('ecologie', 'images/ecologie.png');
+    this.load.image('machine', 'images/machine.png');
+    this.load.image('progression', 'images/progression.png');
+    this.load.image('salaires', 'images/salaires.png');
+    this.load.image('salarie', 'images/salarie.png');
+}
+
+function create ()
+{
+    TEST = new Joueur(); // On essaye notre jeu
+    TEST.Update_Mois();
+
+    scene = this;
 
     var cadre_gauche = new Cadre(10,10,620,270, 50, 0 ,0 ,0 ,0.7); // arrondi élevé en haut a gauche et léger en bas a gauche
     var cadre_bureau = new Cadre(250,370,800,280, 50, 50 ,0 ,0 ,1); // arrondi élevé en haut a gauche et léger en bas a gauche
@@ -990,7 +1012,7 @@ class Fournisseur {
     //  On initialise l'interface puis on la fixe a la camera avec :
     //      elem.fixedToCamera = true;
     // ====> TROUVER AUTRE CHOSE..
-
+}
 
 function update ()
 {
