@@ -429,7 +429,7 @@ class Composant {
             this.Add(0, 1);
         }else if(tmp_Employe>0){
             tmp_Employe--;
-            this..Add(1, 0);
+            this.Add(1, 0);
         }   
     }
     Upgrade(){//utiliser un tableau global en fonction du composant pour tout les parametres
@@ -498,13 +498,78 @@ Environnement :
     Respect des Normes (à définir avec les choix + Evenements randoms)
 Vie Sociale :
     Employe (qualTravail + avantages)
-    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)
-Ventes : Flou pour le moment..
-    Stock de produits
-    Image de marque
+    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)*/
+class Ventes{
+    constructor(){
+        this.stockProduits = 0;
+        this.imageMarque = 0;
+        this.imageTourPrec = 0;
+        this.influenceSurImage = 1;
+        this.influenceSurImageTourPrec = 1;
+        this.partsMarche = 0.3;
+        this.influenceSurParts = 1;
+        this.influenceSurPartsTourPrec = 1;
+        this.pubs = 0;
+        this.pubsTourPrec = 0;
+        this.commerciaux = 0;
+        this.commissionsCommerciaux = 0;
+    }
+
+    influenceDesPubs(){
+        
+    if(this.pubs<=this.pubsTourPrec){ //Baisse de la Pub
+        this.influenceSurImage = this.influenceSurImageTourPrec*0.75
+        if(this.pubsTourPrec-this.pubs>0.05){
+            this.influenceSurImage = this.influenceSurImage*0.75
+        }
+    }
+    if(this.pubs == this.pubsTourPrec){  //La Pub reste pareille
+        this.influenceSurImage = this.influenceSurImageTourPrec*1.05
+    }
+    if(this.pubs>=this.pubsTourPrec){  //Augmentation de la Pub
+        this.influenceSurImage = this.influenceSurImageTourPrec*1.25
+        if(this.pubs-this.pubsTourPrec>0.2){
+            this.influenceSurImage = this.influenceSurImage*1.25
+        }    
+    } 
+
+    }
+    influenceDeImageMarque(){
+        if(this.imageMarque<=this.imageTourPrec){ //Baisse de l'image
+            this.influenceSurParts = this.influenceSurPartsTourPrec*0.75
+            if(this.imageTourPrec-this.imageMarque>0.05){
+                this.influenceSurParts = this.influenceSurParts*0.75
+            }
+        }
+        if(this.imageMarque == this.imageTourPrec){  //L'image reste pareille
+            this.influenceSurParts = this.influenceSurPartsTourPrec*1.05
+        }
+        if(this.imageMarque>=this.imageTourPrec){  //Augmentation de l'image
+            this.influenceSurParts = this.influenceSurPartsTourPrec*1.25
+            if(this.imageMarque-this.imageTourPrec>0.2){
+                this.influenceSurParts = this.influenceSurParts*1.25
+            }    
+        }
+    }
+    influenceDuStock(){
+        let nbVentes = 50; //Variable temp; lien à faire avec le nombre de ventes réel
+        if(nbVentes<=this.stockProduits){
+            if(this.stockProduits >= nbVentes*2){
+                this.influenceSurImage = this.influenceSurImageTourPrec*0.75;
+            }
+            if(this.stockProduits >= nbVentes*3){
+                this.influenceSurImage = this.influenceSurImageTourPrec*0.75;
+            }
+        }
+    }
+}
+     /*
+    
+    
     Parts de marché
-    Pubs
+    
     Commerciaux (impact sur les ventes)
+    
 Production :
     Nb(Employes + Robots)
     cadence de travail(qualTravail - employe.accident + Stocks)
@@ -660,7 +725,7 @@ function buildMap ()
 
 function update ()
 {
-    d = true;
+    
     //this.cameras.main.scrollX = 800;
     
     
