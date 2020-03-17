@@ -21,7 +21,7 @@ app.get('/', (req, res, next) => {
 
 //On enregistre nos Joueurs, on lance à n joueurs
 
-let n = 2
+let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 // reste a modifier en conséquence
 
@@ -30,7 +30,7 @@ io.sockets.on('connection',  (socket) =>{
 
     console.log(this.Monde);
 
-    if(this.Monde.Joueurs.nb > this.Monde.NbJoueursMax) {
+    if(this.Monde.Joueurs.nb >= this.Monde.NbJoueursMax) {
         console.log('send disconnect')
         socket.emit('disconnect'); 
         socket.disconnect();

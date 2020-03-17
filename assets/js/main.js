@@ -17,6 +17,7 @@
         console.log('Event - start')
         //if(this.game.constructor.name != 'Joueur') socket.emit('disconnect'); // on reset si on a pas reçu les bonnes infos
         this.play = true; // sinon on lance le jeu
+        this.Graphique = new Rendu(this.game.Lignes)
         console.log(this.game)
     });
 
