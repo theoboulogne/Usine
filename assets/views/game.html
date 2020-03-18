@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CIRious Games Usine</title>
+    <style>
+        body { margin: 0; }
+        canvas { width: 100%; height: 100% }
+    </style>
+    
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/progress-bars.css">
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+        <script type="application/javascript" src="../js/libs/OBJLoader.js"></script>
+        <script type="application/javascript" src="../js/rendu.js"></script>
+        <script type="application/javascript" src="../js/main.js"></script>
+</head>
+
+
+<body style="overflow: hidden;", class="text-left">
+    <div class="hud">
+        <div id="head-tire-div">
+            <h3 class="text-center text-light bg-secondary"><strong>Usine du futur</strong></h3>
+        </div>
+        <div class="col-md-4 text-center">
+            <h5 class="text-left">Economie</h5>
+            <div class="progress beautiful">
+                <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h5 class="text-left">Social</h5>
+            <div class="progress beautiful">
+                <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h5 class="text-left">Ecologie</h5>
+            <div class="progress beautiful">
+                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h5 class="text-left">Production</h5>
+            <div class="progress beautiful">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+            </div>
+        </div>
+        <div class="col-md-4" id="boutique">
+            <div class="dropright"><button class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Boutique</button>
+                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
+            </div>
+        </div>
+        <div class="col-md-4" id="Info">
+            <div class="card text-white bg-primary shadow" id="info-bule-2">
+                <div class="card-body text-center bg-info" id="Info-bule">
+                    <p class="text-uppercase m-0">Nombre employés :</p>
+                    <p class="text-white-50 small m-0">employéNB</p>
+                    <p class="text-uppercase m-0">Nombre Robots:</p>
+                    <p class="text-white-50 small m-0">robotNB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
