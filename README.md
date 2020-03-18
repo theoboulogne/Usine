@@ -7,31 +7,31 @@ Dans notre jeu, nous proposons plusieurs type de choix, d'abord on offre l'accè
 
     Fonctionnalités principales :
 
-/-/ Environnement :
-*    Energie 
-*    Machines 
+# Environnement :
+-    Energie 
+-    Machines 
 -   Respect des Normes 
-/-/ Vie Sociale :
-*    Employe 
-*    Securité 
-/-/ Ventes : à définir
+# Vie Sociale :
+-    Employe 
+-    Securité 
+# Ventes : à définir
 -   Stock de produits
 -   Image de marque
 -   Parts de marché
 -   Pubs
 -   Commerciaux 
-/-/ Production :
-*    Nb
-*    cadence de travail
-*    Machine
-*    uptimeGlobal
-/-/ 'Magasin' :
+# Production :
+-    nbElement
+-    cadence de travail
+-    Machine
+-    uptimeGlobal
+# Magasin :
 -   nbEmployés / nbRobots
 -   Production visée 
 -   Prix de vente
 -   Gestion de la vente : Commerciaux ou Pubs ou a voir
 
-    Autre :
+# Autre :
 
 - créer class accident pour mieux gérer tout les accidents, les pannes et la sécurité
 - Evaluer tout ce qui est améliorable ou non
