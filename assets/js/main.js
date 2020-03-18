@@ -1,6 +1,7 @@
 (function () {
     //connection server
     this.play = false;
+    
 
     const socket = io.connect('http://localhost:800');
     socket.on('repconnection', (Jeu) => {
@@ -24,6 +25,7 @@
     socket.on('newTurn', (Jeu) => {
         console.log('Event - newTurn')
         this.game = Jeu;
+        
     });
 
 })();

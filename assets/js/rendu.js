@@ -28,6 +28,10 @@ class Rendu{
         render();
     }
 
+    SetBarre(id, pourcentage){
+        document.getElementById(id).setAttribute("aria-valuenow",pourcentage);
+    }
+    
     Affichage(Models, game){
         for(let i=0; i<Models.length; i++){
             this.objLoader.load("../models/" + Models[i].name + ".obj", function(object) {
