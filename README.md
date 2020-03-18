@@ -4,32 +4,26 @@ Le jeu est une simulation de direction d'une entreprise, dans laquelle le joueur
 On s'est basé sur les caractéristique de l'usine du futur que nous avons trouvé sur le site "http://industriedufutur.fim.net/".
 Dans notre jeu, nous proposons plusieurs type de choix, d'abord on offre l'accès à un store où le joueur pourra par exemple engager ou virer des employés, et il y aura des choix plus drastiques qui seront proposé pendant la partie par exemple passé sur des énergie renouvlable pour réduire son taux de polution, évidement chaque choix a des conséquences bonnes et mauvaises, c'est pourquoi il faudra faire attention à bien faire évoluer son entreprise tout en gardant une certaine harmonie entre les différents critères d'évaluations.
 
------------------------------------------------------------------------------------
-                                To-DO List :
-|------Légende:------|
-| " - " = à faire    |
-| " * " = implémenté |
-|--------------------|
 
     Fonctionnalités principales :
 
 /-/ Environnement :
-*    Energie (methode calcul pollution)
-*    Machines (pollution + dechets)
--   Respect des Normes (à définir avec les choix + Evenements randoms)
+*    Energie 
+*    Machines 
+-   Respect des Normes 
 /-/ Vie Sociale :
-*    Employe (qualTravail + avantages)
-*    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)
+*    Employe 
+*    Securité 
 /-/ Ventes : à définir
 -   Stock de produits
 -   Image de marque
 -   Parts de marché
 -   Pubs
--   Commerciaux (impact sur les ventes)
+-   Commerciaux 
 /-/ Production :
-*    Nb(Employes + Robots)
-*    cadence de travail(qualTravail - employe.accident + Stocks)
-*    Machine(Nb, qualité)
+*    Nb
+*    cadence de travail
+*    Machine
 *    uptimeGlobal
 /-/ 'Magasin' :
 -   nbEmployés / nbRobots
