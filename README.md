@@ -37,19 +37,9 @@ Dans notre jeu, nous proposons plusieurs type de choix, d'abord on offre l'accè
 - Evaluer tout ce qui est améliorable ou non
 
 
------------------------------------------------------------------------------------
 
-        -///- Fonctionnement du jeu :
-    
---------------------------------------------------
+## Joueur :
 
-    -//- Initialisation des différentes classes :
-    
---------------------------------------------------
-
-----------------------------------------
- -/- Joueur :
--------------
 uptimeMax = 30; Nombre de jours dans un mois, utilisé pour l'initialisation du courant etc..
 solde = 1000000;
 stock = 0; produits en stock
@@ -66,22 +56,22 @@ Courant (Gestion de la consommation de l'usine)
     avec un Fournisseur principal et auxilliaire chacun composé de : (pollution, prix, coupure)
 Lignes (Gestion des Lignes de production) = [] 
     avec une Ligne au début
-----------------------------------------
 
-----------------------------------------
- -/- Ligne :
-------------
+
+
+## Ligne :
+
 coutReparation = 8000;  cout fixe, en cas de panne
 accident = 0; nombres d'accidents au total sur cette ligne de production
 boolaccident = false; accident sur la ligne de prod
 boolpanne = false; panne sur la ligne de prod
 Composant = []
     avec 5 Composant
-----------------------------------------
 
-----------------------------------------
- -/- Composant :
- ---------------
+
+
+## Composant :
+
 this.nbEmployes = 0; on Stocke le nombre d'ouvriers assignés, varie au cours d'une journée
 this.nbRobots = 0;
 carte=("");  Caractéristiques fixes au composant
@@ -91,13 +81,13 @@ dechets = 8;
 pollution = 40;
 production = 30;
 this.accident = 0.02;
-----------------------------------------
 
---------------------------------------------------
 
-    -//- Fonctionnement d'un tour
+-----------------------
 
---------------------------------------------------
+# Fonctionnement d'un tour
+
+
 
 - Calcul du temps de fonctionnement de l'énergie en jours en fonction 
   de la probabilité de panne des fournisseurs
@@ -120,5 +110,3 @@ this.accident = 0.02;
   (rajouter cout de production + cout fixe + etc)
 
 -----------------------------------------------------------------------------------
-
-*/
