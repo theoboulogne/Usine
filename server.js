@@ -30,7 +30,7 @@ io.sockets.on('connection',  (socket) =>{
 
     console.log(this.Monde);
 
-    if(this.Monde.Joueurs.nb >= this.Monde.NbJoueursMax) {
+    if(this.Monde.Joueurs.nb > this.Monde.NbJoueursMax) {
         console.log('send disconnect')
         socket.emit('disconnect'); 
         socket.disconnect();
@@ -41,10 +41,11 @@ io.sockets.on('connection',  (socket) =>{
         console.log(this.Monde);
         // on informe le client que la connection est effectuée
         console.log('send repconnection')
+        console.log(this.Monde.Joueurs.nb)
         
         socket.emit('repconnection', this.Monde.Joueurs[socket.id].joueur) // on envoi les données générées
 
-        if(this.Monde.Joueurs.nb == this.Monde.NbJoueursMax) io.emit('start');
+        if(this.Monde.Joueurs.nb >= this.Monde.NbJoueursMax) io.emit('start');
     }
 
 
