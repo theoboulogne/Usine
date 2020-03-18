@@ -1,4 +1,4 @@
-## Usine
+# Usine
 
 Le jeu est une simulation de direction d'une entreprise, dans laquelle le joueur sera amené à prendre des décisions pour changer son entreprise et essayer de la rendre moins poluante et et plus propice à un bonne environement de travail.
 On s'est basé sur les caractéristique de l'usine du futur que nous avons trouvé sur le site "http://industriedufutur.fim.net/".
@@ -7,31 +7,31 @@ Dans notre jeu, nous proposons plusieurs type de choix, d'abord on offre l'accè
 
     Fonctionnalités principales :
 
-# Environnement :
+## Environnement :
 -    Energie 
 -    Machines 
 -   Respect des Normes 
-# Vie Sociale :
+## Vie Sociale :
 -    Employe 
 -    Securité 
-# Ventes :
+## Ventes :
 -   Stock de produits
 -   Image de marque
 -   Parts de marché
 -   Pubs
 -   Commerciaux 
-# Production :
+## Production :
 -    nbElement
 -    cadence de travail
 -    Machine
 -    uptimeGlobal
-# Magasin :
+## Magasin :
 -   nbEmployés / nbRobots
 -   Production visée 
 -   Prix de vente
 -   Gestion de la vente : Commerciaux ou Pubs ou a voir
 
-# Autre :
+## Autre :
 
 - créer class accident pour mieux gérer tout les accidents, les pannes et la sécurité
 - Evaluer tout ce qui est améliorable ou non
