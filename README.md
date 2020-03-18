@@ -14,7 +14,7 @@ Dans notre jeu, nous proposons plusieurs type de choix, d'abord on offre l'accè
 # Vie Sociale :
 -    Employe 
 -    Securité 
-# Ventes : à définir
+# Ventes :
 -   Stock de produits
 -   Image de marque
 -   Parts de marché
