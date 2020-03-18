@@ -1,4 +1,4 @@
-# Usine
+## Usine
 
 Le jeu est une simulation de direction d'une entreprise, dans laquelle le joueur sera amené à prendre des décisions pour changer son entreprise et essayer de la rendre moins poluante et et plus propice à un bonne environement de travail.
 On s'est basé sur les caractéristique de l'usine du futur que nous avons trouvé sur le site "http://industriedufutur.fim.net/".
