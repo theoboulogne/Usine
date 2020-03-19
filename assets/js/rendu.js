@@ -32,15 +32,8 @@ class Rendu{
         document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
     }
     DropDown(idbouton, iddropdown){
-        let display_boutique = false;
         document.getElementById(idbouton).addEventListener("click", function(){
-            if(display_boutique) {
-                document.getElementById(iddropdown).setAttribute("style", "display:none;left:22%;");
-            }
-            else {
-                document.getElementById(iddropdown).setAttribute("style", "display:block;left:22%;");
-            }
-            display_boutique=(!display_boutique);
+            document.getElementById(iddropdown).classList.toggle("show"); 
         });
     }
     
