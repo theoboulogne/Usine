@@ -20,9 +20,6 @@
 
         this.Graphique.DropDown("boutique", "dropdown_boutique");
         
-        document.getElementById("dropdown_boutique").addEventListener('click', function (event) { 
-            event.stopPropagation(); 
-        }); 
           
 
         //Ajouter un event on click sur les boutons dans chaque ligne du dropdown
