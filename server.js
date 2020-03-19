@@ -36,6 +36,7 @@ io.sockets.on('connection',  (socket) =>{
         socket.disconnect();
     }
     else {
+        //socket.join('jeu'); // systeme de room à instaurer par la suite
         console.log('add joueur au monde')
         this.Monde.addJoueur(socket.id);
         console.log(this.Monde);
@@ -51,27 +52,30 @@ io.sockets.on('connection',  (socket) =>{
 
 
 
-    socket.on('endTurn', (socket, Tour)=> { // balancer les infos modifiées en argument aussi dans une classe "Tour" 
-                                            // prennant tout ce qui est necessaire et l'appliquant si possible
+    socket.on('endTurn', (/*Choix, Magasin*/)=> { 
+            // balancer les infos modifiées en argument aussi dans une classe "Tour" 
+            // prennant tout ce qui est necessaire et l'appliquant si possible
+            
+        console.log('------endTurn')
         this.Monde.Joueurs[socket.id].jouer = true;
 
         let finTour = true;
-        for(let i=0; i<io.sockets.length; i++) if(!this.Monde.Joueurs[io.sockets[i].id].jouer) finTour = false;
+        for(let i in io.sockets.sockets) {
+            if(!this.Monde.Joueurs[i].jouer) finTour = false;
+        }
+        console.log(finTour)
 
         if(finTour){
-            for(let i=0; i<io.sockets.length; i++) this.Monde.Joueurs[io.sockets[i].id].jouer = false;
-            for(let i=0; i<io.sockets; i++) this.Monde.Joueurs[io.sockets[i].id].Update_Mois(); // mettre l'univers en argument pour influencer ? 
+            for(let i in io.sockets.sockets) this.Monde.Joueurs[i].jouer = false;
+            //for(let i=0; i<io.sockets; i++) this.Monde.Joueurs[io.sockets[i].id].Update_Mois(); // mettre l'univers en argument pour influencer ? 
                                                                     //faire une methode sur l'univers pour update les joueurs ??
-
-
-            for(let i=0; i<io.sockets; i++) io.sockets[i].emit('newTurn', this.Monde.Joueurs[io.sockets[i].id].joueur);
+            
+            for(let i in io.sockets.sockets) io.sockets.sockets[i].emit('newTurn', this.Monde.Joueurs[i].joueur);
         }
     });
     socket.on('disconnect', ()=>{
         io.emit('disconnect'); // changer ?
-        
         this.Monde = new Univers(n);
-
     });
 
     console.log('Fin Connection Client (coté serveur)')
