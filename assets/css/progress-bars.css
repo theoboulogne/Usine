@@ -1,0 +1,180 @@
+.beautiful.progress {
+  height: 15px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+h5 {
+  color:white;
+}
+
+.beautiful.progress.progress-square {
+  border-radius: 0px;
+}
+
+.beautiful.progress.progress-circle {
+  border-radius: 500px;
+}
+
+.beautiful.progress.progress-xs .progress-bar {
+  line-height: 4px;
+}
+
+.beautiful.progress.progress-xs {
+  height: 4px;
+  border-radius: 1px;
+}
+
+.beautiful.progress .progress-bar.progress-bar-success {
+  background-color: #46be8a;
+  background-image: none;
+}
+
+.beautiful.progress .progress-bar.progress-bar-info {
+  background-color: #57c7d4;
+  background-image: none;
+}
+
+.beautiful.progress .progress-bar.progress-bar-warning {
+  background-color: #f2a654;
+  background-image: none;
+}
+
+.beautiful.progress .progress-bar.progress-bar-danger {
+  background-color: #f96868;
+  background-image: none;
+}
+
+.beautiful.progress .progress-sm {
+  height: 10px;
+}
+
+.beautiful.progress .progress-sm .progress-bar {
+  line-height: 10px;
+}
+
+.beautiful.progress.progress-lg {
+  height: 22px;
+}
+
+.beautiful.progress .progress-lg .progress-bar {
+  line-height: 22px;
+}
+
+.beautiful.progress .progress-bar {
+  background-image: none;
+  line-height: 15px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #62a8ea;
+}
+
+.blanc {
+  color:white;
+}
+
+#boutique {
+  margin-top: 2%;
+}
+#newTour {
+  margin-top: 25%;
+}
+
+#Info {
+  margin-top: 18%;
+}
+
+
+#titre {
+  padding-left: 50%;
+}
+
+#head-titre {
+  width: 100%;
+  height: 40px;
+}
+
+#head-tire-div {
+  height: 50px;
+}
+.jeu { 
+  position: relative;
+  z-index: auto;
+  border: dashed;
+  height: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.hud {
+  position: relative;
+  z-index: 1;
+  border: dashed;
+  height: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+
+
+
+
+
+
+/*         Ajout des Glyphicons de BootStrap 3         */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-asterisk:before {
+  content: "\002a";
+}
+.glyphicon-plus:before {
+  content: "\002b";
+}
+.glyphicon-euro:before,
+.glyphicon-eur:before {
+  content: "\20ac";
+}
+.glyphicon-minus:before {
+  content: "\2212";
+}
+.glyphicon-cloud:before {
+  content: "\2601";
+}
+.glyphicon-envelope:before {
+  content: "\2709";
+}
+.glyphicon-pencil:before {
+  content: "\270f";
+}
+.glyphicon-glass:before {
+  content: "\e001";
+}
+.glyphicon-music:before {
+  content: "\e002";
+}
+.glyphicon-search:before {
+  content: "\e003";
+}
+.glyphicon-heart:before {
+  content: "\e005";
+}
+/*
+*from 005 to 260
+.glyphicon-menu-up:before {
+  content: "\e260";
+} */
