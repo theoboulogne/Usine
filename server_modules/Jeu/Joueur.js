@@ -58,10 +58,12 @@ class Joueur{
         this.nbEmployes_dispo = 15;
         this.nbRobots_dispo = 0;
         this.stock = 0 // produits en stock
+        this.variationStock = -1
 
         this.Lignes = [];
         this.Lignes.push(new Ligne()); // une ligne par défault
-
+        
+        this.nbTour = -1
     }
 
     Update_Mois(){ // Fonctionnement d'un mois
