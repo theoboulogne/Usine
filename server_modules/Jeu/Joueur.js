@@ -57,6 +57,7 @@ class Joueur{
         this.nbRobots = 0;
         this.nbEmployes_dispo = 15;
         this.nbRobots_dispo = 0;
+        
         this.stock = 0 // produits en stock
 
         this.Lignes = [];
