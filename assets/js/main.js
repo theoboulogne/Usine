@@ -20,8 +20,6 @@
 
         this.Graphique.DropDown("boutique", "dropdown_boutique");
         
-          
-
         //Ajouter un event on click sur les boutons dans chaque ligne du dropdown
 
         document.getElementById("newTour").addEventListener("click", function(){
@@ -31,6 +29,7 @@
             //et mettre en arguement
 
             //Vérification et application des changements coté serveur a faire (faire une copie de Jeu pour comparaison ?)
+
             socket.emit('endTurn');
         });
     });
@@ -38,6 +37,7 @@
     socket.on('newTurn', (Jeu) => {
         console.log('Event - newTurn')
         this.game = Jeu;
+
     });
 
 })();
