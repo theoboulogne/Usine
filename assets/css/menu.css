@@ -1,0 +1,34 @@
+.Info {
+    position:absolute;
+    margin-top:6%;
+    margin-left: 40%;
+    width: 20%;
+}
+
+body {
+    background-image:url(https://www.usinefutur.fr/wp-content/uploads/2018/10/Usine-du-Futur-Nouvelle-Aquitaine-1-1200x563.jpg);
+    margin:0;
+    color:black;
+    background-color:white;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+    
+.ecriture{
+    color: beige;
+    font-size: 1vw;
+}
+.ecriture_titre{
+    color: beige;
+    font-size: 3vw;
+    margin-top: 2%;
+    font-family: monospace;
+}
+#play{
+    margin-top: 3%;
+}
+.pseudo_formulaire{
+    width: 72%;
+}
