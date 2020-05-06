@@ -15,8 +15,10 @@ const Univers = require('./server_modules/Jeu/Univers');
 //Renvoi vers le fichier index client
 app.use(express.static(__dirname + '/assets/'));
 app.get('/', (req, res, next) => {
-    res.sendFile(__dirname + '/assets/views/game.html') // on renvoi vers le jeu pour le moment, 
-                                                        // -> renvoyer vers le menu et vers le jeu par la suite
+    res.sendFile(__dirname + '/assets/views/menu.html')
+});
+app.get('/game', (request, response, next) => {
+    response.sendFile(__dirname + '/assets/views/game.html')
 });
 
 //On enregistre nos Joueurs, on lance à n joueurs
@@ -66,6 +68,7 @@ io.sockets.on('connection',  (socket) =>{
         console.log(finTour)
 
         if(finTour){
+            
             for(let i in io.sockets.sockets) this.Monde.Joueurs[i].jouer = false;
             //for(let i=0; i<io.sockets; i++) this.Monde.Joueurs[io.sockets[i].id].Update_Mois(); // mettre l'univers en argument pour influencer ? 
                                                                     //faire une methode sur l'univers pour update les joueurs ??
@@ -74,7 +77,7 @@ io.sockets.on('connection',  (socket) =>{
         }
     });
     socket.on('disconnect', ()=>{
-        io.emit('disconnect'); // changer ?
+        io.emit('menu');
         this.Monde = new Univers(n);
     });
 
