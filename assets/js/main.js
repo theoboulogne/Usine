@@ -1,6 +1,6 @@
 (function () {
+    let Game = this;
     //connection server
-    
     const socket = io.connect('http://localhost:800');
     
     socket.on('repconnection', (Jeu) => {
@@ -39,5 +39,9 @@
         this.game = Jeu;
 
     });
+
+    socket.on('menu', ()=>{
+        window.href = './'
+    })
 
 })();
