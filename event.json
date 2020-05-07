@@ -1,0 +1,106 @@
+{
+    "evenement": [
+        {
+            "proba":"0.01",
+            "event":{
+                "nom":"Tremblemment de terre",
+                "panne":{
+                    "min":"0.2",
+                    "max":"0.5"
+                }
+            }
+        },
+        {
+            "proba":"0.025",
+            "event":{
+                "nom":"Orage, surtension electrique",
+                "panne":{
+                    "min":"0.5",
+                    "max":"0.8"
+                }
+            }
+        },
+        {
+            "proba":"0.015",
+            "event":{
+                "nom":"Materiaux non approvisionne",
+                "penurieStock":{
+                    "ratio":{
+                        "min": "10",
+                        "max": "30"
+                    },
+                    "duree": {
+                        "min":"1",
+                        "max":"4"
+                    }
+                }
+            }
+        },
+        {
+            "proba":"0.01",
+            "event":{
+                "nom":"Crise economique",
+                "crise":{
+                    "min": "10",
+                    "max": "30"
+                }
+            }
+        },
+        {
+            "proba":"0.025",
+            "event":{
+                "nom":"Changement des normes ecologique",
+                "norme":{
+                    "pollution":{
+                        "min":"-1",
+                        "max":"-3"
+                    },
+                    "dechets":{
+                        "min":"-1",
+                        "max":"-2"
+                    }
+                }
+            }
+        },
+        {
+            "proba":"0.03",
+            "event":{
+                "nom":"Nouvelle reforme sur le recyclage",
+                "norme":{
+                    "dechet":{
+                        "min":"-1",
+                        "max":"-3"
+                    }
+                }
+            }
+        },
+        {
+            "proba":"0.02",
+            "event":{
+                "nom":"Augmentation du SMIC",
+                "norme":{
+                    "salaire":{
+                        "min":"10",
+                        "max":"60"
+                    }
+                }
+            }
+        },
+        {
+            "proba":"0.03",
+            "event":{
+                "nom":"Reforme economique",
+                "norme":{
+                    "production":{
+                        "min":"30",
+                        "max":"60"
+                    },
+                    "salaire":{
+                        "min":"10",
+                        "max":"30"
+                    }
+                }
+            }
+        }
+    ]
+}
