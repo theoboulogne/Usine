@@ -11,6 +11,7 @@ const io =  require('socket.io')(server);
 
 //Import de classes
 const Univers = require('./server_modules/Jeu/Univers');
+const Repetition = require('./server_modules/Repetition');
 
 //Renvoi vers le fichier index client
 app.use(express.static(__dirname + '/assets/'));
@@ -26,6 +27,8 @@ app.get('/game', (request, response, next) => {
 let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 // reste a modifier en conséquence
+this.rep = new Repetition();
+let Game = this;
 
 io.sockets.on('connection',  (socket) =>{
     console.log('Debut Connection Client (coté serveur)')
@@ -65,7 +68,6 @@ io.sockets.on('connection',  (socket) =>{
         for(let i in io.sockets.sockets) {
             if(!this.Monde.Joueurs[i].jouer) finTour = false;
         }
-        console.log(finTour)
 
         if(finTour){
             
