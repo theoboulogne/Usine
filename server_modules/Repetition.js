@@ -28,10 +28,6 @@ class Repetition{
         }
         return false;
     }
-    amelioration(){
-
-    }
-
 }
 module.exports = Repetition;
 

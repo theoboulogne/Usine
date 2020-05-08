@@ -26,11 +26,6 @@ let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 // reste a modifier en conséquence
 this.rep = new Repetition();
-this.rep.add_Categorie("test", 2);
-this.rep.add_Categorie("test2", 3);
-this.rep.add_Categorie("test3", 4);
-this.rep.add_Categorie("test4", 5);
-this.rep.add_Categorie("test5", 6);
 let Game = this;
 
 io.sockets.on('connection',  (socket) =>{
@@ -73,7 +68,6 @@ io.sockets.on('connection',  (socket) =>{
         }
 
         if(finTour){
-            console.log(Game.rep.repetition());
             for(let i in io.sockets.sockets) this.Monde.Joueurs[i].jouer = false;
             //for(let i=0; i<io.sockets; i++) this.Monde.Joueurs[io.sockets[i].id].Update_Mois(); // mettre l'univers en argument pour influencer ? 
                                                                     //faire une methode sur l'univers pour update les joueurs ??
