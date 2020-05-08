@@ -15,7 +15,6 @@ class Rendu{
         camera.rotation.y = ( 60* (Math.PI / 180)) 
         camera.rotation.z = ( 90* (Math.PI / 180)) 
         camera.position.z = 100;
-        this.gltfLoader = new THREE.GLTFLoader();
         
         
         this.GenerationBoard(scene)
@@ -28,29 +27,14 @@ class Rendu{
         render();
 
         let game = scene;
-        let test = new THREE.GLTFLoader().load( 'models/futuristic/scene.gltf', function ( gltf ) {
-            gltf.scene.traverse( function ( child ) {
-                if ( child.isMesh ) {
-                    // glTF currently supports only tangent-space normal maps.
-                    // this model has been modified to demonstrate the use of an object-space normal map.
-                    child.material.normalMapType = THREE.ObjectSpaceNormalMap;
-                    // attribute normals are not required with an object-space normal map. remove them.
-                    child.geometry.deleteAttribute( 'normal' );
-                    //
-                    child.material.side = THREE.DoubleSide;
-                    child.scale.multiplyScalar( 0.5 );
-                    // recenter
-                    new THREE.Box3().setFromObject( child ).getCenter( child.position ).multiplyScalar( - 1 );
-                    scene.add( child );
-                }
-            } );
-            
-            render();
-            
-            let ambientLight = new THREE.AmbientLight( 0xcccccc );
-            game.add( ambientLight );
-        } );
+        /*
+        let loader = new THREE.FBXLoader();
+        loader.load( 'models/fbxtest/source/model.fbx', function ( object ) {
 
+            scene.add( object );
+        
+        } );
+*/
     }
 
     SetBarre(id, pourcentage){

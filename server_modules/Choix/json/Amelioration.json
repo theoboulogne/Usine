@@ -1,0 +1,21 @@
+{
+    "ameliorations": {
+        "nomCategorie":[
+            {
+                "amelio":"blabla",
+                "prix":"0",
+                "nbTour":"0",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"NomCategorie",
+                        "amelio":"blabla"
+                    },
+                    {}
+                ]
+            }
+        ],
+        "nomCategorie2":[
+
+        ]
+    }
+}

@@ -7,7 +7,7 @@
         console.log('Event - repconnection')
         this.game = Jeu;
         //verif des infos a faire puis on reset si on a pas reçu les bonnes infos
-        this.Graphique = new Rendu(this.game.Lignes)
+        //this.Graphique = new Rendu(this.game.Lignes)
     });
     socket.on('disconnect', () => {
         console.log('Event - disconnect')
@@ -45,3 +45,9 @@
     })
 
 })();
+
+
+$(document).ready(function(){
+    $('.your-class').slick({
+    });
+});
