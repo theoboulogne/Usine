@@ -13,6 +13,7 @@ class Univers{
         this.Joueurs[socketid] = new Object;
         this.Joueurs[socketid].joueur = (new Joueur(socketid))
         this.Joueurs[socketid].jouer = false;
+        this.Joueurs[socketid].choix = [];
     }
     addEvenement(Evenements){
        let ChoixRenvoyes = [];

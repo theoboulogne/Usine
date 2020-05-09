@@ -15,6 +15,48 @@ class Rendu{
         camera.rotation.y = ( 60* (Math.PI / 180)) 
         camera.rotation.z = ( 90* (Math.PI / 180)) 
         camera.position.z = 100;
+
+
+        /*let loader = new THREE.GLTFLoader();
+        loader.load( 'models/Ouvrier.glb', function ( gltf ) {
+
+            model = gltf.scene;
+            scene.add( model );
+
+            model.traverse( function ( object ) {
+
+                if ( object.isMesh ) object.castShadow = true;
+
+            } );
+
+            //
+
+            skeleton = new THREE.SkeletonHelper( model );
+            skeleton.visible = false;
+            scene.add( skeleton );
+
+            //
+
+            createPanel();
+
+
+            //
+
+            var animations = gltf.animations;
+
+            mixer = new THREE.AnimationMixer( model );
+
+            idleAction = mixer.clipAction( animations[ 0 ] );
+            walkAction = mixer.clipAction( animations[ 3 ] );
+            runAction = mixer.clipAction( animations[ 1 ] );
+
+            actions = [ idleAction, walkAction, runAction ];
+
+            activateAllActions();
+
+            animate();
+
+        } );*/
         
         
         this.GenerationBoard(scene)

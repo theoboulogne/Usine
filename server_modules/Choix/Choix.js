@@ -22,13 +22,10 @@ let applyValeur = (valeur,  Joueur) => {
 }
 
 module.exports = {
-    return{
-        getUser : (choix) => {choix.nom, choix.cout},
-        apply : (choix, Joueur) =>{
-            for(let i=0; i<choix.valeurs; i++){
-                applyValeur(choix.valeurs[i], Joueur);
-            }
-        },
+    apply : (choix, Joueur) =>{
+        for(let i=0; i<choix.valeurs; i++){
+            applyValeur(choix.valeurs[i], Joueur);
+        }
     }
 }
     /*

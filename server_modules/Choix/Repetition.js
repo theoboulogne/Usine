@@ -11,13 +11,15 @@ class Repetition{
         let renvois = new Array();
         for(let i=0; i < this.tableau.length; i++){
             if(0 == this.tableau[i].tour){
-                tableau_repetitionEnvoie.push(this.tableau[i].categorie);
                 renvois.push(i);
             }else{
                 this.tableau[i].tour--;
             }
         }
-        for(let i=0; i<renvois.length; i++) this.tableau.splice(renvois[i], 1);
+        for(let i=0; i<renvois.length; i++) {
+            tableau_repetitionEnvoie.push(this.tableau[renvois[i]].categorie);
+            this.tableau.splice(renvois[i], 1);
+        }
         return tableau_repetitionEnvoie;
     }
 }
