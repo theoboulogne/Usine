@@ -1,15 +1,17 @@
 {
     "ponctuel": [
         {
-            "nom":"courantAuxilliaire",
+            "nom":"Courant Auxilliaire",
             "proba":"0.5",
             "variations":[
                 {
-                    "nom": "panneauxSolaires",
+                    
                     "proba":"0.4",
-                    "prix":"25000",
-                    "amelioration":"panneauxSolaires",
+                    "amelioration":"Panneaux Solaires",
                     "choix":{
+                        "nom": "Panneaux Solaires",
+                        "cout":"25000",
+                        "desc":"Installer des panneaux solaires pour remplacer la source d'energie de secours.",
                         "valeurs":[
                             {
                                 "path":[
@@ -35,26 +37,19 @@
                                     "Auxilliaire",
                                     "Coupure"
                                 ],
-                                "val":"-0.03",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Eco",
-                                    "polution"
-                                ],
-                                "val":"-0.03",
-                                "type":"plusegal"
+                                "val":"0.16",
+                                "type":"egal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "eoliennes",
                     "proba":"0.3",
-                    "prix":"50000",
-                    "amelioration":"eoliennes",
+                    "amelioration":"Eoliennes",
                     "choix":{
+                        "nom": "Eoliennes",
+                        "cout":"50000",
+                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours que les panneaux solaires.",
                         "valeurs":[
                             {
                                 "path":[
@@ -80,26 +75,19 @@
                                     "Auxilliaire",
                                     "Coupure"
                                 ],
-                                "val":"-0.03",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Eco",
-                                    "polution"
-                                ],
-                                "val":"-0.03",
-                                "type":"plusegal"
+                                "val":"0.13",
+                                "type":"egal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "generateurBiomase",
                     "proba":"0.2",
-                    "prix":"100000",
-                    "amelioration":"generateurBiomasse",
+                    "amelioration":"Generateur Biomasse",
                     "choix":{
+                        "nom": "Generateur Biomase",
+                        "cout":"100000",
+                        "desc":"Installer un generateur biomasse permettera d'etre plus sur de l'energie fournie par la source de secours.",
                         "valeurs":[
                             {
                                 "path":[
@@ -125,26 +113,19 @@
                                     "Auxilliaire",
                                     "Coupure"
                                 ],
-                                "val":"-0.03",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Eco",
-                                    "polution"
-                                ],
-                                "val":"-0.03",
-                                "type":"plusegal"
+                                "val":"0.10",
+                                "type":"egal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "barrageHydrolique",
                     "proba":"0.1",
-                    "prix":"150000",
-                    "amelioration":"barrageHydrolique",
+                    "amelioration":"Barrage Hydrolique",
                     "choix":{
+                        "nom": "Barrage Hydrolique",
+                        "cout":"150000",
+                        "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
                         "valeurs":[
                             {
                                 "path":[
@@ -170,16 +151,8 @@
                                     "Auxilliaire",
                                     "Coupure"
                                 ],
-                                "val":"-0.03",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Eco",
-                                    "polution"
-                                ],
-                                "val":"-0.03",
-                                "type":"plusegal"
+                                "val":"0.07",
+                                "type":"egal"
                             }
                         ]
                     }
@@ -187,38 +160,42 @@
             ]
         },
         {
-            "nom":"sociale",
+            "nom":"Sociale",
             "proba":"0.4",
             "variations":[
                 {
-                    "nom": "voyage",
                     "proba":"0.1",
-                    "prix":"25000",
                     "amelioration":"CE",
                     "choix":{
+                        "nom": "Voyage",
+                        "cout":"25000",
+                        "desc":"Organisez un voyage pour les employes de la boite.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "satisfaction"
+                                    "Choix",
+                                    "avantages"
                                 ],
-                                "val":"5",
+                                "val":"0.1",
                                 "type":"plusegal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "nouvelleSalleRepos",
                     "proba":"0.3",
-                    "prix":"10000",
                     "amelioration":"CE",
                     "choix":{
+                        "nom": "Nouvelle Salle de Repos",
+                        "cout":"10000",
+                        "desc":"Creer une nouvelle salle de repos pour que vos employes beneficies d'uun repos optimal.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "satisfaction"
+                                    "Choix",
+                                    "avantages"
                                 ],
-                                "val":"2",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
@@ -227,15 +204,16 @@
             ]
         },
         {
-            "nom":"publicite",
+            "nom":"Publicite",
             "proba":"0.3",
             "variations":[
                 {
-                    "nom": "coutDePub",
                     "proba":"1",
-                    "prix":"20000",
-                    "amelioration":"bonComercial",
+                    "amelioration":"Bon Comercial",
                     "choix":{
+                        "nom": "Cout de Pub",
+                        "cout":"20000",
+                        "desc":"Faites une grosse campagne publicitaire pour mieux faire connaitre votre produit.",
                         "valeurs":[
                             {
                                 "path":[
@@ -251,49 +229,48 @@
             ]
         },
         {
-            "nom":"ecologie",
+            "nom":"Ecologie",
             "proba":"0.3",
             "variations":[
                 {
-                    "nom": "traitementDechet/Isolation",
                     "proba":"0.15",
-                    "prix":"40000",
-                    "amelioration":"ecologiste",
+                    "amelioration":"Ecologiste",
                     "choix":{
+                        "nom": "Traitement des Dechets et Isolation",
+                        "cout":"15000",
+                        "desc":"Recyclez vos dechets recyclable pour faire partie des entreprises les plus 'vertes'.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "Eco",
                                     "pollution"
                                 ],
-                                "val":"-1.5",
-                                "type":"plusegal"
+                                "val":"0.9",
+                                "type":"fois"
                             },
                             {
                                 "path":[
-                                    "Eco",
                                     "dechets"
                                 ],
-                                "val":"3",
-                                "type":"plusegal"
+                                "val":"0.85",
+                                "type":"fois"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "changementFiltreAir",
                     "proba":"0.05",
-                    "prix":"35000",
-                    "amelioration":"greenPeace",
+                    "amelioration":"Green Peace",
                     "choix":{
+                        "nom": "Changement des Filtre a Air",
+                        "cout":"40000",
+                        "desc":"Changez vos filtres a air pour limiter vos emitions de produits nocif pour l'environement.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "Eco",
                                     "pollution"
                                 ],
-                                "val":"-3",
-                                "type":"plusegal"
+                                "val":"0.7",
+                                "type":"fois"
                             }
                         ]
                     }
@@ -301,134 +278,129 @@
             ]
         },
         {
-            "nom":"production",
+            "nom":"Production",
             "proba":"0.5",
             "variations":[
                 {
-                    "nom": "ligneDeProduction niv2",
                     "proba":"0.4",
-                    "prix":"5000",
-                    "amelioration":"entrepriseExtraDynamique",
+                    "amelioration":"Entreprise Dynamique niv2",
                     "choix":{
+                        "nom": "Ligne de Production niv2",
+                        "cout":"10000",
+                        "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "vitesse",
                                     "production"
                                 ],
-                                "val":"1",
+                                "val":"0.06",
                                 "type":"plusegal"
                             },
                             {
                                 "path":[
-                                    "consomation",
-                                    "electrique"
+                                    "energie"
                                 ],
-                                "val":"0.5",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "ligneDeProduction niv3",
                     "proba":"0.3",
-                    "prix":"10000",
-                    "amelioration":"entrepriseExtraDynamique",
+                    "amelioration":"Entreprise Dynamique niv3",
                     "choix":{
+                        "nom": "Ligne de Production niv3",
+                        "cout":"15000",
+                        "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "vitesse",
                                     "production"
                                 ],
-                                "val":"1",
+                                "val":"0.06",
                                 "type":"plusegal"
                             },
                             {
                                 "path":[
-                                    "consomation",
-                                    "electrique"
+                                    "energie"
                                 ],
-                                "val":"0.5",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "ligneDeProduction niv4",
                     "proba":"0.3",
-                    "prix":"15000",
-                    "amelioration":"entrepriseExtraDynamique",
+                    "amelioration":"Entreprise Dynamique niv4",
                     "choix":{
+                        "nom": "Ligne de Production niv4",
+                        "cout":"20000",
+                        "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "vitesse",
                                     "production"
                                 ],
-                                "val":"1",
+                                "val":"0.06",
                                 "type":"plusegal"
                             },
                             {
                                 "path":[
-                                    "consomation",
-                                    "electrique"
+                                    "energie"
                                 ],
-                                "val":"0.5",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "ligneDeProduction niv5",
                     "proba":"0.2",
-                    "prix":"20000",
-                    "amelioration":"entrepriseExtraDynamique",
+                    "amelioration":"Entreprise Dynamique niv5",
                     "choix":{
+                        "nom": "Ligne de Production niv5",
+                        "prix":"25000",
+                        "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "vitesse",
                                     "production"
                                 ],
-                                "val":"1",
+                                "val":"0.06",
                                 "type":"plusegal"
                             },
                             {
                                 "path":[
-                                    "consomation",
-                                    "electrique"
+                                    "energie"
                                 ],
-                                "val":"0.5",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
                     }
                 },
                 {
-                    "nom": "ligneDeProduction niv6",
                     "proba":"0.1",
-                    "prix":"25000",
-                    "amelioration":"entrepriseExtraDynamique",
+                    "amelioration":"Entreprise Dynamique niv6",
                     "choix":{
+                        "nom": "Ligne de Production niv6",
+                        "cout":"30000",
+                        "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
                                 "path":[
-                                    "vitesse",
                                     "production"
                                 ],
-                                "val":"1",
+                                "val":"0.06",
                                 "type":"plusegal"
                             },
                             {
                                 "path":[
-                                    "consomation",
-                                    "electrique"
+                                    "energie"
                                 ],
-                                "val":"0.5",
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
@@ -448,35 +420,37 @@
 
 
     "repetition": {
-        "sociale":[
+        "Social":[
             {
                 "proba":"0.2",
                 "prix":"3000",
                 "amelioration":"CE",
                 "nbTour":"4",
                 "choix":{
-                    "nom":"abonnementMensuel",
+                    "nom":"Abonnement Mensuel",
                     "cout":"3000 /tour",
+                    "desc":"Offrez a vos employes un abonnement mensuel dans une salle de muscu ou a Netflix.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"2",
+                            "val":"0.04",
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.4",
-                "prix":"15000",
-                "amelioration":"presidentDuCE",
+                "prix":"50",
+                "amelioration":"President Du CE",
                 "nbTour":"4",
                 "choix":{
-                    "nom":"augmentationDesSalaires",
-                    "cout":"15000 /tour",
+                    "nom":"Augmentation des Salaires",
+                    "cout":"50 /tour",
+                    "desc":"Augmentez les salaires de vos employes.",
                     "valeurs":[
                         {
                             "path":[
@@ -488,23 +462,24 @@
                         },
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"2",
+                            "val":"0.1",
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.5",
-                "prix":"000",
-                "amelioration":"presidentDuCE",
+                "prix":"-30",
+                "amelioration":"President Du CE",
                 "nbTour":"4",
                 "choix":{
-                    "nom":"diminutionDesSalaires",
-                    "cout":"000 /tour",
+                    "nom":"Diminution des Salaires",
+                    "cout":"-30 /salarie/tour",
+                    "desc":"Diminuez les salaires de vos employes.",
                     "valeurs":[
                         {
                             "path":[
@@ -516,155 +491,161 @@
                         },
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"-3",
-                            "type":"plusegal"
+                            "val":"0.85",
+                            "type":"fois"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.05",
                 "prix":"75000",
-                "amelioration":"bonSamaritain",
+                "amelioration":"Bon Samaritain",
                 "nbTour":"4",
                 "choix":{
-                    "nom":"offreDEPartDeLentreprise",
+                    "nom":"Offre de Part de L'entreprise",
                     "cout":"75000",
+                    "desc":"Offrez des parts de l'entreprises a vos employes.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"5",
+                            "val":"0.2",
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             }
         ],
-        "production":[
+        "Production":[
             {
                 "proba":"0.2",
                 "prix":"30000",
-                "amelioration":"entrepriseDynamique",
+                "amelioration":"Entreprise Dynamique",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"augmentationProduction",
+                    "nom":"Augmentation de Production",
                     "cout":"30000",
+                    "desc":"Augmentez la cadence de production de lignes.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"-0.5",
-                            "type":"plusegal"
+                            "val":"0.9",
+                            "type":"fois"
                         },
                         {
                             "path":[
-                                "vitesseProduction"
+                                "production"
                             ],
-                            "val":"3",
+                            "val":"0.08",
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.3",
                 "prix":"30000",
-                "amelioration":"entrepriseDynamique",
+                "amelioration":"Entreprise Dynamique",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"diminutionProduction",
+                    "nom":"Diminution de Production",
                     "cout":"30000",
+                    "desc":"Diminuez la cadences de productions de vos lignes.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"1",
+                            "val":"0.1",
                             "type":"plusegal"
                         },
                         {
                             "path":[
-                                "vitesseProduction"
+                                "Production"
                             ],
-                            "val":"-2",
-                            "type":"plusegal"
+                            "val":"0.85",
+                            "type":"fois"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.3",
                 "prix":"20000",
-                "amelioration":"entrepriseExtraDynamique",
+                "amelioration":"Entreprise Dynamique niv2",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"augmentationTempsTravail",
+                    "nom":"Augmentation du Temps de Travail",
                     "cout":"20000",
+                    "desc":"Faites travailler vos employes plus longtemps.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"-2",
-                            "type":"plusegal"
+                            "val":"0.9",
+                            "type":"fois"
                         },
                         {
                             "path":[
                                 "Production"
                             ],
-                            "val":"2",
+                            "val":"0.1",
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             },
             {
                 "proba":"0.4",
                 "prix":"15000",
-                "amelioration":"entrepriseExtraDynamique",
+                "amelioration":"Entreprise Dynamique niv2",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"diminutionTempsTravail",
+                    "nom":"Diminution du Temps de Travail",
                     "cout":"15000",
+                    "desc":"Faites travailler vos employes moins longtemps.",
                     "valeurs":[
                         {
                             "path":[
-                                "satisfaction"
+                                "Choix",
+                                "avantages"
                             ],
-                            "val":"2",
+                            "val":"0.08",
                             "type":"plusegal"
                         },
                         {
                             "path":[
                                 "Production"
                             ],
-                            "val":"-2",
-                            "type":"plusegal"
+                            "val":"0.9",
+                            "type":"fois"
                         }
                     ]
- 
                 }
             }
         ],
-        "amelioration":[
+        "Amelioration":[
             {
                 "proba":"0.4",
                 "prix":"75000",
                 "amelioration":"",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"investissementRetD",
+                    "nom":"Investissement dans la Recherche et le Developpement",
                     "cout":"75000",
+                    "desc":"Investisser dans la recherche et le developpement de votre en usine, pour effectuer ces taches plus rapidement.",
                     "valeurs":[
                         {
                             "path":[
@@ -680,15 +661,16 @@
                 }
             }
         ],
-        "publicite":[
+        "Publicite":[
             {
                 "proba":"0.2",
                 "prix":"4000",
-                "amelioration":"bonComercial",
+                "amelioration":"Bon Comercial",
                 "nbTour":"5",
                 "choix":{
-                    "nom":"augmenterBudgetPub",
+                    "nom":"Augmenter le Budget Pub",
                     "cout":"4000 /tour",
+                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualite.",
                     "valeurs":[
                         {
                             "path":[
@@ -705,11 +687,12 @@
             {
                 "proba":"0.3",
                 "prix":"",
-                "amelioration":"bonComercial",
+                "amelioration":"Bon Comercial",
                 "nbTour":"5",
                 "choix":{
-                    "nom":"diminuerBudgetPub",
+                    "nom":"Diminuer le Budget Pub",
                     "cout":"-2000 /tour",
+                    "desc":"Diminuez votre budget pub pour liberer des fonds.",
                     "valeurs":[
                         {
                             "path":[
@@ -736,124 +719,184 @@
 
 
     "ameliorations": {
-        "courantAuxilliaire":[
+        "Courant Auxilliaire":[
             {
-                "amelio":"panneauxSolaires",
+                "amelio":"Panneaux Solaires",
+                "desc":"Faites des recherches sur les panneaux solaires afin de pouvoir en installer.",
                 "prix":"1000",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
-                        "categorie":"ecologie",
-                        "amelio":"ecologiste"
+                        "categorie":"Ecologie",
+                        "amelio":"Ecologiste"
                     }
                 ]
             },
             {
-                "amelio":"eoliennes",
+                "amelio":"Eoliennes",
+                "desc":"Faites des recherches sur les eoliennes afin de pouvoir en installer.",
                 "prix":"2000",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
-                        "categorie":"courantAuxilliaire",
-                        "amelio":"panneauxSolaires"
+                        "categorie":"Courant Auxilliaire",
+                        "amelio":"Panneaux Solaires"
                     }
                 ]
             },
             {
-                "amelio":"generateurBiomasse",
+                "amelio":"Generateur Biomasse",
+                "desc":"Faites des recherches sur le generateur biomasse afin de pouvoir en installer un.",
                 "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[
                     {
-                        "categorie":"courantAuxilliaire",
-                        "amelio":"eoliennes"
+                        "categorie":"Courant Auxilliaire",
+                        "amelio":"Eoliennes"
                     }
                 ]
             },
             {
-                "amelio":"barrageHydrolique",
+                "amelio":"Barrage Hydrolique",
+                "desc":"Faites des recherches sur le barrage hydroliqueafin de pouvoir en installer un.",
                 "prix":"4000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
-                        "categorie":"courantAuxilliaire",
-                        "amelio":"generateurBiomasse"
+                        "categorie":"Courant Auxilliaire",
+                        "amelio":"Generateur Biomasse"
                     }
                 ]
             }
         ],
-        "social":[
+        "Social":[
             {
                 "amelio":"CE",
+                "desc":"Grace aux CE vos employes pourront beneficier d'avantages interressant pour le mental.",
                 "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
             {
-                "amelio":"presidentDuCE",
+                "amelio":"President Du CE",
+                "desc":"Debloquez encore plus d'avantages pour vos employes.",
                 "prix":"6000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
-                        "categorie":"social",
+                        "categorie":"Social",
                         "amelio":"CE"
                     }
                 ]
             },
             {
-                "amelio":"bonSamaritain",
+                "amelio":"Bon Samaritain",
+                "desc":"Le moral des troupes compte plus que tout pour votre entreprise.",
                 "prix":"12000",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
-                        "categorie":"social",
-                        "amelio":"persidentDuCE"
+                        "categorie":"Social",
+                        "amelio":"President Du CE"
                     }
                 ]
             }
         ],
-        "production":[
+        "Production":[
             {
-                "amelio":"entrepriseDynamique",
+                "amelio":"Entreprise Dynamique",
+                "desc":"Offrez vous l'acces aux parametres de productions.",
                 "prix":"2000",
                 "nbTour":"1",
                 "amelioNecessaire":[]
             },
             {
-                "amelio":"entrepriseExtraDynamique",
-                "prix":"4000",
+                "amelio":"Entreprise Dynamique niv2",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[
                     {
-                        "categorie":"production",
-                        "amelio":"entrepriseDynamique"
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Dynamique niv3",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "prix":"",
+                "nbTour":"1",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique niv2"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Dynamique niv4",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "prix":"",
+                "nbTour":"1",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique niv3"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Dynamique niv5",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "prix":"",
+                "nbTour":"1",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique niv4"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Dynamique niv6",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "prix":"",
+                "nbTour":"1",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique niv5"
                     }
                 ]
             }
         ],
-        "publicite":[
+        "Publicite":[
             {
-                "amelio":"bonComercial",
+                "amelio":"Bon Comercial",
+                "desc":"Offrez vous les meilleur comerciaux pour vos campagnes publicitaires.",
                 "prix":"4000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             }
         ],
-        "ecologie":[
+        "Ecologie":[
             {
-                "amelio":"ecologiste",
+                "amelio":"Ecologiste",
+                "desc":"Ayez un regard plus 'vert' sur votre entreprise.",
                 "prix":"2000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
             {
-                "amelio":"greenPeace",
+                "amelio":"Green Peace",
+                "desc":"0 pollution, 0 dechets, 0 emission de CO2 pourrait etre votre nouvel objectif.",
                 "prix":"6000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
-                        "categorie":"ecologie",
-                        "amelio":"ecologiste"
+                        "categorie":"Ecologie",
+                        "amelio":"Ecologiste"
                     }
                 ]
             }
