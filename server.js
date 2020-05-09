@@ -37,6 +37,8 @@ app.get('/game', (request, response, next) => {
 let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 // reste a modifier en conséquence
+this.rep = new Repetition();
+let Game = this;
 
 io.sockets.on('connection',  (socket) =>{
     console.log('Debut Connection Client (coté serveur)')
