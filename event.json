@@ -113,38 +113,65 @@
         {
             "proba":"0.02",
             "event":{
-                "nom":"Changement de fournisseur energetique",
-                "desc":"Vous changez de fornisseur energetique",
-                "norme":{
-                    "pollution":{
-                        "min":"0.5",
-                        "max":"1.5"
-                    },
-                    "dechets":{
-                        "min":"0.85",
-                        "max":"1.15"
-                    },
-                    "cout":{
-                        "min":"1000",
-                        "max":"6000"
-                    }
+                "Choix":{
+                    "nom":"Changement de fournisseur energetique",
+                    "desc":"Vous changez de fornisseur energetique",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "Courant",
+                                "Principale",
+                                "pollution"
+                            ],
+                            "val":"0.9",
+                            "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Courant",
+                                "Principale",
+                                "dechets"
+                            ],
+                            "val":"0.9",
+                            "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Courant",
+                                "Principale",
+                                "prix"
+                            ],
+                            "val":"-200",
+                            "type":"plusegal"
+                        }
+                    ]
                 }
             }
         },
         {
             "proba":"0.02",
             "event":{
-                "nom":"Changement de fournisseur de ressources",
-                "desc":"Vous changez de fournisseur pour vos ressources",
-                "norme":{
-                    "stabilite":{
-                        "min":"0.5",
-                        "max":"1.5"
-                    },
-                    "cout":{
-                        "min":"1500",
-                        "max":"2500"
-                    }
+                "Choix":{
+                    "nom":"Changement de fournisseur de ressources",
+                    "desc":"Vous changez de fournisseur pour vos ressources",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "Approvisionnement",
+                                "Capacite"
+                            ],
+                            "val":"500",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
+                                "Approvisionnement",
+                                "CapaciteMax"
+                            ],
+                            "val":"550",
+                            "type":"plusegal"
+                        }
+                    ]
                 }
             }
         }

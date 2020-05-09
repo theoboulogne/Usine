@@ -15,6 +15,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-25000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "Courant",
                                     "Auxilliaire",
                                     "prix"
@@ -51,6 +58,13 @@
                         "cout":"50000",
                         "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours que les panneaux solaires.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "Courant",
@@ -91,6 +105,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-100000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "Courant",
                                     "Auxilliaire",
                                     "prix"
@@ -127,6 +148,13 @@
                         "cout":"150000",
                         "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-150000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "Courant",
@@ -173,6 +201,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-25000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "Choix",
                                     "avantages"
                                 ],
@@ -190,6 +225,13 @@
                         "cout":"10000",
                         "desc":"Creer une nouvelle salle de repos pour que vos employes beneficies d'uun repos optimal.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-10000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "Choix",
@@ -217,6 +259,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-20000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "pub",
                                     "cout"
                                 ],
@@ -240,6 +289,13 @@
                         "cout":"15000",
                         "desc":"Recyclez vos dechets recyclable pour faire partie des entreprises les plus 'vertes'.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-15000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "pollution"
@@ -267,6 +323,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-40000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "pollution"
                                 ],
                                 "val":"0.7",
@@ -289,6 +352,13 @@
                         "cout":"10000",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-10000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "production"
@@ -316,6 +386,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-15000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "production"
                                 ],
                                 "val":"0.06",
@@ -339,6 +416,13 @@
                         "cout":"20000",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-20000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "production"
@@ -366,6 +450,13 @@
                         "valeurs":[
                             {
                                 "path":[
+                                    "solde"
+                                ],
+                                "val":"-25000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
                                     "production"
                                 ],
                                 "val":"0.06",
@@ -389,6 +480,13 @@
                         "cout":"30000",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-30000",
+                                "type":"plusegal"
+                            },
                             {
                                 "path":[
                                     "production"
@@ -431,6 +529,13 @@
                     "cout":"3000 /tour",
                     "desc":"Offrez a vos employes un abonnement mensuel dans une salle de muscu ou a Netflix.",
                     "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-3000",
+                            "type":"plusegal"
+                        },
                         {
                             "path":[
                                 "Choix",
@@ -535,6 +640,13 @@
                     "valeurs":[
                         {
                             "path":[
+                                "solde"
+                            ],
+                            "val":"-30000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
                                 "Choix",
                                 "avantages"
                             ],
@@ -561,6 +673,13 @@
                     "cout":"30000",
                     "desc":"Diminuez la cadences de productions de vos lignes.",
                     "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-30000",
+                            "type":"plusegal"
+                        },
                         {
                             "path":[
                                 "Choix",
@@ -591,6 +710,13 @@
                     "valeurs":[
                         {
                             "path":[
+                                "solde"
+                            ],
+                            "val":"-20000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
                                 "Choix",
                                 "avantages"
                             ],
@@ -619,6 +745,13 @@
                     "valeurs":[
                         {
                             "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
                                 "Choix",
                                 "avantages"
                             ],
@@ -631,6 +764,126 @@
                             ],
                             "val":"0.9",
                             "type":"fois"
+                        }
+                    ]
+                }
+            },
+            {
+                "proba":"0.3",
+                "prix":"15000",
+                "amelioration":"Entreprise Autonome 1",
+                "nbTour":"2",
+                "choix":{
+                    "nom":"Amelioration composant 1",
+                    "cout":"15000",
+                    "desc":"Rendez Autonome le composant 1 de la ligne de production.",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "val":"1",
+                            "type":"R&D"
+                        }
+                    ]
+                }
+            },
+            {
+                "proba":"0.3",
+                "prix":"15000",
+                "amelioration":"Entreprise Autonome 2",
+                "nbTour":"2",
+                "choix":{
+                    "nom":"Amelioration composant 2",
+                    "cout":"15000",
+                    "desc":"Rendez Autonome le composant 2 de la ligne de production.",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "val":"1",
+                            "type":"R&D"
+                        }
+                    ]
+                }
+            },
+            {
+                "proba":"0.3",
+                "prix":"15000",
+                "amelioration":"Entreprise Autonome 3",
+                "nbTour":"2",
+                "choix":{
+                    "nom":"Amelioration composant 3",
+                    "cout":"15000",
+                    "desc":"Rendez Autonome le composant 3 de la ligne de production.",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "val":"1",
+                            "type":"R&D"
+                        }
+                    ]
+                }
+            },
+            {
+                "proba":"0.3",
+                "prix":"15000",
+                "amelioration":"Entreprise Autonome 4",
+                "nbTour":"2",
+                "choix":{
+                    "nom":"Amelioration composant 4",
+                    "cout":"15000",
+                    "desc":"Rendez Autonome le composant 4 de la ligne de production.",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "val":"1",
+                            "type":"R&D"
+                        }
+                    ]
+                }
+            },
+            {
+                "proba":"0.3",
+                "prix":"15000",
+                "amelioration":"Entreprise Autonome 5",
+                "nbTour":"2",
+                "choix":{
+                    "nom":"Amelioration composant 5",
+                    "cout":"15000",
+                    "desc":"Rendez Autonome le composant 5 de la ligne de production.",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-15000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "val":"1",
+                            "type":"R&D"
                         }
                     ]
                 }
@@ -649,15 +902,16 @@
                     "valeurs":[
                         {
                             "path":[
-                                "amelioration",
-                                "tableau",
-                                "NbTour"
+                                "solde"
                             ],
-                            "val":"-1",
+                            "val":"-75000",
                             "type":"plusegal"
+                        },
+                        {
+                            "val":"-1",
+                            "type":"R&D"
                         }
                     ]
- 
                 }
             }
         ],
@@ -681,7 +935,6 @@
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             },
             {
@@ -703,7 +956,6 @@
                             "type":"plusegal"
                         }
                     ]
- 
                 }
             }
         ]
@@ -723,7 +975,6 @@
             {
                 "amelio":"Panneaux Solaires",
                 "desc":"Faites des recherches sur les panneaux solaires afin de pouvoir en installer.",
-                "prix":"1000",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
@@ -735,7 +986,6 @@
             {
                 "amelio":"Eoliennes",
                 "desc":"Faites des recherches sur les eoliennes afin de pouvoir en installer.",
-                "prix":"2000",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
@@ -747,7 +997,6 @@
             {
                 "amelio":"Generateur Biomasse",
                 "desc":"Faites des recherches sur le generateur biomasse afin de pouvoir en installer un.",
-                "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[
                     {
@@ -759,7 +1008,6 @@
             {
                 "amelio":"Barrage Hydrolique",
                 "desc":"Faites des recherches sur le barrage hydroliqueafin de pouvoir en installer un.",
-                "prix":"4000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
@@ -773,14 +1021,12 @@
             {
                 "amelio":"CE",
                 "desc":"Grace aux CE vos employes pourront beneficier d'avantages interressant pour le mental.",
-                "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
             {
                 "amelio":"President Du CE",
                 "desc":"Debloquez encore plus d'avantages pour vos employes.",
-                "prix":"6000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
@@ -792,7 +1038,6 @@
             {
                 "amelio":"Bon Samaritain",
                 "desc":"Le moral des troupes compte plus que tout pour votre entreprise.",
-                "prix":"12000",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
@@ -806,14 +1051,12 @@
             {
                 "amelio":"Entreprise Dynamique",
                 "desc":"Offrez vous l'acces aux parametres de productions.",
-                "prix":"2000",
                 "nbTour":"1",
                 "amelioNecessaire":[]
             },
             {
                 "amelio":"Entreprise Dynamique niv2",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "prix":"3000",
                 "nbTour":"2",
                 "amelioNecessaire":[
                     {
@@ -825,7 +1068,6 @@
             {
                 "amelio":"Entreprise Dynamique niv3",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "prix":"",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
@@ -837,7 +1079,6 @@
             {
                 "amelio":"Entreprise Dynamique niv4",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "prix":"",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
@@ -849,7 +1090,6 @@
             {
                 "amelio":"Entreprise Dynamique niv5",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "prix":"",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
@@ -861,12 +1101,66 @@
             {
                 "amelio":"Entreprise Dynamique niv6",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "prix":"",
                 "nbTour":"1",
                 "amelioNecessaire":[
                     {
                         "categorie":"Production",
                         "amelio":"Entreprise Dynamique niv5"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Autonome 1",
+                "desc":"Ayez la possibilite d'ameliorez le premier composant de chaque ligne.",
+                "nbTour":"2",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Autonome 2",
+                "desc":"Ayez la possibilite d'ameliorez le deuxieme composant de chaque ligne.",
+                "nbTour":"2",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Autonome 3",
+                "desc":"Ayez la possibilite d'ameliorez le troisieme composant de chaque ligne.",
+                "nbTour":"2",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Autonome 4",
+                "desc":"Ayez la possibilite d'ameliorez le quatrieme composant de chaque ligne.",
+                "nbTour":"2",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
+                    }
+                ]
+            },
+            {
+                "amelio":"Entreprise Autonome 5",
+                "desc":"Ayez la possibilite d'ameliorez le cinquieme composant de chaque ligne.",
+                "nbTour":"2",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"Production",
+                        "amelio":"Entreprise Dynamique"
                     }
                 ]
             }
@@ -875,7 +1169,6 @@
             {
                 "amelio":"Bon Comercial",
                 "desc":"Offrez vous les meilleur comerciaux pour vos campagnes publicitaires.",
-                "prix":"4000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             }
@@ -884,14 +1177,12 @@
             {
                 "amelio":"Ecologiste",
                 "desc":"Ayez un regard plus 'vert' sur votre entreprise.",
-                "prix":"2000",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
             {
                 "amelio":"Green Peace",
                 "desc":"0 pollution, 0 dechets, 0 emission de CO2 pourrait etre votre nouvel objectif.",
-                "prix":"6000",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
