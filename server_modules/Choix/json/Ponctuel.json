@@ -1,0 +1,20 @@
+{
+    "ponctuel": [
+        {
+            "nom":"nomCategorie",
+            "proba":"0.01",
+            "variations":[
+                {
+                    "nom":"tratar",
+                    "proba":"0",
+                    "prix":"0",
+                    "amelioration":"blabla",
+                    "choix":{
+
+                    }
+                }
+            ]
+        },
+        {}
+    ]
+}

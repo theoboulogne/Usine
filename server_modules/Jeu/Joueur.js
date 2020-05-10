@@ -7,6 +7,10 @@ const Ligne = require('../Ligne/Ligne')
 //const Composant = require('./Ligne/Composant')
 
 
+const Repetition = require('../Choix/Repetition')
+const Ponctuel = require('../Choix/Ponctuel')
+const Amelioration = require('../Choix/Amelioration')
+
 //const utils = require('./utils')
 
 
@@ -14,6 +18,9 @@ class Joueur{
     constructor(socket){
 
         this.socketid = socket;
+        this.repetition = new Repetition();
+        this.amelioration = new Amelioration();
+        this.ponctuel = new Ponctuel();
         //Nombre de jours dans un mois
         this.uptimeMax = 30;
         //faire varier +1 / -1 ? 
@@ -21,17 +28,18 @@ class Joueur{
 
         this.Choix = new Object();
         this.Choix.salaire = 1500
-        this.Choix.solde = 0 // taxe
+        this.Choix.solde = 0 // paiement par mois
         this.Choix.norme = new Object(); // limites
         this.Choix.norme.pollution = -1
         this.Choix.norme.dechets = -1
-        this.Choix.norme.production = -1
+        this.Choix.norme.salaire = -1
         this.Choix.avantages = 0
         this.Choix.securite = new Object(); // 0.5 - 1.5
         this.Choix.securite.employes = 1
         this.Choix.securite.robots = 1
 
-
+        this.pollution = 1;
+        this.dechets = 1;
         this.Eco = new Ecologie(); // Initialisation de l'écologie
         this.Eco.pollution = 0;
         this.Eco.dechets = 0;
@@ -41,6 +49,7 @@ class Joueur{
 
 
         //Gérer les fournisseurs principaux coté serveur ?
+        this.energie = 1;
         this.Courant = new Energie();// Initialisation de l'énergie
         this.Courant.Principal.prix = 2;
         this.Courant.Principal.pollution = 6;
@@ -49,10 +58,14 @@ class Joueur{
         this.Courant.Auxilliaire.pollution = 15;
         this.Courant.Auxilliaire.coupure = 0.2;
 
+        this.Approvisionnement = new Object();
+        this.Approvisionnement.Capacite = 2000;//Actuelle
+        this.Approvisionnement.CapaciteMax = 2000;//Maximale
+        this.Approvisionnement.Penurie = -1;
 
         this.solde = 1000000;// Initialisation des ventes
 
-
+        this.production = 1;
         this.nbEmployes = 15;// Initialisation de la production
         this.nbRobots = 0;
         this.nbEmployes_dispo = 15;
@@ -67,10 +80,21 @@ class Joueur{
         this.nbTour = -1
     }
 
+    Update_Approvisionnement(){
+        if(this.Approvisionnement.Penurie > -1){
+            if(this.Approvisionnement.Penurie == 0){
+                this.Approvisionnement.Capacite = this.Approvisionnement.CapaciteMax;
+            }
+            this.Approvisionnement.Penurie--;
+        }
+    }
+
     Update_Mois(){ // Fonctionnement d'un mois
         //Reset des variables de stockage des infos du mois + calcul du nombre de jours de fonctionnement
         this.consommationNRJ = 0;
-        let uptimeNRJ = this.Courant.Principal.uptime(this.uptimeMax) + ((this.uptimeMax - this.Courant.Principal.uptime(this.uptimeMax))*(1-this.Courant.Auxilliaire.coupure));
+        let uptimeNRJ = this.Courant.Auxilliaire.uptime(this.uptimeMax) + ((this.uptimeMax - this.Courant.Auxilliaire.uptime(this.uptimeMax))*(1-this.Courant.Principal.coupure));
+
+        this.Update_Approvisionnement();
 
         for(let i=0; i<uptimeNRJ; i++){ // On effectue notre mois
             this.Update_Jour()
@@ -78,7 +102,7 @@ class Joueur{
         //Calcul et facture de fin de mois
 
 
-        this.solde += this.Choix.Solde()/* + Ventes .. */ - ((this.consommationNRJ * (this.Courant.solde_NRJ1(this.uptimeMax) + this.Courant.solde_NRJ2(this.uptimeMax))) + this.solde_salaires());
+        this.solde += this.Choix.solde/* paiement par mois */ - ((this.consommationNRJ * (this.Courant.solde_NRJ1(this.uptimeMax) + this.Courant.solde_NRJ2(this.uptimeMax))) + this.solde_salaires());
         
 
     }
@@ -107,38 +131,42 @@ class Joueur{
     }
     Update_Lignes(){ //Fait fonctionner les machines une heure
         let tmpChoix = new Object;
+        tmpChoix.securite = new Object();
+
         tmpChoix.avantages = this.Choix.avantages
         tmpChoix.securite.employes = this.Choix.securite.employes
         tmpChoix.securite.robots = this.Choix.securite.robots
 
+        let production = 0;
         for(let i=0; i<this.Lignes.length; i++) {
-            this.Lignes[i].Update(tmpChoix);
-            this.stock += this.Lignes[i].production; 
+            if(production < this.Approvisionnement.Capacite) this.Lignes[i].Update(tmpChoix);
+            if(production+(this.production*this.Lignes[i].production) < this.Approvisionnement.Capacite) production += this.production*this.Lignes[i].production; 
         }
+        this.stock += production;
         //Récupérer les infos ensuite
     }
 
     //Faire le même type de fonction pour tout ?
     consommation(){ // Récupère la consommation sur une heure
 
-        for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += this.Lignes[i].energie();
+        for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += (this.energie * this.Lignes[i].energie());
     }
     empreinte(){ // Récupère les infos écologiques sur une heure
         this.Eco.pollution = 0;
         this.Eco.dechets = 0;
         for(let i=0; i<this.Lignes.length; i++){
-            this.Eco.pollution += this.Lignes[i].pollution;
-            this.Eco.dechets += this.Lignes[i].dechets;
+            this.Eco.pollution += (this.Lignes[i].pollution*this.pollution);
+            this.Eco.dechets += (this.Lignes[i].dechets*this.dechets);
         }
         this.Empreinte.pollution += this.Eco.pollution;
         this.Empreinte.dechets += this.Eco.dechets;
     }
 
     avantages(){ // si salaire = 3300 -> = 1 | si salaire = 600 -> = 0
-        return Math.log((this.Choix.Salaire()/300) - (17*this.Choix.Avantages()))
+        return Math.log((this.Choix.salaire/300) - (17*this.Choix.avantages))
     }
     solde_salaires(){ // modifier les salaires pour les week ends
-        return (this.Choix.Salaire()*this.nbEmployes);
+        return (this.Choix.salaire*this.nbEmployes);
     }
 
     

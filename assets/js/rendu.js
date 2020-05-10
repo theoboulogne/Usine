@@ -15,7 +15,48 @@ class Rendu{
         camera.rotation.y = ( 60* (Math.PI / 180)) 
         camera.rotation.z = ( 90* (Math.PI / 180)) 
         camera.position.z = 100;
-        this.gltfLoader = new THREE.GLTFLoader();
+
+
+        /*let loader = new THREE.GLTFLoader();
+        loader.load( 'models/Ouvrier.glb', function ( gltf ) {
+
+            model = gltf.scene;
+            scene.add( model );
+
+            model.traverse( function ( object ) {
+
+                if ( object.isMesh ) object.castShadow = true;
+
+            } );
+
+            //
+
+            skeleton = new THREE.SkeletonHelper( model );
+            skeleton.visible = false;
+            scene.add( skeleton );
+
+            //
+
+            createPanel();
+
+
+            //
+
+            var animations = gltf.animations;
+
+            mixer = new THREE.AnimationMixer( model );
+
+            idleAction = mixer.clipAction( animations[ 0 ] );
+            walkAction = mixer.clipAction( animations[ 3 ] );
+            runAction = mixer.clipAction( animations[ 1 ] );
+
+            actions = [ idleAction, walkAction, runAction ];
+
+            activateAllActions();
+
+            animate();
+
+        } );*/
         
         
         this.GenerationBoard(scene)
@@ -28,29 +69,14 @@ class Rendu{
         render();
 
         let game = scene;
-        let test = new THREE.GLTFLoader().load( 'models/futuristic/scene.gltf', function ( gltf ) {
-            gltf.scene.traverse( function ( child ) {
-                if ( child.isMesh ) {
-                    // glTF currently supports only tangent-space normal maps.
-                    // this model has been modified to demonstrate the use of an object-space normal map.
-                    child.material.normalMapType = THREE.ObjectSpaceNormalMap;
-                    // attribute normals are not required with an object-space normal map. remove them.
-                    child.geometry.deleteAttribute( 'normal' );
-                    //
-                    child.material.side = THREE.DoubleSide;
-                    child.scale.multiplyScalar( 0.5 );
-                    // recenter
-                    new THREE.Box3().setFromObject( child ).getCenter( child.position ).multiplyScalar( - 1 );
-                    scene.add( child );
-                }
-            } );
-            
-            render();
-            
-            let ambientLight = new THREE.AmbientLight( 0xcccccc );
-            game.add( ambientLight );
-        } );
+        /*
+        let loader = new THREE.FBXLoader();
+        loader.load( 'models/fbxtest/source/model.fbx', function ( object ) {
 
+            scene.add( object );
+        
+        } );
+*/
     }
 
     SetBarre(id, pourcentage){
