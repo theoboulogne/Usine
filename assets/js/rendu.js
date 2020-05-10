@@ -1,129 +1,303 @@
+
+//////////////////////
+// Variables globales
+//////////////////////
+let scene = null;
+let renderer = null;
+let camera = null;
+let clock = null;
+let mixers = [];
+//////////////////////
+
+/**
+ * Boucle de rendu
+ */
+function animate() {
+
+    requestAnimationFrame( animate );
+
+    // Récupère le temps écoulé depuis le dernier affichage
+
+    let mixerUpdateDelta = clock.getDelta();
+
+    // Update toutes les animations
+
+    for ( let i = 0; i < mixers.length; ++ i ) {
+
+        mixers[ i ].update( mixerUpdateDelta );
+
+    }
+    
+    renderer.render( scene, camera );
+
+}
+
+
 class Rendu{
-    constructor(Lignes, Salaries){
-        // utiliser "Salaries" pour effectuer le rendu des employés travaillant
-        let game = this;
-        game.scene = new THREE.Scene();
-        let renderer = new THREE.WebGLRenderer();
+
+    constructor(){
+
+        //////////////////////////////
+        // Initialisation de la scene
+        //////////////////////////////
+
+        // On initialise la scène ThreeJs
+        scene = new THREE.Scene();
+
+        // On initialise le rendu
+        renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
-        let camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        camera.up.set( 0, 0, 1 ); // pour que orbitcontrols 'suive' la caméra
 
-        camera.position.x = 5
-        camera.rotation.y = ( 60* (Math.PI / 180)) 
-        camera.rotation.z = ( 90* (Math.PI / 180)) 
-        camera.position.z = 3;
-        game.gltfLoader = new THREE.GLTFLoader();
-        game.fbxLoader = new THREE.FBXLoader();
-        game.controls = new THREE.OrbitControls( camera, renderer.domElement );
-        game.clockAnim = new THREE.Clock();
+        // On initialise la caméra
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        //camera.up.set( 0, 0, 1 ); // pour que orbitcontrols 'suive' la caméra
+        camera.position.x = 0
+        camera.position.y = 3
+        camera.position.z = 5;
+        camera.rotation.y = ( 0* (Math.PI / 180)) 
+        camera.rotation.z = ( 180* (Math.PI / 180)) 
 
-        
         // Redimensionnement du jeu auto
         window.addEventListener( 'resize', function() {
+            
             let width = window.innerWidth;
             let height = window.innerHeight;
+            
             renderer.setSize( width, height );
-            Rendu.camera.aspect = width / height;
-            Rendu.camera.updateProjectionMatrix();
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            
         });
+        
+        //////////////////////////////
+        // Utilisation des librairies
+        //////////////////////////////
 
-        game.models = [ // définition des nom de modèles en dur
-            {nom:"reactor", model:undefined},
-            {nom:"generator", model:undefined},
-            {nom:"box", model:undefined},
-            {nom:"tube", model:undefined},
-            {nom:"end", model:undefined},
-            {nom:"robot", model:undefined}
+        // Caméra dynamique
+        let controls = new THREE.OrbitControls( camera, renderer.domElement );
+        // Loadeur des modèles
+        this.gltfLoader = new THREE.GLTFLoader();
+        // Initialisation de la clock pour l'enregistrement du temps entre les frames
+        clock = new THREE.Clock();
+
+        /////////////////////////////////////////
+        // Génération du plateau et des lumières
+        /////////////////////////////////////////
+ 
+        this.GenerationBoard()
+
+        this.GenerationLight()
+
+        //////////////////////////////////////////
+        // Informations sur les modèles à charger
+        //////////////////////////////////////////
+        
+        //Ligne de Production
+        let lineMODELS = [
+            { name:"reactor" },
+            { name:"generator" },
+            { name:"line" },
+            { name:"tube" },
+            { name:"end" },
+            //{ name:"robotArm" }
         ];
-        for(let i=0; i<game.models.length; i++){ 
-            game.gltfLoader.load( "../models/"+ game.models[i].nom +".gltf", function ( gltf ) {
-                game.models[i].model = gltf;
-            });
-        }
+        //Modèles avec animation
+        let characterMODELS = [
+            { name: "Worker" },
+            { name: "Robot" },
+            { name: "armBot"}
+        ];
 
-        game.lignes = [];
+        //Animation du rendu
+        animate();
+    
 
-        let loadCheck = setInterval(function() { // On attend que toutes nos pièces soient 
-            if (game.checkLoadModels()) {  // chargées avant de commencer à les afficher
-                clearInterval(loadCheck);
-                game.Affichage(game.GenerationLigne());
-                
-            }
-        }, 300);
-
-////////////////////////////////////////////////////////////////////////
+        /////////////////
+        // Phase de test
+        /////////////////
         
-        // load worker model/animation
-        /*
-        console.log("loader");
-        game.fbxLoader.load( 'models/workerNoAnim.fbx', function ( object ) {
+        //this.loadModels(characterMODELS, UNITS);
 
-            mixer = new THREE.AnimationMixer( object );
-
-            //var action = mixer.clipAction( object.animations[ 0 ] );
-            //action.play();
-
-            object.traverse( function ( child ) {
-
-                if ( child.isMesh ) {
-
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-                }
-            } );
-            scene.add( object );
-        } );*/
-
-        let mixers = [];
-        game.fbxLoader.load( 'models/worker.fbx', addObj);
-        function addObj(object) {
-            object.mixer = new THREE.AnimationMixer( object );
-            mixers.push( object.mixer );
-            playerRun = object.mixer.clipAction( object.animations[ 0 ] );
-            playerRun.play();
-            scene.add( object );
-        }
+        let Ligne = {Composant:[{auto:true, nbEmployes:1, nbRobots:1}, {auto:false, nbEmployes:1, nbRobots:1}, {auto:false, nbEmployes:0, nbRobots:2}, {auto:false, nbEmployes:2, nbRobots:0}, {auto:false, nbEmployes:1, nbRobots:1}]}
         
-        function anim() {
-            let deltaAnim = game.clockAnim.getDelta();
-            if ( mixers.length > 0 ) {
-                for ( let i = 0; i < mixers.length; i ++ ) {
-                    mixers[ i ].update( deltaAnim );
-                }
-            }
-        }
-        anim();
-
+        this.loadModels(lineMODELS, this.GenerationLigne(Ligne, 0));
+        this.loadModels(characterMODELS, this.GenerationWorker(Ligne, 0));
+        this.loadModels(lineMODELS, this.GenerationLigne(Ligne, 1));
+        this.loadModels(characterMODELS, this.GenerationWorker(Ligne, 1));
         
-        var model = game.scene;
-        var mixer = new THREE.AnimationMixer( model );
-        //var action = mixer.clipAction( game.animations[0] );
-
-        // Play one animation
-        //action.play();
-
-        // Play all animations
-        //game.animations.forEach( function ( clip ) {
-        //    mixer.clipAction( clip ).play();
-        //} );
         
-
-/////////////////////////////////////////////////////////
-        
-        game.GenerationBoard(game.scene)
-        game.GenerationLight(game.scene)
-
-        function render() {
-            requestAnimationFrame( render );
-            renderer.render( game.scene, camera );
-        }
-        render();
     }
+    
+    /////////////////////////////////////////////////////////////////////////
+    // Génération des unités avec leurs coordonnées selon les données du jeu
+    /////////////////////////////////////////////////////////////////////////
+
+    GenerationLigne(Ligne, Y){
+        // utiliser "Ligne" pour vérifier la variable auto du composant et afficher un modèle différent en conséquence
+        return [
+           {
+               modelName: "reactor", 
+               position:{x: 2.05, y: 0.5, z:Y*2},
+               scale: 0.005, 
+               rotation:{x: (Math.PI/180)*90, y:(Math.PI/180)*0, z:(Math.PI/180)*-90},
+           },
+           {
+               modelName: "generator", 
+               position:{x: 1.36, y: 0.05, z:Y*2},
+               scale: 0.0025,
+               rotation:{x: (Math.PI/180)*90, y:(Math.PI/180)*0, z:(Math.PI/180)*0},
+           },
+           {
+               modelName: "line", 
+               position:{x: 0.95, y: 0.2, z:Y*2},
+               scale: 0.003, 
+               rotation:{x: (Math.PI/180)*0, y:(Math.PI/180)*0, z:(Math.PI/180)*90},
+           },
+           {
+               modelName: "line", 
+               position:{x: 0.39, y: 0.2, z:Y*2},
+               scale: 0.003, 
+               rotation:{x: (Math.PI/180)*0, y:(Math.PI/180)*0, z:(Math.PI/180)*90},
+           },
+           {
+               modelName: "line", 
+               position:{x: -0.17, y: 0.2, z:Y*2},
+               scale: 0.003, 
+               rotation:{x: (Math.PI/180)*0, y:(Math.PI/180)*0, z:(Math.PI/180)*90},
+           },
+           {
+               modelName: "line", 
+               position:{x: -0.75, y: 0.2, z:Y*2},
+               scale: 0.003, 
+               rotation:{x: (Math.PI/180)*0, y:(Math.PI/180)*0, z:(Math.PI/180)*90},
+            },
+            {
+               modelName: "tube", 
+               position:{x: -2, y: 0, z:Y*2},
+               scale: 0.7, 
+               rotation:{x: (Math.PI/180)*0, y:(Math.PI/180)*270, z:(Math.PI/180)*270},
+            },
+            {
+               modelName: "end", 
+               position:{x: -3, y:-0.05, z:(Y*2)+0.06},
+               scale: 0.004, 
+            },   
+        ];
+    }
+
+    GenerationWorker(Ligne, Y) {
+        /*
+        (2%2 == 0)*180
+        */
+       let UNITES = []
+       
+       for(let i=0; i<Ligne.Composant.length; i++){
+           //Si auto 
+           if ( Ligne.Composant[i].auto ){
+
+                let nb = 0;
+                for(let j=0; j<1; j++){
+                    UNITES.push({
+                            modelName: "armBot",
+                            meshName: "Character",
+                            position: { x: -1.1 + 0.45*i, y: 0.25, z: (Y*2) + -0.4 + 0.81*nb },
+                            scale: { x: 0.0007, y:0.0007, z:0.0007 },
+                            rotation: {x: (Math.PI/180)*0, y:(Math.PI/180)*180*(nb%2), z:(Math.PI/180)*0},
+                            animationName: "work"
+                        })
+                        nb++;
+                    }
+                }
+
+           else{
+
+                let nb = 0;
+                for(let j=0; j<Ligne.Composant[i].nbEmployes; j++){
+                    UNITES.push({
+                            modelName: "Worker",
+                            meshName: "Character",
+                            position: { x: -1.1 + 0.45*i, y: 0.05, z: (Y*2) + -0.4 + 0.81*nb },
+                            scale: { x: 0.3, y:0.3, z:0.3 },
+                            rotation: {x: (Math.PI/180)*0, y:(Math.PI/180)*180*(nb%2), z:(Math.PI/180)*0},
+                            animationName: "work"
+                        })
+                        nb++;
+                }
+                for(let j=0; j<Ligne.Composant[i].nbRobots; j++){
+                        UNITES.push({
+                            modelName: "Robot",
+                            meshName: "Robot",
+                            position: { x: -1.1 + 0.45*i, y: 0.15, z: (Y*2) + -0.4 + 0.81*nb },
+                            scale: { x: 0.10, y:0.16, z:0.10 },
+                            rotation: {x: (Math.PI/180)*0, y:(Math.PI/180)*180*(nb%2), z:(Math.PI/180)*0},
+                            animationName: "work"
+                        })
+                        nb++;
+                }
+            }
+       }
+
+       return UNITES;
+    }
+
+    /////////////////////////////////////////
+    // Génération du plateau et des lumières
+    /////////////////////////////////////////
+    
+    GenerationBoard(){
+        
+        let boardTexture = new THREE.ImageUtils.loadTexture("../textures/ground2.png");
+        boardTexture.repeat.set(10, 10);
+        boardTexture.wrapS = THREE.RepeatWrapping;
+        boardTexture.wrapT = THREE.RepeatWrapping;
+
+        let boardMaterials = [
+            new THREE.MeshLambertMaterial({color: 0x555555}),
+            new THREE.MeshLambertMaterial({color: 0x555555}),
+            new THREE.MeshLambertMaterial({color: 0x555555}),
+            new THREE.MeshLambertMaterial({color: 0x555555}),
+            new THREE.MeshLambertMaterial({ map: boardTexture }),
+            new THREE.MeshLambertMaterial({color: 0x555555})
+        ];
+
+        let geometry = new THREE.BoxGeometry( 10, 10, 1);
+
+        let board = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(boardMaterials) );
+        board.receiveShadow = true;
+        board.rotation.x = - Math.PI / 2;
+        board.position.y -= 0.45
+
+        scene.add( board );
+
+    }
+    
+    GenerationLight(){
+
+        let light = new THREE.AmbientLight( 0x808080 ); // soft white light
+        scene.add( light );
+
+        let spotLight = new THREE.SpotLight( 0xcccccc );
+        spotLight.position.set( 50, 250, 50 );
+        spotLight.castShadow = true;
+        spotLight.shadowMapWidth = 1024;
+        spotLight.shadowMapHeight = 1024;
+        spotLight.shadowCameraNear = 500;
+        spotLight.shadowCameraFar = 4000;
+        spotLight.shadowCameraFov = 30;
+        scene.add( spotLight );
+
+    }
+
+    ////////////////////
+    // Gestion de l'Hud
+    ////////////////////
 
     SetBarre(id, pourcentage){
         document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
     }
+
     DropDown(idbouton, iddropdown){
         document.getElementById(idbouton).addEventListener("click", function(){ // on active le bouton
             document.getElementById(iddropdown).classList.toggle("show"); 
@@ -139,83 +313,201 @@ class Rendu{
             }
         }
     }
-    GenerationBoard(game){
-        let boardTexture = new THREE.ImageUtils.loadTexture("../textures/board-pattern.png");
-        boardTexture.repeat.set(6,6);
-        boardTexture.wrapS = THREE.RepeatWrapping;
-        boardTexture.wrapT = THREE.RepeatWrapping;
-        let boardMaterials = [
-            new THREE.MeshLambertMaterial({color: 0x555555}),
-            new THREE.MeshLambertMaterial({color: 0x555555}),
-            new THREE.MeshLambertMaterial({color: 0x555555}),
-            new THREE.MeshLambertMaterial({color: 0x555555}),
-            new THREE.MeshLambertMaterial({ map: boardTexture }),
-            new THREE.MeshLambertMaterial({color: 0x555555})
-        ];
-        let geometry = new THREE.BoxGeometry( 10, 10, 0.1);
-        let board = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(boardMaterials) );
-        //board.position.z -= 1;
-        game.add( board );
-    }
-    GenerationLight(game){
-        let light = new THREE.AmbientLight( 0xb8b8b8 ); // soft white light
-        game.add( light );
-        let spotLight = new THREE.SpotLight( 0xffffff );
-        spotLight.position.set( 50, 150, 50 );
-        spotLight.castShadow = true;
-        spotLight.shadowMapWidth = 1024;
-        spotLight.shadowMapHeight = 1024;
-        spotLight.shadowCameraNear = 500;
-        spotLight.shadowCameraFar = 4000;
-        spotLight.shadowCameraFov = 30;
-        game.add( spotLight );
-    }
+    
+    /////////////////////////////////////////////
+    // Chargement des modèles de façon synchrone
+    /////////////////////////////////////////////
 
-
-    checkLoadModels(){ // fonction de vérification de l'état de chargement des modèles
-        for(let i=0; i<this.models.length; i++) if(this.models[i].model == undefined) return false;
-        return true;
-    }
-
-    Affichage(Models){
+    //Chargement des modèles 3D et instanciation
+    loadModels(MODELS, UNITS) {
         let game = this;
-        for(let i=0; i<Models.length; i++){
-            let object;
-            
-            for(let j=0; j<game.models.length; j++){
-                if(game.models[j].nom == Models[i].nom) {
-                    object = game.models[j].model.scene.clone()
-                }
-            }
-            object.traverse( function ( child ) {
-                    if ( child.isMesh ) {
-                        
-                        child.material.metalness = 0.4;
-                        child.material.roughness = 0.4;
-                        
-                        child.position.set(Models[i].position.y, Models[i].position.x, Models[i].position.z);
-                        child.scale.set(Models[i].scale.x, Models[i].scale.y, Models[i].scale.z);
-                        child.rotation.set(Models[i].rotation.x, Models[i].rotation.y, Models[i].rotation.z);
+        let numLoadedModels = 0
+        for ( var i = 0; i < MODELS.length; ++ i ) {
 
-                        game.scene.add( child );
-                    }
-                } );
-                
-                //render();
+            var m = MODELS[ i ];
+
+            game.loadGltfModel( m, function () {
+
+                ++ numLoadedModels;
+
+                if ( numLoadedModels === MODELS.length ) {
+
+                    console.log( "Modèles chargés, lancement de l'initialisation" );
+                    game.instantiate(MODELS, UNITS);
+
+                }
+
+            } );
+
         }
+
     }
-    GenerationLigne(Ligne){
-        // utiliser "Ligne" pour vérifier la variable auto du composant et afficher un modèle différent en conséquence
-        return [
-            {nom: "reactor", position:{x: 2.38, y: 0, z:0.35},scale:{x:0.004, y:0.004, z:0.004}, rotation:{x:0, y:0, z:0}},
-            {nom: "generator", position:{x: 1.83, y: 0, z:0.07},scale:{x:0.002, y:0.003, z:0.002}, rotation:{x:3.14, y:0, z:-1.57}},
-            {nom: "box", position:{x: 0.95, y: 0, z:0.17},scale:{x:0.003, y:0.003, z:0.003}, rotation:{x:0, y:4.71, z:0}},
-            {nom: "box", position:{x: 0.39, y: 0, z:0.17},scale:{x:0.003, y:0.003, z:0.003}, rotation:{x:0, y:4.71, z:0}},
-            {nom: "box", position:{x: -0.17, y: 0, z:0.17},scale:{x:0.003, y:0.003, z:0.003}, rotation:{x:0, y:4.71, z:0}},
-            {nom: "box", position:{x: -0.75, y: 0, z:0.17},scale:{x:0.003, y:0.003, z:0.003}, rotation:{x:0, y:4.71, z:0}},
-            {nom: "tube", position:{x: -1.4, y: 0, z:0.2},scale:{x:0.7, y:0.7, z:0.7}, rotation:{x:4.71, y:0, z:1.57}},
-            {nom: "end", position:{x: -2.7, y:-0.05, z:0.05},scale:{x:0.004, y:0.004, z:0.004}, rotation:{x:1.56, y:0, z:0}},
+
+    //Instanciation des unités fournies
+    instantiate(MODELS, UNITS) {
+
+        let numSuccess = 0;
+
+        for ( let i = 0; i < UNITS.length; ++ i ) {
+
+            let u = UNITS[ i ];
             
-        ];
+            let model = this.getModelByName(MODELS, u.modelName );
+
+            if ( model ) {
+
+                let clonedScene;
+
+                if ( u.meshName ) {
+
+                    clonedScene = THREE.SkeletonUtils.clone( model.scene );
+
+                    if ( clonedScene ) {
+
+                        // On sélectionne la Mesh à animer
+                        let clonedMesh = clonedScene.getObjectByName( u.meshName );
+
+                        if ( clonedMesh ) {
+
+                            let mixer = this.startAnimation( clonedMesh, model.animations, u.animationName );
+
+                            // On rajoute l'animation dans le mixer pour la boucle de rendu
+                            mixers.push( mixer );
+                            numSuccess ++;
+                        }
+
+                        // On change les positions, tailles et rotations en fonction du modèle
+                        scene.add( clonedScene );
+
+                        if ( u.position ) {
+
+                            clonedScene.position.set( u.position.x, u.position.y, u.position.z );
+
+                        }
+
+                        if ( u.scale ) {
+
+                            clonedScene.scale.set( u.scale.x, u.scale.y, u.scale.z );
+
+                        }
+
+                        if ( u.rotation ) {
+
+                            clonedScene.rotation.x = u.rotation.x;
+                            clonedScene.rotation.y = u.rotation.y;
+                            clonedScene.rotation.z = u.rotation.z;
+
+                        }
+                    }
+                }
+                else{
+                    clonedScene = model.scene.clone();
+
+                    if ( clonedScene ) {
+
+                        // On change les positions, tailles et rotations en fonction du modèle
+                        
+                        clonedScene.traverse( function ( child ) {
+                            if ( child.isMesh ) {
+                                
+                                child.material.metalness = 0.4;
+                                child.material.roughness = 0.4;
+
+                                
+                                if ( u.position ) {
+                                
+                                    child.position.set(u.position.x, u.position.y, u.position.z);
+                                }
+
+                                if ( u.scale ) {
+                                
+                                    child.scale.set(u.scale, u.scale, u.scale);
+                                
+                                }
+                                
+                                if ( u.rotation ) {
+
+                                    child.rotation.set(u.rotation.x, u.rotation.y, u.rotation.z);
+                                }
+
+                                scene.add( child );
+                            }
+                        } );
+                    }
+                }
+
+            } else {
+
+                console.error( "Modèle suivant introuvable : ", u.modelName );
+            }
+        }
+
+        console.log( `Unités chargées` );
     }
+
+    //Lancement de l'animation sélectionnée
+    startAnimation( skinnedMesh, animations, animationName ) {
+
+        let mixer = new THREE.AnimationMixer( skinnedMesh );
+        let clip = THREE.AnimationClip.findByName( animations, animationName );
+
+        if ( clip ) {
+
+            let action = mixer.clipAction( clip );
+            action.play();
+
+        }
+
+        return mixer;
+    }
+
+    //Récupération du modèle selon le nom
+    getModelByName( models, name ) {
+
+        for ( var i = 0; i < models.length; ++ i ) {
+
+            if ( models[ i ].name === name ) {
+
+                return models[ i ];
+
+            }
+        }
+
+        return null;
+    }
+
+    //Chargement des modèles avec GLTFLoader
+    loadGltfModel( model, onLoaded ) {
+
+        if(Object.getOwnPropertyNames(model).length == 1){
+
+            let modelName = "../models/" + model.name + ".gltf";
+
+            this.gltfLoader.load( modelName, function ( gltf ) {
+
+                let sceneModel = gltf.scene;
+
+                model.animations = gltf.animations;
+                model.scene = sceneModel;
+
+                // On active les ombres
+
+                gltf.scene.traverse( function ( object ) {
+
+                    if ( object.isMesh ) {
+
+                        object.castShadow = true;
+
+                    }
+
+                } );
+
+                console.log( "Done loading model", model.name );
+
+                onLoaded();
+            } );
+        }
+        else onLoaded();
+    }
+    
 }
