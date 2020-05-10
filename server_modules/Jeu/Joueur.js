@@ -207,6 +207,28 @@ class Joueur{
             ligne.Composant[i].nbEmployes = 0;
         }
     }
+    avantAchat(){
+        let infoBoutique = new Object();
+        infoBoutique.employes = this.nbEmployes;
+        infoBoutique.robots = this.nbRobots;
+        infoBoutique.lignes = this.Lignes.length;
+        infoBoutique.solde = this.solde;
+        return infoBoutique;
+    }
+    apresAchat(infoBoutique){
+        let coeffRobots = infoBoutique.robots - this.nbRobots;
+        let coeffLignes = infoBoutique.lignes - this.nbLignes.length;
+        let coeffSolde = this.solde - infoBoutique.solde
+        if(coeffRobots)
+        if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
+            this.nbRobots = infoBoutique.robots;
+            this.nbEmployes = infoBoutique.employes;
+            this.solde = infoBoutique.solde;
+            for(let i = 0; i < coeffLignes; i++){
+                this.Lignes.push(new Ligne());
+            }
+        }
+    }
 }
 
 module.exports = Joueur;
