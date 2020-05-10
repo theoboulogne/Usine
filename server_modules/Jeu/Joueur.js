@@ -212,6 +212,10 @@ class Joueur{
         infoBoutique.employes = this.nbEmployes;
         infoBoutique.robots = this.nbRobots;
         infoBoutique.lignes = this.Lignes.length;
+        infoBoutique.prix = new Object();
+        infoBoutique.prix.robots = 35000;
+        infoBoutique.prix.employes = 0;
+        infoBoutique.prix.lignes = 500000;
         infoBoutique.solde = this.solde;
         return infoBoutique;
     }
@@ -220,7 +224,7 @@ class Joueur{
         let coeffLignes = infoBoutique.lignes - this.nbLignes.length;
         let coeffSolde = this.solde - infoBoutique.solde
         if(coeffRobots)
-        if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
+        if(coeffRobots * infoBoutique.prix.robot + coeffLignes * infoBoutique.prix.ligne == coeffSolde){
             this.nbRobots = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
             this.solde = infoBoutique.solde;
