@@ -223,7 +223,7 @@
                     "choix":{
                         "nom": "Nouvelle Salle de Repos",
                         "cout":"10000",
-                        "desc":"Creer une nouvelle salle de repos pour que vos employes beneficies d'uun repos optimal.",
+                        "desc":"Creez une nouvelle salle de repos pour que vos employes beneficies d'uun repos optimal.",
                         "valeurs":[
                             {
                                 "path":[
@@ -527,7 +527,7 @@
                 "choix":{
                     "nom":"Abonnement Mensuel",
                     "cout":"3000 /tour",
-                    "desc":"Offrez a vos employes un abonnement mensuel dans une salle de muscu ou a Netflix.",
+                    "desc":"Offrez a vos employes un abonnement mensuel dans une salle de sport ou a Netflix.",
                     "valeurs":[
                         {
                             "path":[
@@ -636,7 +636,7 @@
                 "choix":{
                     "nom":"Augmentation de Production",
                     "cout":"30000",
-                    "desc":"Augmentez la cadence de production de lignes.",
+                    "desc":"Augmentez la cadence de production de vos lignes.",
                     "valeurs":[
                         {
                             "path":[
@@ -898,7 +898,7 @@
                 "choix":{
                     "nom":"Investissement dans la Recherche et le Developpement",
                     "cout":"75000",
-                    "desc":"Investisser dans la recherche et le developpement de votre en usine, pour effectuer ces taches plus rapidement.",
+                    "desc":"Investissez dans la recherche et le developpement de votre en usine, pour effectuer ces taches plus rapidement.",
                     "valeurs":[
                         {
                             "path":[
@@ -1020,7 +1020,7 @@
         "Social":[
             {
                 "amelio":"CE",
-                "desc":"Grace aux CE vos employes pourront beneficier d'avantages interressant pour le mental.",
+                "desc":"Debloquez certains avantages pour le moral de vos employes.",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
@@ -1037,7 +1037,7 @@
             },
             {
                 "amelio":"Bon Samaritain",
-                "desc":"Le moral des troupes compte plus que tout pour votre entreprise.",
+                "desc":"Debloquez les meilleurs avantages pour vos employes.",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
