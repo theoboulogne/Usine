@@ -2,38 +2,36 @@ const utils = require('../utils')
 const fs = require('fs');
 
 //Chargement des données à partir des fichiers en mémoire en amount pour éviter les problèmes de latence :
-let rawdata = fs.readFileSync(__dirname+'/json/Amelioration.json');
-let ameliorations = JSON.parse(rawdata);
+//tout mettre dans une seule variable globale
+let rawdata = fs.readFileSync(__dirname+'/json/Choix.json');
+let ameliorations = JSON.parse(rawdata).ameliorations;
+let repetition = JSON.parse(rawdata).repetition;
+let ponctuel = JSON.parse(rawdata).ponctuel;
 
 rawdata = fs.readFileSync(__dirname+'/json/Evenement.json');
-let evenement = JSON.parse(rawdata);
-
-rawdata = fs.readFileSync(__dirname+'/json/Repetition.json');
-let repetition = JSON.parse(rawdata);
-
-rawdata = fs.readFileSync(__dirname+'/json/Ponctuel.json');
-let ponctuel = JSON.parse(rawdata);
+let evenement = JSON.parse(rawdata).evenement;
 
 module.exports = {
-    Amelioration : (categories, solde, amelioration) => {
+    initAmelioration : () => Object.getOwnPropertyNames(ameliorations),
+    Amelioration : (categories, amelioration) => {
         Amelio = []
         for(let i=0; i<categories.length; i++){
             for(let j=0; j<ameliorations[categories[i]].length; j++){
                 if(!amelioration.check(categories[i], ameliorations[categories[i]][j].amelio)){ // si pas déja faite
-                    if(ameliorations[categories[i]][j].prix < solde){
-                        let ameliobool = true;
-                        for(let k=0; k<ameliorations[categories[i]][j].amelioNecessaire.length; k++){
-                            if(!amelioration.check(ameliorations[categories[i]][j].amelioNecessaire[k].categorie, ameliorations[categories[i]][j].amelioNecessaire[k].amelio)){
-                                ameliobool = false;
-                            }
+                    let ameliobool = true;
+                    for(let k=0; k<ameliorations[categories[i]][j].amelioNecessaire.length; k++){
+                        if(!amelioration.check(ameliorations[categories[i]][j].amelioNecessaire[k].categorie, ameliorations[categories[i]][j].amelioNecessaire[k].amelio)){
+                            ameliobool = false;
                         }
-                        if(ameliobool){
-                            Amelio.push({categorie:categories[i], desc:ameliorations[categories[i]][j].desc, amelio:ameliorations[categories[i]][j].amelio, nbTour:ameliorations[categories[i]][j].nbTour});
-                        }
+                    }
+                    if(ameliobool){
+                        Amelio.push({categorie:categories[i], desc:ameliorations[categories[i]][j].desc, amelio:ameliorations[categories[i]][j].amelio, nbTour:ameliorations[categories[i]][j].nbTour});
                     }
                 }
             }
         }
+        console.log('Amelio :')
+        console.log(Amelio)
         return Amelio;
     },
     AmeliorationDisplay : (amelios) => {
@@ -55,6 +53,8 @@ module.exports = {
                 }
             }
         }
+        console.log('Events :')
+        console.log(Events)
         return Events;
     },
     EvenementDisplay : (evenements) => {
@@ -67,16 +67,11 @@ module.exports = {
     EvenementChoixDisplay : (evenements) => {
         let display = []
         for(let i=0; i<evenements.length; i++){
-            display.push({categorie:"Evenement", nom:evenements[i].nom, desc:evenements[i].desc, cout:evenements[i].cout})
+            display.push({categorie:"evenement", nom:evenements[i].nom, desc:evenements[i].desc, cout:evenements[i].cout})
         }
         return display;
     },
-    initRepetition : () => {
-        /*
-        à mettre dans generateRepetition à l'init
-        */
-        return Object.getOwnPropertyNames(repetition);
-    },
+    initRepetition : () => Object.getOwnPropertyNames(repetition),
     Repetition : (categories, solde, amelioration) => { // prend en entrée la sortie de répétition
         let Choix = [];
         for(let i=0; i<categories.length; i++){
@@ -93,6 +88,8 @@ module.exports = {
                 }
             }
         }
+        console.log('Repetition :')
+        console.log(Choix)
         return Choix;
     },
     Ponctuel : (ponctuelFait, solde, amelioration) => {
@@ -115,6 +112,8 @@ module.exports = {
                 }
             }
         }
+        console.log('Ponctuel :')
+        console.log(Choix)
         return Choix;
     },
     ChoixDisplay : (choix) => {

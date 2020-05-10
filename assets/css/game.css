@@ -108,11 +108,11 @@ h5 {
   margin-top: 0;
 }
 .cadre{
-  width: 60%;
+  width: 70%;
   position: relative;
   z-index: 1;
   margin-top: 35vh;
-  margin-left: 20%;
+  margin-left: 15%;
 }
 .slick-slide {
   margin: 0 10px;
@@ -123,10 +123,11 @@ h5 {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   behavior: url(/PIE.htc);
+  vertical-align:middle;
 }
 .ecriture1{
   color: rgb(49, 47, 47);
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 .ecriture2{
   color: rgb(49, 47, 47);
@@ -176,6 +177,9 @@ h5 {
 }
 .amelioration_ecologie{
   background-color: rgba(131, 238, 9, 0.849);
+}
+.evenement{
+  background-color: rgba(18, 248, 237, 0.849);
 }
 .cout{
   border: solid;

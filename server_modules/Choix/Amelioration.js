@@ -5,8 +5,8 @@ class Amelioration{
     }
     lancer_Amelioration(Categorie, NbTours, amelioration){
         this.tableau.push({categorie:Categorie, tour:NbTours, amelioration: amelioration});
-        if(this.tabAmelioration[this.tableau.categorie] == undefined){
-            this.tabAmelioration[this.tableau.categorie] = new Array();
+        if(this.tabAmelioration[Categorie] == undefined){
+            this.tabAmelioration[Categorie] = new Array();
         }
     }
     fin_Amelioration(indice){
@@ -17,17 +17,16 @@ class Amelioration{
         let tableau_repetitionEnvoie = new Array();
         let renvois = new Array();
         for(let i=0; i < this.tableau.length; i++){
+            this.tableau[i].tour--;
             if(0 == this.tableau[i].tour){
                 renvois.push(i);
-            }else{
-                this.tableau[i].tour--;
             }
         }
         for(let i=0; i<renvois.length; i++){
             tableau_repetitionEnvoie.push(this.tableau[renvois[i]].categorie);
             this.fin_Amelioration(renvois[i]);
-            this.tableau.splice(renvois[i], 1);
         } 
+        for(let i=0; i<renvois.length; i++) this.tableau.splice(renvois[i]-i, 1);
         return tableau_repetitionEnvoie;
     }
     check(Categorie, amelioration){
@@ -45,6 +44,12 @@ class Amelioration{
             this.tableau[i].tour-=nb;
             if(this.tableau[i].tour<0) this.tableau[i].tour = 0;
         }
+    }
+    checkInit(init, tab){
+        for(let i=0; i<init.length; i++){
+            if(this.tabAmelioration[init[i]] == undefined) tab.push(init[i]);
+        }
+        return tab;
     }
 }
 module.exports = Amelioration;

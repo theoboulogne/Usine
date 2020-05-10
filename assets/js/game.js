@@ -2,16 +2,21 @@
 let Affichage = (function(){
     return{
         addSlick:()=>{
-            $(document).ready(function(){
-                $('.cadre').slick({
-                    infinite: true,
-                    speed: 300,
-                    slidesToShow: 4,
-                    slidesToScroll: 3,
-                });
+            $('.cadre').slick({
+                infinite: false,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 4,
             });
         },
-        addNewSlick:(name, titre, description, cout,categorie)=>{
+        removeSlick:()=>{
+            while (document.getElementById('cadre').firstChild) {
+                document.getElementById('cadre').removeChild(document.getElementById('cadre').lastChild);
+            }
+            $('cadre').slick('unslick');
+            document.getElementById('cadre').className = "cadre"
+        },
+        addNewSlick:(name, titre, description, cout, categorie)=>{
             let NewSlick = document.createElement("div")
             NewSlick.setAttribute("class", categorie)
             let titre_ = document.createElement("h2")
@@ -34,15 +39,12 @@ let Affichage = (function(){
             NewSlick.appendChild(coche)
             document.getElementById("cadre").appendChild(NewSlick)
         },
-        isValider:(Categorie)=>{
-            let elementChoisit = document.getElementsByName(Categorie).value
-        }
+        isValider:(Categorie)=> $("input[name='"+Categorie+"']:checked").val()
     }
 })();
 
-
-Affichage.addSlick();
-Affichage.addNewSlick("dossier1","dossier1","dossier1","100","amelioration_social")
+//Affichage.addNewSlick("CE","CE","Grace aux CE vos employes pourront beneficier d'avantages interressant pour le mental.","2 tours","Social")
+/*
 Affichage.addNewSlick("dossier2","dossier2","dossier2","1000","amelioration_social")
 Affichage.addNewSlick("dossier3","dossier3","dossier3","10000","ponctuel_production")
 Affichage.addNewSlick("dossier4","dossier4","dossier4",95148,"ponctuel_publicite")
@@ -51,3 +53,4 @@ Affichage.addNewSlick("dossier6","dossier6","dossier6",85845,"ponctuel_publicite
 Affichage.addNewSlick("dossier7","dossier7","dossier7","10000","ponctuel_ecologie")
 Affichage.addNewSlick("dossier8","dossier8","dossier8","100","ponctuel_ecologie")
 Affichage.addNewSlick("dossier8","dossier8","dossier8","1000","ponctuel_ecologie")
+*/
