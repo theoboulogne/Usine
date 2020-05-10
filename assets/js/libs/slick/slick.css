@@ -78,9 +78,11 @@
 {
     display: none;
     float: left;
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
 
-    height: 100%;
-    min-height: 1px;
+    height: 15vh;
 }
 [dir='rtl'] .slick-slide
 {
@@ -110,7 +112,7 @@
 {
     display: block;
 
-    height: auto;
+    height: 100%;
 
     border: 1px solid transparent;
 }
