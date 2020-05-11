@@ -24,38 +24,51 @@
         this.Dossiers = []
         this.Magasin = new Boutique();
 
-        document.getElementById("newTour").addEventListener("click", function(){
-            console.log('Click - endTurn')
+        if(true){ // Lorsque le rendu 3D est chargé :
 
-            //Compilation des Choix effectués et des modifications effectuées par l'interface(boutique,employes,voir+) a faire 
-            //et mettre en arguement
+            document.getElementById("newTour").addEventListener("click", function(){
+                console.log('Click - endTurn')
 
-            let choix = []
+                //Compilation des Choix effectués et des modifications effectuées par l'interface(boutique,employes,voir+) a faire 
+                //et mettre en arguement
 
-            for(let i=0; i<Game.Dossiers.length; i++){
-                if(Game.Dossiers[i].nom == Affichage.isValider(Game.Dossiers[i].categorie)){
-                    let c = Game.Dossiers[i];
-                    if(c.categorie != 'evenement'){
-                        let categorie = c.categorie.split('_');
-                        c.categorie = categorie[1];
+                let choix = []
+
+                for(let i=0; i<Game.Dossiers.length; i++){
+                    if(Game.Dossiers[i].nom == Affichage.isValider(Game.Dossiers[i].categorie)){
+                        let c = Game.Dossiers[i];
+                        if(c.categorie != 'evenement'){
+                            let categorie = c.categorie.split('_');
+                            c.categorie = categorie[1];
+                        }
+                        choix.push(c);
                     }
-                    choix.push(c);
                 }
-            }
 
-            console.log(choix)
+                console.log(choix)
 
-            //Vérification et application des changements coté serveur a faire (faire une copie de Jeu pour comparaison ?)
-            setTimeout(function(){
-                socket.emit('endTurn', choix, Magasin.boutique);
-            }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
-        });
+                //Vérification et application des changements coté serveur a faire (faire une copie de Jeu pour comparaison ?)
+                setTimeout(function(){
+                    socket.emit('endTurn', choix, Magasin.boutique);
+                }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
+            });
+
+            socket.emit('endTurn', [], []); // On demande les infos de départ
+
+        }
     });
 
-    socket.on('newTurn', (Events, Choix, Magasin, joueur) => {
+    socket.on('newTurn', (Events, Choix, Magasin, Barres, joueur) => {
         console.log('Event - newTurn')
         console.log(joueur)
         Affichage.removeSlick()
+
+        console.log(Barres)
+
+        this.Graphique.SetBarre("economie", Barres[0])
+        this.Graphique.SetBarre("social", Barres[1])
+        this.Graphique.SetBarre("ecologie", Barres[2])
+        this.Graphique.SetBarre("production", Barres[3])
 
         this.Dossiers = []
         this.Magasin.avantAchat(Magasin);

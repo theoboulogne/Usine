@@ -10,6 +10,8 @@
 
     - calcul des barres a faire
 
+    - faire les pannes
+
     -rajouter pub fixe dans magasin
 
     - evenement a tester
@@ -52,7 +54,7 @@ app.get('/game', (request, response, next) => {
 
 //On enregistre nos Joueurs, on lance à n joueurs
 
-let n = 2
+let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 
 io.sockets.on('connection',  (socket) =>{
@@ -123,7 +125,7 @@ io.sockets.on('connection',  (socket) =>{
         
 
         //Validation Magasin :
-        this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
+        if(Magasin != []) this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
 
 
 
@@ -174,7 +176,7 @@ io.sockets.on('connection',  (socket) =>{
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur);
             }
         }
     });

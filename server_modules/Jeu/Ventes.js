@@ -1,8 +1,8 @@
 class Ventes{
     constructor(n){
         //global
-        this.prixVente = 25;
-        this.nbClientsTotal=n*1000;
+        this.prixVente = 5;
+        this.nbClientsTotal=n*8000;
     }
 
     partDeMarche(tab/* tout les joueurs */){  // tout les calcul de cette fonction sont invente 
@@ -16,6 +16,7 @@ class Ventes{
         for(let i in tab){//parcourt des joueurs
             // on rassemble les couts de pub avec le budget pub global
             part.push((tab[i].joueur.pub + tab[i].joueur.Choix.solde) / 1000) * tab[i].joueur.pollution
+            tab[i].joueur.pubPrec = tab[i].joueur.pub;
             tab[i].joueur.pub = 0;
         }
 
@@ -40,15 +41,9 @@ class Ventes{
         let indice = 0;
         for (let i in tab){
             if(tab[i].joueur.stock < part[indice] * this.nbClientsTotal){
-                console.log('a')
-                console.log(part[indice])
-                console.log( tab[i].joueur.stock * this.prixVente)
                 tab[i].joueur.solde += tab[i].joueur.stock * this.prixVente
             }
             else {
-                console.log('b')
-                console.log(part[indice])
-                console.log(part[indice] * this.nbClientsTotal * this.prixVente)
                 tab[i].joueur.solde += part[indice] * this.nbClientsTotal * this.prixVente;
             }
             indice++;
