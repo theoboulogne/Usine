@@ -20,7 +20,10 @@ class Repetition{
         for(let i=0; i<init.length; i++){
             let bool = false;
             for(let j=0; j<this.tableau.length; j++){
-                if(init[i] == this.tableau[j].categorie) bool = true;
+                if(init[i] == this.tableau[j].categorie && this.tableau[j].tour > 0) bool = true;
+            }
+            for(let j=0; j<tab.length; j++){
+                if(tab[j] == init[i]) bool = true;
             }
             if(!bool) tab.push(init[i]);
         }

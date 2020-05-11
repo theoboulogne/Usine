@@ -42,12 +42,22 @@ class Amelioration{
     reduire(nb){
         for(let i=0; i < this.tableau.length; i++){
             this.tableau[i].tour-=nb;
-            if(this.tableau[i].tour<0) this.tableau[i].tour = 0;
+            if(this.tableau[i].tour<1) this.tableau[i].tour = 1;
         }
     }
     checkInit(init, tab){
         for(let i=0; i<init.length; i++){
             if(this.tabAmelioration[init[i]] == undefined) tab.push(init[i]);
+            else{
+                let bool = false;
+                for(let j=0; j<this.tableau.length; j++){
+                    if(this.tableau[j].categorie == init[i] && this.tableau[j].tour>0) bool = true;
+                }
+                for(let j=0; j<tab.length; j++){
+                    if(tab[j] == init[i]) bool = true;
+                }
+                if(!bool) tab.push(init[i])
+            }
         }
         return tab;
     }

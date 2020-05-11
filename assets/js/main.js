@@ -52,8 +52,9 @@
         });
     });
 
-    socket.on('newTurn', (Events, Choix, Magasin) => {
+    socket.on('newTurn', (Events, Choix, Magasin, joueur) => {
         console.log('Event - newTurn')
+        console.log(joueur)
         Affichage.removeSlick()
 
         this.Dossiers = []

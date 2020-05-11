@@ -33,7 +33,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "polution"
+                                    "pollution"
                                 ],
                                 "val":"0",
                                 "type":"egal"
@@ -42,7 +42,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "Coupure"
+                                    "coupure"
                                 ],
                                 "val":"0.16",
                                 "type":"egal"
@@ -78,7 +78,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "polution"
+                                    "pollution"
                                 ],
                                 "val":"0",
                                 "type":"egal"
@@ -87,7 +87,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "Coupure"
+                                    "coupure"
                                 ],
                                 "val":"0.13",
                                 "type":"egal"
@@ -123,7 +123,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "polution"
+                                    "pollution"
                                 ],
                                 "val":"2",
                                 "type":"egal"
@@ -132,7 +132,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "Coupure"
+                                    "coupure"
                                 ],
                                 "val":"0.10",
                                 "type":"egal"
@@ -168,7 +168,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "polution"
+                                    "pollution"
                                 ],
                                 "val":"0",
                                 "type":"egal"
@@ -177,7 +177,7 @@
                                 "path":[
                                     "Courant",
                                     "Auxilliaire",
-                                    "Coupure"
+                                    "coupure"
                                 ],
                                 "val":"0.07",
                                 "type":"egal"
@@ -617,6 +617,13 @@
                     "valeurs":[
                         {
                             "path":[
+                                "solde"
+                            ],
+                            "val":"-75000",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
                                 "Choix",
                                 "avantages"
                             ],
@@ -690,7 +697,7 @@
                         },
                         {
                             "path":[
-                                "Production"
+                                "production"
                             ],
                             "val":"0.85",
                             "type":"fois"
@@ -725,7 +732,7 @@
                         },
                         {
                             "path":[
-                                "Production"
+                                "production"
                             ],
                             "val":"0.1",
                             "type":"plusegal"
@@ -760,7 +767,7 @@
                         },
                         {
                             "path":[
-                                "Production"
+                                "production"
                             ],
                             "val":"0.9",
                             "type":"fois"
@@ -776,7 +783,7 @@
                 "choix":{
                     "nom":"Amelioration composant 1",
                     "cout":"15000",
-                    "desc":"Rendez Autonome le composant 1 de la ligne de production.",
+                    "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
                     "valeurs":[
                         {
                             "path":[
@@ -787,7 +794,7 @@
                         },
                         {
                             "val":"1",
-                            "type":"R&D"
+                            "type":"upgrade"
                         }
                     ]
                 }
@@ -800,7 +807,7 @@
                 "choix":{
                     "nom":"Amelioration composant 2",
                     "cout":"15000",
-                    "desc":"Rendez Autonome le composant 2 de la ligne de production.",
+                    "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
                     "valeurs":[
                         {
                             "path":[
@@ -810,8 +817,8 @@
                             "type":"plusegal"
                         },
                         {
-                            "val":"1",
-                            "type":"R&D"
+                            "val":"2",
+                            "type":"upgrade"
                         }
                     ]
                 }
@@ -824,7 +831,7 @@
                 "choix":{
                     "nom":"Amelioration composant 3",
                     "cout":"15000",
-                    "desc":"Rendez Autonome le composant 3 de la ligne de production.",
+                    "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
                     "valeurs":[
                         {
                             "path":[
@@ -834,8 +841,8 @@
                             "type":"plusegal"
                         },
                         {
-                            "val":"1",
-                            "type":"R&D"
+                            "val":"3",
+                            "type":"upgrade"
                         }
                     ]
                 }
@@ -848,7 +855,7 @@
                 "choix":{
                     "nom":"Amelioration composant 4",
                     "cout":"15000",
-                    "desc":"Rendez Autonome le composant 4 de la ligne de production.",
+                    "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
                     "valeurs":[
                         {
                             "path":[
@@ -858,8 +865,8 @@
                             "type":"plusegal"
                         },
                         {
-                            "val":"1",
-                            "type":"R&D"
+                            "val":"4",
+                            "type":"upgrade"
                         }
                     ]
                 }
@@ -872,7 +879,7 @@
                 "choix":{
                     "nom":"Amelioration composant 5",
                     "cout":"15000",
-                    "desc":"Rendez Autonome le composant 5 de la ligne de production.",
+                    "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
                     "valeurs":[
                         {
                             "path":[
@@ -882,8 +889,8 @@
                             "type":"plusegal"
                         },
                         {
-                            "val":"1",
-                            "type":"R&D"
+                            "val":"5",
+                            "type":"upgrade"
                         }
                     ]
                 }
@@ -970,52 +977,6 @@
 
 
     "ameliorations": {
-        "courantauxilliaire":[
-            {
-                "amelio":"Panneaux Solaires",
-                "desc":"Faites des recherches sur les panneaux solaires afin de pouvoir en installer.",
-                "nbTour":"1",
-                "amelioNecessaire":[
-                    {
-                        "categorie":"ecologie",
-                        "amelio":"ecologiste"
-                    }
-                ]
-            },
-            {
-                "amelio":"Eoliennes",
-                "desc":"Faites des recherches sur les eoliennes afin de pouvoir en installer.",
-                "nbTour":"1",
-                "amelioNecessaire":[
-                    {
-                        "categorie":"courantauxilliaire",
-                        "amelio":"Panneaux Solaires"
-                    }
-                ]
-            },
-            {
-                "amelio":"Generateur Biomasse",
-                "desc":"Faites des recherches sur le generateur biomasse afin de pouvoir en installer un.",
-                "nbTour":"2",
-                "amelioNecessaire":[
-                    {
-                        "categorie":"courantauxilliaire",
-                        "amelio":"Eoliennes"
-                    }
-                ]
-            },
-            {
-                "amelio":"Barrage Hydrolique",
-                "desc":"Faites des recherches sur le barrage hydroliqueafin de pouvoir en installer un.",
-                "nbTour":"3",
-                "amelioNecessaire":[
-                    {
-                        "categorie":"courantauxilliaire",
-                        "amelio":"Generateur Biomasse"
-                    }
-                ]
-            }
-        ],
         "social":[
             {
                 "amelio":"CE",
@@ -1056,7 +1017,7 @@
             {
                 "amelio":"Entreprise Dynamique niv2",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "nbTour":"2",
+                "nbTour":"3",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1067,7 +1028,7 @@
             {
                 "amelio":"Entreprise Dynamique niv3",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "nbTour":"1",
+                "nbTour":"5",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1078,7 +1039,7 @@
             {
                 "amelio":"Entreprise Dynamique niv4",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "nbTour":"1",
+                "nbTour":"7",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1089,7 +1050,7 @@
             {
                 "amelio":"Entreprise Dynamique niv5",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "nbTour":"1",
+                "nbTour":"9",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1100,7 +1061,7 @@
             {
                 "amelio":"Entreprise Dynamique niv6",
                 "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
-                "nbTour":"1",
+                "nbTour":"11",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1111,7 +1072,7 @@
             {
                 "amelio":"Entreprise Autonome 1",
                 "desc":"Ayez la possibilite d'ameliorez le premier composant de chaque ligne.",
-                "nbTour":"2",
+                "nbTour":"4",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
@@ -1122,44 +1083,44 @@
             {
                 "amelio":"Entreprise Autonome 2",
                 "desc":"Ayez la possibilite d'ameliorez le deuxieme composant de chaque ligne.",
-                "nbTour":"2",
+                "nbTour":"5",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Dynamique"
+                        "amelio":"Entreprise Autonome 1"
                     }
                 ]
             },
             {
                 "amelio":"Entreprise Autonome 3",
                 "desc":"Ayez la possibilite d'ameliorez le troisieme composant de chaque ligne.",
-                "nbTour":"2",
+                "nbTour":"8",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Dynamique"
+                        "amelio":"Entreprise Autonome 2"
                     }
                 ]
             },
             {
                 "amelio":"Entreprise Autonome 4",
                 "desc":"Ayez la possibilite d'ameliorez le quatrieme composant de chaque ligne.",
-                "nbTour":"2",
+                "nbTour":"10",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Dynamique"
+                        "amelio":"Entreprise Autonome 3"
                     }
                 ]
             },
             {
                 "amelio":"Entreprise Autonome 5",
                 "desc":"Ayez la possibilite d'ameliorez le cinquieme composant de chaque ligne.",
-                "nbTour":"2",
+                "nbTour":"12",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Dynamique"
+                        "amelio":"Entreprise Autonome 4"
                     }
                 ]
             }
@@ -1168,7 +1129,7 @@
             {
                 "amelio":"Bon Comercial",
                 "desc":"Offrez vous les meilleur comerciaux pour vos campagnes publicitaires.",
-                "nbTour":"2",
+                "nbTour":"5",
                 "amelioNecessaire":[]
             }
         ],
@@ -1180,12 +1141,60 @@
                 "amelioNecessaire":[]
             },
             {
-                "amelio":"Green Peace",
-                "desc":"0 pollution, 0 dechets, 0 emission de CO2 pourrait etre votre nouvel objectif.",
+                "amelio":"Panneaux Solaires",
+                "desc":"Faites des recherches sur les panneaux solaires afin de pouvoir en installer.",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
-                        "categorie":"Ecologie",
+                        "categorie":"ecologie",
+                        "amelio":"Ecologiste"
+                    }
+                ]
+            },
+            {
+                "amelio":"Eoliennes",
+                "desc":"Faites des recherches sur les eoliennes afin de pouvoir en installer.",
+                "nbTour":"3",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"ecologie",
+                        "amelio":"Panneaux Solaires"
+                    }
+                ]
+            },
+            {
+                "amelio":"Generateur Biomasse",
+                "desc":"Faites des recherches sur le generateur biomasse afin de pouvoir en installer un.",
+                "nbTour":"4",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"ecologie",
+                        "amelio":"Eoliennes"
+                    }
+                ]
+            },
+            {
+                "amelio":"Barrage Hydrolique",
+                "desc":"Faites des recherches sur le barrage hydroliqueafin de pouvoir en installer un.",
+                "nbTour":"3",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"ecologie",
+                        "amelio":"Generateur Biomasse"
+                    },
+                    {
+                        "categorie":"ecologie",
+                        "amelio":"Green Peace"
+                    }
+                ]
+            },
+            {
+                "amelio":"Green Peace",
+                "desc":"0 pollution, 0 dechets, 0 emission de CO2 pourrait etre votre nouvel objectif.",
+                "nbTour":"6",
+                "amelioNecessaire":[
+                    {
+                        "categorie":"ecologie",
                         "amelio":"Ecologiste"
                     }
                 ]

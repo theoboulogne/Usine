@@ -8,8 +8,6 @@
     TO-DO:
     - RAJOUTER pub dans joueur
 
-    - coder R&D et Upgrade
-
     - calcul des barres a faire
 
     - Afficher + d'informations :
@@ -76,8 +74,7 @@ io.sockets.on('connection',  (socket) =>{
 
     if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) {
         console.log('send disconnect')
-        socket.emit('disconnect'); 
-        socket.disconnect();
+        socket.disconnect(); 
     }
     else {
         console.log('add joueur au monde')
@@ -104,12 +101,17 @@ io.sockets.on('connection',  (socket) =>{
         console.log('--------------------')
         console.log('Choix :')
         console.log(this.Monde.Joueurs[socket.id].choix)
-        console.log('--------------------')
+        console.log('--------------------') 
         for(let i=0; i<Dossiers.length; i++){
             for(let j=0; j<this.Monde.Joueurs[socket.id].choix.length; j++){
                 for(let k=0; k<this.Monde.Joueurs[socket.id].choix[j].length; k++){
                     if(this.Monde.Joueurs[socket.id].choix[j][k].categorie == Dossiers[i].categorie || (this.Monde.Joueurs[socket.id].choix[j][k].categorie == undefined && Dossiers[i].categorie=='evenement')){
-                        if(this.Monde.Joueurs[socket.id].choix[j][k].nom == Dossiers[i].nom || this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom){
+                        let bool = false;
+                        if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom) bool = true;
+                        else if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == undefined){
+                            if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
+                        }
+                        if(bool){
                             Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur)
                             switch(j){
                                 case 1://ponctuel
@@ -181,12 +183,12 @@ io.sockets.on('connection',  (socket) =>{
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur);
             }
         }
     });
     socket.on('disconnect', ()=>{
-        io.emit('menu');
+        socket.emit('menu');
         this.Monde = new Univers(n);
     });
 
