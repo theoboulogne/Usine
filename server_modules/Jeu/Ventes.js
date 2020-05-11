@@ -114,8 +114,6 @@ class Ventes{
 
 
 
-
-
     calculNbClients(nbClientsTotal,partsMarche){
         
  

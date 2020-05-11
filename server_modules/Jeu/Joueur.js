@@ -65,6 +65,7 @@ class Joueur{
         this.Approvisionnement.Penurie = -1;
 
         this.solde = 1000000;// Initialisation des ventes
+        this.pub = 0;
 
         this.production = 1;
         this.nbEmployes = 15;// Initialisation de la production
@@ -208,6 +209,8 @@ class Joueur{
             ligne.Composant[i].nbEmployes = 0;
         }
     }
+
+    
     avantAchat(){
         let infoBoutique = new Object();
         infoBoutique.employes = this.nbEmployes;
@@ -222,10 +225,9 @@ class Joueur{
     }
     apresAchat(infoBoutique){
         let coeffRobots = infoBoutique.robots - this.nbRobots;
-        let coeffLignes = infoBoutique.lignes - this.nbLignes.length;
+        let coeffLignes = infoBoutique.lignes - this.Lignes.length;
         let coeffSolde = this.solde - infoBoutique.solde
-        if(coeffRobots)
-        if(coeffRobots * infoBoutique.prix.robot + coeffLignes * infoBoutique.prix.ligne == coeffSolde){
+        if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
             this.nbRobots = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
             this.solde = infoBoutique.solde;

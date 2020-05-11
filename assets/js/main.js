@@ -21,25 +21,65 @@
         this.Graphique.DropDown("boutique", "dropdown_boutique");
         
         //Ajouter un event on click sur les boutons dans chaque ligne du dropdown
+        this.Dossiers = []
+        this.Magasin = new Boutique();
 
         document.getElementById("newTour").addEventListener("click", function(){
             console.log('Click - endTurn')
 
-
             //Compilation des Choix effectués et des modifications effectuées par l'interface(boutique,employes,voir+) a faire 
             //et mettre en arguement
 
+            let choix = []
+
+            for(let i=0; i<Game.Dossiers.length; i++){
+                if(Game.Dossiers[i].nom == Affichage.isValider(Game.Dossiers[i].categorie)){
+                    let c = Game.Dossiers[i];
+                    if(c.categorie != 'evenement'){
+                        let categorie = c.categorie.split('_');
+                        c.categorie = categorie[1];
+                    }
+                    choix.push(c);
+                }
+            }
+
+            console.log(choix)
+
             //Vérification et application des changements coté serveur a faire (faire une copie de Jeu pour comparaison ?)
             setTimeout(function(){
-                socket.emit('endTurn', []);
+                socket.emit('endTurn', choix, Magasin.boutique);
             }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
         });
     });
 
-    socket.on('newTurn', (Jeu) => {
+    socket.on('newTurn', (Events, Choix, Magasin, joueur) => {
         console.log('Event - newTurn')
-        this.game = Jeu;
+        console.log(joueur)
+        Affichage.removeSlick()
 
+        this.Dossiers = []
+        this.Magasin.avantAchat(Magasin);
+
+        Affichage.removeSlick()
+        for(let i=0; i<Choix.length; i++) {
+            for(let j=0; j<Choix[i].length; j++){
+                let choix = Choix[i][j]
+                switch(i){
+                    case 1:
+                        choix.categorie = "ponctuel_"+choix.categorie;
+                        break;
+                    case 2:
+                        choix.categorie = "repetition_"+choix.categorie;
+                        break;
+                    case 3:
+                        choix.categorie = "amelioration_"+choix.categorie;
+                        break;
+                }
+                this.Dossiers.push(choix);
+                Affichage.addNewSlick(choix.nom, choix.nom, choix.desc, choix.cout, choix.categorie);
+            }
+        }
+        Affichage.addSlick();
     });
 
     socket.on('menu', ()=>{

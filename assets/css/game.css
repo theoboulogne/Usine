@@ -1,5 +1,5 @@
 .beautiful.progress {
-  height: 15px;
+  height: 2vh;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -17,11 +17,11 @@ h5 {
 }
 
 .beautiful.progress.progress-xs .progress-bar {
-  line-height: 4px;
+  line-height: 1vh;
 }
 
 .beautiful.progress.progress-xs {
-  height: 4px;
+  height: 1vh;
   border-radius: 1px;
 }
 
@@ -46,24 +46,24 @@ h5 {
 }
 
 .beautiful.progress .progress-sm {
-  height: 10px;
+  height: 2vh;
 }
 
 .beautiful.progress .progress-sm .progress-bar {
-  line-height: 10px;
+  line-height: 2vh;
 }
 
 .beautiful.progress.progress-lg {
-  height: 22px;
+  height: 2vh;
 }
 
 .beautiful.progress .progress-lg .progress-bar {
-  line-height: 22px;
+  line-height: 2vh;
 }
 
 .beautiful.progress .progress-bar {
   background-image: none;
-  line-height: 15px;
+  line-height: 2vh;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #62a8ea;
@@ -74,24 +74,20 @@ h5 {
 }
 
 #boutique {
-  margin-top: 2%;
+  margin-top: 1vh;
 }
 #newTour {
-  margin-top: 25%;
+  margin-top: 1vh;
+  height: 2vh;
 }
 
 #Info {
-  margin-top: 18%;
+  margin-top: 18vh;
 }
 
 
 #titre {
   padding-left: 50%;
-}
-
-#head-titre {
-  width: 100%;
-  height: 40px;
 }
 
 #head-tire-div {
@@ -100,7 +96,6 @@ h5 {
 .jeu { 
   position: relative;
   z-index: auto;
-  border: dashed;
   height: 0;
   margin-bottom: 0;
   margin-top: 0;
@@ -108,23 +103,93 @@ h5 {
 .hud {
   position: relative;
   z-index: 1;
-  border: dashed;
   height: 0;
   margin-bottom: 0;
   margin-top: 0;
 }
 .cadre{
-  width: 95%;
+  width: 70%;
   position: relative;
   z-index: 1;
-  height: 25%;
-  margin-top: 20%;
+  margin-top: 35vh;
+  margin-left: 15%;
 }
-
-
-
-
-
+.slick-slide {
+  margin: 0 10px;
+  border: solid;
+  border-color: rgb(53, 51, 51);
+  padding-left: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  behavior: url(/PIE.htc);
+  vertical-align:middle;
+}
+.ecriture1{
+  color: rgb(49, 47, 47);
+  font-size: 1.5vw;
+}
+.ecriture2{
+  color: rgb(49, 47, 47);
+  font-size: 1vw;
+}
+.text-left{
+  font-size: 1vw;
+}
+.ponctuel_energie{
+  background-color: rgba(0, 0, 255, 0.849);
+}
+.ponctuel_social{
+  background-color: rgba(255, 0, 0, 0.849);
+}
+.ponctuel_publicite{
+  background-color: rgba(255, 255, 0, 0.849);
+}
+.ponctuel_ecologie{
+  background-color: rgba(0, 128, 0, 0.849);
+}
+.ponctuel_production{
+  background-color: rgba(243, 138, 246, 0.849);
+}
+.repetition_social{
+  background-color: rgba(170, 8, 8, 0.849);
+}
+.repetition_production{
+  background-color: rgba(168, 111, 120, 0.849);
+}
+.repetition_amelioration{
+  background-color: rgba(226, 240, 223, 0.849);
+}
+.ponctuel_publicite{
+  background-color: rgba(160, 160, 10, 0.849);
+}
+.amelioration_energie{
+  background-color: rgba(54, 166, 240, 0.849);
+}
+.amelioration_social{
+  background-color: rgba(255, 166, 0, 0.849);
+}
+.amelioration_production{
+  background-color: rgba(162, 0, 255, 0.849);
+}
+.amelioration_publicite{
+  background-color: rgba(233, 233, 170, 0.849);
+}
+.amelioration_ecologie{
+  background-color: rgba(131, 238, 9, 0.849);
+}
+.evenement{
+  background-color: rgba(18, 248, 237, 0.849);
+}
+.cout{
+  border: solid;
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(53, 51, 51, 0.993);
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  behavior: url(/PIE.htc);
+}
 
 /*         Ajout des Glyphicons de BootStrap 3         */
 @font-face {

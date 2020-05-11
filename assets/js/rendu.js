@@ -11,10 +11,10 @@ class Rendu{
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
         let camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        camera.position.x = 200
+        camera.position.x = 5
         camera.rotation.y = ( 60* (Math.PI / 180)) 
         camera.rotation.z = ( 90* (Math.PI / 180)) 
-        camera.position.z = 100;
+        camera.position.z = 3;
 
 
         /*let loader = new THREE.GLTFLoader();

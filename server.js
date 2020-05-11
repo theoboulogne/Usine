@@ -1,6 +1,36 @@
 /*
+
+
+
+
+
+
     TO-DO:
     - RAJOUTER pub dans joueur
+
+    - calcul des barres a faire
+
+    - Afficher + d'informations :
+    ex : budget pub par mois / salaire des employes / solde
+
+
+    - rajouter le temps a l'affichage pour les choix a repetition
+
+    - retirer les niveau de ligne de production
+
+    - rajouter un $ ou euro dans le json pour chaque 'cout'
+
+    -renommer choix solde en choix pub
+
+    -rajouter pub fixe dans magasin
+
+
+
+
+
+
+
+
 
 
 
@@ -36,19 +66,15 @@ app.get('/game', (request, response, next) => {
 
 let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
-// reste a modifier en conséquence
-this.rep = new Repetition();
-let Game = this;
 
 io.sockets.on('connection',  (socket) =>{
     console.log('Debut Connection Client (coté serveur)')
 
     console.log(this.Monde);
 
-    if(this.Monde.NbJoueurs > this.Monde.NbJoueursMax) {
+    if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) {
         console.log('send disconnect')
-        socket.emit('disconnect'); 
-        socket.disconnect();
+        socket.disconnect(); 
     }
     else {
         console.log('add joueur au monde')
@@ -66,18 +92,28 @@ io.sockets.on('connection',  (socket) =>{
 
 
 
-    socket.on('endTurn', (Dossiers, Magasin)=> { 
-            // Rajouter les méthodes dans Magasin
+    socket.on('endTurn', (Dossiers, Magasin)=> {
         console.log('------endTurn')
         this.Monde.Joueurs[socket.id].jouer = true;
 
+        console.log('Dossiers :')
+        console.log(Dossiers)
+        console.log('--------------------')
+        console.log('Choix :')
+        console.log(this.Monde.Joueurs[socket.id].choix)
+        console.log('--------------------') 
         for(let i=0; i<Dossiers.length; i++){
-            for(let j=0; j<this.Monde.Joueurs[socket.id].choix; j++){
-                for(let k=0; k<this.Monde.Joueurs[socket.id].choix[j]; k++){
-                    if(this.Monde.Joueurs[socket.id].choix[j][k].categorie == Dossier[i].categorie){
-                        if(this.Monde.Joueurs[socket.id].choix[j][k].nom == Dossier[i].nom){
-                            Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k], this.Monde.Joueurs[socket.id].joueur)
-                            switch(k){
+            for(let j=0; j<this.Monde.Joueurs[socket.id].choix.length; j++){
+                for(let k=0; k<this.Monde.Joueurs[socket.id].choix[j].length; k++){
+                    if(this.Monde.Joueurs[socket.id].choix[j][k].categorie == Dossiers[i].categorie || (this.Monde.Joueurs[socket.id].choix[j][k].categorie == undefined && Dossiers[i].categorie=='evenement')){
+                        let bool = false;
+                        if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom) bool = true;
+                        else if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == undefined){
+                            if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
+                        }
+                        if(bool){
+                            Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur)
+                            switch(j){
                                 case 1://ponctuel
                                     this.Monde.Joueurs[socket.id].joueur.ponctuel.add(this.Monde.Joueurs[socket.id].choix[j][k].categorie, this.Monde.Joueurs[socket.id].choix[j][k].nom)
                                 break;
@@ -86,9 +122,9 @@ io.sockets.on('connection',  (socket) =>{
                                 break;
                                 case 3://amelioration
                                     let nbtour = this.Monde.Joueurs[socket.id].choix[j][k].nbTour
-                                    nbtour.splice(nbtour.length-6, 6);
-                                    nbtour = parseInt(nbtour, 10);
-                                    this.Monde.Joueurs[socket.id].joueur.amelioration.lancer_Amelioration(this.Monde.Joueurs[socket.id].choix[j][k].categorie, nbtour, this.Monde.Joueurs[socket.id].choix[j][k].nom)
+                                    nbtour = nbtour.split(' ');
+                                    nbtour = parseInt(nbtour[0], 10);
+                                    this.Monde.Joueurs[socket.id].joueur.amelioration.lancer_Amelioration(this.Monde.Joueurs[socket.id].choix[j][k].categorie, nbtour, this.Monde.Joueurs[socket.id].choix[j][k].amelio)
                                 break;
                             }
                         }
@@ -98,7 +134,8 @@ io.sockets.on('connection',  (socket) =>{
         }
         
 
-        //Validation Magasin a faire + application
+        //Validation Magasin :
+        this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
 
 
 
@@ -108,6 +145,7 @@ io.sockets.on('connection',  (socket) =>{
         }
 
         if(finTour){
+            console.log('------FinTour')
 
 
             //Global
@@ -125,11 +163,10 @@ io.sockets.on('connection',  (socket) =>{
                 this.Monde.Joueurs[i].choix.splice(0, this.Monde.Joueurs[i].choix.length); 
 
                 //On génère les nouveaux choix
-                let ameliorations = Generate.Amelioration(this.Monde.Joueurs[i].joueur.amelioration.newTour(), this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
-                let repetitions;
-                if(this.Monde.nbTour == 1) repetitions = Generate.Repetition(Generate.initRepetition(), this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
-                else repetitions = Generate.Repetition(this.Monde.Joueurs[i].joueur.repetition.newTour(), this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
-                let ponctuels = Generate.Ponctuel(this.Monde.Joueurs[i].ponctuel, this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
+                let ameliorations = Generate.Amelioration(this.Monde.Joueurs[i].joueur.amelioration.checkInit(Generate.initAmelioration(),this.Monde.Joueurs[i].joueur.amelioration.newTour()), this.Monde.Joueurs[i].joueur.amelioration);
+                
+                let repetitions = Generate.Repetition(this.Monde.Joueurs[i].joueur.repetition.checkInit(Generate.initRepetition(),this.Monde.Joueurs[i].joueur.repetition.newTour()), this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
+                let ponctuels = Generate.Ponctuel(this.Monde.Joueurs[i].joueur.ponctuel, this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
                 //let critiques =  // A CODER ENCORE
                 
                 //On les enregistre et convertit pour le client
@@ -138,17 +175,20 @@ io.sockets.on('connection',  (socket) =>{
                     Generate.ChoixDisplay(ponctuels), 
                     Generate.ChoixDisplay(repetitions), 
                     Generate.AmeliorationDisplay(ameliorations)];
+                //On génère sa boutique
+                let boutique = this.Monde.Joueurs[i].joueur.avantAchat();
                 
                 //Générer les barres coté serveur et envoyer aussi
 
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix);
+                //Envoi de la boutique
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur);
             }
         }
     });
     socket.on('disconnect', ()=>{
-        io.emit('menu');
+        socket.emit('menu');
         this.Monde = new Univers(n);
     });
 
