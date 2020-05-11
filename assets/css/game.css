@@ -139,49 +139,52 @@ h5 {
   font-size: 1vw;
 }
 .ponctuel_energie{
-  background-color: rgba(0, 0, 255, 0.849);
+  background-color: rgba(191,232,236);
 }
 .ponctuel_social{
-  background-color: rgba(255, 0, 0, 0.849);
+  background-color: rgba(255, 0, 0, 0.9);
 }
 .ponctuel_publicite{
-  background-color: rgba(255, 255, 0, 0.849);
+  background-color: rgba(255, 255, 0, 0.9);
 }
 .ponctuel_ecologie{
-  background-color: rgba(0, 128, 0, 0.849);
+  background-color: rgba(51,201,28, 0.9);
 }
 .ponctuel_production{
-  background-color: rgba(243, 138, 246, 0.849);
+  background-color: rgba(243, 138, 246, 0.9);
 }
 .repetition_social{
-  background-color: rgba(170, 8, 8, 0.849);
+  background-color: rgba(244,44,44, 0.9);
 }
 .repetition_production{
-  background-color: rgba(168, 111, 120, 0.849);
+  background-color: rgba(255,126,126, 0.9);
 }
 .repetition_amelioration{
-  background-color: rgba(226, 240, 223, 0.849);
+  background-color: rgba(226, 240, 223, 0.9);
+}
+.repetition_publicite{
+  background-color: rgba(208, 255, 0, 0.9);
 }
 .ponctuel_publicite{
-  background-color: rgba(160, 160, 10, 0.849);
+  background-color: rgba(244,217,153, 0.9);
 }
 .amelioration_energie{
-  background-color: rgba(54, 166, 240, 0.849);
+  background-color: rgba(54, 166, 240, 0.9);
 }
 .amelioration_social{
-  background-color: rgba(255, 166, 0, 0.849);
+  background-color: rgba(255, 166, 0, 0.95);
 }
 .amelioration_production{
-  background-color: rgba(162, 0, 255, 0.849);
+  background-color: rgba(185, 74, 250, 0.9);
 }
 .amelioration_publicite{
-  background-color: rgba(233, 233, 170, 0.849);
+  background-color: rgba(233, 233, 170, 0.9);
 }
 .amelioration_ecologie{
-  background-color: rgba(131, 238, 9, 0.849);
+  background-color: rgba(131, 238, 9, 0.9);
 }
 .evenement{
-  background-color: rgba(18, 248, 237, 0.849);
+  background-color: rgba(18, 248, 237, 0.9);
 }
 .body{
   overflow-x: hidden; 
@@ -190,6 +193,18 @@ h5 {
 .coche{
   margin-left: 90%;
 }
+.googlescrollbare::-webkit-scrollbar {
+  width: 6px;
+}
+.googlescrollbare::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+}
+.googlescrollbare::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.801);
+  border-radius: 20px;
+  border: 3px solid rgba(230, 230, 230, 0);
+}
+
 
 /*         Ajout des Glyphicons de BootStrap 3         */
 @font-face {

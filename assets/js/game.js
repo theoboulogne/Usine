@@ -43,16 +43,16 @@ let Affichage = (function(){
         addSlick:()=>{
             $(document).ready(function(){
                 $('.cadre').slick({
-                    infinite: true,
+                    infinite: false,
                     speed: 300,
                     slidesToShow: 4,
-                    slidesToScroll: 3,
+                    slidesToScroll: 4,
                 });
             });
         },
         addNewSlick:(name, titre, description, cout,categorie)=>{
             let NewSlick = document.createElement("div")
-            NewSlick.setAttribute("class", categorie+" "+"my-custom-scrollbar my-custom-scrollbar-primary")
+            NewSlick.setAttribute("class", categorie+" "+"my-custom-scrollbar my-custom-scrollbar-primary"+" "+"back_slick googlescrollbare")
             let titre_ = document.createElement("h2")
             titre_.setAttribute("class","ecriture1")
             titre_.appendChild(document.createTextNode(titre))
