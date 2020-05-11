@@ -6,6 +6,7 @@
 
 
     TO-DO:
+    limiter lignes a 5 max
 
     - calcul des barres a faire
 
