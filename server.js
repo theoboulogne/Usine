@@ -147,7 +147,6 @@ io.sockets.on('connection',  (socket) =>{
         if(finTour){
             console.log('------FinTour')
 
-
             //Global
             this.Monde.nbTour++;
             //Génération des évenements + Application
@@ -158,7 +157,11 @@ io.sockets.on('connection',  (socket) =>{
             for(let i in io.sockets.sockets) { // i -> socket.id
                 this.Monde.Joueurs[i].jouer = false;
                 this.Monde.Joueurs[i].joueur.Update_Mois();
+            }
 
+            this.Monde.Vente.ventesJoueurs(this.Monde.Joueurs);
+
+            for(let i in io.sockets.sockets) {
                 //On vide le tableau
                 this.Monde.Joueurs[i].choix.splice(0, this.Monde.Joueurs[i].choix.length); 
 

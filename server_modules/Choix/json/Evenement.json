@@ -116,6 +116,7 @@
                 "choix":{
                     "nom":"Changement de fournisseur energetique",
                     "desc":"Vous changez de fornisseur energetique",
+                    "cout":"",
                     "valeurs":[
                         {
                             "path":[
@@ -154,6 +155,7 @@
                 "choix":{
                     "nom":"Changement de fournisseur de ressources",
                     "desc":"Vous changez de fournisseur pour vos ressources",
+                    "cout":"",
                     "valeurs":[
                         {
                             "path":[

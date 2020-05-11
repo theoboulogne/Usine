@@ -28,7 +28,7 @@ class Joueur{
 
         this.Choix = new Object();
         this.Choix.salaire = 1500;
-        this.Choix.solde = 4000; // paiement par mois
+        this.Choix.solde = 2000; // paiement par mois
         this.Choix.norme = new Object(); // limites
         this.Choix.norme.pollution = -1
         this.Choix.norme.dechets = -1;
@@ -52,12 +52,12 @@ class Joueur{
         //Gérer les fournisseurs principaux coté serveur ?
         this.energie = 1;
         this.Courant = new Energie();// Initialisation de l'énergie
-        this.Courant.Principal.prix = 2;
-        this.Courant.Principal.pollution = 6;
-        this.Courant.Principal.coupure = 0.5;
-        this.Courant.Auxilliaire.prix = 8;
-        this.Courant.Auxilliaire.pollution = 15;
-        this.Courant.Auxilliaire.coupure = 0.2;
+        this.Courant.Principal.prix = 15;
+        this.Courant.Principal.pollution = 12;
+        this.Courant.Principal.coupure = 0.4;
+        this.Courant.Auxilliaire.prix = 10;
+        this.Courant.Auxilliaire.pollution = 30;
+        this.Courant.Auxilliaire.coupure = 0.5;
 
         this.Approvisionnement = new Object();
         this.Approvisionnement.Capacite = 2000;//Actuelle
@@ -68,18 +68,15 @@ class Joueur{
         this.pub = 0;
 
         this.production = 1;
-        this.nbEmployes = 15;// Initialisation de la production
-        this.nbRobots = 0;
-        this.nbEmployes_dispo = 15;
-        this.nbRobots_dispo = 0;
+        this.nbEmployes = 0;// Initialisation de la production
+        this.nbRobots = 10;
+        this.nbEmployes_dispo = 0;
+        this.nbRobots_dispo = 10;
         
         this.stock = 0 // produits en stock
-        this.variationStock = -1
 
         this.Lignes = [];
         this.Lignes.push(new Ligne()); // une ligne par défault
-        
-        this.nbTour = -1
     }
 
     Update_Approvisionnement(){
@@ -101,11 +98,12 @@ class Joueur{
         for(let i=0; i<uptimeNRJ; i++){ // On effectue notre mois
             this.Update_Jour()
         }
+
         //Calcul et facture de fin de mois
-
-
-        this.solde += this.Choix.solde/* paiement par mois */ - ((this.consommationNRJ * (this.Courant.solde_NRJ1(this.uptimeMax) + this.Courant.solde_NRJ2(this.uptimeMax))) + this.solde_salaires());
-        
+        this.solde -= this.Choix.solde/* paiement par mois */
+        this.solde -= (this.consommationNRJ * (this.Courant.solde_NRJ1(this.uptimeMax)))
+        this.solde -= (this.consommationNRJ * (this.Courant.solde_NRJ2(this.uptimeMax))) 
+        this.solde -= this.solde_salaires();
 
     }
     Update_Jour(){ // Fonctionnement d'une journée
@@ -115,7 +113,7 @@ class Joueur{
                 this.add_ouvriers()
 
             }// definir la var marche de la machine a ce moment la pour retirer du traitement ?
-            if(i==12||i==18){// | 12 : 00 h | 18 : 00 h | -> Retire les employes 
+            if(i==12||i==22){// | 12 : 00 h | 18 : 00 h | -> Retire les employes 
 
                 this.retirer_employe() // ( on laisse les robots ils tournent 24/24 actuellement, a changer )
                 
@@ -154,7 +152,7 @@ class Joueur{
         for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += (this.energie * this.Lignes[i].energie());
     }
     empreinte(){ // Récupère les infos écologiques sur une heure
-        this.Eco.pollution = 0;
+        this.Eco.pollution =  this.pollution * (1/5000) * ((this.Courant.Principal.pollution * (this.Courant.solde_NRJ1(this.uptimeMax)/this.Courant.Principal.prix)) + (this.Courant.Auxilliaire.pollution * (this.Courant.solde_NRJ2(this.uptimeMax)/this.Courant.Auxilliaire.prix)));
         this.Eco.dechets = 0;
         for(let i=0; i<this.Lignes.length; i++){
             this.Eco.pollution += (this.Lignes[i].pollution*this.pollution);
@@ -182,7 +180,7 @@ class Joueur{
         }
         else {
             let i = 0;
-            while(this.nbEmployes_dispo+this.nbRobots>0) { // On remplit les lignes une par une et on rempli au maximum la dernière si on peut pas en faire fonctionner une nouvelle
+            while(this.nbEmployes_dispo+this.nbRobots_dispo>0) { // On remplit les lignes une par une et on rempli au maximum la dernière si on peut pas en faire fonctionner une nouvelle
                 for(let j=0; j<5; j++) this.Add(this.Lignes[i]);
                 if(this.nbEmployes_dispo+this.nbRobots_dispo>=5) i++;
                 if(i==this.Lignes.length) i=0; // on met une sécurité pour reboucler au cas ou

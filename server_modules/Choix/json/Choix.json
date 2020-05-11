@@ -10,7 +10,7 @@
                     "amelioration":"Panneaux Solaires",
                     "choix":{
                         "nom": "Panneaux Solaires",
-                        "cout":"25000",
+                        "cout":"25000 euros",
                         "desc":"Installer des panneaux solaires pour remplacer la source d'energie de secours.",
                         "valeurs":[
                             {
@@ -55,8 +55,8 @@
                     "amelioration":"Eoliennes",
                     "choix":{
                         "nom": "Eoliennes",
-                        "cout":"50000",
-                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours que les panneaux solaires.",
+                        "cout":"50000 euros",
+                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours.",
                         "valeurs":[
                             {
                                 "path":[
@@ -100,7 +100,7 @@
                     "amelioration":"Generateur Biomasse",
                     "choix":{
                         "nom": "Generateur Biomase",
-                        "cout":"100000",
+                        "cout":"100000 euros",
                         "desc":"Installer un generateur biomasse permettera d'etre plus sur de l'energie fournie par la source de secours.",
                         "valeurs":[
                             {
@@ -145,7 +145,7 @@
                     "amelioration":"Barrage Hydrolique",
                     "choix":{
                         "nom": "Barrage Hydrolique",
-                        "cout":"150000",
+                        "cout":"150000 euros",
                         "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
                         "valeurs":[
                             {
@@ -196,7 +196,7 @@
                     "amelioration":"CE",
                     "choix":{
                         "nom": "Voyage",
-                        "cout":"25000",
+                        "cout":"25000 euros",
                         "desc":"Organisez un voyage pour les employes de la boite.",
                         "valeurs":[
                             {
@@ -222,8 +222,8 @@
                     "amelioration":"CE",
                     "choix":{
                         "nom": "Nouvelle Salle de Repos",
-                        "cout":"10000",
-                        "desc":"Creez une nouvelle salle de repos pour que vos employes beneficies d'uun repos optimal.",
+                        "cout":"10000 euros",
+                        "desc":"Creez une nouvelle salle de repos pour que vos employes beneficient d'uun repos optimal.",
                         "valeurs":[
                             {
                                 "path":[
@@ -251,10 +251,10 @@
             "variations":[
                 {
                     "proba":"1",
-                    "amelioration":"Bon Comercial",
+                    "amelioration":"Bon Commercial",
                     "choix":{
                         "nom": "Cout de Pub",
-                        "cout":"20000",
+                        "cout":"20000 euros",
                         "desc":"Faites une grosse campagne publicitaire pour mieux faire connaitre votre produit.",
                         "valeurs":[
                             {
@@ -266,8 +266,7 @@
                             },
                             {
                                 "path":[
-                                    "pub",
-                                    "cout"
+                                    "pub"
                                 ],
                                 "val":"20000",
                                 "type":"plusegal"
@@ -286,7 +285,7 @@
                     "amelioration":"Ecologiste",
                     "choix":{
                         "nom": "Traitement des Dechets et Isolation",
-                        "cout":"15000",
+                        "cout":"15000 euros",
                         "desc":"Recyclez vos dechets recyclable pour faire partie des entreprises les plus 'vertes'.",
                         "valeurs":[
                             {
@@ -317,8 +316,8 @@
                     "proba":"0.05",
                     "amelioration":"Green Peace",
                     "choix":{
-                        "nom": "Changement des Filtre a Air",
-                        "cout":"40000",
+                        "nom": "Changement des Filtres a Air",
+                        "cout":"40000 euros",
                         "desc":"Changez vos filtres a air pour limiter vos emitions de produits nocif pour l'environement.",
                         "valeurs":[
                             {
@@ -349,7 +348,7 @@
                     "amelioration":"Entreprise Dynamique niv2",
                     "choix":{
                         "nom": "Ligne de Production niv2",
-                        "cout":"10000",
+                        "cout":"10000 euros",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
@@ -381,7 +380,7 @@
                     "amelioration":"Entreprise Dynamique niv3",
                     "choix":{
                         "nom": "Ligne de Production niv3",
-                        "cout":"15000",
+                        "cout":"15000 euros",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
@@ -413,7 +412,7 @@
                     "amelioration":"Entreprise Dynamique niv4",
                     "choix":{
                         "nom": "Ligne de Production niv4",
-                        "cout":"20000",
+                        "cout":"20000 euros",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
@@ -445,7 +444,7 @@
                     "amelioration":"Entreprise Dynamique niv5",
                     "choix":{
                         "nom": "Ligne de Production niv5",
-                        "cout":"25000",
+                        "cout":"25000 euros",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
@@ -477,7 +476,7 @@
                     "amelioration":"Entreprise Dynamique niv6",
                     "choix":{
                         "nom": "Ligne de Production niv6",
-                        "cout":"30000",
+                        "cout":"30000 euros",
                         "desc":"Ameliorez vos lignes de productions.",
                         "valeurs":[
                             {
@@ -508,15 +507,6 @@
         }
     ],
 
-    
-
-
-
-
-
-
-
-
     "repetition": {
         "social":[
             {
@@ -526,7 +516,7 @@
                 "nbTour":"4",
                 "choix":{
                     "nom":"Abonnement Mensuel",
-                    "cout":"3000",
+                    "cout":"3000 euros | Nombre de tour : 4",
                     "desc":"Offrez a vos employes un abonnement mensuel dans une salle de sport ou a Netflix.",
                     "valeurs":[
                         {
@@ -554,7 +544,7 @@
                 "nbTour":"4",
                 "choix":{
                     "nom":"Augmentation des Salaires",
-                    "cout":"50 /tour",
+                    "cout":"50 euros /tour/employes | Nombre de tour : 4",
                     "desc":"Augmentez les salaires de vos employes.",
                     "valeurs":[
                         {
@@ -583,7 +573,7 @@
                 "nbTour":"4",
                 "choix":{
                     "nom":"Diminution des Salaires",
-                    "cout":"-30 /salarie/tour",
+                    "cout":"-30 euros /tour/employes | Nombre de tour : 4",
                     "desc":"Diminuez les salaires de vos employes.",
                     "valeurs":[
                         {
@@ -612,7 +602,7 @@
                 "nbTour":"4",
                 "choix":{
                     "nom":"Offre de Part de L'entreprise",
-                    "cout":"75000",
+                    "cout":"75000 euros | Nombre de tour : 4",
                     "desc":"Offrez des parts de l'entreprises a vos employes.",
                     "valeurs":[
                         {
@@ -637,21 +627,13 @@
         "production":[
             {
                 "proba":"0.2",
-                "prix":"30000",
                 "amelioration":"Entreprise Dynamique",
                 "nbTour":"2",
                 "choix":{
                     "nom":"Augmentation de Production",
-                    "cout":"30000",
+                    "cout":"Nombre de tour : 2",
                     "desc":"Augmentez la cadence de production de vos lignes.",
                     "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-30000",
-                            "type":"plusegal"
-                        },
                         {
                             "path":[
                                 "Choix",
@@ -672,21 +654,13 @@
             },
             {
                 "proba":"0.3",
-                "prix":"30000",
                 "amelioration":"Entreprise Dynamique",
                 "nbTour":"2",
                 "choix":{
                     "nom":"Diminution de Production",
-                    "cout":"30000",
+                    "cout":"Nombre de tour : 2",
                     "desc":"Diminuez la cadences de productions de vos lignes.",
                     "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-30000",
-                            "type":"plusegal"
-                        },
                         {
                             "path":[
                                 "Choix",
@@ -707,21 +681,13 @@
             },
             {
                 "proba":"0.3",
-                "prix":"20000",
                 "amelioration":"Entreprise Dynamique niv2",
                 "nbTour":"2",
                 "choix":{
                     "nom":"Augmentation du Temps de Travail",
-                    "cout":"20000",
+                    "cout":"Nombre de tour : 2",
                     "desc":"Faites travailler vos employes plus longtemps.",
                     "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-20000",
-                            "type":"plusegal"
-                        },
                         {
                             "path":[
                                 "Choix",
@@ -742,21 +708,13 @@
             },
             {
                 "proba":"0.4",
-                "prix":"15000",
                 "amelioration":"Entreprise Dynamique niv2",
                 "nbTour":"2",
                 "choix":{
                     "nom":"Diminution du Temps de Travail",
-                    "cout":"15000",
+                    "cout":"Nombre de tour : 2",
                     "desc":"Faites travailler vos employes moins longtemps.",
                     "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-15000",
-                            "type":"plusegal"
-                        },
                         {
                             "path":[
                                 "Choix",
@@ -782,7 +740,7 @@
                 "nbTour":"2",
                 "choix":{
                     "nom":"Amelioration composant 1",
-                    "cout":"15000",
+                    "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
                     "valeurs":[
                         {
@@ -806,7 +764,7 @@
                 "nbTour":"2",
                 "choix":{
                     "nom":"Amelioration composant 2",
-                    "cout":"15000",
+                    "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
                     "valeurs":[
                         {
@@ -830,7 +788,7 @@
                 "nbTour":"2",
                 "choix":{
                     "nom":"Amelioration composant 3",
-                    "cout":"15000",
+                    "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
                     "valeurs":[
                         {
@@ -854,7 +812,7 @@
                 "nbTour":"2",
                 "choix":{
                     "nom":"Amelioration composant 4",
-                    "cout":"15000",
+                    "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
                     "valeurs":[
                         {
@@ -878,7 +836,7 @@
                 "nbTour":"2",
                 "choix":{
                     "nom":"Amelioration composant 5",
-                    "cout":"15000",
+                    "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
                     "valeurs":[
                         {
@@ -902,8 +860,8 @@
                 "prix":"75000",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Investissement dans la Recherche et le Developpement",
-                    "cout":"75000",
+                    "nom":"Investissement dans la Recherche ",
+                    "cout":"75000 euros | Nombre de tour : 2",
                     "desc":"Investissez dans la recherche et le developpement de votre en usine, pour effectuer ces taches plus rapidement.",
                     "valeurs":[
                         {
@@ -925,17 +883,17 @@
             {
                 "proba":"0.2",
                 "prix":"4000",
-                "amelioration":"Bon Comercial",
+                "amelioration":"Bon Commercial",
                 "nbTour":"5",
                 "choix":{
                     "nom":"Augmenter le Budget Pub",
-                    "cout":"4000 /tour",
+                    "cout":"4000 euros /tour | Nombre de tour : 5",
                     "desc":"Augmentez votre budget pub pour en avoir de meilleure qualite.",
                     "valeurs":[
                         {
                             "path":[
-                                "pub",
-                                "cout"
+                                "Choix",
+                                "solde"
                             ],
                             "val":"4000",
                             "type":"plusegal"
@@ -946,17 +904,17 @@
             {
                 "proba":"0.3",
                 "prix":"",
-                "amelioration":"Bon Comercial",
+                "amelioration":"Bon Commercial",
                 "nbTour":"5",
                 "choix":{
                     "nom":"Diminuer le Budget Pub",
-                    "cout":"-2000 /tour",
+                    "cout":"-2000 euros /tour | Nombre de tour : 5",
                     "desc":"Diminuez votre budget pub pour liberer des fonds.",
                     "valeurs":[
                         {
                             "path":[
-                                "pub",
-                                "cout"
+                                "Choix",
+                                "solde"
                             ],
                             "val":"-2000",
                             "type":"plusegal"
@@ -966,15 +924,6 @@
             }
         ]
     },
-
-
-
-
-
-
-
-
-
 
     "ameliorations": {
         "social":[
@@ -1127,7 +1076,7 @@
         ],
         "publicite":[
             {
-                "amelio":"Bon Comercial",
+                "amelio":"Bon Commercial",
                 "desc":"Offrez vous les meilleur comerciaux pour vos campagnes publicitaires.",
                 "nbTour":"5",
                 "amelioNecessaire":[]
