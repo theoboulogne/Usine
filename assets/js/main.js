@@ -45,6 +45,14 @@
                     }
                 }
 
+                for(let i=0; i<choix.length; i++){ // On met investissement dans la recherche a la fin pour influencer les améliorations de ce tour
+                    if(choix[i].nom == "Investissement dans la Recherche "){
+                        let choixTMP = choix[i]
+                        choix.splice(i, 1);
+                        choix.push(choixTMP);
+                    }
+                }
+
                 console.log(choix)
 
                 //Vérification et application des changements coté serveur a faire (faire une copie de Jeu pour comparaison ?)
