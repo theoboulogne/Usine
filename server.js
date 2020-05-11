@@ -6,25 +6,12 @@
 
 
     TO-DO:
-    - RAJOUTER pub dans joueur
 
     - calcul des barres a faire
 
-    - Afficher + d'informations :
-    ex : budget pub par mois / salaire des employes / solde
-
-
-    - rajouter le temps a l'affichage pour les choix a repetition
-
-    - retirer les niveau de ligne de production
-
-    - rajouter un $ ou euro dans le json pour chaque 'cout'
-
-    -renommer choix solde en choix pub
-
     -rajouter pub fixe dans magasin
 
-
+    - evenement a tester
 
 
 
@@ -64,7 +51,7 @@ app.get('/game', (request, response, next) => {
 
 //On enregistre nos Joueurs, on lance à n joueurs
 
-let n = 1
+let n = 2
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
 
 io.sockets.on('connection',  (socket) =>{

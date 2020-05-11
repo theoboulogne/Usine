@@ -1,8 +1,8 @@
 class Ventes{
-    constructor(){
+    constructor(n){
         //global
-        this.prixVente = 45;
-        this.nbClientsTotal=10000;
+        this.prixVente = 25;
+        this.nbClientsTotal=n*1000;
     }
 
     partDeMarche(tab/* tout les joueurs */){  // tout les calcul de cette fonction sont invente 
@@ -14,8 +14,9 @@ class Ventes{
         let part = [];//tebleau de la meme taille que le nombre de joueur
 
         for(let i in tab){//parcourt des joueurs
-            tab[i].joueur.pub += tab[i].joueur.Choix.solde; // on rassemble les couts de pub avec le budget pub global
-            part.push(tab[i].joueur.pub / 1000) * tab[i].joueur.pollution
+            // on rassemble les couts de pub avec le budget pub global
+            part.push((tab[i].joueur.pub + tab[i].joueur.Choix.solde) / 1000) * tab[i].joueur.pollution
+            tab[i].joueur.pub = 0;
         }
 
         let imageDeMarqueTotal = part.reduce(reducer);
@@ -36,16 +37,21 @@ class Ventes{
     
     ventesJoueurs(tab){
         let part = this.partDeMarche(tab);
+        let indice = 0;
         for (let i in tab){
-            if(tab[i].joueur.stock < part[i] * this.nbClientsTotal){
-                console.log(tab[i].joueur.stock * this.prixVente)
+            if(tab[i].joueur.stock < part[indice] * this.nbClientsTotal){
+                console.log('a')
+                console.log(part[indice])
+                console.log( tab[i].joueur.stock * this.prixVente)
                 tab[i].joueur.solde += tab[i].joueur.stock * this.prixVente
-d
             }
             else {
-                console.log(part[i] * this.nbClientsTotal * this.prixVente)
-                tab[i].joueur.solde += part[i] * this.nbClientsTotal * this.prixVente;
+                console.log('b')
+                console.log(part[indice])
+                console.log(part[indice] * this.nbClientsTotal * this.prixVente)
+                tab[i].joueur.solde += part[indice] * this.nbClientsTotal * this.prixVente;
             }
+            indice++;
         }
     }
 }

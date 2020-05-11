@@ -28,7 +28,7 @@ class Joueur{
 
         this.Choix = new Object();
         this.Choix.salaire = 1500;
-        this.Choix.solde = 2000; // paiement par mois
+        this.Choix.solde = 5000; // paiement par mois
         this.Choix.norme = new Object(); // limites
         this.Choix.norme.pollution = -1
         this.Choix.norme.dechets = -1;
@@ -37,7 +37,6 @@ class Joueur{
         this.Choix.securite = new Object(); // 0.5 - 1.5
         this.Choix.securite.employes = 1;
         this.Choix.securite.robots = 1;
-        this.pub = 0;
 
         this.pollution = 1;
         this.dechets = 1;
@@ -68,10 +67,10 @@ class Joueur{
         this.pub = 0;
 
         this.production = 1;
-        this.nbEmployes = 0;// Initialisation de la production
-        this.nbRobots = 10;
-        this.nbEmployes_dispo = 0;
-        this.nbRobots_dispo = 10;
+        this.nbEmployes = 10;// Initialisation de la production
+        this.nbRobots = 0;
+        this.nbEmployes_dispo = 10;
+        this.nbRobots_dispo = 0;
         
         this.stock = 0 // produits en stock
 

@@ -4,7 +4,7 @@ const Ventes = require('./Ventes')
 class Univers{
     constructor(n){
         this.Joueurs = new Object()
-        this.Vente = new Ventes()
+        this.Vente = new Ventes(n)
         this.NbJoueurs = 0;
         this.NbJoueursMax = n // constante (nombre de joueurs par partie)
 
