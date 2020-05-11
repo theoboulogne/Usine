@@ -27,16 +27,17 @@ class Joueur{
         // ou retirer des jours pour laisser les wk end off en fonction des choix ?
 
         this.Choix = new Object();
-        this.Choix.salaire = 1500
-        this.Choix.solde = 0 // paiement par mois
+        this.Choix.salaire = 1500;
+        this.Choix.solde = 4000; // paiement par mois
         this.Choix.norme = new Object(); // limites
         this.Choix.norme.pollution = -1
-        this.Choix.norme.dechets = -1
-        this.Choix.norme.salaire = -1
-        this.Choix.avantages = 0
+        this.Choix.norme.dechets = -1;
+        this.Choix.norme.salaire = -1;
+        this.Choix.avantages = 0;
         this.Choix.securite = new Object(); // 0.5 - 1.5
-        this.Choix.securite.employes = 1
-        this.Choix.securite.robots = 1
+        this.Choix.securite.employes = 1;
+        this.Choix.securite.robots = 1;
+        this.pub = 0;
 
         this.pollution = 1;
         this.dechets = 1;

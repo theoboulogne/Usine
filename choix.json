@@ -266,8 +266,7 @@
                             },
                             {
                                 "path":[
-                                    "pub",
-                                    "cout"
+                                    "pub"
                                 ],
                                 "val":"20000",
                                 "type":"plusegal"
@@ -928,8 +927,8 @@
                     "valeurs":[
                         {
                             "path":[
-                                "pub",
-                                "cout"
+                                "Choix",
+                                "solde"
                             ],
                             "val":"4000",
                             "type":"plusegal"
@@ -949,8 +948,8 @@
                     "valeurs":[
                         {
                             "path":[
-                                "pub",
-                                "cout"
+                                "Choix",
+                                "solde"
                             ],
                             "val":"-2000",
                             "type":"plusegal"
