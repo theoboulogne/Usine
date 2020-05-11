@@ -68,11 +68,6 @@ h5 {
   box-shadow: none;
   background-color: #62a8ea;
 }
-
-.blanc {
-  color:white;
-}
-
 #boutique {
   margin-top: 1vh;
 }
@@ -80,12 +75,6 @@ h5 {
   margin-top: 1vh;
   height: 2vh;
 }
-
-#Info {
-  margin-top: 18vh;
-}
-
-
 #titre {
   padding-left: 50%;
 }
@@ -111,7 +100,7 @@ h5 {
   width: 70%;
   position: relative;
   z-index: 1;
-  margin-top: 37vh;
+  margin-top: 20vh;
   margin-left: 15%;
 }
 .slick-slide {
@@ -204,7 +193,29 @@ h5 {
   border-radius: 20px;
   border: 3px solid rgba(230, 230, 230, 0);
 }
-
+.finance{
+  margin-top: 1vh;
+  margin-left: 1%;
+  width: 20%;
+  height: auto;
+  background-color: rgba(245, 245, 245, 0.801);
+  border: solid;
+  border-color: rgb(53, 51, 51);
+  padding-left: 8px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  behavior: url(/PIE.htc);
+}
+.inline{
+  display: inline;
+}
+.input-number{
+  border-color: rgba(255, 255, 255, 0);
+}
+.info{
+  margin-top: 10px;
+}
 
 /*         Ajout des Glyphicons de BootStrap 3         */
 @font-face {
@@ -259,53 +270,20 @@ h5 {
 .glyphicon-heart:before {
   content: "\e005";
 }
-/*
-*from 005 to 260
-.glyphicon-menu-up:before {
-  content: "\e260";
-} */
- /* The Modal (background) */
- .modal {
-  border: solid;
-  border-color: rgb(53, 51, 51);
-  padding-left: 20px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  behavior: url(/PIE.htc);
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  margin-left: 0%;
-  width: 15%; /* Full width */
+.modal {
+  width: 30%; /* Full width */
   height: auto; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(248, 228, 228, 0.883); /* Black w/ opacity */
+  margin-top: 20vh;
+  margin-left: 35%;
+  background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
 }
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+.modal-sm{
+  width: 12%; /* Full width */
+  height: auto; /* Full height */
+  margin-top: 35vh;
+  margin-left: 44%;
+  background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
 }
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.btn-sm{
+  margin-top: 1vh;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-} 
