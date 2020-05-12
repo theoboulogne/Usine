@@ -736,10 +736,10 @@
             {
                 "proba":"0.3",
                 "prix":"15000",
-                "amelioration":"Entreprise Autonome 1",
+                "amelioration":"Entreprise Autonome niv1",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Amelioration composant 1",
+                    "nom":"Amelioration composant niv1",
                     "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
                     "valeurs":[
@@ -760,10 +760,10 @@
             {
                 "proba":"0.3",
                 "prix":"15000",
-                "amelioration":"Entreprise Autonome 2",
+                "amelioration":"Entreprise Autonome niv2",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Amelioration composant 2",
+                    "nom":"Amelioration composant niv2",
                     "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
                     "valeurs":[
@@ -784,10 +784,10 @@
             {
                 "proba":"0.3",
                 "prix":"15000",
-                "amelioration":"Entreprise Autonome 3",
+                "amelioration":"Entreprise Autonome niv3",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Amelioration composant 3",
+                    "nom":"Amelioration composant niv3",
                     "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
                     "valeurs":[
@@ -808,10 +808,10 @@
             {
                 "proba":"0.3",
                 "prix":"15000",
-                "amelioration":"Entreprise Autonome 4",
+                "amelioration":"Entreprise Autonome niv4",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Amelioration composant 4",
+                    "nom":"Amelioration composant niv4",
                     "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
                     "valeurs":[
@@ -832,10 +832,10 @@
             {
                 "proba":"0.3",
                 "prix":"15000",
-                "amelioration":"Entreprise Autonome 5",
+                "amelioration":"Entreprise Autonome niv5",
                 "nbTour":"2",
                 "choix":{
-                    "nom":"Amelioration composant 5",
+                    "nom":"Amelioration composant niv5",
                     "cout":"15000 euros | Nombre de tour : 2",
                     "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
                     "valeurs":[
@@ -1019,7 +1019,7 @@
                 ]
             },
             {
-                "amelio":"Entreprise Autonome 1",
+                "amelio":"Entreprise Autonome niv1",
                 "desc":"Ayez la possibilite d'ameliorez le premier composant de chaque ligne.",
                 "nbTour":"4",
                 "amelioNecessaire":[
@@ -1030,46 +1030,46 @@
                 ]
             },
             {
-                "amelio":"Entreprise Autonome 2",
+                "amelio":"Entreprise Autonome niv2",
                 "desc":"Ayez la possibilite d'ameliorez le deuxieme composant de chaque ligne.",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome 1"
+                        "amelio":"Entreprise Autonome niv1"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome 3",
+                "amelio":"Entreprise Autonome niv3",
                 "desc":"Ayez la possibilite d'ameliorez le troisieme composant de chaque ligne.",
                 "nbTour":"8",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome 2"
+                        "amelio":"Entreprise Autonome niv2"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome 4",
+                "amelio":"Entreprise Autonome niv4",
                 "desc":"Ayez la possibilite d'ameliorez le quatrieme composant de chaque ligne.",
                 "nbTour":"10",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome 3"
+                        "amelio":"Entreprise Autonome niv3"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome 5",
+                "amelio":"Entreprise Autonome niv5",
                 "desc":"Ayez la possibilite d'ameliorez le cinquieme composant de chaque ligne.",
                 "nbTour":"12",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome 4"
+                        "amelio":"Entreprise Autonome niv4"
                     }
                 ]
             }

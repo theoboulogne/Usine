@@ -74,7 +74,7 @@
 
             console.log('Events : ')
             console.log(Events)
-            //Affichage.modal(Events)
+            Affichage.modal(Events)
 
             Game.Dossiers = []
             Game.Magasin.avantAchat(Magasin);
