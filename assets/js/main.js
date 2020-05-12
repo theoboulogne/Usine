@@ -20,6 +20,7 @@
             
             Game.Dossiers = []
             Game.Magasin = new Boutique();
+            Affichage.set_addEvent(Game.Magasin)
 
             socket.emit('endTurn', [], []); // On demande les infos de départ
 
@@ -67,13 +68,19 @@
             console.log(Barres)
             console.log(Choix)
             console.log(Lignes)
+            console.log(Magasin)
 
             Affichage.SetBarre("economie", Barres[0])
             Affichage.SetBarre("social", Barres[1])
             Affichage.SetBarre("ecologie", Barres[2])
             Affichage.SetBarre("production", Barres[3])
             
-            Affichage.finance(Infos)
+            Game.Infos = Infos;
+            Affichage.SetStock(Infos[0])
+            Affichage.SetConso(Infos[1])
+            Affichage.SetAccident(Infos[2])
+            Affichage.SetSalaires(Infos[3])
+            Affichage.SetPub(Infos[4])
 
             Game.Graphique.GenerationUsine(Lignes);
 
@@ -83,6 +90,8 @@
 
             Game.Dossiers = []
             Game.Magasin.avantAchat(Magasin);
+            Affichage.updateMagasin(Game.Magasin);
+            Affichage.SetSolde(Game.Magasin.boutique.solde)
 
             Affichage.removeSlick()
             for(let i=0; i<Choix.length; i++) {

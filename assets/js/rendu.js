@@ -89,7 +89,7 @@ class Rendu{
         let controls = new THREE.OrbitControls( camera, renderer.domElement );
         
         controls.mouseButtons = {
-            LEFT: THREE.MOUSE.ROTATE,
+            RIGHT: THREE.MOUSE.ROTATE,
             MIDDLE: THREE.MOUSE.DOLLY
         }
         controls.enablePan = false; // translation

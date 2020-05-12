@@ -7,16 +7,12 @@
 
     TO-DO:
 
-    - faire les pannes
+    - evenement a verifier le changement de valeur -> Ne marche pas pour le smic en tout cas
 
-    - rajouter pub fixe dans magasin  ????
+    - changer hauteur slick
 
-    - evenement a verifier le changement de valeur
-
-
-
-
-
+    - degrade barre : normes ? a voir car que ecologie d'important
+    - ou multiple barres en fonction des différents facteurs ( avec popover pq pas )
 
 
 
