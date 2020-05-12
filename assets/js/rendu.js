@@ -182,7 +182,6 @@ class Rendu{
         //Animation du rendu
         animate();
         this.Lignes = [];
-
     }
     
         /*
