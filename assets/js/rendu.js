@@ -32,7 +32,6 @@ function animate() {
 
 }
 
-
 class Rendu{
 
     constructor(){
@@ -45,11 +44,13 @@ class Rendu{
         scene = new THREE.Scene();
 
         // On initialise le rendu
-        renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.WebGLRenderer({
+            alpha: true,
+          });
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
-        //document.body.style.backgroundImage = "url('../textures/background.jpg')";
-        //document.body.style.backgroundSize = "cover"
+        document.body.style.backgroundImage = "url('../textures/background.jpg')";
+        document.body.style.backgroundSize = "cover"
 
         // On initialise la caméra
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -354,8 +355,8 @@ class Rendu{
     
     GenerationBoard(){
         
-        let boardTexture = new THREE.ImageUtils.loadTexture("../textures/ground2.png");
-        boardTexture.repeat.set(20, 10);
+        let boardTexture = new THREE.ImageUtils.loadTexture("../textures/ground.png");
+        boardTexture.repeat.set(20, 5);
         boardTexture.wrapS = THREE.RepeatWrapping;
         boardTexture.wrapT = THREE.RepeatWrapping;
 
@@ -368,7 +369,7 @@ class Rendu{
             new THREE.MeshLambertMaterial({color: 0x555555})
         ];
 
-        let geometry = new THREE.BoxGeometry( 40, 30, 1);
+        let geometry = new THREE.BoxGeometry( 80, 30, 1);
 
         let board = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(boardMaterials) );
         board.receiveShadow = true;
