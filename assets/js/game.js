@@ -1,7 +1,7 @@
 let Affichage = (function(){
     return{
         SetBarre:(id, pourcentage)=>{
-            document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
+            document.getElementById(id).setAttribute("style","width:"+String(pourcentage)+"%");
         },
         robots:()=>{
             $("#modal_Robots").modal({
@@ -42,33 +42,35 @@ let Affichage = (function(){
             document.getElementById("pub").innerHTML=tab[2]
         },
         modal:(tab)=>{
-            if(tab != [] && tab != undefined){
-                let modalNext = document.getElementById("modal_next")
-                let modalJouer = document.getElementById("modal_jouer")
-                let i=1
-                let text = document.createElement("h1")
-                text.setAttribute("class","ecriture2")
-                text.setAttribute("id","text")
-                text.appendChild(document.createTextNode(tab[0]))
-                modalNext.insertBefore(text, document.getElementById("end_next"))
-                $("#modal_next").modal({
-                    escapeClose: false,
-                    clickClose: false,
-                    showClose: false,
-                    toogle: true,
-
-                });
-                //$('#modal_next').modal('toggle')
+            if(tab.length != 0){
+                    let i=1
+                    let text_element = document.getElementById("text-modal")
+                    let text_dernier = document.getElementById("text-modal-dernier")
+                    if(tab.length == 1){
+                        text_dernier.innerHTML=tab[0]
+                        $("#modal_jouer").modal({
+                            escapeClose: false,
+                            clickClose: false,
+                            showClose: false,
+                            toogle: true
+                        });
+                    }else{
+                        text_element.innerHTML=tab[0]
+                        $("#modal_next").modal({
+                            escapeClose: false,
+                            clickClose: false,
+                            showClose: false,
+                            toogle: true
+                        });
+                    }
+               
                 document.getElementById("bouton_next").addEventListener("click",function(){
-                    text.innerHTML=""
-                    text.appendChild(document.createTextNode(tab[i]))
-                    
+                   
                     if(i < tab.length){
-                        modalNext.removeChild(document.getElementById("text"))
-                        modalNext.insertBefore(text, document.getElementById("end_next"))
+                        text_element.innerHTML=tab[i]
                         i++
                     }
-                    
+                   
                     if( i == tab.length){
                         $("#modal_jouer").modal({
                             escapeClose: false,
@@ -76,9 +78,11 @@ let Affichage = (function(){
                             showClose: false,
                             toogle: true
                         });
-                        modalJouer.insertBefore(text, document.getElementById("end_jouer"))
+                        console.log(tab[i-1])
+                        text_dernier.innerHTML=tab[i-1]
                     }
                 })
+               
                 document.getElementById("bouton_jouer").addEventListener("click",function(){
                     $.modal.close();
                 })
@@ -128,15 +132,3 @@ let Affichage = (function(){
         isValider:(Categorie)=> $("input[name='"+Categorie+"']:checked").val()
     }
 })();
-
-//Affichage.addNewSlick("CE","CE","Grace aux CE vos employes pourront beneficier d'avantages interressant pour le mental.","2 tours","Social")
-/*
-Affichage.addNewSlick("dossier2","dossier2","dossier2","1000","amelioration_social")
-Affichage.addNewSlick("dossier3","dossier3","dossier3","10000","ponctuel_production")
-Affichage.addNewSlick("dossier4","dossier4","dossier4",95148,"ponctuel_publicite")
-Affichage.addNewSlick("dossier5","dossier5","dossier5",81448,"ponctuel_publicite")
-Affichage.addNewSlick("dossier6","dossier6","dossier6",85845,"ponctuel_publicite")
-Affichage.addNewSlick("dossier7","dossier7","dossier7","10000","ponctuel_ecologie")
-Affichage.addNewSlick("dossier8","dossier8","dossier8","100","ponctuel_ecologie")
-Affichage.addNewSlick("dossier8","dossier8","dossier8","1000","ponctuel_ecologie")
-*/
