@@ -1,7 +1,7 @@
 {
     "evenement": [
         {
-            "proba":"0.01",
+            "proba":"1",
             "event":{
                 "nom":"Tremblemment de terre",
                 "desc":"Un tremblement de terre vient de se produire, il a pu endomager vos machines.",

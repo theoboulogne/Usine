@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-/* Slider */
->>>>>>> thomas
->>>>>>> Theo
-.slick-slider
-{
+.slick-slider{
     position: relative;
 
     display: block;
@@ -88,7 +80,7 @@
     scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
 
-    height: 15vh;
+    height: 17vh;
 }
 [dir='rtl'] .slick-slide
 {

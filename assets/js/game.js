@@ -42,30 +42,32 @@ let Affichage = (function(){
             document.getElementById("pub").innerHTML=tab[2]
         },
         modal:(tab)=>{
-            if(tab != [] && tab != undefined){
-                let modalNext = document.getElementById("modal_next")
-                let modalJouer = document.getElementById("modal_jouer")
-                let i=1
-                let text = document.createElement("h1")
-                text.setAttribute("class","ecriture2")
-                text.setAttribute("id","text")
-                text.appendChild(document.createTextNode(tab[0]))
-                modalNext.insertBefore(text, document.getElementById("end_next"))
-                $("#modal_next").modal({
-                    escapeClose: false,
-                    clickClose: false,
-                    showClose: false,
-                    toogle: true,
-
-                });
-                //$('#modal_next').modal('toggle')
+            if(tab.length != 0){
+                    let i=1
+                    let text_element = document.getElementById("text-modal")
+                    let text_dernier = document.getElementById("text-modal-dernier")
+                    if(tab.length == 1){
+                        text_dernier.innerHTML=tab[0]
+                        $("#modal_jouer").modal({
+                            escapeClose: false,
+                            clickClose: false,
+                            showClose: false,
+                            toogle: true
+                        });
+                    }else{
+                        text_element.innerHTML=tab[0]
+                        $("#modal_next").modal({
+                            escapeClose: false,
+                            clickClose: false,
+                            showClose: false,
+                            toogle: true
+                        });
+                    }
+                
                 document.getElementById("bouton_next").addEventListener("click",function(){
-                    text.innerHTML=""
-                    text.appendChild(document.createTextNode(tab[i]))
                     
                     if(i < tab.length){
-                        modalNext.removeChild(document.getElementById("text"))
-                        modalNext.insertBefore(text, document.getElementById("end_next"))
+                        text_element.innerHTML=tab[i]
                         i++
                     }
                     
@@ -76,9 +78,11 @@ let Affichage = (function(){
                             showClose: false,
                             toogle: true
                         });
-                        modalJouer.insertBefore(text, document.getElementById("end_jouer"))
+                        console.log(tab[i-1])
+                        text_dernier.innerHTML=tab[i-1]
                     }
                 })
+                
                 document.getElementById("bouton_jouer").addEventListener("click",function(){
                     $.modal.close();
                 })
