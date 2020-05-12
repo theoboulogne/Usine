@@ -1,7 +1,7 @@
 let Affichage = (function(){
     return{
         SetBarre:(id, pourcentage)=>{
-            document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
+            document.getElementById(id).setAttribute("style","width:"+String(pourcentage)+"%");
         },
         robots:()=>{
             $("#modal_Robots").modal({
