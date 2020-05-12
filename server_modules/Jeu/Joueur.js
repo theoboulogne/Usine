@@ -112,10 +112,10 @@ class Joueur{
 
                 this.add_ouvriers()
 
-            }// definir la var marche de la machine a ce moment la pour retirer du traitement ?
+            }
             if(i==12||i==22){// | 12 : 00 h | 18 : 00 h | -> Retire les employes 
 
-                this.retirer_employe() // ( on laisse les robots ils tournent 24/24 actuellement, a changer )
+                this.retirer_employe() // ( on laisse les robots ils tournent 24/24 )
                 
             } 
 
@@ -146,9 +146,7 @@ class Joueur{
         //Récupérer les infos ensuite
     }
 
-    //Faire le même type de fonction pour tout ?
     consommation(){ // Récupère la consommation sur une heure
-
         for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += (this.energie * this.Lignes[i].energie());
     }
     empreinte(){ // Récupère les infos écologiques sur une heure
@@ -165,13 +163,11 @@ class Joueur{
     avantages(){ // si salaire = 3300 -> = 1 | si salaire = 600 -> = 0
         return Math.log((this.Choix.salaire/300) - (17*this.Choix.avantages))
     }
-    solde_salaires(){ // modifier les salaires pour les week ends
+    solde_salaires(){ 
         return (this.Choix.salaire*this.nbEmployes);
     }
 
     
-    //RAJOUTER UNE SECURITE VERIFIANT QU'IL N'Y A PAS PLUS D'EMPLOYES QUE DE PLACE DANS LES BOUCLES +
-    // CHANGER LES METHODES COMPOSANT&LIGNE POUR OUVRIER
     add_ouvriers(){
         if(this.Lignes.length*5<this.nbEmployes_dispo+this.nbRobots_dispo) { //on ajoute un dans chaque ligne jusqu'à tant qu'il y en ai plus
             while(this.nbEmployes_dispo+this.nbRobots_dispo>0) for(let i=0; i<this.Lignes.length; i++){
@@ -188,13 +184,14 @@ class Joueur{
         }
     }
     Add(ligne){
-        if(this.nbRobots_dispo>0){
-            this.nbRobots_dispo--;
-            ligne.Add(1); // 1 pour robot
-        }else if(this.nbEmployes_dispo>0){
+        if(this.nbEmployes_dispo>0){
             this.nbEmployes_dispo--;
-            ligne.Add(0); // 0 pour employe
+            ligne.Add(0); 
+        }else if(this.nbRobots_dispo>0){
+            this.nbRobots_dispo--;
+            ligne.Add(1);
         }   
+         // 1 pour robot & 0 pour employe
     }
     retirer_employe(){
         for(let i=0; i<this.Lignes.length; i++){
@@ -250,7 +247,7 @@ class Joueur{
         }
         if(this.Choix.salaire < this.Choix.norme.salaire) Social = Social/10;
 
-        if(Social>4) Social = 1
+        if(Social>3) Social = 1
         else Social = Social / 3
 
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -313,13 +310,13 @@ class Joueur{
 
         if(solde >= 1000000){
             soldeString += String(Math.floor(solde/1000000))
-            soldeString += " Millions "
+            soldeString += " M "
             solde -= Math.floor(solde/1000000) * 1000000
         }
 
         if(solde >= 1000){
             soldeString += String(Math.floor(solde/1000))
-            soldeString += " Milles "
+            soldeString += " k "
             solde -= Math.floor(solde/1000) * 1000
         }
         
@@ -327,6 +324,18 @@ class Joueur{
         soldeString += " € "
 
         return [soldeString, String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
+    }
+
+    LignesDisplay(){
+
+        this.add_ouvriers()
+
+        let ligneTMP = JSON.parse(JSON.stringify(this.Lignes));
+
+        this.retirer_employe() // ( on laisse les robots ils tournent 24/24)
+
+        return ligneTMP;
+
     }
 }
 

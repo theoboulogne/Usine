@@ -8,17 +8,17 @@ class Boutique {
         this.infoBoutique = infoBoutique;
         this.boutique = infoBoutique;
     }
-    boutonPlus(infoBoutique,categorie /* "lignes" / "robots" / "employes" */){
-        if(categorie != "lignes" || infoBoutique[categorie] < 6){
-            infoBoutique[categorie]++;
-            boutique.solde -= infoBoutique["prix"][categorie];
+    boutonPlus(categorie /* "lignes" / "robots" / "employes" */){
+        if(categorie != "lignes" || this.boutique[categorie] < 6){
+            this.boutique[categorie]++;
+            this.boutique.solde -= this.boutique["prix"][categorie];
         }
     }
-    boutonMoins(infoBoutique,categorie){
-        if((this.boutique.lignes =! infoBoutique.lignes) || (categorie =! "lignes")){
-            if(categorie != "employes" || infoBoutique[categorie] > 1){
-                infoBoutique[categorie]--;
-                infoBoutique.solde += infoBoutique["prix"][categorie];
+    boutonMoins(categorie){
+        if((this.boutique.lignes =! this.boutique.lignes) || (categorie =! "lignes")){
+            if(categorie != "employes" || this.boutique[categorie] > 1){
+                this.boutique[categorie]--;
+                this.boutique.solde += this.boutique["prix"][categorie];
             }
         }
     }

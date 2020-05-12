@@ -48,6 +48,11 @@ class Rendu{
             alpha: true,
           });
         renderer.setSize( window.innerWidth, window.innerHeight );
+
+        let onClick = this.OnClick;
+        let game = this;
+        renderer.domElement.addEventListener("click", function(){onClick(event, game.Lignes)}, false); // On active les events
+
         document.body.appendChild( renderer.domElement );
         document.body.style.backgroundImage = "url('../textures/background.jpg')";
         document.body.style.backgroundSize = "cover"
@@ -184,6 +189,35 @@ class Rendu{
         animate();
         this.Lignes = [];
     }
+
+    
+    OnClick(event, Lignes){
+        
+        // Detection des clicks
+        let raycaster = new THREE.Raycaster(); //Gestion de la détection des clicks (Events)
+        
+        let mouse = new THREE.Vector2();
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+
+        let bool = false;
+        for(let i=Lignes.length-1; i>=0; i--) {
+            if(!bool){
+                let tabTMP = raycaster.intersectObjects(Lignes[i].lignemodel, true)
+                if(tabTMP.length) {
+                    bool = true;
+                    $("#modal_Magasin").modal({
+                        escapeClose: false,
+                        clickClose: false,
+                        showClose: false,
+                        toogle: true
+                    });
+                }
+            }
+        }
+    }
     
         /*
         let Lignes = [{Composant:[{nbEmployes:0, nbRobots:1, auto:false}, {nbEmployes:0, nbRobots:1, auto:false}, {nbEmployes:2, nbRobots:0, auto:false}, {nbEmployes:1, nbRobots:1, auto:false}, {nbEmployes:0, nbRobots:0, auto:true}]}]
@@ -207,7 +241,7 @@ class Rendu{
 
         //Enregistrer tableau ligne
         while(this.Lignes.length < LIGNES.length){
-            this.Lignes.push({Ligne:JSON.parse(JSON.stringify(LIGNES[this.Lignes.length])), lignemodel:[], charactermodel:[]})
+            this.Lignes.push({Ligne:JSON.parse(JSON.stringify(LIGNES[this.Lignes.length])), lignemodel:[], charactermodel:[], panne:[]})
             //ajouter nouvelles lignes
             this.LoadLine(this.GenerationLigne(this.Lignes[this.Lignes.length-1].Ligne, this.Lignes.length-1), this.Lignes[this.Lignes.length-1].lignemodel);
         }
@@ -234,9 +268,31 @@ class Rendu{
             }
         }
 
+        
+        for (let j=0; j<this.Lignes.length; j++) {
+            let bool = false
+            if (this.Lignes[j].Ligne.boolpanne && !LIGNES[j].boolpanne) {
+                bool = true;
+            }
+            if(bool){
+                if(this.Lignes[j].Ligne.boolpanne){
+                    scene.remove(this.Lignes[j].panne[0]);
+                    scene.remove(this.Lignes[j].panne[1]);
+                    this.Lignes[j].panne.length = 0;
+                }
+                this.Lignes[j].Ligne.boolpanne = LIGNES[j].boolpanne;
+            }
+        }
+
         for(let i=0; i<this.Lignes.length; i++){
             if(this.Lignes[i].charactermodel.length == 0){
                 this.LoadCharacters(this.GenerationWorker(this.Lignes[i].Ligne, i), this.Lignes[i].charactermodel);
+            }
+        }
+        
+        for(let i=0; i<this.Lignes.length; i++){
+            if(this.Lignes[i].Ligne.boolpanne){
+                this.LoadFire(i, this.Lignes[i].panne);
             }
         }
     }
@@ -385,7 +441,7 @@ class Rendu{
         scene.add( light );
 
         let spotLight = new THREE.SpotLight( 0xcccccc );
-        spotLight.position.set( 50, 250, 50 );
+        spotLight.position.set( 50, 100, 50 );
         spotLight.castShadow = true;
         spotLight.shadowMapWidth = 1024;
         spotLight.shadowMapHeight = 1024;
@@ -399,6 +455,40 @@ class Rendu{
     /////////////////////////////////////////////
     // Chargement des modèles de façon synchrone
     /////////////////////////////////////////////
+
+    LoadFire(Y, ENREGISTREMENT){
+
+        let plane = new THREE.PlaneBufferGeometry( 20, 20 );
+        let fire = new THREE.Fire( plane, {
+            textureWidth: 512,
+            textureHeight: 512,
+            debug: false
+        } );
+        fire.position.y = 1;
+
+        fire.color1.set( 0xd2d2d2 );
+        fire.color2.set( 0xd7d7d7 );
+        fire.color3.set( 0x000000 );
+        fire.windVector.x =  - 0.05;
+        fire.windVector.y = 0.15;
+        fire.colorBias = 0.3;
+        fire.burnRate = 0.0;
+        fire.diffuse = 0.8;
+        fire.viscosity = 0.25;
+        fire.expansion = -0.14;
+        fire.swirl = 3.75;
+        fire.drag = 0.4;
+        fire.airSpeed = 18.0;
+        fire.speed = 500.0;
+        fire.massConservation = false;
+
+        fire.addSource( 0.55, 0.2, 0.02, 0.2, 0.2, 0.2 );
+        fire.position.z = Y*2;
+
+
+        ENREGISTREMENT.push(fire);
+        scene.add( fire );
+    }
 
     LoadLine(UNITS, ENREGISTREMENT){
         if(ENREGISTREMENT == undefined) ENREGISTREMENT = []
@@ -504,9 +594,18 @@ class Rendu{
                         clonedScene.traverse( function ( child ) {
                             if ( child.isMesh ) {
                                 
-                                child.material.metalness = 0.4;
-                                child.material.roughness = 0.4;
+                                if(u.modelName == "wall"){
+                                    
+                                    child.material.metalness = 0;
+                                    child.material.roughness = 0;
 
+                                }
+                                else {
+
+                                    child.material.metalness = 0.4;
+                                    child.material.roughness = 0.4;
+
+                                }
                                 
                                 if ( u.position ) {
                                 

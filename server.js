@@ -6,7 +6,6 @@
 
 
     TO-DO:
-    limiter lignes a 5 max
 
     - faire les pannes
 
@@ -15,7 +14,6 @@
     - evenement a verifier le changement de valeur
 
 
-    problème : modal des evenements
 
 
 
@@ -178,7 +176,7 @@ io.sockets.on('connection',  (socket) =>{
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
             }
         }
     });
