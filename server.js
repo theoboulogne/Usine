@@ -8,13 +8,14 @@
     TO-DO:
     limiter lignes a 5 max
 
-    - calcul des barres a faire
-
     - faire les pannes
 
-    -rajouter pub fixe dans magasin
+    - rajouter pub fixe dans magasin  ????
 
-    - evenement a tester
+    - evenement a verifier le changement de valeur
+
+
+    problème : modal des evenements
 
 
 
@@ -74,7 +75,7 @@ io.sockets.on('connection',  (socket) =>{
         console.log('send repconnection')
         console.log(this.Monde.NbJoueurs)
         
-        socket.emit('repconnection', this.Monde.Joueurs[socket.id].joueur) // on envoi les données générées
+        socket.emit('repconnection')
 
         if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) io.emit('start');
     }
@@ -99,7 +100,8 @@ io.sockets.on('connection',  (socket) =>{
                         let bool = false;
                         if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom) bool = true;
                         else if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == undefined){
-                            if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
+                            if(this.Monde.Joueurs[socket.id].choix[j][k].nom == Dossiers[i].nom) bool = true;
+                            else if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
                         }
                         if(bool){
                             Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur)
@@ -141,7 +143,7 @@ io.sockets.on('connection',  (socket) =>{
             this.Monde.nbTour++;
             //Génération des évenements + Application
             let evenements = Generate.Evenement(this.Monde.nbTour);
-            let evenementsChoix = this.Monde.addEvenement(evenements);
+            let evenementsChoix = this.Monde.addEvenement(evenements, evenements.length);
             evenements = Generate.EvenementDisplay(evenements);
 
             for(let i in io.sockets.sockets) { // i -> socket.id
@@ -176,7 +178,7 @@ io.sockets.on('connection',  (socket) =>{
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur);
             }
         }
     });

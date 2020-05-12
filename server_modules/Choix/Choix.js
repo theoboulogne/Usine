@@ -30,11 +30,8 @@ let applyValeur = (valeur,  Joueur) => {
 module.exports = {
     apply : (choix, Joueur) =>{
         if(choix != undefined){
-            console.log(choix)
-            console.log(Joueur.solde)
             for(let i=0; i<choix.valeurs.length; i++){
                 applyValeur(choix.valeurs[i], Joueur);
-                console.log(Joueur.solde)
             }
         }
     }
