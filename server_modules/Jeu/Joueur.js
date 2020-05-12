@@ -222,7 +222,7 @@ class Joueur{
         let coeffRobots = infoBoutique.robots - this.nbRobots;
         let coeffLignes = infoBoutique.lignes - this.Lignes.length;
         let coeffSolde = this.solde - infoBoutique.solde
-        if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
+        if(infoBoutique.solde > 0) if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
             this.nbRobots = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
             this.solde = infoBoutique.solde;

@@ -557,9 +557,6 @@ class Rendu{
                         }
 
                         // On change les positions, tailles et rotations en fonction du modèle
-                        console.log('add character : ')
-                        console.log(u)
-                        console.log(ENREGISTREMENT)
                         ENREGISTREMENT.push(clonedScene);
                         scene.add( clonedScene );
 
@@ -635,7 +632,6 @@ class Rendu{
             }
         }
 
-        console.log(MODELS);
         console.log( `Unités chargées` );
     }
 

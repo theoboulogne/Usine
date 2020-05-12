@@ -10,8 +10,10 @@ class Boutique {
     }
     boutonPlus(categorie /* "lignes" / "robots" / "employes" */){
         if(categorie != "lignes" || this.boutique[categorie] < 6){
-            this.boutique[categorie]++;
-            this.boutique.solde -= this.boutique["prix"][categorie];
+            if(this.boutique.solde - this.boutique["prix"][categorie] > 0){
+                this.boutique[categorie]++;
+                this.boutique.solde -= this.boutique["prix"][categorie];
+            }
         }
     }
     boutonMoins(categorie){
