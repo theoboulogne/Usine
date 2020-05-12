@@ -225,7 +225,7 @@ class Joueur{
         let coeffRobots = infoBoutique.robots - this.nbRobots;
         let coeffLignes = infoBoutique.lignes - this.Lignes.length;
         let coeffSolde = this.solde - infoBoutique.solde
-        if(coeffRobots * 35000 + coeffLignes * 500000 == coeffSolde){
+        if((coeffRobots * 35000) + (coeffLignes * 500000) == coeffSolde){
             this.nbRobots = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
             this.solde = infoBoutique.solde;
@@ -270,8 +270,9 @@ class Joueur{
 
         let nb = this.nbEmployes+this.nbRobots
         let auto = 0
+
         for(let i=0; i<this.Lignes.length; i++) for(let j=0; j<5; j++) if(this.Lignes[i].Composant[j].auto) auto++
-        while(nb < (10 * this.Lignes.length) - auto) {
+        while(nb > (10 * this.Lignes.length) - auto) {
             nb-=3
             Production *= 0.9
         }

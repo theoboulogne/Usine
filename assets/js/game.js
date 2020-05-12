@@ -1,18 +1,43 @@
 let Affichage = (function(){
     return{
-        SetBarre:(id, pourcentage)=>{
-            document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
-        },
-        robots:()=>{
-            $("#modal_Robots").modal({
-                escapeClose: false,
-                clickClose: false,
-                showClose: false,
-                toogle: true
-            });
-            document.getElementById("bouton_Robots").addEventListener("click",function(){
+        set_addEvent:(boutique)=>{
+            document.getElementById("bouton_Employes").addEventListener("click",function(){
                 $.modal.close();
             })
+            document.getElementById("bouton_Lignes").addEventListener("click",function(){
+                $.modal.close();
+            })
+
+            document.getElementById("lignes-moins").addEventListener("click", function(){
+                console.log(boutique)
+                boutique.boutonMoins("lignes");
+                document.getElementById("lignes-nb").innerHTML=  boutique.boutique.lignes;
+            })
+            document.getElementById("lignes-plus").addEventListener("click", function(){
+                boutique.boutonPlus("lignes");
+                document.getElementById("lignes-nb").innerHTML=  boutique.boutique.lignes;
+            })
+            document.getElementById("robots-moins").addEventListener("click", function(){
+                boutique.boutonMoins("robots");
+                document.getElementById("robots-nb").innerHTML=  boutique.boutique.robots;
+            })
+            document.getElementById("robots-plus").addEventListener("click", function(){
+                boutique.boutonPlus("robots");
+                document.getElementById("robots-nb").innerHTML=  boutique.boutique.robots;
+            })
+            
+            document.getElementById("employes-moins").addEventListener("click", function(){
+                boutique.boutonMoins("employes");
+                document.getElementById("employes-nb").innerHTML=  boutique.boutique.employes;
+            })
+
+            document.getElementById("employes-plus").addEventListener("click",  function(){
+                boutique.boutonPlus("employes");
+                document.getElementById("employes-nb").innerHTML =  boutique.boutique.employes;
+            })
+        },
+        SetBarre:(id, pourcentage)=>{
+            document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
         },
         employes:()=>{
             $("#modal_Employes").modal({
@@ -21,9 +46,7 @@ let Affichage = (function(){
                 showClose: false,
                 toogle: true
             });
-            document.getElementById("bouton_Employes").addEventListener("click",function(){
-                $.modal.close();
-            })
+           
         },
         lignes:()=>{
             $("#modal_Lignes").modal({
@@ -32,9 +55,7 @@ let Affichage = (function(){
                 showClose: false,
                 toogle: true
             });
-            document.getElementById("bouton_Lignes").addEventListener("click",function(){
-                $.modal.close();
-            })
+            
         },
         finance:(tab)=>{
             document.getElementById("solde").innerHTML=tab[0]

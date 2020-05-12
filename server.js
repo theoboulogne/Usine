@@ -127,7 +127,9 @@ io.sockets.on('connection',  (socket) =>{
         
 
         //Validation Magasin :
+        console.log('test avant')
         if(Magasin != []) this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
+        console.log('test apres')
 
 
 
@@ -172,13 +174,15 @@ io.sockets.on('connection',  (socket) =>{
                     Generate.AmeliorationDisplay(ameliorations)];
                 //On génère sa boutique
                 let boutique = this.Monde.Joueurs[i].joueur.avantAchat();
-                
+                let barres = this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour)
+                let infosAfficher = this.Monde.Joueurs[i].joueur.infosAfficher()
+
                 //Générer les barres coté serveur et envoyer aussi
 
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, barres, infosAfficher, this.Monde.Joueurs[i].joueur);
             }
         }
     });

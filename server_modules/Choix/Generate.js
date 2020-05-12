@@ -30,8 +30,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Amelio :')
-        console.log(Amelio)
         return Amelio;
     },
     AmeliorationDisplay : (amelios) => {
@@ -53,8 +51,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Events :')
-        console.log(Events)
         return Events;
     },
     EvenementDisplay : (evenements) => {
@@ -88,8 +84,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Repetition :')
-        console.log(Choix)
         return Choix;
     },
     Ponctuel : (ponctuelFait, solde, amelioration) => {
@@ -112,8 +106,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Ponctuel :')
-        console.log(Choix)
         return Choix;
     },
     ChoixDisplay : (choix) => {

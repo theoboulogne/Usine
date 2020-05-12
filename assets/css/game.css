@@ -123,6 +123,18 @@ h5 {
   color: rgb(49, 47, 47);
   font-size: 1vw;
 }
+.ecriture-modal{
+  color: rgb(49, 47, 47);
+  font-size: 1.3vw;
+  text-align: center;
+}
+
+.ecriture-modal-nb{
+  color: rgb(49, 47, 47);
+  font-size: 1.3vw;
+  text-align: center;
+  white-space:nowrap;
+}
 .text-left{
   font-size: 1vw;
 }
@@ -284,5 +296,20 @@ h5 {
   background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
 }
 .btn-sm{
+  margin-top: 0vh;
+}
+.btn-light{
+  margin-left: 1%;
+  width: 20%;
+  height: auto;
+  background-color: rgba(245, 245, 245, 0.801);
+  border: solid;
+  border-color: rgb(53, 51, 51);
+  padding-left: 8px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  behavior: url(/PIE.htc);
+  width: auto;
   margin-top: 1vh;
 }

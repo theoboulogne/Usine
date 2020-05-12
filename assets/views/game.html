@@ -59,13 +59,13 @@
                 <span style="margin-top:5px;">Lignes</span>
                 </br>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                    <button id="lignes-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
                         <span class="glyphicon glyphicon-minus"></span>
                     </button>
                 </span>
-                <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
+                <span id="lignes-nb" class="ecriture2" >1</span>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                    <button id="lignes-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
@@ -80,42 +80,38 @@
                 <span style="margin-top:5px;">Employés</span>
                 </br>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
+                    <button id="employes-moins" type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
                         <span class="glyphicon glyphicon-minus"></span>
                     </button>
                 </span>
-                <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
+                <span id="employes-nb" class="ecriture2" >10</span>
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                    <button id="employes-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
-                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Employes">Suivant</button>
-            </center>
-        </div>    
-
-        
-        <div id="modal_Robots" class="modal modal-sm">
-            <center>
+                </br>
+                </br>
                 <img src="../textures/robot.png" class="rounded " >
                 <span style="margin-top:5px;">Robots</span>
                 </br>
                 <div class="info">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                        <button id="robots-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
+                    <span id="robots-nb" class="ecriture2" >0</span>
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                        <button id="robots-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </span>
                 </div>
-                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Robots">Suivant</button>
+                </br>
+                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Employes">Suivant</button>
             </center>
-        </div>  
+        </div>
 
         <div class="col-md-4" id="newTour">
             <button type="button" class="btn btn-primary"><h1 class="text-left">Tour suivant</h1></button>
@@ -124,7 +120,7 @@
         </div>
         
         <div id="modal_next" class="modal">
-            <p class="ecriture2" id="text-modal"></p>
+            <p class="ecriture-modal" id="text-modal"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_next">Suivant</button>
@@ -132,7 +128,7 @@
         </div>
         
         <div id="modal_jouer" class="modal">
-            <p class="ecriture2" id="text-modal-dernier"></p>
+            <p class="ecriture-modal" id="text-modal-dernier"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_jouer">Fermer</button>
