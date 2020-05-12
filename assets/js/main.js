@@ -18,7 +18,7 @@
     socket.on('start', () => {
         console.log('Event - start')
 
-        this.Graphique.DropDown("boutique", "dropdown_boutique");
+        //this.Graphique.DropDown("boutique", "dropdown_boutique");
         
         //Ajouter un event on click sur les boutons dans chaque ligne du dropdown
 
