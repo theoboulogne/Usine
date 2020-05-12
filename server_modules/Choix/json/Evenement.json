@@ -43,11 +43,8 @@
             "proba":"0.01",
             "event":{
                 "nom":"Crise economique",
-                "desc":"Une crise economique est survenu, vous aurez des problemes d'argent ce mois ci.",
-                "crise":{
-                    "min": "10",
-                    "max": "30"
-                }
+                "desc":"Une crise economique est survenu, vous aurez du mal a vendre desormais",
+                "crise":"true"
             }
         },
         {
@@ -113,6 +110,7 @@
         {
             "proba":"0.02",
             "event":{
+                "nom":"Nouveau fournisseur energetique !",
                 "choix":{
                     "nom":"Changement de fournisseur energetique",
                     "desc":"Vous changez de fornisseur energetique",
@@ -152,6 +150,7 @@
         {
             "proba":"0.02",
             "event":{
+                "nom":"Nouveau fournisseur de ressources !",
                 "choix":{
                     "nom":"Changement de fournisseur de ressources",
                     "desc":"Vous changez de fournisseur pour vos ressources",

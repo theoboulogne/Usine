@@ -45,7 +45,7 @@ module.exports = {
         /*
         récup les infos a afficher pour le joueur a faire
         */
-        Events = []
+        Events = new Array()
         if(tour%3 == 0 && tour>10){
             for(let i=0; i<evenement.length; i++){
                 if(utils.proba(evenement[i].proba)){
@@ -60,7 +60,7 @@ module.exports = {
     EvenementDisplay : (evenements) => {
         let display = []
         for(let i=0; i<evenements.length; i++){
-            display.push(evenements.nom)
+            display.push(evenements[i].nom)
         }
         return display;
     },

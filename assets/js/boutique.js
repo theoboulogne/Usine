@@ -9,13 +9,17 @@ class Boutique {
         this.boutique = infoBoutique;
     }
     boutonPlus(infoBoutique,categorie /* "lignes" / "robots" / "employes" */){
-        infoBoutique[categorie]++;
-        boutique.solde -= infoBoutique["prix"][categorie];
+        if(categorie != "lignes" || infoBoutique[categorie] < 6){
+            infoBoutique[categorie]++;
+            boutique.solde -= infoBoutique["prix"][categorie];
+        }
     }
     boutonMoins(infoBoutique,categorie){
         if((this.boutique.lignes =! infoBoutique.lignes) || (categorie =! "lignes")){
-            infoBoutique[categorie]--;
-            infoBoutique.solde += infoBoutique["prix"][categorie];
+            if(categorie != "employes" || infoBoutique[categorie] > 1){
+                infoBoutique[categorie]--;
+                infoBoutique.solde += infoBoutique["prix"][categorie];
+            }
         }
     }
 }

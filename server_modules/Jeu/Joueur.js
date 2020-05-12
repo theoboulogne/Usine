@@ -65,6 +65,7 @@ class Joueur{
 
         this.solde = 1000000;// Initialisation des ventes
         this.pub = 0;
+        this.pubPrec = 0;
 
         this.production = 1;
         this.nbEmployes = 10;// Initialisation de la production
@@ -232,6 +233,100 @@ class Joueur{
                 this.Lignes.push(new Ligne());
             }
         }
+    }
+    
+    barres(nbTour){
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        let Social = 0.2 + ((2-this.production) * 0.7)
+        Social += this.Choix.avantages
+        Social += (this.Choix.securite.employes-0.5) + (0.5*(this.Choix.securite.robots-0.5))
+
+        let salairetmp = this.Choix.salaire
+        while(salairetmp<1700){
+            salairetmp+=15
+            Social = Social * 0.99
+        }
+        if(this.Choix.salaire < this.Choix.norme.salaire) Social = Social/10;
+
+        if(Social>4) Social = 1
+        else Social = Social / 3
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        let Ecologie = 1
+        if(this.energie * this.Courant.Auxilliaire.pollution > this.Courant.Principal.pollution) Ecologie *= 0.6
+
+        if((2 - this.pollution) * this.Empreinte.pollution / (nbTour * this.Eco.pollution) < 1) Ecologie *= 0.6
+        if((2 - this.dechets) * this.Empreinte.dechets / (nbTour * this.Eco.dechets) < 1) Ecologie *= 0.7
+
+        if(this.Choix.norme.pollution != -1) if(this.Choix.norme.pollution > this.Eco.pollution) Ecologie *= 0.5
+        if(this.Choix.norme.dechets != -1) if(this.Choix.norme.dechets > this.Eco.dechets) Ecologie *= 0.5
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        let Production = this.production * 0.5 * (this.Choix.securite.employes-0.5) + 0.1 + (0.5*(this.Choix.securite.robots-0.5))
+
+        let nb = this.nbEmployes+this.nbRobots
+        let auto = 0
+        for(let i=0; i<this.Lignes.length; i++) for(let j=0; j<5; j++) if(this.Lignes[i].Composant[j].auto) auto++
+        while(nb < (10 * this.Lignes.length) - auto) {
+            nb-=3
+            Production *= 0.9
+        }
+        for(let i=0; i<auto; i++) Production*=1.25
+
+        for(let i=0; i<this.nbRobots; i++) Production *= 1.1
+        if(Production>1) Production = 1
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        let Croissance = (JSON.parse(JSON.stringify(Production + Social + Ecologie)))/3
+
+        let CroissanceTMP = (this.solde / 1000000);
+        if(CroissanceTMP>1.1) CroissanceTMP = 1.1;
+        Croissance *= CroissanceTMP;
+        for(let i=0; i<Math.floor(this.solde/1000000) - 1; i++) Croissance *= 1.1
+
+        if(this.pubPrec) Croissance*=1.3;
+
+        (Croissance -= Math.floor((this.solde_salaires() - 10000) / 10000)*0.1)
+        if(this.Choix.solde < 5000) Croissance *= 0.9
+        if(this.Choix.solde < 2000) Croissance *= 0.8
+        if(this.Choix.solde > 5000) Croissance *= 1.05
+        if(this.Choix.solde > 7000) Croissance *= 1.1
+
+        if(this.solde < 0) Croissance *= 0.1
+        if(Croissance>1) Croissance = 1
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+        return [Croissance*100, Social*100, Ecologie*100, Production*100]
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    infosAfficher(){
+        let solde = Math.trunc(this.solde)
+        let soldeString = ""
+
+        if(solde >= 1000000){
+            soldeString += String(Math.floor(solde/1000000))
+            soldeString += " Millions "
+            solde -= Math.floor(solde/1000000) * 1000000
+        }
+
+        if(solde >= 1000){
+            soldeString += String(Math.floor(solde/1000))
+            soldeString += " Milles "
+            solde -= Math.floor(solde/1000) * 1000
+        }
+        
+        soldeString += String(solde)
+        soldeString += " € "
+
+        return [soldeString, String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
     }
 }
 

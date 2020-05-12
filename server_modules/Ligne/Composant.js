@@ -7,7 +7,7 @@ class Composant {
         // a deplacer dans une fonction qui prend un json en entree si possible
     /* Variables Fixes par rapport au composant sélectionné */
         this.carte=(""); // nom et description a l'affichage
-        this.auto = true; // besoin d'un employé pour fonctionner ?
+        this.auto = false; // besoin d'un employé pour fonctionner ?
         this.consomationNRJ = 0.003;// remonter la consomation par production
         this.dechets = 0.026;// remonter dechets de ce composant
         this.pollution = 0.09;// remonter pollution de ce composant

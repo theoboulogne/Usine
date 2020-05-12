@@ -79,24 +79,6 @@ class Rendu{
 */
     }
 
-    SetBarre(id, pourcentage){
-        document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
-    }
-    DropDown(idbouton, iddropdown){
-        document.getElementById(idbouton).addEventListener("click", function(){ // on active le bouton
-            document.getElementById(iddropdown).classList.toggle("show"); 
-        });
-        document.getElementById(iddropdown).addEventListener('click', function (event) {  // on laisse ouvert si click dans le dropdown
-            event.stopPropagation(); 
-        }); 
-        window.onclick = function(event) { //on ferme si click en dehors du dropdown
-            if (!document.getElementById(idbouton).contains(event.target)) { 
-                if(document.getElementById(iddropdown).classList.contains('show')) { 
-                    document.getElementById(iddropdown).classList.remove('show'); 
-                }
-            }
-        }
-    }
     
     GenerationBoard(game){
         let boardTexture = new THREE.ImageUtils.loadTexture("../textures/board-pattern.png");
