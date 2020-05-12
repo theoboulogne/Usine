@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
 /*
      _ _      _       _
  ___| (_) ___| | __  (_)___
@@ -15,6 +19,8 @@
 
  */
 /* global window, document, define, jQuery, setInterval, clearInterval */
+>>>>>>> thomas
+>>>>>>> Theo
 ;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {

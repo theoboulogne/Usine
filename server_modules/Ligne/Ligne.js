@@ -19,34 +19,38 @@ class Ligne {
     Update(Choix){
         let tmp_accident = this.accident;
         this.marche = true;
-        this.boolaccident = false;
         this.dechets=0;
         this.production=0; 
         this.pollution=0;
+
+
         for(let i=0; i<5; i++){
-                if(this.Composant[i].auto){
-                    if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i]);
-                    if(!this.boolpanne&&!this.boolaccident){ // on revérifie
+            if(this.boolaccident) this.production-=7;
+            this.boolaccident = false;
+            if(this.Composant[i].auto){
+                if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i], Choix.securite);
+                if(!this.boolpanne&&!this.boolaccident){ // on revérifie
 
-                        this.production += this.Composant[i].production_auto();
-                        this.dechets += this.Composant[i].dechets_auto();
-                        this.pollution += this.Composant[i].pollution_auto();
+                    this.production += this.Composant[i].production_auto();
+                    this.dechets += this.Composant[i].dechets_auto();
+                    this.pollution += this.Composant[i].pollution_auto();
 
+                }
+            }
+            else{
+                if(this.Composant[i].nbRobots+this.Composant[i].nbEmployes == 0) this.marche = false;
+                else{
+                    if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i], Choix.securite);
+                    if(!this.boolpanne&&!this.boolaccident){
+                        let qualTravail = Math.pow(this.cadence_travail(this.Composant[i], Choix), this.Composant[i].nbEmployes) * Math.pow(3.3, this.Composant[i].nbRobots); // on recalcule si il y a eu de nouveaux accidents, rajouter d'autres modif par la suite en fonction des choix possibles
+                        this.production += this.Composant[i].production_normal(qualTravail);//Composant[i].production*tmp_Uptime * (qualTravail^(Composant[i].nbEmployes)) * (3.5^(Composant[i].nbRobots))
+                        this.dechets += this.Composant[i].dechets_normal(qualTravail);
+                        this.pollution += this.Composant[i].pollution_normal(qualTravail);
+                        
+                        this.qualtravail = qualTravail;
                     }
                 }
-                else{
-                    if(this.Composant[i].nbRobots+this.Composant[i].nbEmployes == 0) this.marche = false;
-                    else{
-                        if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i]);
-                        if(!this.boolpanne&&!this.boolaccident){
-                            let qualTravail = Math.pow(this.cadence_travail(this.Composant[i], Choix.avantages), this.Composant[i].nbEmployes) * Math.pow(3.5, this.Composant[i].nbRobots); // on recalcule si il y a eu de nouveaux accidents, rajouter d'autres modif par la suite en fonction des choix possibles
-                            this.production += this.Composant[i].production_normal(qualTravail);//Composant[i].production*tmp_Uptime * (qualTravail^(Composant[i].nbEmployes)) * (3.5^(Composant[i].nbRobots))
-                            this.dechets += this.Composant[i].dechets_normal(qualTravail);
-                            this.pollution += this.Composant[i].pollution_normal(qualTravail);
-                            
-                        }
-                    }
-                }   
+            }   
         }
         if(this.boolaccident) this.boolaccident = false//demander une action humaine  pour reactiver production si auto ?  
         if(!this.marche) this.reset_update(tmp_accident);// on reset si il manque un employé sur un composant
@@ -59,7 +63,7 @@ class Ligne {
     }
 
     cadence_travail(composant, Choix){ //return 1 + (composant.accident_normal()/*0->2*/) + (avantages/*0->1*/); première formule utilisée
-        return (((2-composant.accident_normal(Choix.securite))+(2*Choix.avantages))/4)
+        return 2.9 + composant.accident_normal(Choix.securite) + (0.3*Choix.avantages);
     }
     energie(){
         let tmpNRJ = 0;
@@ -77,8 +81,8 @@ class Ligne {
         }
         return tmpNRJ;
     }
-    accident_switch(composant){
-        switch(composant.Accident()){
+    accident_switch(composant, secu){
+        switch(composant.Accident(secu)){
             case 2:
                 this.boolpanne = true;
                 break;

@@ -1,3 +1,32 @@
+/*
+
+
+
+
+
+
+    TO-DO:
+    limiter lignes a 5 max
+
+    - faire les pannes
+
+    - rajouter pub fixe dans magasin  ????
+
+    - evenement a verifier le changement de valeur
+
+
+    problème : modal des evenements
+
+
+
+
+
+
+
+
+
+*/
+
 
 //Serveur - CIRious Game
 
@@ -11,56 +40,96 @@ const io =  require('socket.io')(server);
 
 //Import de classes
 const Univers = require('./server_modules/Jeu/Univers');
-const Repetition = require('./server_modules/Repetition');
+//Import des modules
+const Generate = require('./server_modules/Choix/Generate');
+const Choix = require('./server_modules/Choix/Choix');
 
 //Renvoi vers le fichier index client
 app.use(express.static(__dirname + '/assets/'));
 app.get('/', (req, res, next) => {
-    res.sendFile(__dirname + '/assets/views/game.html') // on renvoi vers le jeu pour le moment, 
-                                                        // -> renvoyer vers le menu et vers le jeu par la suite
+    res.sendFile(__dirname + '/assets/views/menu.html')
+});
+app.get('/game', (request, response, next) => {
+    response.sendFile(__dirname + '/assets/views/game.html')
 });
 
 //On enregistre nos Joueurs, on lance à n joueurs
 
 let n = 1
 this.Monde = new Univers(n); // instancier un "Univers" pour stocker les infos des ventes et générer les évents
-// reste a modifier en conséquence
-this.rep = new Repetition();
-let Game = this;
 
 io.sockets.on('connection',  (socket) =>{
     console.log('Debut Connection Client (coté serveur)')
 
     console.log(this.Monde);
 
-    if(this.Monde.Joueurs.nb > this.Monde.NbJoueursMax) {
+    if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) {
         console.log('send disconnect')
-        socket.emit('disconnect'); 
-        socket.disconnect();
+        socket.disconnect(); 
     }
     else {
-        //socket.join('jeu'); // systeme de room à instaurer par la suite
         console.log('add joueur au monde')
         this.Monde.addJoueur(socket.id);
         console.log(this.Monde);
         // on informe le client que la connection est effectuée
         console.log('send repconnection')
-        console.log(this.Monde.Joueurs.nb)
+        console.log(this.Monde.NbJoueurs)
         
-        socket.emit('repconnection', this.Monde.Joueurs[socket.id].joueur) // on envoi les données générées
+        socket.emit('repconnection')
 
-        if(this.Monde.Joueurs.nb >= this.Monde.NbJoueursMax) io.emit('start');
+        if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) io.emit('start');
     }
 
 
 
 
-    socket.on('endTurn', (/*Choix, Magasin*/)=> { 
-            // balancer les infos modifiées en argument aussi dans une classe "Tour" 
-            // prennant tout ce qui est necessaire et l'appliquant si possible
-            
+    socket.on('endTurn', (Dossiers, Magasin)=> {
         console.log('------endTurn')
         this.Monde.Joueurs[socket.id].jouer = true;
+
+        console.log('Dossiers :')
+        console.log(Dossiers)
+        console.log('--------------------')
+        console.log('Choix :')
+        console.log(this.Monde.Joueurs[socket.id].choix)
+        console.log('--------------------') 
+        for(let i=0; i<Dossiers.length; i++){
+            for(let j=0; j<this.Monde.Joueurs[socket.id].choix.length; j++){
+                for(let k=0; k<this.Monde.Joueurs[socket.id].choix[j].length; k++){
+                    if(this.Monde.Joueurs[socket.id].choix[j][k].categorie == Dossiers[i].categorie || (this.Monde.Joueurs[socket.id].choix[j][k].categorie == undefined && Dossiers[i].categorie=='evenement')){
+                        let bool = false;
+                        if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom) bool = true;
+                        else if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == undefined){
+                            if(this.Monde.Joueurs[socket.id].choix[j][k].nom == Dossiers[i].nom) bool = true;
+                            else if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
+                        }
+                        if(bool){
+                            Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur)
+                            switch(j){
+                                case 1://ponctuel
+                                    this.Monde.Joueurs[socket.id].joueur.ponctuel.add(this.Monde.Joueurs[socket.id].choix[j][k].categorie, this.Monde.Joueurs[socket.id].choix[j][k].nom)
+                                break;
+                                case 2://repetition
+                                    this.Monde.Joueurs[socket.id].joueur.repetition.add_Categorie(this.Monde.Joueurs[socket.id].choix[j][k].categorie, this.Monde.Joueurs[socket.id].choix[j][k].nbTour)
+                                break;
+                                case 3://amelioration
+                                    let nbtour = this.Monde.Joueurs[socket.id].choix[j][k].nbTour
+                                    nbtour = nbtour.split(' ');
+                                    nbtour = parseInt(nbtour[0], 10);
+                                    this.Monde.Joueurs[socket.id].joueur.amelioration.lancer_Amelioration(this.Monde.Joueurs[socket.id].choix[j][k].categorie, nbtour, this.Monde.Joueurs[socket.id].choix[j][k].amelio)
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        //Validation Magasin :
+        if(Magasin != []) this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
+
+
 
         let finTour = true;
         for(let i in io.sockets.sockets) {
@@ -68,15 +137,53 @@ io.sockets.on('connection',  (socket) =>{
         }
 
         if(finTour){
-            for(let i in io.sockets.sockets) this.Monde.Joueurs[i].jouer = false;
-            //for(let i=0; i<io.sockets; i++) this.Monde.Joueurs[io.sockets[i].id].Update_Mois(); // mettre l'univers en argument pour influencer ? 
-                                                                    //faire une methode sur l'univers pour update les joueurs ??
-            
-            for(let i in io.sockets.sockets) io.sockets.sockets[i].emit('newTurn', this.Monde.Joueurs[i].joueur);
+            console.log('------FinTour')
+
+            //Global
+            this.Monde.nbTour++;
+            //Génération des évenements + Application
+            let evenements = Generate.Evenement(this.Monde.nbTour);
+            let evenementsChoix = this.Monde.addEvenement(evenements, evenements.length);
+            evenements = Generate.EvenementDisplay(evenements);
+
+            for(let i in io.sockets.sockets) { // i -> socket.id
+                this.Monde.Joueurs[i].jouer = false;
+                this.Monde.Joueurs[i].joueur.Update_Mois();
+            }
+
+            this.Monde.Vente.ventesJoueurs(this.Monde.Joueurs);
+
+            for(let i in io.sockets.sockets) {
+                //On vide le tableau
+                this.Monde.Joueurs[i].choix.splice(0, this.Monde.Joueurs[i].choix.length); 
+
+                //On génère les nouveaux choix
+                let ameliorations = Generate.Amelioration(this.Monde.Joueurs[i].joueur.amelioration.checkInit(Generate.initAmelioration(),this.Monde.Joueurs[i].joueur.amelioration.newTour()), this.Monde.Joueurs[i].joueur.amelioration);
+                
+                let repetitions = Generate.Repetition(this.Monde.Joueurs[i].joueur.repetition.checkInit(Generate.initRepetition(),this.Monde.Joueurs[i].joueur.repetition.newTour()), this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
+                let ponctuels = Generate.Ponctuel(this.Monde.Joueurs[i].joueur.ponctuel, this.Monde.Joueurs[i].joueur.solde, this.Monde.Joueurs[i].joueur.amelioration);
+                //let critiques =  // A CODER ENCORE
+                
+                //On les enregistre et convertit pour le client
+                this.Monde.Joueurs[i].choix = [evenementsChoix, ponctuels, repetitions, ameliorations];
+                let envoiChoix = [Generate.EvenementChoixDisplay(evenementsChoix), 
+                    Generate.ChoixDisplay(ponctuels), 
+                    Generate.ChoixDisplay(repetitions), 
+                    Generate.AmeliorationDisplay(ameliorations)];
+                //On génère sa boutique
+                let boutique = this.Monde.Joueurs[i].joueur.avantAchat();
+                
+                //Générer les barres coté serveur et envoyer aussi
+
+                //Envoi des messages : {evenements}
+                //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
+                //Envoi de la boutique
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur);
+            }
         }
     });
     socket.on('disconnect', ()=>{
-        io.emit('disconnect'); // changer ?
+        socket.emit('menu');
         this.Monde = new Univers(n);
     });
 
