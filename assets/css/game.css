@@ -100,7 +100,7 @@ h5 {
   width: 70%;
   /*position: relative;*/
   z-index: 1;
-  /*margin-top: 20vh;*/
+  margin-top: 10vh;
   margin-left: 15%;
 }
 .slick-slide {
@@ -209,6 +209,7 @@ h5 {
 }
 .finance{
   margin-top: 1vh;
+  padding-bottom: 1vh;
   margin-left: 1%;
   width: 20%;
   height: auto;

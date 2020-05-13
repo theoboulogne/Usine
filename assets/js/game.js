@@ -155,7 +155,12 @@ let Affichage = (function(){
             description_.appendChild(document.createTextNode(description))
             let cout_= document.createElement("h4")
             cout_.setAttribute("class","ecriture2 ")
-            cout_.appendChild(document.createTextNode("coût : "+cout))
+            if(categorie == "amelioration_energie" || categorie == "amelioration_social" || categorie == "amelioration_production" || categorie == "amelioration_publicite" || categorie == "amelioration_ecologie"){
+                cout_.appendChild(document.createTextNode("nombre de tours : "+cout))
+            }
+            else{
+                cout_.appendChild(document.createTextNode("coût : "+cout))
+            }
 
             let row = document.createElement("div")
             row.setAttribute("class","row")

@@ -8,10 +8,9 @@
             console.log('Event - repconnection')       
             
             //Tutoriel :
-            Affichage.modal(["Bienvenue dans Modern Factory ! Tu es le patron de cette entreprise, ton objectif est de faire les choix qui permettront de la faire vivre afin d'explorer les différents enjeux liés à la thématique de l'Usine du Futur !", 
-            "Chaque tour représente un mois, et chaque mois tu seras amené à faire des choix importants. Tu auras plusieurs dossiers identifiables par des couleurs comportant chacun un ou plusieurs choix. Tu ne pourra choisir qu'un seul choix par dossier ou ne pas en choisir. Mais attention ! Chaque choix a un coût et des répercutions sur les indices de croissance, du social, de l'écologie et de la production, affichés dans les barres d'indices.",
-            "Par le biais de ces choix tu as la possibilité de débloquer des améliorations te permettant de déverouiller de nouveaux choix. Tu peux également cliquer sur les lignes de production et tes employés, cela te permettra d'afficher le menu permettant de modifier l'élément sélectionné."])
-
+            Affichage.modal(["Bienvenue dans Modern Factory !</br> Tu es le patron de cette entreprise, ton objectif est de faire les choix qui permettront de la faire vivre afin d'explorer les différents enjeux liés à la thématique de l'Usine du Futur !", 
+            "Chaque tour représente un mois, et chaque mois tu seras amené à faire des choix importants.</br> Tu auras plusieurs dossiers identifiables par des couleurs comportant chacun un ou plusieurs choix.</br> Tu ne pourra choisir qu'un seul choix par dossier ou ne pas en choisir.</br> Mais attention ! Chaque choix a un coût et des répercutions sur les indices de croissance, du social, de l'écologie et de la production, affichés dans les barres d'indices.",
+            "Par le biais de ces choix tu as la possibilité de débloquer des améliorations te permettant de déverouiller de nouveaux choix.</br> Tu peux également cliquer sur les lignes de production et tes employés, cela te permettra d'afficher le menu permettant de modifier l'élément sélectionné."])
             Game.Graphique = new Rendu()
         });
         

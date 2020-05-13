@@ -334,10 +334,12 @@ class Joueur{
 
         let Production_Cadence = 0.6
         if(this.production > 1.65) Production_Cadence = 1;
-        if(this.production < 0) Production_Cadence = 0;
-        Production_Cadence *= this.production;
+        else if(this.production < 0) Production_Cadence = 0;
+        else Production_Cadence *= this.production;
         Production_Cadence *= 0.35
         Production_Cadence /= (1+pannes)
+        if (Production_Cadence > 0.35) Production_Securite = 0.35
+        if (Production_Cadence < 0) Production_Securite = 0
 
         let Production_Securite = (((this.Choix.securite.employes-0.5)) + (0.4*(this.Choix.securite.robots-0.5)))* 0.1
         if (Production_Securite > 0.1) Production_Securite = 0.1
@@ -355,6 +357,9 @@ class Joueur{
         if (Production_Composant < 0) Production_Composant = 0
 
         let Production_Ligne = 0.05 + ((this.Lignes.length / 5) * 0.15)
+        if (Production_Ligne > 0.2) Production_Ligne = 0.2
+        if (Production_Ligne < 0) Production_Ligne = 0
+
 
         console.log('----Production----')
         console.log(Production_Cadence)
@@ -383,7 +388,7 @@ class Joueur{
         if (Social_Securite > 0.2) Social_Securite = 0.2
         if (Social_Securite < 0) Social_Securite = 0
 
-        let Social_Prod = Production * 0.2
+        let Social_Prod = (1 - Production) * 0.2
         if(Social_Prod > 0.2) Social_Prod = 0.2
         if(Social_Prod < 0) Social_Prod = 0
 
