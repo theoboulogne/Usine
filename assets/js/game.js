@@ -44,7 +44,7 @@ let Affichage = (function(){
             })
         },
         SetBarre:(id, pourcentage)=>{
-            document.getElementById(id).setAttribute("style","width:"+pourcentage.toString()+"%");
+            document.getElementById(id).setAttribute("style","width:"+String(pourcentage)+"%");
         },
         SetSolde:(valeur)=>{
             let solde = Math.trunc(valeur)
