@@ -2,11 +2,11 @@
     "ponctuel": [
         {
             "nom":"courantauxilliaire",
-            "proba":"0.5",
+            "proba":"1",
             "variations":[
                 {
                     
-                    "proba":"0.4",
+                    "proba":"1",
                     "amelioration":"Panneaux Solaires",
                     "choix":{
                         "nom": "Panneaux Solaires",
@@ -51,7 +51,7 @@
                     }
                 },
                 {
-                    "proba":"0.3",
+                    "proba":"1",
                     "amelioration":"Eoliennes",
                     "choix":{
                         "nom": "Eoliennes",
@@ -96,7 +96,7 @@
                     }
                 },
                 {
-                    "proba":"0.2",
+                    "proba":"1",
                     "amelioration":"Generateur Biomasse",
                     "choix":{
                         "nom": "Generateur Biomase",
@@ -141,7 +141,7 @@
                     }
                 },
                 {
-                    "proba":"0.1",
+                    "proba":"1",
                     "amelioration":"Barrage Hydrolique",
                     "choix":{
                         "nom": "Barrage Hydrolique",
@@ -639,7 +639,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.9",
+                            "val":"0.8",
                             "type":"fois"
                         },
                         {
@@ -666,7 +666,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.1",
+                            "val":"0.07",
                             "type":"plusegal"
                         },
                         {
@@ -693,7 +693,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.9",
+                            "val":"0.8",
                             "type":"fois"
                         },
                         {

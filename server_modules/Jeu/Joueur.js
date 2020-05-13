@@ -64,6 +64,7 @@ class Joueur{
         this.Approvisionnement.Penurie = -1;
 
         this.solde = 1000000;// Initialisation des ventes
+        this.soldePrec = 1000000;
         this.pub = 0;
         this.pubPrec = 0;
 
@@ -238,67 +239,125 @@ class Joueur{
     barres(nbTour){
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        //avantages / securite / salaire / cadence prod
+        //    0.3       0.2       0.3          0.2
 
-        let Social = 0.2 + ((2-this.production) * 0.7)
-        Social += this.Choix.avantages
-        Social += (this.Choix.securite.employes-0.5) + (0.5*(this.Choix.securite.robots-0.5))
+        let Social_Avantages = 0.3 * this.avantages;
+        if(Social_Avantages > 0.3) Social_Avantages = 0.3;
+        if(Social_Avantages < 0) Social_Avantages = 0;
 
-        let salairetmp = this.Choix.salaire
-        while(salairetmp<1700){
-            salairetmp+=15
-            Social = Social * 0.99
+        let Social_Salaire = this.Choix.salaire;
+        if(Social_Salaire < 1300) Social_Salaire = 1300;
+        if(Social_Salaire > 1700) Social_Salaire = 1700;
+        Social_Salaire = ((Social_Salaire - 1300) / 400 ) * 0.3
+
+        let Social_Securite = (this.Choix.securite.employes-0.5) * 0.2
+        if (Social_Securite > 0.2) Social_Securite = 0.2
+        if (Social_Securite < 0) Social_Securite = 0
+
+        let Social_Prod = this.production * 0.2
+        if(Social_Prod > 0.2) Social_Prod = 0.2
+        if(Social_Prod < 0) Social_Prod = 0
+
+        let Social = Social_Avantages + Social_Salaire + Social_Securite + Social_Prod;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        // Courant / pollution / dechets / normes
+        //   0.30      0.35       0.35
+
+        let Ecologie_Courant = (1 - (this.Courant.Auxilliaire.uptime(this.uptimeMax) * this.Courant.Auxilliaire.pollution / 30 * this.uptimeMax) + ((this.uptimeMax - this.Courant.Auxilliaire.uptime(this.uptimeMax))*(1-this.Courant.Principal.coupure)) / this.uptimeMax )
+        if(this.energie > 1.2) Ecologie_Courant *= 1.2
+        else if(this.energie < 0.5) Ecologie_Courant *= 0.5
+        else Ecologie_Courant *= this.energie
+        if(Ecologie_Courant > 1) Ecologie_Courant = 1 
+        if(Ecologie_Courant < 0) Ecologie_Courant = 0
+        Ecologie_Courant *= 0.3
+
+        let Ecologie_Pollution = 0.5;
+        if(this.pollution > 1.5) Ecologie_Pollution /= 1.5
+        else if(this.pollution < 0.6) Ecologie_Pollution /= 0.6
+        else Ecologie_Pollution /= this.pollution
+        Ecologie_Pollution = (Ecologie_Pollution - 0.3) / 0.6
+        Ecologie_Pollution *= 0.35
+
+        let Ecologie_Dechets = 0.5;
+        if(this.dechets > 1.5) Ecologie_Dechets /= 1.5
+        else if(this.dechets < 0.6) Ecologie_Dechets /= 0.6
+        else Ecologie_Dechets /= this.dechets
+        Ecologie_Dechets = (Ecologie_Dechets - 0.3) / 0.6
+        Ecologie_Dechets *= 0.35
+
+        if((Ecologie_Pollution / 0.35) < this.Choix.norme.pollution) {
+            Ecologie_Pollution = 0
+            Ecologie_Courant /= 2
+            this.solde -= 10000
         }
-        if(this.Choix.salaire < this.Choix.norme.salaire) Social = Social/10;
+        if((Ecologie_Dechets / 0.35) < this.Choix.norme.dechets) {
+            Ecologie_Dechets = 0
+            Ecologie_Courant /= 2
+            this.solde -= 10000
+        }
 
-        if(Social>4) Social = 1
-        else Social = Social / 3
-
-        //////////////////////////////////////////////////////////////////////////////////////////////
-
-        let Ecologie = 1
-        if(this.energie * this.Courant.Auxilliaire.pollution > this.Courant.Principal.pollution) Ecologie *= 0.6
-
-        if((2 - this.pollution) * this.Empreinte.pollution / (nbTour * this.Eco.pollution) < 1) Ecologie *= 0.6
-        if((2 - this.dechets) * this.Empreinte.dechets / (nbTour * this.Eco.dechets) < 1) Ecologie *= 0.7
-
-        if(this.Choix.norme.pollution != -1) if(this.Choix.norme.pollution > this.Eco.pollution) Ecologie *= 0.5
-        if(this.Choix.norme.dechets != -1) if(this.Choix.norme.dechets > this.Eco.dechets) Ecologie *= 0.5
+        let Ecologie = Ecologie_Courant + Ecologie_Pollution + Ecologie_Dechets;
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        // Cadence prod / securite / employes inactifs / composants ameliores / nb de ligne
+        //     0.35           0.1             0.1                  0.3                0.15
 
-        let Production = this.production * 0.5 * (this.Choix.securite.employes-0.5) + 0.1 + (0.5*(this.Choix.securite.robots-0.5))
+        let Production_Cadence = 0.5
+        if(this.production > 2) Production_Cadence = 1;
+        if(this.production < 0) Production_Cadence = 0;
+        Production_Cadence *= this.production;
+        Production_Cadence *= 0.35
+
+        let Production_Securite = ((0.6*(this.Choix.securite.employes-0.5)) + (0.4*(this.Choix.securite.robots-0.5)))* 0.1
+        if (Production_Securite > 0.1) Production_Securite = 0.1
+        if (Production_Securite < 0) Production_Securite = 0
 
         let nb = this.nbEmployes+this.nbRobots
         let auto = 0
+        let Production_Employes_inactifs;
         for(let i=0; i<this.Lignes.length; i++) for(let j=0; j<5; j++) if(this.Lignes[i].Composant[j].auto) auto++
-        while(nb < (10 * this.Lignes.length) - auto) {
-            nb-=3
-            Production *= 0.9
+        if(nb > (10 * this.Lignes.length) - auto) {
+            Production_Employes_inactifs = 0;
         }
-        for(let i=0; i<auto; i++) Production*=1.25
+        else{
+            Production_Employes_inactifs = 0.1;
+        }
+        
+        let Production_Composant = (auto / (3 * this.Lignes.length)) * 0.3
+        if (Production_Composant > 0.3) Production_Composant = 0.3
+        if (Production_Composant < 0) Production_Composant = 0
 
-        for(let i=0; i<this.nbRobots; i++) Production *= 1.1
-        if(Production>1) Production = 1
+        let Production_Ligne = (this.Lignes.length / 5) * 0.15
+
+
+        let Production = Production_Cadence + Production_Composant + Production_Employes_inactifs + Production_Securite + Production_Ligne
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        // Budget Pub / Barre production / par rapport au tour precedent
+        //      0.35            0.15                0.50                                                                
 
-        let Croissance = (JSON.parse(JSON.stringify(Production + Social + Ecologie)))/3
+        if(this.Choix.solde < 0) this.Choix.solde = 0
 
-        let CroissanceTMP = (this.solde / 1000000);
-        if(CroissanceTMP>1.1) CroissanceTMP = 1.1;
-        Croissance *= CroissanceTMP;
-        for(let i=0; i<Math.floor(this.solde/1000000) - 1; i++) Croissance *= 1.1
+        let Croissance_Pub = this.Choix.solde / 13000
+        if(Croissance_Pub < 0) Croissance_Pub = 0
+        if(Croissance_Pub > 1) Croissance_Pub = 1
+        Croissance_Pub *= 0.35
+        if(this.pubPrec>1000) Croissance_Pub = 0.35
 
-        if(this.pubPrec) Croissance*=1.3;
+        let Croissance_Production = Production * 0.15
 
-        (Croissance -= Math.floor((this.solde_salaires() - 10000) / 10000)*0.1)
-        if(this.Choix.solde < 5000) Croissance *= 0.9
-        if(this.Choix.solde < 2000) Croissance *= 0.8
-        if(this.Choix.solde > 5000) Croissance *= 1.05
-        if(this.Choix.solde > 7000) Croissance *= 1.1
+        let Croissance_Solde = Math.trunc(this.solde) / Math.trunc(this.soldePrec) - 0.56;
+        if (Croissance_Solde > 0.6) Croissance_Solde = 0.6;
+        if (Croissance_Solde < 0) Croissance_Solde = 0;
+        Croissance_Solde /= 0.7;
+        Croissance_Solde *= 0.5;
 
-        if(this.solde < 0) Croissance *= 0.1
-        if(Croissance>1) Croissance = 1
+        this.soldePrec = this.solde;
+
+
+        let Croissance = Croissance_Pub + Croissance_Production + Croissance_Solde;
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 
