@@ -176,7 +176,7 @@ let Affichage = (function(){
             let videcoche = document.createElement("button")
             let videcoche_icone = document.createElement("span")
             videcoche.setAttribute("type","button")
-            videcoche.setAttribute("class","btn btn-danger")
+            videcoche.setAttribute("class","btn btn-dark")
             videcoche.setAttribute("id", "videcoche")
             videcoche_icone.setAttribute("class","glyphicon glyphicon-remove")
             videcoche.appendChild(videcoche_icone)

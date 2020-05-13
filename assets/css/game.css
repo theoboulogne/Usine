@@ -98,9 +98,9 @@ h5 {
 }
 .cadre{
   width: 70%;
-  position: relative;
+  /*position: relative;*/
   z-index: 1;
-  margin-top: 20vh;
+  /*margin-top: 20vh;*/
   margin-left: 15%;
 }
 .slick-slide {
@@ -192,7 +192,7 @@ h5 {
 }
 .coche{
   /*margin-left: 80%;*/
-  margin-top:7.5px;
+  margin-top:6.5px;
   width:2em;
   height:2em;
 }
