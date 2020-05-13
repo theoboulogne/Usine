@@ -379,6 +379,8 @@ class Joueur{
         if(Social_Avantages > 0.3) Social_Avantages = 0.3;
         if(Social_Avantages < 0) Social_Avantages = 0;
 
+        if(this.Choix.salaire < 1300) this.Choix.salaire = 1300;
+        if(this.Choix.salaire < 1700) this.Choix.salaire = 1700;
         let Social_Salaire = this.Choix.salaire;
         if(Social_Salaire < 1300) Social_Salaire = 1300;
         if(Social_Salaire > 1700) Social_Salaire = 1700;
@@ -456,7 +458,7 @@ class Joueur{
         }
         accidents -= this.PrevAccidents
         this.PrevAccidents += accidents
-        return [String(this.stock), String(Math.trunc(this.consommationNRJ)), String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
+        return [String(Math.trunc(this.stock)), String(Math.trunc(this.consommationNRJ)), String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
     }
 
     LignesDisplay(){
