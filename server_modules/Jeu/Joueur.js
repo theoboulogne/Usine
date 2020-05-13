@@ -67,10 +67,11 @@ class Joueur{
         this.pub = 0;
         this.pubPrec = 0;
 
+        this.PrevAccidents = 0;
         this.production = 1;
-        this.nbEmployes = 10;// Initialisation de la production
+        this.nbEmployes = 15;// Initialisation de la production
         this.nbRobots = 0;
-        this.nbEmployes_dispo = 10;
+        this.nbEmployes_dispo = 15;
         this.nbRobots_dispo = 0;
         
         this.stock = 0 // produits en stock
@@ -105,6 +106,8 @@ class Joueur{
         this.solde -= (this.consommationNRJ * (this.Courant.solde_NRJ2(this.uptimeMax))) 
         this.solde -= this.solde_salaires();
 
+
+        this.retirer_ouvriers() // Pour les modifs d'ouvrier
     }
     Update_Jour(){ // Fonctionnement d'une journée
         for(let i=0; i<24; i++){
@@ -112,10 +115,10 @@ class Joueur{
 
                 this.add_ouvriers()
 
-            }// definir la var marche de la machine a ce moment la pour retirer du traitement ?
-            if(i==12||i==22){// | 12 : 00 h | 18 : 00 h | -> Retire les employes 
+            }
+            if(i==12||i==22){// | 12 : 00 h | 18 : 00 h | -> Retire les employes + Robots car ils ont besoin d'employés pour les parametrer
 
-                this.retirer_employe() // ( on laisse les robots ils tournent 24/24 actuellement, a changer )
+                this.retirer_ouvriers()
                 
             } 
 
@@ -146,9 +149,7 @@ class Joueur{
         //Récupérer les infos ensuite
     }
 
-    //Faire le même type de fonction pour tout ?
     consommation(){ // Récupère la consommation sur une heure
-
         for(let i=0; i<this.Lignes.length; i++) this.consommationNRJ += (this.energie * this.Lignes[i].energie());
     }
     empreinte(){ // Récupère les infos écologiques sur une heure
@@ -165,13 +166,11 @@ class Joueur{
     avantages(){ // si salaire = 3300 -> = 1 | si salaire = 600 -> = 0
         return Math.log((this.Choix.salaire/300) - (17*this.Choix.avantages))
     }
-    solde_salaires(){ // modifier les salaires pour les week ends
+    solde_salaires(){ 
         return (this.Choix.salaire*this.nbEmployes);
     }
 
     
-    //RAJOUTER UNE SECURITE VERIFIANT QU'IL N'Y A PAS PLUS D'EMPLOYES QUE DE PLACE DANS LES BOUCLES +
-    // CHANGER LES METHODES COMPOSANT&LIGNE POUR OUVRIER
     add_ouvriers(){
         if(this.Lignes.length*5<this.nbEmployes_dispo+this.nbRobots_dispo) { //on ajoute un dans chaque ligne jusqu'à tant qu'il y en ai plus
             while(this.nbEmployes_dispo+this.nbRobots_dispo>0) for(let i=0; i<this.Lignes.length; i++){
@@ -188,15 +187,16 @@ class Joueur{
         }
     }
     Add(ligne){
-        if(this.nbRobots_dispo>0){
-            this.nbRobots_dispo--;
-            ligne.Add(1); // 1 pour robot
-        }else if(this.nbEmployes_dispo>0){
+        if(this.nbEmployes_dispo>0){
             this.nbEmployes_dispo--;
-            ligne.Add(0); // 0 pour employe
+            ligne.Add(0); 
+        }else if(this.nbRobots_dispo>0){
+            this.nbRobots_dispo--;
+            ligne.Add(1);
         }   
+         // 1 pour robot & 0 pour employe
     }
-    retirer_employe(){
+    retirer_ouvriers(){
         for(let i=0; i<this.Lignes.length; i++){
             this.Vider(this.Lignes[i]);
         }
@@ -205,6 +205,8 @@ class Joueur{
         for(let i=0; i<5; i++){
             this.nbEmployes_dispo += ligne.Composant[i].nbEmployes;
             ligne.Composant[i].nbEmployes = 0;
+            this.nbRobots_dispo += ligne.Composant[i].nbRobots;
+            ligne.Composant[i].nbRobots = 0;
         }
     }
 
@@ -218,6 +220,13 @@ class Joueur{
         infoBoutique.prix.robots = 35000;
         infoBoutique.prix.employes = 0;
         infoBoutique.prix.lignes = 500000;
+        infoBoutique.prix.pannes = -50000;
+        infoBoutique.pannes = 0;
+        for(let i=0; i<this.Lignes.length; i++){
+            if(this.Lignes[i].boolpanne){
+                infoBoutique.pannes++;
+            }
+        }
         infoBoutique.solde = this.solde;
         return infoBoutique;
     }
@@ -225,10 +234,27 @@ class Joueur{
         let coeffRobots = infoBoutique.robots - this.nbRobots;
         let coeffLignes = infoBoutique.lignes - this.Lignes.length;
         let coeffSolde = this.solde - infoBoutique.solde
-        if((coeffRobots * 35000) + (coeffLignes * 500000) == coeffSolde){
+
+        let pannes = 0;
+        for(let i=0; i<this.Lignes.length; i++){
+            if(this.Lignes[i].boolpanne){
+                pannes++;
+            }
+        }
+        let coeffpannes = pannes - infoBoutique.pannes;
+
+        if(infoBoutique.solde > 0) if((coeffRobots * 35000) + (coeffLignes * 500000) + (coeffpannes* (50000)) == coeffSolde){
             this.nbRobots = infoBoutique.robots;
+            this.nbRobots_dispo = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
+            this.nbEmployes_dispo = infoBoutique.employes;
             this.solde = infoBoutique.solde;
+            for(let i=0; i<this.Lignes.length; i++){
+                if(coeffpannes>0 && this.Lignes[i].boolpanne){
+                    this.Lignes[i].boolpanne = false
+                    coeffpannes--;
+                }
+            }
             for(let i = 0; i < coeffLignes; i++){
                 this.Lignes.push(new Ligne());
             }
@@ -238,6 +264,7 @@ class Joueur{
     barres(nbTour){
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        //avantages / securite / salaire / cadence prod
 
         let Social = 0.2 + ((2-this.production) * 0.7)
         Social += this.Choix.avantages
@@ -250,10 +277,11 @@ class Joueur{
         }
         if(this.Choix.salaire < this.Choix.norme.salaire) Social = Social/10;
 
-        if(Social>4) Social = 1
+        if(Social>3) Social = 1
         else Social = Social / 3
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        // Courant / pollution / dechets / normes
 
         let Ecologie = 1
         if(this.energie * this.Courant.Auxilliaire.pollution > this.Courant.Principal.pollution) Ecologie *= 0.6
@@ -265,6 +293,7 @@ class Joueur{
         if(this.Choix.norme.dechets != -1) if(this.Choix.norme.dechets > this.Eco.dechets) Ecologie *= 0.5
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        // Cadence prod / securite / employes inactifs / composants ameliores / nb de ligne
 
         let Production = this.production * 0.5 * (this.Choix.securite.employes-0.5) + 0.1 + (0.5*(this.Choix.securite.robots-0.5))
 
@@ -282,6 +311,7 @@ class Joueur{
         if(Production>1) Production = 1
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+        // Argent / cout salaire-mois / Budget Pub / Barre production
 
         let Croissance = (JSON.parse(JSON.stringify(Production + Social + Ecologie)))/3
 
@@ -309,25 +339,25 @@ class Joueur{
     }
 
     infosAfficher(){
-        let solde = Math.trunc(this.solde)
-        let soldeString = ""
-
-        if(solde >= 1000000){
-            soldeString += String(Math.floor(solde/1000000))
-            soldeString += " Millions "
-            solde -= Math.floor(solde/1000000) * 1000000
+        let accidents = 0
+        for(let i=0; i<this.Lignes.length; i++){
+            accidents+=this.Lignes[i].accident
         }
+        accidents -= this.PrevAccidents
+        this.PrevAccidents += accidents
+        return [String(this.stock), String(Math.trunc(this.consommationNRJ)), String(accidents), String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
+    }
 
-        if(solde >= 1000){
-            soldeString += String(Math.floor(solde/1000))
-            soldeString += " Milles "
-            solde -= Math.floor(solde/1000) * 1000
-        }
-        
-        soldeString += String(solde)
-        soldeString += " € "
+    LignesDisplay(){
 
-        return [soldeString, String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
+        this.add_ouvriers()
+
+        let ligneTMP = JSON.parse(JSON.stringify(this.Lignes));
+
+        this.retirer_ouvriers()
+
+        return ligneTMP;
+
     }
 }
 

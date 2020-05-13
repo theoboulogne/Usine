@@ -4,7 +4,6 @@ const Composant = require('./Composant')
 class Ligne {
     constructor(){
         //Gestion des Pannes / Accidents
-        this.coutReparation = 8000; // cout de réparation fixe en cas de panne
         this.accident = 0;
         this.boolaccident = false;
         this.boolpanne = false; // possibilité de réparer par probabilité sinon fin de la machine
