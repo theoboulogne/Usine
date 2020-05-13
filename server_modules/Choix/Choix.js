@@ -4,7 +4,7 @@ let applyValeur = (valeur,  Joueur, Ventes) => {
     }
     else if(valeur.type=="upgrade"){
         for(let i=0; i<Joueur.Lignes.length; i++){
-            Joueur.Lignes[i].Composant[valeur.val].auto = true;
+            Joueur.Lignes[i].Composant[valeur.val - 1].auto = true;
         }
     }
     else if(valeur.type == "nbClients"){

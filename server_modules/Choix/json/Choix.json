@@ -1,12 +1,6 @@
 {
     "ponctuel": [
         {
-            "nom":"courantauxilliaire",
-            "proba":"1",
-            "variations":[
-            ]
-        },
-        {
             "nom":"sociale",
             "proba":"0.7",
             "variations":[
@@ -615,6 +609,116 @@
             "nom":"production",
             "proba":"0.8",
             "variations":[
+                {
+                    "proba":"0.5",
+                    "amelioration":"Entreprise Autonome niv1",
+                    "choix":{
+                        "nom":"Amelioration composant niv1",
+                        "cout":"50000 euros",
+                        "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "val":"1",
+                                "type":"upgrade"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"0.3",
+                    "amelioration":"Entreprise Autonome niv2",
+                    "choix":{
+                        "nom":"Amelioration composant niv2",
+                        "cout":"50000 euros",
+                        "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "val":"2",
+                                "type":"upgrade"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"0.3",
+                    "amelioration":"Entreprise Autonome niv3",
+                    "choix":{
+                        "nom":"Amelioration composant niv3",
+                        "cout":"50000 euros",
+                        "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "val":"3",
+                                "type":"upgrade"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"0.3",
+                    "amelioration":"Entreprise Autonome niv4",
+                    "choix":{
+                        "nom":"Amelioration composant niv4",
+                        "cout":"50000 euros",
+                        "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "val":"4",
+                                "type":"upgrade"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"0.3",
+                    "amelioration":"Entreprise Autonome niv5",
+                    "choix":{
+                        "nom":"Amelioration composant niv5",
+                        "cout":"50000 euros",
+                        "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "val":"5",
+                                "type":"upgrade"
+                            }
+                        ]
+                    }
+                },
                 {
                     "proba":"0.5",
                     "amelioration":"Entreprise Dynamique niv2",
@@ -1300,10 +1404,10 @@
                 "proba":"0.15",
                 "prix":"15000",
                 "amelioration":"CE",
-                "nbTour":"1",
+                "nbTour":"3",
                 "choix":{
                     "nom":"Achat d'EPI",
-                    "cout":"15000 euros | Nombre de tour : 1",
+                    "cout":"15000 euros | Nombre de tour : 3",
                     "desc":"Achetez de meilleurs EPI pour vos employes.",
                     "valeurs":[
                         {
@@ -1568,126 +1672,6 @@
                             ],
                             "val":"0.9",
                             "type":"fois"
-                        }
-                    ]
-                }
-            },
-            {
-                "proba":"0.5",
-                "prix":"50000",
-                "amelioration":"Entreprise Autonome niv1",
-                "nbTour":"2",
-                "choix":{
-                    "nom":"Amelioration composant niv1",
-                    "cout":"50000 euros | Nombre de tour : 2",
-                    "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-50000",
-                            "type":"plusegal"
-                        },
-                        {
-                            "val":"1",
-                            "type":"upgrade"
-                        }
-                    ]
-                }
-            },
-            {
-                "proba":"0.3",
-                "prix":"50000",
-                "amelioration":"Entreprise Autonome niv2",
-                "nbTour":"2",
-                "choix":{
-                    "nom":"Amelioration composant niv2",
-                    "cout":"50000 euros | Nombre de tour : 2",
-                    "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-50000",
-                            "type":"plusegal"
-                        },
-                        {
-                            "val":"2",
-                            "type":"upgrade"
-                        }
-                    ]
-                }
-            },
-            {
-                "proba":"0.3",
-                "prix":"50000",
-                "amelioration":"Entreprise Autonome niv3",
-                "nbTour":"2",
-                "choix":{
-                    "nom":"Amelioration composant niv3",
-                    "cout":"50000 euros | Nombre de tour : 2",
-                    "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-50000",
-                            "type":"plusegal"
-                        },
-                        {
-                            "val":"3",
-                            "type":"upgrade"
-                        }
-                    ]
-                }
-            },
-            {
-                "proba":"0.3",
-                "prix":"50000",
-                "amelioration":"Entreprise Autonome niv4",
-                "nbTour":"3",
-                "choix":{
-                    "nom":"Amelioration composant niv4",
-                    "cout":"50000 euros | Nombre de tour : 3",
-                    "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-50000",
-                            "type":"plusegal"
-                        },
-                        {
-                            "val":"4",
-                            "type":"upgrade"
-                        }
-                    ]
-                }
-            },
-            {
-                "proba":"0.3",
-                "prix":"50000",
-                "amelioration":"Entreprise Autonome niv5",
-                "nbTour":"3",
-                "choix":{
-                    "nom":"Amelioration composant niv5",
-                    "cout":"50000 euros | Nombre de tour : 3",
-                    "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "solde"
-                            ],
-                            "val":"-50000",
-                            "type":"plusegal"
-                        },
-                        {
-                            "val":"5",
-                            "type":"upgrade"
                         }
                     ]
                 }

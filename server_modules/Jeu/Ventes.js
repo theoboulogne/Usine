@@ -2,7 +2,7 @@ class Ventes{
     constructor(n){
         //global
         this.prixVente = 45;
-        this.nbClientsTotal=n*1400;
+        this.nbClientsTotal=n*1200;
     }
  
     partDeMarche(tab/* tout les joueurs */){  // tout les calcul de cette fonction sont invente

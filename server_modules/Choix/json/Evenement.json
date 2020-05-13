@@ -3,55 +3,8 @@
         {
             "proba":"0.05",
             "event":{
-                "nom":"Tremblemment de terre !",
-                "desc":"Un tremblement de terre vient de se produire, il a pu endomager vos machines, <br> surveillez votre indicateur de pannes.",
-                "panne":{
-                    "min":"0.2",
-                    "max":"0.5"
-                }
-            }
-        },
-        {
-            "proba":"0.045",
-            "event":{
-                "nom":"Orage, surtension electrique",
-                "desc":"Un Orage a eclate pendant la nuit, votre courant a peut etre saute, <br> surveillez votre indicateur de pannes.",
-                "panne":{
-                    "min":"0.5",
-                    "max":"0.8"
-                }
-            }
-        },
-        {
-            "proba":"0.025",
-            "event":{
-                "nom":"Materiaux non approvisionne",
-                "desc":"Il y a eu des problemes chez le fournisseur de materiaux, vous n'avez pas recu la commande attendu. <br> Le manque de fiabilité de votre fournisseur aura des conséquences sur votre production.",
-                "penurieStock":{
-                    "ratio":{
-                        "min": "2",
-                        "max": "15"
-                    },
-                    "duree": {
-                        "min":"3",
-                        "max":"7"
-                    }
-                }
-            }
-        },
-        {
-            "proba":"0.01",
-            "event":{
-                "nom":"Crise economique",
-                "desc":"Une crise economique est survenu, vous aurez plus de mal a vendre desormais, <br> vous devez adapter votre production en conséquence",
-                "crise":"true"
-            }
-        },
-        {
-            "proba":"0.025",
-            "event":{
-                "nom":"Changement des normes ecologique",
-                "desc":"Le gouvernement a baissé les quotas concernants l'empreinte carbone des usines, <br> vous devez adapter votre production en conséquence.",
+                "nom":"Changement des normes écologique",
+                "desc":"Le gouvernement a baissé les quotas concernant l'empreinte carbone des usines, <br> vous devez adapter votre production en conséquence si vous voulez eviter les sanctions.",
                 "norme":{
                     "pollution":{
                         "min":"0.1",
@@ -65,65 +18,37 @@
             }
         },
         {
-            "proba":"0.03",
+            "proba":"0.05",
             "event":{
-                "nom":"Nouvelle reforme sur le recyclage des dechets",
-                "desc":"Les normes sur la gestion des dechets sont plus strict, <br> vous risquez de lourdes taxes si vous ne vous adaptez pas.",
-                "norme":{
-                    "dechet":{
-                        "min":"0.1",
-                        "max":"0.3"
-                    }
-                }
-            }
-        },
-        {
-            "proba":"0.02",
-            "event":{
-                "nom":"Nouveau fournisseur energetique !",
-                "choix":{
-                    "nom":"propostition de changement de fournisseur energetique moins polluant",
-                    "desc":"Vous pouvez changer de fournisseur energetique <br> (nouveau choix possible !)",
-                    "cout":"",
-                    "valeurs":[
-                        {
-                            "path":[
-                                "Courant",
-                                "Principale",
-                                "pollution"
-                            ],
-                            "val":"0.9",
-                            "type":"fois"
-                        },
-                        {
-                            "path":[
-                                "Courant",
-                                "Principale",
-                                "dechets"
-                            ],
-                            "val":"0.9",
-                            "type":"fois"
-                        },
-                        {
-                            "path":[
-                                "Courant",
-                                "Principale",
-                                "prix"
-                            ],
-                            "val":"-200",
-                            "type":"plusegal"
+                "nom":"Nouvelle réforme sur le recyclage des déchets",
+                "desc":"Les normes sur la gestion des déchets sont plus strictes, <br> vous risquez de lourdes taxes si vous ne vous adaptez pas.",
+                "norme":[
+                    {
+                        "nom":"dechets",
+                        "valeur":{
+                            "min":"0.1",
+                            "max":"0.3"
                         }
-                    ]
-                }
+                    }
+                ]
             }
         },
         {
-            "proba":"0.02",
+            "proba":"0.04",
             "event":{
-                "nom":"Nouveau fournisseur de ressources !",
+                "nom":"Crise économique",
+                "desc":"Une crise économique est survenu, vous aurez plus de mal à vendre désormais, <br> vous devez adapter votre production en conséquence",
+                "crise":"true"
+            }
+        },
+        {
+            "proba":"0.1",
+            "event":{
+                "nom":"Nouveau fournisseur de ressources ! ",
+                "desc":"Vous avez un dossier disponible ce tour pour le choisir",
                 "choix":{
-                    "nom":"proposition de changement de fournisseur de ressources plus fiable et competitif",
-                    "desc":"Vous pouvez changer de fournisseur pour vos ressources <br> (nouveau choix possible !)",
+                    "nom":"Proposition de changement de fournisseur de ressources plus fiable et compétitif",
+                    "desc":"Vous pouvez changer de fournisseur pour vos ressources",
                     "cout":"",
                     "valeurs":[
                         {
@@ -139,10 +64,90 @@
                                 "Approvisionnement",
                                 "CapaciteMax"
                             ],
-                            "val":"550",
+                            "val":"500",
                             "type":"plusegal"
                         }
                     ]
+                }
+            }
+        },
+        {
+            "proba":"0.18",
+            "event":{
+                "nom":"Nouveau fournisseur energetique ! ",
+                "desc":"Vous avez un dossier disponible ce tour pour le choisir",
+                "choix":{
+                    "nom":"Propostition de changement de fournisseur énergetique moins polluant et plus fiable",
+                    "desc":"Vous pouvez changer de fournisseur énergetique",
+                    "cout":"",
+                    "valeurs":[
+                        {
+                            "path":[
+                                "Courant",
+                                "Principal",
+                                "pollution"
+                            ],
+                            "val":"0.75",
+                            "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Courant",
+                                "Principal",
+                                "coupure"
+                            ],
+                            "val":"0.75",
+                            "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Courant",
+                                "Principal",
+                                "prix"
+                            ],
+                            "val":"0.75",
+                            "type":"fois"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "proba":"0.08",
+            "event":{
+                "nom":"Tremblemment de terre !",
+                "desc":"Un tremblement de terre vient de se produire, il a pu endomager vos machines, <br> surveillez votre indicateur de pannes.",
+                "panne":{
+                    "min":"0.4",
+                    "max":"0.7"
+                }
+            }
+        },
+        {
+            "proba":"0.1",
+            "event":{
+                "nom":"Orage, surtension électrique",
+                "desc":"Un Orage a éclaté pendant la nuit, votre courant a peut être sauté, <br> surveillez votre indicateur de pannes.",
+                "panne":{
+                    "min":"0.5",
+                    "max":"0.8"
+                }
+            }
+        },
+        {
+            "proba":"0.1",
+            "event":{
+                "nom":"Materiaux non approvisionné",
+                "desc":"Il y a eu des problemes chez le fournisseur de materiaux, vous n'avez pas recu la commande attendue. <br> Le manque de fiabilité de votre fournisseur aura des conséquences sur votre production lors des prochains tours.",
+                "penurieStock":{
+                    "ratio":{
+                        "min": "0.05",
+                        "max": "0.25"
+                    },
+                    "duree": {
+                        "min":"2",
+                        "max":"7"
+                    }
                 }
             }
         }

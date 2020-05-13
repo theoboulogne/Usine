@@ -30,8 +30,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Amelio :')
-        console.log(Amelio)
         return Amelio;
     },
     AmeliorationDisplay : (amelios) => {
@@ -42,32 +40,27 @@ module.exports = {
         return display;
     },
     Evenement : (tour) => {
-        /*
-        récup les infos a afficher pour le joueur a faire
-        */
         Events = new Array()
-        if(tour%3 == 0 && tour>10){
+        if(tour%4 == 0 && tour>6){
             for(let i=0; i<evenement.length; i++){
-                if(utils.proba(evenement[i].proba)){
+                if(Events.length == 0) if(utils.proba(evenement[i].proba)){ // 1 seul évenemet par tour
                     Events.push(evenement[i].event);
                 }
             }
         }
-        console.log('Events :')
-        console.log(Events)
         return Events;
     },
     EvenementDisplay : (evenements) => {
         let display = []
         for(let i=0; i<evenements.length; i++){
-            display.push(evenements[i].nom)
+            display.push(evenements[i].nom + "<br><br>" + evenements[i].desc)
         }
         return display;
     },
     EvenementChoixDisplay : (evenements) => {
         let display = []
         for(let i=0; i<evenements.length; i++){
-            display.push({categorie:"evenement", nom:evenements[i].nom, desc:evenements[i].desc, cout:evenements[i].cout})
+            display.push({categorie:"evenement", nom:evenements[i].choix.nom, desc:evenements[i].choix.desc, cout:evenements[i].choix.cout})
         }
         return display;
     },
@@ -88,8 +81,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Repetition :')
-        console.log(Choix)
         return Choix;
     },
     Ponctuel : (ponctuelFait, solde, amelioration) => {
@@ -97,14 +88,19 @@ module.exports = {
         for(let i=0; i<ponctuel.length; i++){
             if(utils.proba(ponctuel[i].proba)){ // plusieurs if pour réduire le cout en mémoire quand le choix n'est pas possible
                 for(let j=0; j<ponctuel[i].variations.length; j++){
-                    if(!ponctuelFait.check(ponctuel[i].nom, ponctuel[i].variations[j].nom)){ // Si pas déjà fait
-                        if(ponctuel[i].variations[j].prix == undefined || ponctuel[i].variations[j].prix < solde){ // si assez d'argent
-                            let ameliorationbool = false;
-                            if(ponctuel[i].variations[j].amelioration == undefined) ameliorationbool = true;
-                            else{
-                                if(amelioration.check(ponctuel[i].nom, ponctuel[i].variations[j].amelioration)) ameliorationbool = true;
-                            }
-                            if(ameliorationbool) if(utils.proba(ponctuel[i].variations[j].proba)){ // si amélio nécessaire faite
+                    let ameliorationbool = false;
+                    if(ponctuel[i].variations[j].amelioration == undefined) ameliorationbool = true;
+                    else{
+                        if(amelioration.check(ponctuel[i].nom, ponctuel[i].variations[j].amelioration)) ameliorationbool = true;
+                    }
+                    if(ameliorationbool) if(!ponctuelFait.check(ponctuel[i].nom, ponctuel[i].variations[j].choix.nom)){ // Si pas déjà fait
+                        let prix;
+                        if(ponctuel[i].variations[j].choix.cout == undefined) prix = 0;
+                        else {
+                            prix = parseInt(ponctuel[i].variations[j].choix.cout.slice(' ')[0], 10)
+                        }
+                        if(prix < solde){ // si assez d'argent
+                            if(utils.proba(ponctuel[i].variations[j].proba)){
                                 Choix.push({categorie:ponctuel[i].nom, choix:ponctuel[i].variations[j].choix})
                             }
                         }
@@ -112,8 +108,6 @@ module.exports = {
                 }
             }
         }
-        console.log('Ponctuel :')
-        console.log(Choix)
         return Choix;
     },
     ChoixDisplay : (choix) => {

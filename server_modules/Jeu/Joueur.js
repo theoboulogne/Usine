@@ -32,7 +32,6 @@ class Joueur{
         this.Choix.norme = new Object(); // limites
         this.Choix.norme.pollution = -1
         this.Choix.norme.dechets = -1;
-        this.Choix.norme.salaire = -1;
         this.Choix.avantages = 0;
         this.Choix.securite = new Object(); // 0.5 - 1.5
         this.Choix.securite.employes = 1;
@@ -220,7 +219,7 @@ class Joueur{
         infoBoutique.prix = new Object();
         infoBoutique.prix.robots = 35000;
         infoBoutique.prix.employes = 0;
-        infoBoutique.prix.lignes = 500000;
+        infoBoutique.prix.lignes = 300000;
         infoBoutique.prix.pannes = -50000;
         infoBoutique.pannes = 0;
         for(let i=0; i<this.Lignes.length; i++){
@@ -244,7 +243,7 @@ class Joueur{
         }
         let coeffpannes = pannes - infoBoutique.pannes;
 
-        if(infoBoutique.solde > 0) if((coeffRobots * 35000) + (coeffLignes * 500000) + (coeffpannes* (50000)) == coeffSolde){
+        if(infoBoutique.solde > 0 || (coeffLignes == 0 && coeffRobots<=0)) if((coeffRobots * 35000) + (coeffLignes * 500000) + (coeffpannes* (50000)) == coeffSolde){
             this.nbRobots = infoBoutique.robots;
             this.nbRobots_dispo = infoBoutique.robots;
             this.nbEmployes = infoBoutique.employes;
@@ -310,12 +309,6 @@ class Joueur{
 
             Ecologie = Ecologie_Courant + Ecologie_Pollution + Ecologie_Dechets;
         }
-        
-        console.log('----Ecologie----')
-        console.log(Ecologie_Courant)
-        console.log(Ecologie_Pollution)
-        console.log(Ecologie_Dechets)
-
 
         //////////////////////////////////////////////////////////////////////////////////////////////
         // Cadence prod / securite / employes inactifs / composants ameliores / nb de ligne
@@ -361,12 +354,6 @@ class Joueur{
         if (Production_Ligne < 0) Production_Ligne = 0
 
 
-        console.log('----Production----')
-        console.log(Production_Cadence)
-        console.log(Production_Securite)
-        console.log(Production_Employes_inactifs)
-        console.log(Production_Composant)
-        console.log(Production_Ligne)
 
         let Production = Production_Cadence + Production_Composant + Production_Employes_inactifs + Production_Securite + Production_Ligne
 
@@ -384,21 +371,16 @@ class Joueur{
         let Social_Salaire = this.Choix.salaire;
         if(Social_Salaire < 1300) Social_Salaire = 1300;
         if(Social_Salaire > 1700) Social_Salaire = 1700;
-        Social_Salaire = ((Social_Salaire - 1300) / 400 ) * 0.3
+        Social_Salaire = ((Social_Salaire - 1300) / 400 ) * 0.25
 
         let Social_Securite = (this.Choix.securite.employes-0.5) * 0.2
         if (Social_Securite > 0.2) Social_Securite = 0.2
         if (Social_Securite < 0) Social_Securite = 0
 
-        let Social_Prod = (1 - Production) * 0.2
-        if(Social_Prod > 0.2) Social_Prod = 0.2
+        let Social_Prod = (1 - Production) * 0.25
+        if(Social_Prod > 0.25) Social_Prod = 0.25
         if(Social_Prod < 0) Social_Prod = 0
 
-        console.log('----Social----')
-        console.log(Social_Avantages)
-        console.log(Social_Salaire)
-        console.log(Social_Securite)
-        console.log(Social_Prod)
 
         let Social = Social_Avantages + Social_Salaire + Social_Securite + Social_Prod;
 
@@ -409,7 +391,7 @@ class Joueur{
         let indiceSOLDE = 0.5;
         let Croissance_Pub = 0;
 
-        if(this.Choix.stock != 0){
+        if(this.stock != 0 && this.solde>0){
             if(this.Choix.solde < 1000) this.Choix.solde = 1000
 
             Croissance_Pub = this.Choix.solde / 13000
@@ -435,14 +417,9 @@ class Joueur{
             this.soldePrec = this.solde;
         }
 
-
-        console.log('----Croissance----')
-        console.log(Croissance_Solde)
-        console.log(Croissance_Pub)
-        console.log(Croissance_Production)
-
-
         let Croissance = Croissance_Pub + Croissance_Production + Croissance_Solde;
+        if(this.solde < 0) Croissance *= 0.5
+        if(this.solde < 100000) Croissance *= 0.5
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 

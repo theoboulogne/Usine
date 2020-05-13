@@ -1,5 +1,6 @@
 const Joueur = require('./Joueur')
 const Ventes = require('./Ventes')
+const utils = require('../utils')
 
 class Univers{
     constructor(n){
@@ -22,36 +23,39 @@ class Univers{
        for(let idx in this.Joueurs) {
             for(let i=0; i<taille; i++){
                 if(Evenements[i].choix != undefined){
-                    ChoixRenvoyes.push(Evenements[i].choix);
+                    ChoixRenvoyes.push(Evenements[i]);
                     //l'evenement génère un choix ponctuel dans choixRenvoyes
                 }
                 else{ //l'evenement affecte uniquement des variables
                     if(Evenements[i].panne != undefined){
                         //On génère x pourcentage de pannes
-                        let nbMachine = this.Joueurs[idx].joueur.Lignes.lenght;
                         let panne = (Evenements[i].panne.min/Math.abs(Evenements[i].panne.min))*(Math.random() * (Math.abs(Evenements[i].panne.max) - Math.abs(Evenements[i].panne.min)) + Math.abs(Evenements[i].panne.min));
-                        let nbPannes = nbMachine * panne / 100;
-                        for(let j = 0; j<this.Joueurs[idx].joueur.Lignes.lenght; j++){
-                            if(nbPannes>0){
+                        for(let j = 0; j<this.Joueurs[idx].joueur.Lignes.length; j++){
+                            if(utils.proba(panne)){
                                 this.Joueurs[idx].joueur.Lignes[j].boolpanne = true;
-                                nbPannes--;
                             }
                         }
                     }
                     if(Evenements[i].penurieStock != undefined){
+                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Capacite)
+                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Penurie)
+                        console.log('-')
+
                         let ratio = (Evenements[i].penurieStock.ratio.min/Math.abs(Evenements[i].penurieStock.ratio.min))*(Math.random() * (Math.abs(Evenements[i].penurieStock.ratio.max) - Math.abs(Evenements[i].penurieStock.ratio.min)) + Math.abs(Evenements[i].penurieStock.ratio.min));
                         this.Joueurs[idx].joueur.Approvisionnement.Capacite = ratio * this.Joueurs[idx].joueur.Approvisionnement.CapaciteMax;
                         let duree = (Evenements[i].penurieStock.duree.min/Math.abs(Evenements[i].penurieStock.duree.min))*(Math.random() * (Math.abs(Evenements[i].penurieStock.duree.max) - Math.abs(Evenements[i].penurieStock.duree.min)) + Math.abs(Evenements[i].penurieStock.duree.min));
-                        this.Joueurs[idx].joueur.Approvisionnement.Penurie = duree;
+                        this.Joueurs[idx].joueur.Approvisionnement.Penurie = Math.trunc(duree);
+                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Capacite)
+                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Penurie)
                     }
                     if(Evenements[i].crise != undefined){
                         //réduction du nombre de clients global
-                        this.Vente.nbClientsTotal *= 0.7
+                        this.Vente.nbClientsTotal *= 0.5
                     }
                     if(Evenements[i].norme != undefined){
-                        for(let j=0; j<Evenements[i].norme.lenght; j++){
+                        for(let j=0; j<Evenements[i].norme.length; j++){
                             let norme = (Evenements[i].norme[j].valeur.min/Math.abs(Evenements[i].norme[j].valeur.min))*(Math.random() * (Math.abs(Evenements[i].norme[j].valeur.max) - Math.abs(Evenements[i].norme[j].valeur.min)) + Math.abs(Evenements[i].norme[j].valeur.min));
-                            this.Joueurs[idx].joueur.norme[Evenements[i].norme[j].nom] = norme;
+                            this.Joueurs[idx].joueur.Choix.norme[Evenements[i].norme[j].nom] = norme;
                         }
                     }
                 }

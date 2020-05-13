@@ -11,7 +11,7 @@ class Boutique {
     boutonPlus(categorie /* "lignes" / "robots" / "employes" */){
         if(categorie != "lignes"  || this.boutique[categorie] < 5){
             if(categorie != "pannes"){
-                if(this.boutique.solde - this.boutique.prix[categorie] > 0){
+                if((this.boutique.prix[categorie] > 0 && this.boutique.solde - this.boutique.prix[categorie] > 0)||(this.boutique.prix[categorie] == 0)){
                     this.boutique[categorie]++;
                     this.boutique.solde -= this.boutique.prix[categorie];
                     Affichage.SetSolde(this.boutique.solde)
@@ -22,7 +22,7 @@ class Boutique {
     boutonMoins(categorie){
         if((this.boutique.lignes != this.infoBoutique.lignes) || (categorie != "lignes")){
             if((categorie != "employes" && this.boutique[categorie] > 0) || this.boutique[categorie] > 1){
-                if(this.boutique.solde + this.boutique.prix[categorie] > 0){ // pour les pannes ( prix negatif )
+                if((this.boutique.prix[categorie] < 0 && this.boutique.solde + this.boutique.prix[categorie] > 0)||(this.boutique.prix[categorie] >= 0)){ // pour les pannes ( prix negatif )
                     this.boutique[categorie]--;
                     this.boutique.solde += this.boutique.prix[categorie];
                     Affichage.SetSolde(this.boutique.solde)

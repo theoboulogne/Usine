@@ -68,7 +68,7 @@ class Composant {
     }
     Accident(secu){ // génération d'une proba d'accident
         if(utils.proba(this.proba_Accident(secu))){
-            if(utils.proba(this.proba_Accident(secu)/4)){
+            if(utils.proba(this.proba_Accident(secu)/2)){
                 return 2;
             }
             return 1;

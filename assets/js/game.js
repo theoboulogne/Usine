@@ -178,15 +178,14 @@ let Affichage = (function(){
             let videcoche = document.createElement("button")
             let videcoche_icone = document.createElement("span")
             videcoche.setAttribute("type","button")
-            videcoche.setAttribute("class","btn btn-dark")
+            videcoche.setAttribute("class","btn btn-dark btn-sm")
             videcoche.setAttribute("id", "videcoche")
             videcoche_icone.setAttribute("class","glyphicon glyphicon-remove")
             videcoche.appendChild(videcoche_icone)
-            
             let passageligne = document.createElement("br")
             
+            //On rajoute la possibilité de decocher la radio
             videcoche.addEventListener("click", function(){
-                console.log('testttt')
                 $('input[name="'+categorie+'"]').prop('checked', false);
             })
 
@@ -201,6 +200,7 @@ let Affichage = (function(){
             NewSlick.appendChild(cout_)
             NewSlick.appendChild(row)
             NewSlick.appendChild(passageligne)
+
             document.getElementById("cadre").appendChild(NewSlick)
         },
         isValider:(Categorie)=> $("input[name='"+Categorie+"']:checked").val()
