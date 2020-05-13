@@ -403,13 +403,20 @@ class Joueur{
         //////////////////////////////////////////////////////////////////////////////////////////////
         // Argent / Budget Pub / Barre production
         
-        if(this.Choix.solde < 1000) this.Choix.solde = 1000
+        
+        let indiceSOLDE = 0.5;
+        let Croissance_Pub = 0;
 
-        let Croissance_Pub = this.Choix.solde / 13000
-        if(Croissance_Pub < 0) Croissance_Pub = 0
-        if(Croissance_Pub > 1) Croissance_Pub = 1
-        Croissance_Pub *= 0.35
-        if(this.pubPrec>1000) Croissance_Pub = 0.35
+        if(this.Choix.stock != 0){
+            if(this.Choix.solde < 1000) this.Choix.solde = 1000
+
+            Croissance_Pub = this.Choix.solde / 13000
+            if(Croissance_Pub < 0) Croissance_Pub = 0
+            if(Croissance_Pub > 1) Croissance_Pub = 1
+            Croissance_Pub *= 0.35
+            if(this.pubPrec>1000) Croissance_Pub = 0.35
+        }
+        else indiceSOLDE += 0.35
 
         let Croissance_Production = Production * 0.15
 
@@ -421,7 +428,7 @@ class Joueur{
             if (Croissance_Solde > 0.6) Croissance_Solde = 0.6;
             if (Croissance_Solde < 0) Croissance_Solde = 0;
             Croissance_Solde /= 0.7;
-            Croissance_Solde *= 0.5;
+            Croissance_Solde *= indiceSOLDE;
             if (Croissance_Solde < 0) Croissance_Solde = 0;
             this.soldePrec = this.solde;
         }
