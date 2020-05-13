@@ -98,7 +98,7 @@ io.sockets.on('connection',  (socket) =>{
                             else if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
                         }
                         if(bool){
-                            Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur)
+                            Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur, this.Monde.Vente)
                             switch(j){
                                 case 1://ponctuel
                                     this.Monde.Joueurs[socket.id].joueur.ponctuel.add(this.Monde.Joueurs[socket.id].choix[j][k].categorie, this.Monde.Joueurs[socket.id].choix[j][k].nom)

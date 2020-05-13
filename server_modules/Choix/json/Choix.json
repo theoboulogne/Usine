@@ -1324,7 +1324,7 @@
                         {
                             "path":[
                                 "Choix",
-                                "securites",
+                                "securite",
                                 "employes"
                             ],
                             "val":"0.25",
@@ -1715,7 +1715,7 @@
                 "nbTour":"3",
                 "choix":{
                     "nom":"Investissement dans la Recherche ",
-                    "cout":"75000 euros | Nombre de tour : 3",
+                    "cout":"25000 euros | Nombre de tour : 3",
                     "desc":"Investissez dans la recherche et le developpement de votre en usine, pour gagner 1 tours en ameliorations.",
                     "valeurs":[
                         {

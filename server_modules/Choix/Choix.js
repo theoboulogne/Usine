@@ -1,4 +1,4 @@
-let applyValeur = (valeur,  Joueur) => {
+let applyValeur = (valeur,  Joueur, Ventes) => {
     if(valeur.type=="R&D"){
         Joueur.amelioration.reduire(valeur.val);
     }
@@ -6,6 +6,9 @@ let applyValeur = (valeur,  Joueur) => {
         for(let i=0; i<Joueur.Lignes.length; i++){
             Joueur.Lignes[i].Composant[valeur.val].auto = true;
         }
+    }
+    else if(valeur.type == "nbClients"){
+        Ventes.nbClientsTotal+=parseFloat(valeur.val)
     }
     else{
         let emplacement = Joueur
