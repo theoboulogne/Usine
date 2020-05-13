@@ -1,7 +1,7 @@
 class Ventes{
     constructor(n){
         //global
-        this.prixVente = 5;
+        this.prixVente = 45;
         this.nbClientsTotal=n*1400;
     }
  
