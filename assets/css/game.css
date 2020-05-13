@@ -100,7 +100,7 @@ h5 {
   width: 70%;
   /*position: relative;*/
   z-index: 1;
-  /*margin-top: 20vh;*/
+  margin-top: 10vh;
   margin-left: 15%;
 }
 .slick-slide {
@@ -208,15 +208,16 @@ h5 {
   border: 3px solid rgba(230, 230, 230, 0);
 }
 .finance{
-  margin-top: 1vh;
+  margin-top: 0.8vh;
   margin-left: 1%;
   width: 20%;
   height: auto;
   background-color: rgba(245, 245, 245, 0.801);
   border: solid;
   border-color: rgb(53, 51, 51);
-  padding-top:10px;
   padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;

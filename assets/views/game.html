@@ -48,16 +48,16 @@
         </div>
  
         <div id="cadrant_finance" class="finance">
-            <p class="ecriture2 inline"> Trésorerie : <h2 class="ecriture2 inline" id="solde"></h2></p>
-            <p class="ecriture2 inline"> Produits en stock : <h2 class="ecriture2 inline" id="stock"></h2></p>
+            <p class="ecriture2 inline"> Trésorerie :</p> <h2 class="ecriture2 inline" id="solde"></h2></br>
+            <p class="ecriture2 inline"> Produits en stock : </p><h2 class="ecriture2 inline" id="stock"></h2>
         </div>
         <div id="cadrant_finance" class="finance">
-            <p class="ecriture2 inline"> Salaires des employés : <h2 class="ecriture2 inline" id="salaires"></h2></p>
-            <p class="ecriture2 inline"> Budget publicité : <h2  class="ecriture2 inline" id="pub"></h2></p>
+            <p class="ecriture2 inline"> Salaires des employés : </p><h2 class="ecriture2 inline" id="salaires"></h2></br>
+            <p class="ecriture2 inline"> Budget publicité : </p><h2  class="ecriture2 inline" id="pub"></h2>
         </div>
         <div id="cadrant_finance" class="finance">
-            <p class="ecriture2 inline"> Consommation Energétique : <h2 class="ecriture2 inline" id="consoNRJ"></h2></p>
-            <p class="ecriture2 inline"> Accidents ce mois : <h2 class="ecriture2 inline" id="accident"></h2></p>
+            <p class="ecriture2 inline"> Consommation Energétique : </p><h2 class="ecriture2 inline" style ="margin-bottom: 1em;" id="consoNRJ"></h2></br>
+            <p class="ecriture2 inline"> Accidents ce mois : </p><h2 class="ecriture2 inline" id="accident"></h2>
         </div>
        
         <div id="modal_Magasin" class="modal modal-sm">
@@ -67,6 +67,7 @@
                     <div class="row">
                         <div class="col">
                             <img src="../textures/ligne.png" class="rounded" >
+                            </br>
                             <span style="margin-top:5px;">&nbsp Lignes</span>
                             </br>
                             <br>
@@ -86,15 +87,16 @@
                         </div>
                         <div class="col">
                             <img src="../textures/panne.png" class="rounded" >
-                            <span style="margin-top:5px;">&nbsp Pannes</span>
+                            <span style="margin-top:5px;">&nbsp Reparation</span>
                             </br>
                             <br>
-                            <br>
                             <span class="input-group-btn">
-                                <button id="pannes-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                                <span class="glyphicon glyphicon-minus"></span>
+                                <button id="pannes-moins" type="button" class="btn btn-success btn-number"  data-type="plus" data-field="quant[2]">
+                                <span class="glyphicon glyphicon-plus"></span>
                                 </button>
+                                </span>
                             </span>
+                            </br>
                             <input id="pannes-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
                             
                         </div>
