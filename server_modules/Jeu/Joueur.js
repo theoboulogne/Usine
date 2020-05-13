@@ -268,8 +268,8 @@ class Joueur{
         // Courant / pollution / dechets / normes
         //   0.30      0.35       0.35
 
-        let Ecologie_Courant = (this.Courant.Auxilliaire.uptime(this.uptimeMax) / this.uptimeMax) * (this.Courant.Auxilliaire.pollution / 30)
-        Ecologie_Courant += ((((this.uptimeMax - this.Courant.Auxilliaire.uptime(this.uptimeMax))*(1-this.Courant.Principal.coupure)) / this.uptimeMax ) * (this.Courant.Principal.pollution / 30))
+        let Ecologie_Courant = ((this.Courant.Auxilliaire.uptime(this.uptimeMax) / this.uptimeMax)) * ((30 - this.Courant.Auxilliaire.pollution) / 30)
+        Ecologie_Courant += (((((this.uptimeMax - this.Courant.Auxilliaire.uptime(this.uptimeMax))*(1-this.Courant.Principal.coupure)) / this.uptimeMax )) * ((30 - this.Courant.Principal.pollution) / 30))
         if(this.energie > 1.2) Ecologie_Courant *= 1.2
         else if(this.energie < 0.5) Ecologie_Courant *= 0.5
         else Ecologie_Courant *= this.energie

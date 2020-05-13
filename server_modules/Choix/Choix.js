@@ -31,10 +31,10 @@ let applyValeur = (valeur,  Joueur, Ventes) => {
 }
 
 module.exports = {
-    apply : (choix, Joueur) =>{
+    apply : (choix, Joueur, Ventes) =>{
         if(choix != undefined){
             for(let i=0; i<choix.valeurs.length; i++){
-                applyValeur(choix.valeurs[i], Joueur);
+                applyValeur(choix.valeurs[i], Joueur, Ventes);
             }
         }
     }

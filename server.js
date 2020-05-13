@@ -9,6 +9,8 @@
 
     - evenement a verifier le changement de valeur -> Ne marche pas pour le smic en tout cas
 
+    - ajouter description des evenements
+
     - changer hauteur slick
 
     - degrade barre : normes ? a voir car que ecologie d'important

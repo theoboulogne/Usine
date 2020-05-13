@@ -4,186 +4,6 @@
             "nom":"courantauxilliaire",
             "proba":"1",
             "variations":[
-                {
-                    "proba":"1",
-                    "amelioration":"Panneaux Solaires",
-                    "choix":{
-                        "nom": "Panneaux Solaires",
-                        "cout":"25000 euros",
-                        "desc":"Installer des panneaux solaires pour remplacer la source d'energie de secours.",
-                        "valeurs":[
-                            {
-                                "path":[
-                                    "solde"
-                                ],
-                                "val":"-25000",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "prix"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "pollution"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "coupure"
-                                ],
-                                "val":"0.25",
-                                "type":"egal"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "proba":"1",
-                    "amelioration":"Eoliennes",
-                    "choix":{
-                        "nom": "Eoliennes",
-                        "cout":"50000 euros",
-                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours.",
-                        "valeurs":[
-                            {
-                                "path":[
-                                    "solde"
-                                ],
-                                "val":"-50000",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "prix"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "pollution"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "coupure"
-                                ],
-                                "val":"0.18",
-                                "type":"egal"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "proba":"1",
-                    "amelioration":"Generateur Biomasse",
-                    "choix":{
-                        "nom": "Generateur Biomase",
-                        "cout":"100000 euros",
-                        "desc":"Installer un generateur biomasse permettera d'etre plus sur de l'energie fournie par la source de secours.",
-                        "valeurs":[
-                            {
-                                "path":[
-                                    "solde"
-                                ],
-                                "val":"-100000",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "prix"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "pollution"
-                                ],
-                                "val":"2",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "coupure"
-                                ],
-                                "val":"0.12",
-                                "type":"egal"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "proba":"1",
-                    "amelioration":"Barrage Hydrolique",
-                    "choix":{
-                        "nom": "Barrage Hydrolique",
-                        "cout":"150000 euros",
-                        "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
-                        "valeurs":[
-                            {
-                                "path":[
-                                    "solde"
-                                ],
-                                "val":"-150000",
-                                "type":"plusegal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "prix"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "pollution"
-                                ],
-                                "val":"0",
-                                "type":"egal"
-                            },
-                            {
-                                "path":[
-                                    "Courant",
-                                    "Auxilliaire",
-                                    "coupure"
-                                ],
-                                "val":"0.05",
-                                "type":"egal"
-                            }
-                        ]
-                    }
-                }
             ]
         },
         {
@@ -605,6 +425,186 @@
                                 ],
                                 "val":"0.7",
                                 "type":"fois"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"1",
+                    "amelioration":"Energie Verte",
+                    "choix":{
+                        "nom": "Panneaux Solaires",
+                        "cout":"25000 euros",
+                        "desc":"Installer des panneaux solaires pour remplacer la source d'energie de secours.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-25000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "prix"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "pollution"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "coupure"
+                                ],
+                                "val":"0.25",
+                                "type":"egal"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"1",
+                    "amelioration":"Energie Verte",
+                    "choix":{
+                        "nom": "Installation d'Eoliennes",
+                        "cout":"50000 euros",
+                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-50000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "prix"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "pollution"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "coupure"
+                                ],
+                                "val":"0.18",
+                                "type":"egal"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"1",
+                    "amelioration":"Reduction de dechets",
+                    "choix":{
+                        "nom": "Installation d'un Generateur Biomasse",
+                        "cout":"100000 euros",
+                        "desc":"Installer un generateur biomasse permettera d'etre plus sur de l'energie fournie par la source de secours.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-100000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "prix"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "pollution"
+                                ],
+                                "val":"2",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "coupure"
+                                ],
+                                "val":"0.12",
+                                "type":"egal"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "proba":"1",
+                    "amelioration":"Exploitez les forces de la nature",
+                    "choix":{
+                        "nom": "Installation d'un Barrage Hydrolique",
+                        "cout":"150000 euros",
+                        "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
+                        "valeurs":[
+                            {
+                                "path":[
+                                    "solde"
+                                ],
+                                "val":"-150000",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "prix"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "pollution"
+                                ],
+                                "val":"0",
+                                "type":"egal"
+                            },
+                            {
+                                "path":[
+                                    "Courant",
+                                    "Auxilliaire",
+                                    "coupure"
+                                ],
+                                "val":"0.05",
+                                "type":"egal"
                             }
                         ]
                     }
@@ -1336,14 +1336,22 @@
         ],
         "production":[
             {
-                "proba":"0.1",
+                "proba":"0.08",
+                "prix":"5000",
                 "amelioration":"Entreprise Dynamique",
-                "nbTour":"3",
+                "nbTour":"5",
                 "choix":{
                     "nom":"Maintenance des serveurs",
-                    "cout":"Nombre de tour : 5",
+                    "cout":"5000 euros | Nombre de tour : 5",
                     "desc":"Reduisez les risques de hacking et de pannes.",
                     "valeurs":[
+                        {
+                            "path":[
+                                "solde"
+                            ],
+                            "val":"-5000",
+                            "type":"plusegal"
+                        },
                         {
                             "path":[
                                 "Choix",
@@ -1838,7 +1846,7 @@
             },
             {
                 "proba":"0.3",
-                "prix":"",
+                "prix":"500",
                 "amelioration":"Bon Commercial",
                 "nbTour":"3",
                 "choix":{
@@ -2035,8 +2043,8 @@
                 "amelioNecessaire":[]
             },
             {
-                "amelio":"Panneaux Solaires",
-                "desc":"Faites des recherches sur les panneaux solaires afin de pouvoir en installer.",
+                "amelio":"Energie Verte",
+                "desc":"Faites des recherches sur les energies vertes.",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
@@ -2046,36 +2054,21 @@
                 ]
             },
             {
-                "amelio":"Eoliennes",
-                "desc":"Faites des recherches sur les eoliennes afin de pouvoir en installer.",
-                "nbTour":"3",
-                "amelioNecessaire":[
-                    {
-                        "categorie":"ecologie",
-                        "amelio":"Panneaux Solaires"
-                    }
-                ]
-            },
-            {
-                "amelio":"Generateur Biomasse",
+                "amelio":"Reduction de dechets",
                 "desc":"Faites des recherches sur le generateur biomasse afin de pouvoir en installer un.",
-                "nbTour":"4",
+                "nbTour":"5",
                 "amelioNecessaire":[
                     {
                         "categorie":"ecologie",
-                        "amelio":"Eoliennes"
+                        "amelio":"Green Peace"
                     }
                 ]
             },
             {
-                "amelio":"Barrage Hydrolique",
+                "amelio":"Exploitez les forces de la nature",
                 "desc":"Faites des recherches sur le barrage hydrolique afin de pouvoir en installer un.",
-                "nbTour":"3",
+                "nbTour":"5",
                 "amelioNecessaire":[
-                    {
-                        "categorie":"ecologie",
-                        "amelio":"Generateur Biomasse"
-                    },
                     {
                         "categorie":"ecologie",
                         "amelio":"Green Peace"
