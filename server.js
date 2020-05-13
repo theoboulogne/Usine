@@ -6,19 +6,13 @@
 
 
     TO-DO:
-    limiter lignes a 5 max
 
-    - faire les pannes
+    - evenement a verifier le changement de valeur -> Ne marche pas pour le smic en tout cas
 
-    - rajouter pub fixe dans magasin  ????
+    - changer hauteur slick
 
-    - evenement a verifier le changement de valeur
-
-
-    problème : modal des evenements
-
-
-
+    - degrade barre : normes ? a voir car que ecologie d'important
+    - ou multiple barres en fonction des différents facteurs ( avec popover pq pas )
 
 
 
@@ -178,7 +172,7 @@ io.sockets.on('connection',  (socket) =>{
                 //Envoi des messages : {evenements}
                 //Envoi des choix : {ameliorations | repetitions | ponctuels | evenementsChoix} 
                 //Envoi de la boutique
-                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(this.Monde.nbTour), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur);
+                io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, boutique, this.Monde.Joueurs[i].joueur.barres(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
             }
         }
     });

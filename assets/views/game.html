@@ -48,98 +48,130 @@
         </div>
  
         <div id="cadrant_finance" class="finance">
-            <p class="ecriture2 inline"> Solde : <h2 class="ecriture2 inline" id="solde"></h2></p>
-            <p class="ecriture2 inline"> Salaires des employés : <h2 class="ecriture2 inline" id="salaires"></h2></p>
-            <p class="ecriture2 inline"> Budget publicité : <h2  class="ecriture2 inline" id="pub"></h2></p>
+            <p class="ecriture2 inline"> Trésorerie :</p> <h2 class="ecriture2 inline" id="solde"></h2></br>
+            <p class="ecriture2 inline"> Produits en stock : </p><h2 class="ecriture2 inline" id="stock"></h2>
+        </div>
+        <div id="cadrant_finance" class="finance">
+            <p class="ecriture2 inline"> Salaires des employés : </p><h2 class="ecriture2 inline" id="salaires"></h2></br>
+            <p class="ecriture2 inline"> Budget publicité : </p><h2  class="ecriture2 inline" id="pub"></h2>
+        </div>
+        <div id="cadrant_finance" class="finance">
+            <p class="ecriture2 inline"> Consommation Energétique : </p><h2 class="ecriture2 inline" style ="margin-bottom: 1em;" id="consoNRJ"></h2></br>
+            <p class="ecriture2 inline"> Accidents ce mois : </p><h2 class="ecriture2 inline" id="accident"></h2>
         </div>
        
-        <div id="modal_Lignes" class="modal modal-sm">
-            <center>
-                <img src="../textures/ligne.png" class="rounded" >
-                <span style="margin-top:5px;">Lignes</span>
-                </br>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
-                </span>
-                <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </span>
-                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Lignes">Suivant</button>
-            </center>  
+        <div id="modal_Magasin" class="modal modal-sm">
+            <div class="info">
+                <center>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="../textures/ligne.png" class="rounded" >
+                            </br>
+                            <span style="margin-top:5px;">&nbsp Lignes</span>
+                            </br>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="lignes-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                            <br>
+                            <input id="lignes-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="lignes-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <img src="../textures/panne.png" class="rounded" >
+                            <span style="margin-top:5px;">&nbsp Reparation</span>
+                            </br>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="pannes-moins" type="button" class="btn btn-success btn-number"  data-type="plus" data-field="quant[2]">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                </span>
+                            </span>
+                            </br>
+                            <input id="pannes-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <img src="../textures/employe.png" class="rounded" >
+                            <span style="margin-top:5px;">&nbsp Employés</span>
+                            </br>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="employes-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                            <br>
+                            <input id="employes-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="employes-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <img src="../textures/robot.png" class="rounded" >
+                            <span style="margin-top:5px;">&nbsp Robots</span>
+                            </br>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="robots-plus" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                            <br>
+                            <input id="robots-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
+                            <br>
+                            <span class="input-group-btn">
+                                <button id="robots-moins" type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Magasin">Fermer</button>
+                </center>   
+            </div>
         </div>
- 
-       
-        <div id="modal_Employes" class="modal modal-sm">
-            <center>
-                <img src="../textures/employe.png" class="rounded" >
-                <span style="margin-top:5px;">Employés</span>
-                </br>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
-                </span>
-                <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </span>
-                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Employes">Suivant</button>
-            </center>
-        </div>    
- 
-       
-        <div id="modal_Robots" class="modal modal-sm">
-            <center>
-                <img src="../textures/robot.png" class="rounded " >
-                <span style="margin-top:5px;">Robots</span>
-                </br>
-                <div class="info">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-                            <span class="glyphicon glyphicon-minus"></span>
-                        </button>
-                    </span>
-                    <input type="text" name="quant[2]" class="input-number" value="10" min="1" max="100" style="width:40px;text-align: center;">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </span>
-                </div>
-                <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Robots">Suivant</button>
-            </center>
-        </div>  
- 
+
         <div class="col-md-4" id="newTour">
             <button type="button" class="btn btn-primary"><h1 class="text-left">Tour suivant</h1></button>
         </div>
-        <div class="cadre" id="cadre">
+        <div class="cadre fixed-bottom" id="cadre">
         </div>
-       
+        
         <div id="modal_next" class="modal">
-            <p class="ecriture2" id="text-modal"></p>
+            <p class="ecriture-modal" id="text-modal"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_next">Suivant</button>
-            </center>  
+            </center>   
         </div>
-       
+        
         <div id="modal_jouer" class="modal">
-            <p class="ecriture2" id="text-modal-dernier"></p>
+            <p class="ecriture-modal" id="text-modal-dernier"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_jouer">Fermer</button>
-            </center>  
+            </center>   
         </div>
     </div>
- 
+  
  
    
     <script src="/socket.io/socket.io.js"></script>
@@ -147,6 +179,7 @@
     <script type="application/javascript" src="../js/libs/OrbitControls.js"></script>
     <script type="application/javascript" src="../js/libs/GLTFLoader.js"></script>
     <script type="application/javascript" src="../js/libs/SkeletonUtils.js"></script>
+    <script type="application/javascript" src="../js/libs/Fire.js"></script>
  
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>

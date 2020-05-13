@@ -8,10 +8,9 @@
             console.log('Event - repconnection')       
             
             //Tutoriel :
-            Affichage.modal(["Bienvenue dans Modern Factory ! Tu es le patron de cette entreprise, ton objectif est de faire les choix qui permettront de la faire vivre afin d'explorer les différents enjeux liés à la thématique de l'Usine du Futur !", 
-            "Chaque tour représente un mois, et chaque mois tu seras amené à faire des choix importants. Tu auras plusieurs dossiers identifiables par des couleurs comportant chacun un ou plusieurs choix. Tu ne pourra choisir qu'un seul choix par dossier ou ne pas en choisir. Mais attention ! Chaque choix a un coût et des répercutions sur les indices de croissance, du social, de l'écologie et de la production, affichés dans les barres d'indices.",
-            "Par le biais de ces choix tu as la possibilité de débloquer des améliorations te permettant de déverouiller de nouveaux choix. Tu peux également cliquer sur les lignes de production et tes employés, cela te permettra d'afficher le menu permettant de modifier l'élément sélectionné."])
-
+            Affichage.modal(["Bienvenue dans Modern Factory !</br> Tu es le patron de cette entreprise, ton objectif est de faire les choix qui permettront de la faire vivre afin d'explorer les différents enjeux liés à la thématique de l'Usine du Futur !", 
+            "Chaque tour représente un mois, et chaque mois tu seras amené à faire des choix importants.</br> Tu auras plusieurs dossiers identifiables par des couleurs comportant chacun un ou plusieurs choix.</br> Tu ne pourra choisir qu'un seul choix par dossier ou ne pas en choisir.</br> Mais attention ! Chaque choix a un coût et des répercutions sur les indices de croissance, du social, de l'écologie et de la production, affichés dans les barres d'indices.",
+            "Par le biais de ces choix tu as la possibilité de débloquer des améliorations te permettant de déverouiller de nouveaux choix.</br> Tu peux également cliquer sur les lignes de production et tes employés, cela te permettra d'afficher le menu permettant de modifier l'élément sélectionné."])
             Game.Graphique = new Rendu()
         });
         
@@ -20,57 +19,69 @@
             
             Game.Dossiers = []
             Game.Magasin = new Boutique();
+            Affichage.set_addEvent(Game.Magasin)
 
-            if(true){ // Lorsque le rendu 3D est chargé :
+            socket.emit('endTurn', [], []); // On demande les infos de départ
 
-                document.getElementById("newTour").addEventListener("click", function(){
-                    console.log('Click - endTurn')
+            let loadTest = setInterval(function() { // Lorsque le rendu 3D est chargé :
+                if (Game.Graphique.loadCheck()) {
+                    clearInterval(loadTest);
 
-                    let choix = []
-
-                    for(let i=0; i<Game.Dossiers.length; i++){
-                        if(Game.Dossiers[i].nom == Affichage.isValider(Game.Dossiers[i].categorie)){
-                            let c = Game.Dossiers[i];
-                            if(c.categorie != 'evenement'){
-                                let categorie = c.categorie.split('_');
-                                c.categorie = categorie[1];
+                    document.getElementById("newTour").addEventListener("click", function(){
+                        console.log('Click - endTurn')
+    
+                        let choix = []
+    
+                        for(let i=0; i<Game.Dossiers.length; i++){
+                            if(Game.Dossiers[i].nom == Affichage.isValider(Game.Dossiers[i].categorie)){
+                                let c = Game.Dossiers[i];
+                                if(c.categorie != 'evenement'){
+                                    let categorie = c.categorie.split('_');
+                                    c.categorie = categorie[1];
+                                }
+                                choix.push(c);
                             }
-                            choix.push(c);
                         }
-                    }
-
-                    for(let i=0; i<choix.length; i++){ // On met investissement dans la recherche a la fin pour influencer les améliorations de ce tour
-                        if(choix[i].nom == "Investissement dans la Recherche "){
-                            let choixTMP = choix[i]
-                            choix.splice(i, 1);
-                            choix.push(choixTMP);
+    
+                        for(let i=0; i<choix.length; i++){ // On met investissement dans la recherche a la fin pour influencer les améliorations de ce tour
+                            if(choix[i].nom == "Investissement dans la Recherche "){
+                                let choixTMP = choix[i]
+                                choix.splice(i, 1);
+                                choix.push(choixTMP);
+                            }
                         }
-                    }
-
-                    console.log(choix)
-
-                    setTimeout(function(){
-                        socket.emit('endTurn', choix, Game.Magasin.boutique);
-                    }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
-                });
-
-                socket.emit('endTurn', [], []); // On demande les infos de départ
-
-            }
+    
+                        console.log(choix)
+    
+                        setTimeout(function(){
+                            socket.emit('endTurn', choix, Game.Magasin.boutique);
+                        }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
+                    });
+                }
+            }, 1000);
         });
 
-        socket.on('newTurn', (Events, Choix, Magasin, Barres, Infos, joueur) => {
+        socket.on('newTurn', (Events, Choix, Magasin, Barres, Infos, Lignes, joueur) => {
             console.log('Event - newTurn')
             console.log(joueur)
             console.log(Barres)
             console.log(Choix)
+            console.log(Lignes)
+            console.log(Magasin)
 
             Affichage.SetBarre("economie", Barres[0])
             Affichage.SetBarre("social", Barres[1])
             Affichage.SetBarre("ecologie", Barres[2])
             Affichage.SetBarre("production", Barres[3])
             
-            Affichage.finance(Infos)
+            Game.Infos = Infos;
+            Affichage.SetStock(Infos[0])
+            Affichage.SetConso(Infos[1])
+            Affichage.SetAccident(Infos[2])
+            Affichage.SetSalaires(Infos[3])
+            Affichage.SetPub(Infos[4])
+
+            Game.Graphique.GenerationUsine(Lignes);
 
             console.log('Events : ')
             console.log(Events)
@@ -78,6 +89,8 @@
 
             Game.Dossiers = []
             Game.Magasin.avantAchat(Magasin);
+            Affichage.updateMagasin(Game.Magasin);
+            Affichage.SetSolde(Game.Magasin.boutique.solde)
 
             Affichage.removeSlick()
             for(let i=0; i<Choix.length; i++) {
