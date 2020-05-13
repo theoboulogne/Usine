@@ -271,7 +271,7 @@ class Rendu{
         
         for (let j=0; j<this.Lignes.length; j++) {
             let bool = false
-            if (this.Lignes[j].Ligne.boolpanne && !LIGNES[j].boolpanne) {
+            if ((this.Lignes[j].Ligne.boolpanne && !LIGNES[j].boolpanne) || (LIGNES[j].boolpanne && !this.Lignes[j].Ligne.boolpanne)) {
                 bool = true;
             }
             if(bool){
@@ -291,7 +291,7 @@ class Rendu{
         }
         
         for(let i=0; i<this.Lignes.length; i++){
-            if(this.Lignes[i].Ligne.boolpanne){
+            if(this.Lignes[i].Ligne.boolpanne && this.Lignes[i].panne.length == 0){
                 this.LoadFire(i, this.Lignes[i].panne);
             }
         }

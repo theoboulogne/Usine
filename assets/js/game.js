@@ -72,9 +72,6 @@ let Affichage = (function(){
         SetConso:(valeur)=>{
             document.getElementById("consoNRJ").innerHTML=valeur + " MW"
         },
-        SetAccident:(valeur)=>{
-            document.getElementById("accident").innerHTML=valeur
-        },
         SetSalaires:(valeur)=>{
             document.getElementById("salaires").innerHTML=valeur
         },

@@ -456,7 +456,7 @@ class Joueur{
         }
         accidents -= this.PrevAccidents
         this.PrevAccidents += accidents
-        return [String(this.stock), String(Math.trunc(this.consommationNRJ)), String(accidents), String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
+        return [String(this.stock), String(Math.trunc(this.consommationNRJ)), String(this.Choix.salaire) + " € / mois ", String(this.Choix.solde) + " € / mois "];
     }
 
     LignesDisplay(){
