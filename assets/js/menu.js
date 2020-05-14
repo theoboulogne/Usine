@@ -3,12 +3,14 @@ let Menu = (function(){
         //fonction lier au bouton play
         Play : () => {
             event.preventDefault();
-            window.location.href = "game";
+            let nb = document.getElementById("nb").value;
+            let duree = document.getElementById("duree").value;
+
+            window.location.href = "game?nb=" + nb + "&duree=" + duree;
         }
     }
 })();
 (function () {
-    console.log('test')
     let BoutonPlay = document.getElementById("play");
     BoutonPlay.addEventListener("click", event=> Menu.Play());
 })();

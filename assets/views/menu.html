@@ -21,14 +21,26 @@
             <img src="/textures/logo.png">
         </div>
     </center>
+    </br>
        
     <!-- div qui contient tout le formulaire du menu -->
-    <div class="Info" id="menu">
-        <center>
-            <!-- bouton pour lancer la partie -->
-            <button class="btn btn-dark" id="play">PLAY</button>
-        </center>
-    </div>
+    <center>
+        <form name="formulaire" action='./jeu' style="width:20%" method="GET">
+            <!-- entrée du pseudo -->
+            <div>
+                <input class="form-control" type="text" name="nb" id="nb" placeholder="Nombre de joueurs">
+            </div>
+            <div>
+                <input class="form-control" type="text" name="duree" id="duree" placeholder="Nombre de tours dans la partie">
+            </div>
+            </br>
+
+            <div class="Info" id="menu">
+                    <!-- bouton pour lancer la partie -->
+                    <button class="btn btn-dark" type="submit" id="play">PLAY</button>
+            </div>
+        </form>
+    </center>
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,7 +1,6 @@
 .Info {
     position:absolute;
     margin-top:2%;
-    margin-left: 40%;
     width: 20%;
 }
  
@@ -22,22 +21,19 @@ body {
 .ecriture_titre{
     color: rgb(255, 255, 255);
     font-size: 4vw;
-    margin-top: 2%;
+    margin-top: 1%;
     font-family: Impact, fantasy;
-    margin-top: 7%;
+    margin-top: 2%;
     ;
 }
 #play{
-    font-size: 500%;
+    font-size: 200%;
     font-family: Impact, fantasy;
     width: 100%;
-    margin-top: 10%;
-}
-.pseudo_formulaire{
-    width: 72%;
+    margin-top: 1%;
 }
 img {
-    margin-top: 3%;
+    margin-top: 1%;
     height: 30vh;
     width: auto;
 }

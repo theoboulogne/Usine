@@ -11,6 +11,11 @@ class Univers{
 
         this.nbTour = 0;
     }
+    
+    changeTaille(n){
+        this.Vente = new Ventes(n)
+        this.NbJoueursMax = n
+    }
     addJoueur(socketid){
         this.NbJoueurs++; 
         this.Joueurs[socketid] = new Object;

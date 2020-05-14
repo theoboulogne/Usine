@@ -1,35 +1,3 @@
-/*
-
-
-
-
-
-
-
-
-    TO-DO:
-
-
-    - solde trop negatif nique croissance a faire
-
-    - accents a mettre dans les json
-
-
-
-    - retirer envoi joueur de l'envoi serveur
-
-    - afficher les normes ecologiques sur les barres ?
-
-
-
-
-
-
-
-
-*/
-
-
 //Serveur - CIRious Game
 
 //Constantes
@@ -52,6 +20,15 @@ app.get('/', (req, res, next) => {
     res.sendFile(__dirname + '/assets/views/menu.html')
 });
 app.get('/game', (request, response, next) => {
+    Param = request.query // on récupère les paramètres
+
+    if(this.Monde.NbJoueurs == 0){
+        n = Param.nb
+        dureePartie = Param.duree
+
+        this.Monde.changeTaille(Param.nb)
+    }
+
     response.sendFile(__dirname + '/assets/views/game.html')
 });
 
@@ -160,7 +137,7 @@ io.sockets.on('connection',  (socket) =>{
                         Generate.AmeliorationDisplay(ameliorations)];
 
                     //On les envoi avec les différentes infos
-                    io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.verifSpam(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
+                    io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.verifSpam(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay());
                 
                 }
                 if(this.Monde.nbTour == dureePartie) { // On génère les scores de fin
