@@ -37,16 +37,11 @@ class Univers{
                         }
                     }
                     if(Evenements[i].penurieStock != undefined){
-                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Capacite)
-                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Penurie)
-                        console.log('-')
 
                         let ratio = (Evenements[i].penurieStock.ratio.min/Math.abs(Evenements[i].penurieStock.ratio.min))*(Math.random() * (Math.abs(Evenements[i].penurieStock.ratio.max) - Math.abs(Evenements[i].penurieStock.ratio.min)) + Math.abs(Evenements[i].penurieStock.ratio.min));
                         this.Joueurs[idx].joueur.Approvisionnement.Capacite = ratio * this.Joueurs[idx].joueur.Approvisionnement.CapaciteMax;
                         let duree = (Evenements[i].penurieStock.duree.min/Math.abs(Evenements[i].penurieStock.duree.min))*(Math.random() * (Math.abs(Evenements[i].penurieStock.duree.max) - Math.abs(Evenements[i].penurieStock.duree.min)) + Math.abs(Evenements[i].penurieStock.duree.min));
                         this.Joueurs[idx].joueur.Approvisionnement.Penurie = Math.trunc(duree);
-                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Capacite)
-                        console.log(this.Joueurs[idx].joueur.Approvisionnement.Penurie)
                     }
                     if(Evenements[i].crise != undefined){
                         //réduction du nombre de clients global
@@ -64,5 +59,41 @@ class Univers{
         }
         return ChoixRenvoyes
     }
+
+    calculScore(/* tout les joueurs */){
+ 
+        const reducer = (accumulator, currentValue) => accumulator + currentValue; // pour calculer la somme d'un tableau
+     
+        let Score = [];  // pour stocker les scores de chaques joueur
+     
+        for (let i in this.Joueurs){
+            let barres = this.Joueurs[i].joueur.barres(); // on ercupere les barres du joueur
+     
+            let score = barres.reduce(reducer); // on somme le tableau
+     
+            for (let j in barres){
+                if(barres[j] < 10){ // si une barre est en dessou de 10% c'est perdu
+                    score *= 0;
+                }
+                else{  // on multiplie par un coefficient proportionel au % de chaque barre
+                    score *= ((barres[j] / 100) + 0.5);
+                }
+            }
+     
+            let Moula = Math.trunc(this.Joueurs[i].joueur.solde / 100000);  // on prend en compte l'argent du solde final
+     
+            if(Moula != 0){
+                for(let j = 0; j < Math.abs(Moula); j++){  // on ajoute (ou retire) les points correspondants
+                    score += ((Moula / Math.abs(Moula)) * 20);
+                }
+            }
+     
+            if(score < 0) score = 0;
+     
+            Score.push([Math.trunc(score), i]);
+        }
+        return Score;
+    }
+
 }
 module.exports = Univers;

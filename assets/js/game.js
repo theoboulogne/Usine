@@ -1,5 +1,145 @@
+let DivavecBarres = (Barres, indiceJoueur)=>{
+
+    let DivBarres = document.createElement("div")
+
+    let BarreCroissance = document.createElement("div")
+    let CroissanceTitre = document.createElement("h5")
+    CroissanceTitre.setAttribute('class', 'text-left ecriture2')
+    CroissanceTitre.innerHTML = "Croissance"
+    let CroissanceBarre = document.createElement("div")
+    CroissanceBarre.setAttribute('class', 'progress beautiful')
+    CroissanceBarre.setAttribute('style', 'width: 80%')
+    let CroissanceBarre2 = document.createElement("div")
+    CroissanceBarre2.setAttribute('class', 'progress-bar bg-warning progress-bar-striped progress-bar-animated')
+    CroissanceBarre2.setAttribute('style', 'width: '+Barres[indiceJoueur][0]+'%')
+    let CroissanceBarre3 = document.createElement("span")
+    CroissanceBarre3.setAttribute('class', 'sr-only')
+    CroissanceBarre2.appendChild(CroissanceBarre3)        
+    CroissanceBarre.appendChild(CroissanceBarre2)    
+    BarreCroissance.appendChild(CroissanceTitre)
+    BarreCroissance.appendChild(CroissanceBarre)
+    DivBarres.appendChild(BarreCroissance)
+    
+    let BarreSocial = document.createElement("div")
+    let SocialTitre = document.createElement("h5")
+    SocialTitre.setAttribute('class', 'text-left ecriture2')
+    SocialTitre.innerHTML = "Social"
+    let SocialBarre = document.createElement("div")
+    SocialBarre.setAttribute('class', 'progress beautiful')
+    SocialBarre.setAttribute('style', 'width: 80%')
+    let SocialBarre2 = document.createElement("div")
+    SocialBarre2.setAttribute('class', 'progress-bar bg-danger progress-bar-striped progress-bar-animated')
+    SocialBarre2.setAttribute('style', 'width: '+Barres[indiceJoueur][1]+'%')
+    let SocialBarre3 = document.createElement("span")
+    SocialBarre3.setAttribute('class', 'sr-only')
+    SocialBarre2.appendChild(SocialBarre3)        
+    SocialBarre.appendChild(SocialBarre2)    
+    BarreSocial.appendChild(SocialTitre)
+    BarreSocial.appendChild(SocialBarre)
+    DivBarres.appendChild(BarreSocial)
+    
+    let BarreEcologie = document.createElement("div")
+    let EcologieTitre = document.createElement("h5")
+    EcologieTitre.setAttribute('class', 'text-left ecriture2')
+    EcologieTitre.innerHTML = "Ecologie"
+    let EcologieBarre = document.createElement("div")
+    EcologieBarre.setAttribute('class', 'progress beautiful')
+    EcologieBarre.setAttribute('style', 'width: 80%')
+    let EcologieBarre2 = document.createElement("div")
+    EcologieBarre2.setAttribute('class', 'progress-bar bg-success progress-bar-striped progress-bar-animated')
+    EcologieBarre2.setAttribute('style', 'width: '+Barres[indiceJoueur][2]+'%')
+    let EcologieBarre3 = document.createElement("span")
+    EcologieBarre3.setAttribute('class', 'sr-only')
+    EcologieBarre2.appendChild(EcologieBarre3)        
+    EcologieBarre.appendChild(EcologieBarre2)    
+    BarreEcologie.appendChild(EcologieTitre)
+    BarreEcologie.appendChild(EcologieBarre)
+    DivBarres.appendChild(BarreEcologie)
+    
+    let BarreProduction = document.createElement("div")
+    let ProductionTitre = document.createElement("h5")
+    ProductionTitre.setAttribute('class', 'text-left ecriture2')
+    ProductionTitre.innerHTML = "Production"
+    let ProductionBarre = document.createElement("div")
+    ProductionBarre.setAttribute('class', 'progress beautiful')
+    ProductionBarre.setAttribute('style', 'width: 80%')
+    let ProductionBarre2 = document.createElement("div")
+    ProductionBarre2.setAttribute('class', 'progress-bar progress-bar-striped progress-bar-animated')
+    ProductionBarre2.setAttribute('style', 'width: '+Barres[indiceJoueur][3]+'%')
+    let ProductionBarre3 = document.createElement("span")
+    ProductionBarre3.setAttribute('class', 'sr-only')
+    ProductionBarre2.appendChild(ProductionBarre3)        
+    ProductionBarre.appendChild(ProductionBarre2)    
+    BarreProduction.appendChild(ProductionTitre)
+    BarreProduction.appendChild(ProductionBarre)
+    DivBarres.appendChild(BarreProduction)
+
+    return DivBarres
+}
+
+let CadreScore = (Scores, Barres, indiceJoueur) =>{
+
+    let ScoreJoueur = document.createElement("div")
+    let TitreScore = document.createElement("h2")
+    TitreScore.setAttribute("class","ecriture1")
+    TitreScore.appendChild(document.createTextNode("Score : "+String(Scores[indiceJoueur][0])))
+    ScoreJoueur.appendChild(TitreScore)
+    let passageligne = document.createElement("br")
+    ScoreJoueur.appendChild(passageligne)
+    let divBarresJoueur = DivavecBarres(Barres, indiceJoueur);
+    ScoreJoueur.appendChild(divBarresJoueur)
+
+    return ScoreJoueur
+}
+
+
+
+
 let Affichage = (function(){
     return{
+        createFin:(Scores, Barres, indiceJoueur)=>{
+
+            let status = ""
+            let max = 0;
+            for(let j in Scores){
+                if(Scores[j][0] > max) max = Scores[j][0];
+            }
+            if(max == Scores[indiceJoueur][0]) status = "gagné";
+            else status = "perdu";
+
+            document.getElementById("modal-gagnant").innerHTML = status
+            
+            document.getElementById("modal_fin-joueur").appendChild(CadreScore(Scores, Barres, indiceJoueur))
+
+            let nb = 0
+            let Rows = []
+            for(let i=0; i<Scores.length; i++){
+                if(i!=indiceJoueur){
+                    if(nb%2 == 0){
+                        let row = document.createElement('div')
+                        row.setAttribute('class', 'row')
+                        Rows.push(row)
+                    }
+                    let col = document.createElement("div")
+                    col.setAttribute("class","col")
+                    col.appendChild(CadreScore(Scores, Barres, i))
+                    nb++
+                }
+            }
+
+            for(let i=0; i<Rows.length; i++){
+                document.getElementById("modal_fin-tab").appendChild(Rows[i])
+            }
+
+            
+            $("#modal_fin").modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false,
+                toogle: true
+            });
+            
+        },
         updateMagasin:(boutique)=>{
             document.getElementById("lignes-nb").value=  boutique.boutique.lignes;
             document.getElementById("pannes-nb").value=  boutique.boutique.pannes;

@@ -116,6 +116,9 @@
         socket.on('menu', ()=>{
             window.href = './'
         })
+        socket.on('fin', (Scores, Barres, indiceJoueur)=>{
+            Affichage.createFin(Scores, Barres, indiceJoueur)
+        })
 
         /*socket.on('disconnect', () => {
             console.log('Event - disconnect')

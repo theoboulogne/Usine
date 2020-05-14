@@ -56,7 +56,7 @@ app.get('/game', (request, response, next) => {
 });
 
 //On enregistre nos Joueurs, on lance à n joueurs
-let n = 1
+let n = 5
 this.Monde = new Univers(n); // instanciation d'un "Univers" pour générer les infos des ventes et des evenements et stocker les joueurs
 
 io.sockets.on('connection',  (socket) =>{
@@ -80,7 +80,7 @@ io.sockets.on('connection',  (socket) =>{
 
     socket.on('endTurn', (Dossiers, Magasin)=> {
         console.log('------endTurn')
-        if(this.Monde.Joueurs[socket.id].jouer == false){ // si le joueur n'a pas deja joué
+        if(this.Monde.Joueurs[socket.id].jouer == false && this.Monde.nbTour<4){ // si le joueur n'a pas deja joué
             this.Monde.Joueurs[socket.id].jouer = true;
             
             //Verification avec stockage cote serveur et application des dossiers correspondant
@@ -160,6 +160,22 @@ io.sockets.on('connection',  (socket) =>{
                     //On les envoi avec les différentes infos
                     io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.barres(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
                 }
+            }
+        }
+        else{
+            if(this.Monde.nbTour>=4){ // fin du jeu, on zappe le dernier envoi du joueur
+
+                let Scores = this.Monde.calculScore()
+                let Barres = []
+                let indiceJoueur;
+
+                for(let i=0; i<Scores.length; i++){
+                    if(Scores[i][1] == socket.id) indiceJoueur = i;
+                    this.Monde.Joueurs[Scores[i][1]].joueur.Update_Mois();// on passe un tour pour normaliser les barres
+                    Barres.push(this.Monde.Joueurs[Scores[i][1]].joueur.barres())
+                }
+
+                socket.emit('fin', Scores, Barres, indiceJoueur)
             }
         }
     });

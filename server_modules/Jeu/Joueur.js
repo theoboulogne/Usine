@@ -231,30 +231,44 @@ class Joueur{
         return infoBoutique;
     }
     apresAchat(infoBoutique){
-        let coeffRobots = infoBoutique.robots - this.nbRobots;
-        let coeffLignes = infoBoutique.lignes - this.Lignes.length;
-        let coeffSolde = this.solde - infoBoutique.solde
+        let coeffRobots = 0;
+        if(infoBoutique.robots != undefined) coeffRobots = infoBoutique.robots - this.nbRobots;
+        let coeffLignes = 0;
+        if(infoBoutique.lignes != undefined) coeffLignes = infoBoutique.lignes - this.Lignes.length;
+        let coeffEmployes = 0;
+        if(infoBoutique.employes != undefined) coeffEmployes = infoBoutique.employes - this.nbEmployes;
 
+        
         let pannes = 0;
         for(let i=0; i<this.Lignes.length; i++){
             if(this.Lignes[i].boolpanne){
                 pannes++;
             }
         }
-        let coeffpannes = pannes - infoBoutique.pannes;
+        let coeffpannes = 0;
+        if(pannes != 0) coeffpannes = pannes - infoBoutique.pannes;
+        
+        this.nbEmployes += coeffEmployes;
+        this.nbEmployes_dispo += coeffEmployes;
 
-        if(infoBoutique.solde > 0 || (coeffLignes == 0 && coeffRobots<=0)) if((coeffRobots * 35000) + (coeffLignes * 500000) + (coeffpannes* (50000)) == coeffSolde){
-            this.nbRobots = infoBoutique.robots;
-            this.nbRobots_dispo = infoBoutique.robots;
-            this.nbEmployes = infoBoutique.employes;
-            this.nbEmployes_dispo = infoBoutique.employes;
-            this.solde = infoBoutique.solde;
+        if(this.solde - (coeffRobots*3500)>0 || coeffRobots<0){
+            this.solde -= (coeffRobots*3500)
+            this.nbRobots +=coeffRobots;
+            this.nbRobots_dispo +=coeffRobots;
+        }
+
+        if(this.solde + (coeffpannes*50000) > 0){
+            this.solde += (coeffpannes*50000)
             for(let i=0; i<this.Lignes.length; i++){
                 if(coeffpannes>0 && this.Lignes[i].boolpanne){
                     this.Lignes[i].boolpanne = false
                     coeffpannes--;
                 }
             }
+        }
+        
+        if(this.solde - (coeffLignes*300000) > 0){
+            this.solde -= coeffLignes*300000
             for(let i = 0; i < coeffLignes; i++){
                 this.Lignes.push(new Ligne());
             }
