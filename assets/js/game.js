@@ -123,6 +123,7 @@ let Affichage = (function(){
                     let col = document.createElement("div")
                     col.setAttribute("class","col")
                     col.appendChild(CadreScore(Scores, Barres, i))
+                    Rows[Rows.length-1].appendChild(col);
                     nb++
                 }
             }
@@ -130,6 +131,9 @@ let Affichage = (function(){
             for(let i=0; i<Rows.length; i++){
                 document.getElementById("modal_fin-tab").appendChild(Rows[i])
             }
+
+            document.getElementById('modal_fin').style = "width: 35%;"
+            if(Scores.length>2) document.getElementById('modal_fin').style = "width: 20%;"
 
             
             $("#modal_fin").modal({
