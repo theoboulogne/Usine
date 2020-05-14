@@ -41,7 +41,7 @@ class Ligne {
                 else{
                     if(!this.boolpanne&&!this.boolaccident) this.accident_switch(this.Composant[i], Choix.securite);
                     if(!this.boolpanne&&!this.boolaccident){
-                        let qualTravail = Math.pow(this.cadence_travail(this.Composant[i], Choix), this.Composant[i].nbEmployes) * Math.pow(3.3, this.Composant[i].nbRobots); // on recalcule si il y a eu de nouveaux accidents, rajouter d'autres modif par la suite en fonction des choix possibles
+                        let qualTravail = Math.pow(this.cadence_travail(this.Composant[i], Choix), this.Composant[i].nbEmployes) * Math.pow(3, this.Composant[i].nbRobots); // on recalcule si il y a eu de nouveaux accidents, rajouter d'autres modif par la suite en fonction des choix possibles
                         this.production += this.Composant[i].production_normal(qualTravail);//Composant[i].production*tmp_Uptime * (qualTravail^(Composant[i].nbEmployes)) * (3.5^(Composant[i].nbRobots))
                         this.dechets += this.Composant[i].dechets_normal(qualTravail);
                         this.pollution += this.Composant[i].pollution_normal(qualTravail);

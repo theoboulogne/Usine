@@ -54,7 +54,7 @@ class Rendu{
         renderer.domElement.addEventListener("click", function(){onClick(event, game.Lignes)}, false); // On active les events
 
         document.body.appendChild( renderer.domElement );
-        document.body.style.backgroundImage = "url('../textures/background.jpg')";
+        document.body.style.backgroundImage = "url('../textures/background.png')";
         document.body.style.backgroundSize = "cover"
 
         // On initialise la caméra
@@ -139,48 +139,72 @@ class Rendu{
         let WallUnits = [
             {
                 modelName: "wall", 
-                position:{x: -16, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: -36, y:0, z:-6},
+                scale: 0.04, 
             }, 
             {
                 modelName: "wall", 
-                position:{x: -12, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: -27, y:0, z:-6},
+                scale: 0.04, 
             },  
             {
                 modelName: "wall", 
-                position:{x: -8, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: -18, y:0, z:-6},
+                scale: 0.04, 
             },  
             {
                 modelName: "wall", 
-                position:{x: -4, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: -9, y:0, z:-6},
+                scale: 0.04, 
             },   
             {
                 modelName: "wall", 
-                position:{x: 0, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: 0, y:0, z:-6},
+                scale: 0.04, 
             },   
             {
                 modelName: "wall", 
-                position:{x: 4, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: 9, y:0, z:-6},
+                scale: 0.04, 
             },   
             {
                 modelName: "wall", 
-                position:{x: 8, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: 18, y:0, z:-6},
+                scale: 0.04, 
             }, 
             {
                 modelName: "wall", 
-                position:{x: 12, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: 27, y:0, z:-6},
+                scale: 0.04, 
             },  
             {
                 modelName: "wall", 
-                position:{x: 16, y:0, z:-4},
-                scale: 0.02, 
+                position:{x: 36, y:0, z:-6},
+                scale: 0.04, 
+            }, 
+            {
+                modelName: "wall", 
+                position:{x: -10, y:0, z: 1},
+                rotation:{x:0, y:75*(Math.PI / 180), z:0},
+                scale: 0.04
+            }, 
+            {
+                modelName: "wall", 
+                position:{x: 10, y:0, z: 1},
+                rotation:{x:0, y:-75*(Math.PI / 180), z:0},
+                scale: 0.04
+            }, 
+            {
+                modelName: "wall", 
+                position:{x: -13, y:0, z: 10},
+                rotation:{x:0, y: 75*(Math.PI / 180), z:0},
+                scale: 0.04 
+            }, 
+            {
+                modelName: "wall", 
+                position:{x: 13, y:0, z: 10},
+                rotation:{x:0, y:-75*(Math.PI / 180), z:0},
+                scale: 0.04 
             },  
         ];
         this.LoadLine(WallUnits);
@@ -412,9 +436,6 @@ class Rendu{
     GenerationBoard(){
         
         let boardTexture = new THREE.ImageUtils.loadTexture("../textures/ground.png");
-        boardTexture.repeat.set(20, 5);
-        boardTexture.wrapS = THREE.RepeatWrapping;
-        boardTexture.wrapT = THREE.RepeatWrapping;
 
         let boardMaterials = [
             new THREE.MeshLambertMaterial({color: 0x555555}),
@@ -425,7 +446,7 @@ class Rendu{
             new THREE.MeshLambertMaterial({color: 0x555555})
         ];
 
-        let geometry = new THREE.BoxGeometry( 80, 30, 1);
+        let geometry = new THREE.BoxGeometry( 25, 27, 1);
 
         let board = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial(boardMaterials) );
         board.receiveShadow = true;
@@ -437,11 +458,11 @@ class Rendu{
     
     GenerationLight(){
 
-        let light = new THREE.AmbientLight( 0x808080 ); // soft white light
+        let light = new THREE.AmbientLight( 0xFFFFFF ); // soft white light
         scene.add( light );
 
         let spotLight = new THREE.SpotLight( 0xcccccc );
-        spotLight.position.set( 50, 100, 50 );
+        spotLight.position.set( 20, 50, 5 );
         spotLight.castShadow = true;
         spotLight.shadowMapWidth = 1024;
         spotLight.shadowMapHeight = 1024;

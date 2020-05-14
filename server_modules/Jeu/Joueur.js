@@ -367,7 +367,7 @@ class Joueur{
         if(Social_Avantages < 0) Social_Avantages = 0;
 
         if(this.Choix.salaire < 1300) this.Choix.salaire = 1300;
-        if(this.Choix.salaire < 1700) this.Choix.salaire = 1700;
+        if(this.Choix.salaire > 1700) this.Choix.salaire = 1700;
         let Social_Salaire = this.Choix.salaire;
         if(Social_Salaire < 1300) Social_Salaire = 1300;
         if(Social_Salaire > 1700) Social_Salaire = 1700;
@@ -419,7 +419,7 @@ class Joueur{
 
         let Croissance = Croissance_Pub + Croissance_Production + Croissance_Solde;
         if(this.solde < 0) Croissance *= 0.5
-        if(this.solde < 100000) Croissance *= 0.5
+        if(this.solde < -100000) Croissance *= 0.5
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 

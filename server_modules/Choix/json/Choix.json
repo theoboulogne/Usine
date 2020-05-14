@@ -10,7 +10,7 @@
                     "choix":{
                         "nom": "Video surveillance",
                         "cout":"15000 euros",
-                        "desc":"Surveillez vos employes pour augmenter la production.",
+                        "desc":"Surveillez vos employés pour augmenter la production.",
                         "valeurs":[
                             {
                                 "path":[
@@ -24,15 +24,15 @@
                                     "Choix",
                                     "avantages"
                                 ],
-                                "val":"-0.15",
-                                "type":"plusegal"
+                                "val":"0.85",
+                                "type":"fois"
                             },
                             {
                                 "path":[
                                     "Choix",
                                     "production"
                                 ],
-                                "val":"0.08",
+                                "val":"0.09",
                                 "type":"plusegal"
                             }
                         ]
@@ -44,7 +44,7 @@
                     "choix":{
                         "nom": "Voyage",
                         "cout":"25000 euros",
-                        "desc":"Organisez un voyage pour les employes de la boite.",
+                        "desc":"Organisez un voyage pour les employés de la boite.",
                         "valeurs":[
                             {
                                 "path":[
@@ -58,7 +58,16 @@
                                     "Choix",
                                     "avantages"
                                 ],
-                                "val":"0.1",
+                                "val":"0.12",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Choix",
+                                    "securite",
+                                    "employes"
+                                ],
+                                "val":"0.05",
                                 "type":"plusegal"
                             }
                         ]
@@ -68,9 +77,9 @@
                     "proba":"0.5",
                     "amelioration":"President du CE",
                     "choix":{
-                        "nom": "Veicule autonome",
+                        "nom": "Vehicule autonome",
                         "cout":"25000 euros",
-                        "desc":"Achetez des veicule autonome pour les transferts de produits, dechets et materiaux au sein de l'usine.",
+                        "desc":"Achetez des véhicules autonomes pour les transferts de produits, déchets et matériaux au sein de l'usine.",
                         "valeurs":[
                             {
                                 "path":[
@@ -84,7 +93,7 @@
                                     "Choix",
                                     "avantages"
                                 ],
-                                "val":"0.1",
+                                "val":"0.05",
                                 "type":"plusegal"
                             },
                             {
@@ -107,7 +116,7 @@
                                     "securite",
                                     "employe"
                                 ],
-                                "val":"0.1",
+                                "val":"0.15",
                                 "type":"plusegal"
                             }
                         ]
@@ -119,7 +128,7 @@
                     "choix":{
                         "nom": "Nouvelle Salle de Repos",
                         "cout":"10000 euros",
-                        "desc":"Creez une nouvelle salle de repos pour que vos employes beneficient d'un repos optimal.",
+                        "desc":"Creez une nouvelle salle de repos pour que vos employés beneficient d'un repos optimal.",
                         "valeurs":[
                             {
                                 "path":[
@@ -133,7 +142,16 @@
                                     "Choix",
                                     "avantages"
                                 ],
-                                "val":"0.04",
+                                "val":"0.08",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Choix",
+                                    "securite",
+                                    "employes"
+                                ],
+                                "val":"0.03",
                                 "type":"plusegal"
                             }
                         ]
@@ -145,7 +163,7 @@
                     "choix":{
                         "nom": "Objets connectes",
                         "cout":"20000 euros",
-                        "desc":"Ajout d'objets connecte pour simplifier la vie des employes.",
+                        "desc":"Ajout d'objets connectés pour simplifier la vie des employés.",
                         "valeurs":[
                             {
                                 "path":[
@@ -159,7 +177,16 @@
                                     "Choix",
                                     "avantages"
                                 ],
-                                "val":"0.1",
+                                "val":"0.14",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Choix",
+                                    "securite",
+                                    "employes"
+                                ],
+                                "val":"0.05",
                                 "type":"plusegal"
                             }
                         ]
@@ -175,7 +202,7 @@
                     "proba":"0.6",
                     "amelioration":"Bon Commercial",
                     "choix":{
-                        "nom": "Cout de Pub",
+                        "nom": "Coup de Pub",
                         "cout":"10000 euros",
                         "desc":"Faites une campagne publicitaire pour mieux faire connaitre votre produit.",
                         "valeurs":[
@@ -194,7 +221,7 @@
                                 "type":"plusegal"
                             },
                             {
-                               "val":"50",
+                               "val":"20",
                                "type":"nbClients"
                             }
                         ]
@@ -204,7 +231,7 @@
                     "proba":"0.4",
                     "amelioration":"Bon Commercial",
                     "choix":{
-                        "nom": "Gros Cout de Pub",
+                        "nom": "Gros Coup de Pub",
                         "cout":"20000 euros",
                         "desc":"Faites une grosse campagne publicitaire pour mieux faire connaitre votre produit.",
                         "valeurs":[
@@ -234,18 +261,18 @@
                     "amelioration":"Bon Commercial",
                     "choix":{
                         "nom": "Nouvelles relations economique",
-                        "cout":"15000 euros",
+                        "cout":"25000 euros",
                         "desc":"Faites une grosse campagne publicitaire pour mieux faire connaitre votre produit.",
                         "valeurs":[
                             {
                                 "path":[
                                     "solde"
                                 ],
-                                "val":"-15000",
+                                "val":"-25000",
                                 "type":"plusegal"
                             },
                             {
-                               "val":"200",
+                               "val":"150",
                                "type":"nbClients"
                             }
                         ]
@@ -292,7 +319,7 @@
                                     "securite",
                                     "employes"
                                 ],
-                                "val":"0.05",
+                                "val":"0.08",
                                 "type":"plusegal"
                             }
                         ]
@@ -304,7 +331,7 @@
                     "choix":{
                         "nom": "Changement des Filtres a Air",
                         "cout":"30000 euros",
-                        "desc":"Changez vos filtres a air pour limiter vos emitions de produits nocif pour l'environement.",
+                        "desc":"Changez vos filtres à air pour limiter vos émissions de produits nocifs pour l'environnement.",
                         "valeurs":[
                             {
                                 "path":[
@@ -326,7 +353,15 @@
                                     "securite",
                                     "employes"
                                 ],
-                                "val":"0.15",
+                                "val":"0.1",
+                                "type":"plusegal"
+                            },
+                            {
+                                "path":[
+                                    "Choix",
+                                    "avantages"
+                                ],
+                                "val":"0.04",
                                 "type":"plusegal"
                             }
                         ]
@@ -338,7 +373,7 @@
                     "choix":{
                         "nom": "Economie Circulaire",
                         "cout":"50000 euros",
-                        "desc":"Ameliorez la gestion des dechets.",
+                        "desc":"Ameliorez la gestion des déchets.",
                         "valeurs":[
                             {
                                 "path":[
@@ -363,7 +398,7 @@
                     "choix":{
                         "nom": "Nouvelle ventilation",
                         "cout":"20000 euros",
-                        "desc":"Changez vos filtres a air pour limiter vos emitions de produits nocif pour l'environement.",
+                        "desc":"Changez vos filtres à air pour limiter vos emitions de produits nocifs pour l'environnement.",
                         "valeurs":[
                             {
                                 "path":[
@@ -385,7 +420,7 @@
                                     "securite",
                                     "employes"
                                 ],
-                                "val":"0.15",
+                                "val":"0.1",
                                 "type":"plusegal"
                             }
                         ]
@@ -470,11 +505,11 @@
                 },
                 {
                     "proba":"1",
-                    "amelioration":"Energie Verte",
+                    "amelioration":"Exploitez les forces de la nature",
                     "choix":{
                         "nom": "Installation d'Eoliennes",
                         "cout":"50000 euros",
-                        "desc":"Installer des eoliennes pour avoir une meilleure source d'energie de secours.",
+                        "desc":"Installer des éoliennes pour avoir une meilleure source d'énergie de secours.",
                         "valeurs":[
                             {
                                 "path":[
@@ -519,7 +554,7 @@
                     "choix":{
                         "nom": "Installation d'un Generateur Biomasse",
                         "cout":"100000 euros",
-                        "desc":"Installer un generateur biomasse permettera d'etre plus sur de l'energie fournie par la source de secours.",
+                        "desc":"Installer un générateur biomasse permettera d'être plus sûr de l'energie fournie par la source de secours.",
                         "valeurs":[
                             {
                                 "path":[
@@ -564,7 +599,7 @@
                     "choix":{
                         "nom": "Installation d'un Barrage Hydrolique",
                         "cout":"150000 euros",
-                        "desc":"Le barrage hydrolique est la meilleure source d'energie de secours possible.",
+                        "desc":"Le barrage hydrolique est la meilleure source d'énergie de secours possible.",
                         "valeurs":[
                             {
                                 "path":[
@@ -611,9 +646,9 @@
             "variations":[
                 {
                     "proba":"0.5",
-                    "amelioration":"Entreprise Autonome niv1",
+                    "amelioration":"Entreprise Autonome machine 1",
                     "choix":{
-                        "nom":"Amelioration composant niv1",
+                        "nom":"Amelioration de la Machine 1",
                         "cout":"50000 euros",
                         "desc":"Rendez Autonome vos composants 1 de vos lignes de production.",
                         "valeurs":[
@@ -633,9 +668,9 @@
                 },
                 {
                     "proba":"0.3",
-                    "amelioration":"Entreprise Autonome niv2",
+                    "amelioration":"Entreprise Autonome machine 2",
                     "choix":{
-                        "nom":"Amelioration composant niv2",
+                        "nom":"Amelioration de la Machine 2",
                         "cout":"50000 euros",
                         "desc":"Rendez Autonome vos composants 2 de vos lignes de production.",
                         "valeurs":[
@@ -655,9 +690,9 @@
                 },
                 {
                     "proba":"0.3",
-                    "amelioration":"Entreprise Autonome niv3",
+                    "amelioration":"Entreprise Autonome machine 3",
                     "choix":{
-                        "nom":"Amelioration composant niv3",
+                        "nom":"Amelioration de la Machine 3",
                         "cout":"50000 euros",
                         "desc":"Rendez Autonome vos composants 3 de vos lignes de production.",
                         "valeurs":[
@@ -677,9 +712,9 @@
                 },
                 {
                     "proba":"0.3",
-                    "amelioration":"Entreprise Autonome niv4",
+                    "amelioration":"Entreprise Autonome machine 4",
                     "choix":{
-                        "nom":"Amelioration composant niv4",
+                        "nom":"Amelioration de la Machine 4",
                         "cout":"50000 euros",
                         "desc":"Rendez Autonome vos composants 4 de vos lignes de production.",
                         "valeurs":[
@@ -699,9 +734,9 @@
                 },
                 {
                     "proba":"0.3",
-                    "amelioration":"Entreprise Autonome niv5",
+                    "amelioration":"Entreprise Autonome machine 5",
                     "choix":{
-                        "nom":"Amelioration composant niv5",
+                        "nom":"Amelioration de la Machine 5",
                         "cout":"50000 euros",
                         "desc":"Rendez Autonome vos composants 5 de vos lignes de production.",
                         "valeurs":[
@@ -725,7 +760,7 @@
                     "choix":{
                         "nom": "CyberSecurite",
                         "cout":"25000 euros",
-                        "desc":"Protegez votre entreprise contre les hackers.",
+                        "desc":"Protegez votre entreprise contre les hackers afin d'améliorer la sécurité de vos robots (réduit le risque de panne).",
                         "valeurs":[
                             {
                                 "path":[
@@ -793,7 +828,7 @@
                     "choix":{
                         "nom": "Capteurs intelligent",
                         "cout":"10000 euros",
-                        "desc":"Ajoute des capteurs pour augmenter la securite de la chaine de production.",
+                        "desc":"Ajoute des capteurs pour réduire le risque de panne sur la chaine de production.",
                         "valeurs":[
                             {
                                 "path":[
@@ -836,7 +871,7 @@
                     "choix":{
                         "nom": "Realite augmente",
                         "cout":"20000 euros",
-                        "desc":"Donnez des lunette de realite augmentee a vos employes pour ameliorer leur productivite.",
+                        "desc":"Donnez des lunettes de realité augmentée à vos employés pour ameliorer leur productivité.",
                         "valeurs":[
                             {
                                 "path":[
@@ -868,7 +903,7 @@
                     "choix":{
                         "nom": "Optimisation de la maintenance",
                         "cout":"20000 euros",
-                        "desc":"Ameliorez la securite de vos installations.",
+                        "desc":"Réduisez le risque de pannes sur vos installations.",
                         "valeurs":[
                             {
                                 "path":[
@@ -933,7 +968,7 @@
                                     "securite",
                                     "employes"
                                 ],
-                                "val":"0.05",
+                                "val":"0.03",
                                 "type":"plusegal"
                             },
                             {
@@ -942,7 +977,7 @@
                                     "securite",
                                     "robots"
                                 ],
-                                "val":"0.02",
+                                "val":"0.05",
                                 "type":"plusegal"
                             },
                             {
@@ -1182,7 +1217,7 @@
                     "choix":{
                         "nom": "Analyse Predictive",
                         "cout":"15000 euros",
-                        "desc":"Optimisation de la methode de production a l'aide d'une IA.",
+                        "desc":"Optimisation de la méthode de production a l'aide d'une IA.",
                         "valeurs":[
                             {
                                 "path":[
@@ -1202,14 +1237,14 @@
                                 "path":[
                                     "pollution"
                                 ],
-                                "val":"0.8",
+                                "val":"1.05",
                                 "type":"fois"
                             },
                             {
                                 "path":[
                                     "dechets"
                                 ],
-                                "val":"0.9",
+                                "val":"0.85",
                                 "type":"fois"
                             },
                             {
@@ -1250,7 +1285,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.08",
+                            "val":"0.1",
                             "type":"plusegal"
                         }
                     ]
@@ -1264,7 +1299,7 @@
                 "choix":{
                     "nom":"Augmentation des Salaires",
                     "cout":"80 euros /tour/employes | Nombre de tour : 5",
-                    "desc":"Augmentez les salaires de vos employes.",
+                    "desc":"Augmentez les salaires de vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1281,6 +1316,15 @@
                             ],
                             "val":"0.15",
                             "type":"plusegal"
+                        },
+                        {
+                            "path":[
+                                "Choix",
+                                "securite",
+                                "employes"
+                            ],
+                            "val":"0.05",
+                            "type":"plusegal"
                         }
                     ]
                 }
@@ -1293,7 +1337,7 @@
                 "choix":{
                     "nom":"Augmentation des Salaires",
                     "cout":"100 euros /tour/employes | Nombre de tour : 6",
-                    "desc":"Augmentez les salaires de vos employes.",
+                    "desc":"Augmentez les salaires de vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1308,7 +1352,16 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.25",
+                            "val":"0.18",
+                            "type":"plusegal"
+                        },
+                        {
+                            "path":[
+                                "Choix",
+                                "securite",
+                                "employes"
+                            ],
+                            "val":"0.07",
                             "type":"plusegal"
                         }
                     ]
@@ -1322,7 +1375,7 @@
                 "choix":{
                     "nom":"Diminution des Salaires",
                     "cout":"-50 euros /tour/employes | Nombre de tour : 4",
-                    "desc":"Diminuez les salaires de vos employes.",
+                    "desc":"Diminuez les salaires de vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1339,6 +1392,15 @@
                             ],
                             "val":"0.65",
                             "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Choix",
+                                "securite",
+                                "employes"
+                            ],
+                            "val":"0.85",
+                            "type":"fois"
                         }
                     ]
                 }
@@ -1351,7 +1413,7 @@
                 "choix":{
                     "nom":"Diminution des Salaires",
                     "cout":"-100 euros /tour/employes | Nombre de tour : 6",
-                    "desc":"Diminuez les salaires de vos employes.",
+                    "desc":"Diminuez les salaires de vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1368,6 +1430,15 @@
                             ],
                             "val":"0.45",
                             "type":"fois"
+                        },
+                        {
+                            "path":[
+                                "Choix",
+                                "securite",
+                                "employes"
+                            ],
+                            "val":"0.65",
+                            "type":"fois"
                         }
                     ]
                 }
@@ -1380,7 +1451,7 @@
                 "choix":{
                     "nom":"Offre de Part de L'entreprise",
                     "cout":"25000 euros | Nombre de tour : 4",
-                    "desc":"Offrez des parts de l'entreprises a vos employes.",
+                    "desc":"Offrez des parts de l'entreprises a vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1394,7 +1465,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.25",
+                            "val":"0.2",
                             "type":"plusegal"
                         }
                     ]
@@ -1408,7 +1479,7 @@
                 "choix":{
                     "nom":"Achat d'EPI",
                     "cout":"15000 euros | Nombre de tour : 3",
-                    "desc":"Achetez de meilleurs EPI pour vos employes.",
+                    "desc":"Achetez de meilleurs EPI pour vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1422,7 +1493,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.05",
+                            "val":"0.08",
                             "type":"plusegal"
                         },
                         {
@@ -1498,7 +1569,7 @@
                                 "securite",
                                 "employes"
                             ],
-                            "val":"0.8",
+                            "val":"0.7",
                             "type":"fois"
                         },
                         {
@@ -1507,14 +1578,14 @@
                                 "securite",
                                 "robots"
                             ],
-                            "val":"0.95",
+                            "val":"0.85",
                             "type":"fois"
                         },
                         {
                             "path":[
                                 "pollution"
                             ],
-                            "val":"0.05",
+                            "val":"0.1",
                             "type":"plusegal"
                         }
                     ]
@@ -1534,7 +1605,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.07",
+                            "val":"0.09",
                             "type":"plusegal"
                         },
                         {
@@ -1559,7 +1630,7 @@
                                 "securite",
                                 "robots"
                             ],
-                            "val":"0.05",
+                            "val":"0.1",
                             "type":"plusegal"
                         },
                         {
@@ -1579,14 +1650,14 @@
                 "choix":{
                     "nom":"Augmentation du Temps de Travail",
                     "cout":"Nombre de tour : 4",
-                    "desc":"Faites travailler vos employes plus longtemps.",
+                    "desc":"Faites travailler vos employés plus longtemps.",
                     "valeurs":[
                         {
                             "path":[
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.8",
+                            "val":"0.7",
                             "type":"fois"
                         },
                         {
@@ -1602,7 +1673,7 @@
                                 "securite",
                                 "employes"
                             ],
-                            "val":"0.8",
+                            "val":"0.7",
                             "type":"fois"
                         },
                         {
@@ -1611,7 +1682,7 @@
                                 "securite",
                                 "robots"
                             ],
-                            "val":"0.95",
+                            "val":"0.85",
                             "type":"fois"
                         },
                         {
@@ -1631,14 +1702,14 @@
                 "choix":{
                     "nom":"Diminution du Temps de Travail",
                     "cout":"Nombre de tour : 3",
-                    "desc":"Faites travailler vos employes moins longtemps.",
+                    "desc":"Faites travailler vos employés moins longtemps.",
                     "valeurs":[
                         {
                             "path":[
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.08",
+                            "val":"0.1",
                             "type":"plusegal"
                         },
                         {
@@ -1663,7 +1734,7 @@
                                 "securite",
                                 "robots"
                             ],
-                            "val":"0.05",
+                            "val":"0.09",
                             "type":"plusegal"
                         },
                         {
@@ -1684,14 +1755,14 @@
                 "nbTour":"4",
                 "choix":{
                     "nom":"Investissement dans la Recherche ",
-                    "cout":"75000 euros | Nombre de tour : 4",
-                    "desc":"Investissez dans la recherche et le developpement de votre en usine, pour gagner 4 tours en ameliorations.",
+                    "cout":"80000 euros | Nombre de tour : 4",
+                    "desc":"Permet de réduire le temps des améliorations en cours afin de débloquer des nouveaux choix plus rapidement.",
                     "valeurs":[
                         {
                             "path":[
                                 "solde"
                             ],
-                            "val":"-75000",
+                            "val":"-80000",
                             "type":"plusegal"
                         },
                         {
@@ -1708,7 +1779,7 @@
                 "choix":{
                     "nom":"Investissement dans la Recherche ",
                     "cout":"25000 euros | Nombre de tour : 3",
-                    "desc":"Investissez dans la recherche et le developpement de votre en usine, pour gagner 1 tours en ameliorations.",
+                    "desc":"Permet de réduire le temps des améliorations en cours afin de débloquer des nouveaux choix plus rapidement.",
                     "valeurs":[
                         {
                             "path":[
@@ -1731,7 +1802,7 @@
                 "choix":{
                     "nom":"Investissement dans l'entretient",
                     "cout":"10000 euros | Nombre de tour : 2",
-                    "desc":"Rendez votre usine plus propre.",
+                    "desc":"Rendez votre usine plus propre afin d'améliorer le confort de vos employés.",
                     "valeurs":[
                         {
                             "path":[
@@ -1745,7 +1816,7 @@
                                 "Choix",
                                 "avantages"
                             ],
-                            "val":"0.05",
+                            "val":"0.07",
                             "type":"plusegal"
                         }
                     ]
@@ -1761,7 +1832,7 @@
                 "choix":{
                     "nom":"Augmenter le Budget Pub",
                     "cout":"4000 euros /tour | Nombre de tour : 5",
-                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualite.",
+                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualité.",
                     "valeurs":[
                         {
                             "path":[
@@ -1772,7 +1843,7 @@
                             "type":"plusegal"
                         },
                         {
-                            "val":"20",
+                            "val":"10",
                             "type":"nbClients"
                         }
                     ]
@@ -1786,7 +1857,7 @@
                 "choix":{
                     "nom":"Augmenter le Budget Pub",
                     "cout":"2000 euros /tour | Nombre de tour : 3",
-                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualite.",
+                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualité.",
                     "valeurs":[
                         {
                             "path":[
@@ -1811,7 +1882,7 @@
                 "choix":{
                     "nom":"Augmenter le Budget Pub",
                     "cout":"1000 euros /tour | Nombre de tour : 3",
-                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualite.",
+                    "desc":"Augmentez votre budget pub pour en avoir de meilleure qualité.",
                     "valeurs":[
                         {
                             "path":[
@@ -1836,7 +1907,7 @@
                 "choix":{
                     "nom":"Diminuer le Budget Pub",
                     "cout":"-500 euros /tour | Nombre de tour : 3",
-                    "desc":"Diminuez votre budget pub pour liberer des fonds.",
+                    "desc":"Diminuez votre budget pub pour libérer des fonds.",
                     "valeurs":[
                         {
                             "path":[
@@ -1877,13 +1948,13 @@
         "social":[
             {
                 "amelio":"CE",
-                "desc":"Debloquez certains avantages pour le moral de vos employes.",
+                "desc":"Debloquez certains avantages pour le moral de vos employés.",
                 "nbTour":"2",
                 "amelioNecessaire":[]
             },
             {
                 "amelio":"President du CE",
-                "desc":"Debloquez encore plus d'avantages pour vos employes.",
+                "desc":"Debloquez encore plus d'avantages pour vos employés.",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
@@ -1894,7 +1965,7 @@
             },
             {
                 "amelio":"Bon Samaritain",
-                "desc":"Debloquez les meilleurs avantages pour vos employes.",
+                "desc":"Debloquez les meilleurs avantages pour vos employés, ils seront plus motivés.",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
@@ -1907,13 +1978,13 @@
         "production":[
             {
                 "amelio":"Entreprise Dynamique",
-                "desc":"Offrez vous l'acces aux parametres de productions.",
+                "desc":"Débloquez l'accès aux paramètres de productions.",
                 "nbTour":"1",
                 "amelioNecessaire":[]
             },
             {
                 "amelio":"Entreprise Dynamique niv2",
-                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau supérieur.",
                 "nbTour":"3",
                 "amelioNecessaire":[
                     {
@@ -1935,7 +2006,7 @@
             },
             {
                 "amelio":"Entreprise Dynamique niv4",
-                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "desc":"Recherchez comment ameliorez vos lignes de production au niveau supérieur.",
                 "nbTour":"7",
                 "amelioNecessaire":[
                     {
@@ -1946,7 +2017,7 @@
             },
             {
                 "amelio":"Entreprise Dynamique niv5",
-                "desc":"Recherchez comment ameliorez vos lignes de production au niveau superieur.",
+                "desc":"Recherchez comment améliorez vos lignes de production au niveau supérieur.",
                 "nbTour":"8",
                 "amelioNecessaire":[
                     {
@@ -1956,8 +2027,8 @@
                 ]
             },
             {
-                "amelio":"Entreprise Autonome niv1",
-                "desc":"Ayez la possibilite d'ameliorez le premier composant de chaque ligne.",
+                "amelio":"Entreprise Autonome machine 1",
+                "desc":"Ayez la possibilité d'améliorez le premier composant de chaque ligne.",
                 "nbTour":"4",
                 "amelioNecessaire":[
                     {
@@ -1967,46 +2038,46 @@
                 ]
             },
             {
-                "amelio":"Entreprise Autonome niv2",
-                "desc":"Ayez la possibilite d'ameliorez le deuxieme composant de chaque ligne.",
+                "amelio":"Entreprise Autonome machine 2",
+                "desc":"Ayez la possibilité d'améliorez le deuxième composant de chaque ligne.",
                 "nbTour":"5",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome niv1"
+                        "amelio":"Entreprise Autonome machine 1"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome niv3",
-                "desc":"Ayez la possibilite d'ameliorez le troisieme composant de chaque ligne.",
+                "amelio":"Entreprise Autonome machine 3",
+                "desc":"Ayez la possibilité d'améliorez le troisième composant de chaque ligne.",
                 "nbTour":"7",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome niv2"
+                        "amelio":"Entreprise Autonome machine 2"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome niv4",
-                "desc":"Ayez la possibilite d'ameliorez le quatrieme composant de chaque ligne.",
+                "amelio":"Entreprise Autonome machine 4",
+                "desc":"Ayez la possibilité d'améliorez le quatrième composant de chaque ligne.",
                 "nbTour":"8",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome niv3"
+                        "amelio":"Entreprise Autonome machine 3"
                     }
                 ]
             },
             {
-                "amelio":"Entreprise Autonome niv5",
-                "desc":"Ayez la possibilite d'ameliorez le cinquieme composant de chaque ligne.",
+                "amelio":"Entreprise Autonome machine 5",
+                "desc":"Ayez la possibilité d'améliorez le cinquième composant de chaque ligne.",
                 "nbTour":"9",
                 "amelioNecessaire":[
                     {
                         "categorie":"production",
-                        "amelio":"Entreprise Autonome niv4"
+                        "amelio":"Entreprise Autonome machine 4"
                     }
                 ]
             }
