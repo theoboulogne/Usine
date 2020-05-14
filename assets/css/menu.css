@@ -38,4 +38,6 @@ body {
 }
 img {
     margin-top: 3%;
+    height: 30vh;
+    width: auto;
 }
