@@ -1,66 +1,67 @@
+
 .beautiful.progress {
   height: 2vh;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
+ 
 h5 {
   color:white;
 }
-
+ 
 .beautiful.progress.progress-square {
   border-radius: 0px;
 }
-
+ 
 .beautiful.progress.progress-circle {
   border-radius: 500px;
 }
-
+ 
 .beautiful.progress.progress-xs .progress-bar {
   line-height: 1vh;
 }
-
+ 
 .beautiful.progress.progress-xs {
   height: 1vh;
   border-radius: 1px;
 }
-
+ 
 .beautiful.progress .progress-bar.progress-bar-success {
   background-color: #46be8a;
   background-image: none;
 }
-
+ 
 .beautiful.progress .progress-bar.progress-bar-info {
   background-color: #57c7d4;
   background-image: none;
 }
-
+ 
 .beautiful.progress .progress-bar.progress-bar-warning {
   background-color: #f2a654;
   background-image: none;
 }
-
+ 
 .beautiful.progress .progress-bar.progress-bar-danger {
   background-color: #f96868;
   background-image: none;
 }
-
+ 
 .beautiful.progress .progress-sm {
   height: 2vh;
 }
-
+ 
 .beautiful.progress .progress-sm .progress-bar {
   line-height: 2vh;
 }
-
+ 
 .beautiful.progress.progress-lg {
   height: 2vh;
 }
-
+ 
 .beautiful.progress .progress-lg .progress-bar {
   line-height: 2vh;
 }
-
+ 
 .beautiful.progress .progress-bar {
   background-image: none;
   line-height: 2vh;
@@ -78,11 +79,11 @@ h5 {
 #titre {
   padding-left: 50%;
 }
-
+ 
 #head-tire-div {
   height: 50px;
 }
-.jeu { 
+.jeu {
   position: relative;
   z-index: auto;
   height: 0;
@@ -112,7 +113,7 @@ h5 {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   behavior: url(/PIE.htc);
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 .ecriture1{
   color: rgb(49, 47, 47);
@@ -128,7 +129,7 @@ h5 {
   font-size: 1.3vw;
   text-align: center;
 }
-
+ 
 .ecriture-modal-nb{
   color: rgb(49, 47, 47);
   font-size: 1.3vw;
@@ -187,8 +188,8 @@ h5 {
   background-color: rgba(18, 248, 237, 0.9);
 }
 .body{
-  overflow-x: hidden; 
-  overflow-y: hidden; 
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .coche{
   /*margin-left: 80%;*/
@@ -232,11 +233,11 @@ h5 {
 .info{
   margin-top: 10px;
 }
-
+ 
 /*         Ajout des Glyphicons de BootStrap 3         */
 @font-face {
   font-family: 'Glyphicons Halflings';
-
+ 
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
@@ -248,7 +249,7 @@ h5 {
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-
+ 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -289,12 +290,21 @@ h5 {
 .glyphicon-heart:before {
   content: "\e005";
 }
-.modal-modif {
+.modal{
   width: 30%; /* Full width */
   height: auto; /* Full height */
+  margin-top: 10vh;
+  margin-left: 35%;
+  background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
+}
+.modal-score {
+  width: 30%; /* Full width */
+  height: auto; /* Full height */
+  max-height: 60vh;
   margin-top: 20vh;
   margin-left: 35%;
   background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
+  overflow-y: scroll;
 }
 .modal-sm{
   width: 1000px; /* Full width */

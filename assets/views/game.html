@@ -60,7 +60,7 @@
         <div id="modal_Magasin" class="modal modal-modif modal-sm">
             <div class="info">
                 <center>
-                    
+                   
                     <div class="row">
                         <div class="col">
                             <img src="../textures/ligne.png" class="rounded" >
@@ -94,7 +94,7 @@
                             </span>
                             </br>
                             <input id="pannes-nb" type="text" name="quant[2]" class="input-number" value="0" min="0" max="100" style="width:40px;text-align: center;" disabled>
-                            
+                           
                         </div>
                     </div>
                     <br>
@@ -141,34 +141,34 @@
                     <br>
                     <br>
                     <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_Magasin">Fermer</button>
-                </center>   
+                </center>  
             </div>
         </div>
-
+ 
         <div class="col-md-4" id="newTour">
             <button type="button" class="btn btn-primary"><h1 class="text-left">Tour suivant</h1></button>
         </div>
         <div class="cadre fixed-bottom" id="cadre">
         </div>
-        
-        <div id="modal_next" class="modal-modif">
+       
+        <div id="modal_next" class="modal">
             <p class="ecriture-modal" id="text-modal"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_next">Suivant</button>
-            </center>   
+            </center>  
         </div>
-        
-        <div id="modal_jouer" class="modal-modif">
+       
+        <div id="modal_jouer" class="modal">
             <p class="ecriture-modal" id="text-modal-dernier"></p>
             </br>
             <center>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_jouer">Fermer</button>
-            </center>   
+            </center>  
         </div>
-
-        
-        <div id="modal_fin" class="modal">
+ 
+       
+        <div id="modal_fin" class="modal-score my-custom-scrollbar my-custom-scrollbar-primary googlescrollbare ">
             <center>
                 <p class="ecriture-modal">Vous avez <span id="modal-gagnant"></span></p>
                 </br>
@@ -182,10 +182,10 @@
                 <br>
                 <br>
                 <button type="button" class="btn btn-light btn-sm ecriture2" id="bouton_fin">Retourner au menu</button>
-            </center>   
+            </center>  
         </div>
     </div>
-  
+ 
  
    
     <script src="/socket.io/socket.io.js"></script>
@@ -214,3 +214,4 @@
 </body>
  
 </html>
+ 

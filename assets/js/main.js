@@ -114,7 +114,7 @@
         });
 
         socket.on('menu', ()=>{
-            window.href = './'
+            window.location.href = './'
         })
         socket.on('fin', (Scores, Barres, indiceJoueur)=>{
             Affichage.createFin(Scores, Barres, indiceJoueur)

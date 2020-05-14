@@ -57,6 +57,8 @@ app.get('/game', (request, response, next) => {
 
 //On enregistre nos Joueurs, on lance à n joueurs
 let n = 3
+let dureePartie = 4
+
 this.Monde = new Univers(n); // instanciation d'un "Univers" pour générer les infos des ventes et des evenements et stocker les joueurs
 
 io.sockets.on('connection',  (socket) =>{
@@ -80,7 +82,7 @@ io.sockets.on('connection',  (socket) =>{
 
     socket.on('endTurn', (Dossiers, Magasin)=> {
         console.log('------endTurn')
-        if(this.Monde.Joueurs[socket.id].jouer == false && this.Monde.nbTour<4){ // si le joueur n'a pas deja joué
+        if(this.Monde.Joueurs[socket.id].jouer == false && this.Monde.nbTour<dureePartie){ // si le joueur n'a pas deja joué
             this.Monde.Joueurs[socket.id].jouer = true;
             
             //Verification avec stockage cote serveur et application des dossiers correspondant
@@ -159,23 +161,30 @@ io.sockets.on('connection',  (socket) =>{
 
                     //On les envoi avec les différentes infos
                     io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.barres(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
+                
+                }
+                if(this.Monde.nbTour == dureePartie) { // On génère les scores de fin
+                    for(let i in io.sockets.sockets) this.Monde.Joueurs[i].joueur.Update_Mois();
+                    let Scores = this.Monde.calculScore()
+                    let Barres = []
+                    for(let i=0; i<Scores.length; i++){
+                        Barres.push(this.Monde.Joueurs[Scores[i][1]].joueur.barres())
+                    }
+                    this.Monde.FIN = [Scores, Barres]
                 }
             }
         }
         else{
-            if(this.Monde.nbTour>=4){ // fin du jeu, on zappe le dernier envoi du joueur
+            if(this.Monde.nbTour>=dureePartie){ // fin du jeu, on zappe le dernier envoi du joueur
 
-                let Scores = this.Monde.calculScore()
-                let Barres = []
+                let Scores = this.Monde.FIN[0]; // on cherche son indice et on le renvoi
                 let indiceJoueur;
 
                 for(let i=0; i<Scores.length; i++){
                     if(Scores[i][1] == socket.id) indiceJoueur = i;
-                    this.Monde.Joueurs[Scores[i][1]].joueur.Update_Mois();// on passe un tour pour normaliser les barres
-                    Barres.push(this.Monde.Joueurs[Scores[i][1]].joueur.barres())
                 }
 
-                socket.emit('fin', Scores, Barres, indiceJoueur)
+                socket.emit('fin', this.Monde.FIN[0], this.Monde.FIN[1], indiceJoueur)
             }
         }
     });

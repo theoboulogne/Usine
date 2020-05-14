@@ -97,24 +97,23 @@ let CadreScore = (Scores, Barres, indiceJoueur) =>{
 
 let Affichage = (function(){
     return{
-        createFin:(Scores, Barres, indiceJoueur)=>{
-
+        createFin:(Scores, Barres, indice)=>{
             let status = ""
             let max = 0;
             for(let j in Scores){
                 if(Scores[j][0] > max) max = Scores[j][0];
             }
-            if(max == Scores[indiceJoueur][0]) status = "gagné";
+            if(max == Scores[indice][0]) status = "gagné";
             else status = "perdu";
 
             document.getElementById("modal-gagnant").innerHTML = status
             
-            document.getElementById("modal_fin-joueur").appendChild(CadreScore(Scores, Barres, indiceJoueur))
+            document.getElementById("modal_fin-joueur").appendChild(CadreScore(Scores, Barres, indice))
 
             let nb = 0
             let Rows = []
             for(let i=0; i<Scores.length; i++){
-                if(i!=indiceJoueur){
+                if(i!=indice){
                     if(nb%2 == 0){
                         let row = document.createElement('div')
                         row.setAttribute('class', 'row')
@@ -134,6 +133,11 @@ let Affichage = (function(){
 
             document.getElementById('modal_fin').style = "width: 35%;"
             if(Scores.length>2) document.getElementById('modal_fin').style = "width: 20%;"
+
+            document.getElementById('bouton_fin').addEventListener('click', function(){
+                console.log('test')
+                window.location.href = './'
+            })
 
             
             $("#modal_fin").modal({
