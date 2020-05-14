@@ -78,6 +78,12 @@ class Joueur{
 
         this.Lignes = [];
         this.Lignes.push(new Ligne()); // une ligne par défault
+
+
+        this.tabCroissance = [];
+        this.tabSocial = [];
+        this.tabEcologie = [];
+        this.tabProduction = [];
     }
 
     Update_Approvisionnement(){
@@ -440,6 +446,37 @@ class Joueur{
         return [Croissance*100, Social*100, Ecologie*100, Production*100]
 
         //////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    
+    verifSpam(){
+        let barres = this.barres();
+
+        this.tabCroissance.push(barres[0]);
+
+        this.tabSocial.push(barres[1]);
+
+        this.tabEcologie.push(barres[2]);
+
+        this.tabProduction.push(barres[3]);
+
+        let tabTour = [0,0,0,0];
+
+        for(let i = 1; i < this.tabCroissance.length; i++){
+            if(this.tabCroissance[i - 1] == this.tabCroissance[i]) tabTour[0] += 1;
+
+            if(this.tabSocial[i - 1] == this.tabSocial[i]) tabTour[1] += 1;
+
+            if(this.tabEcologie[i - 1] == this.tabEcologie[i]) tabTour[2] += 1;
+
+            if(this.tabProduction[i - 1] == this.tabProduction[i]) tabTour[3] += 1;
+        }
+
+        for(let i = 0; i < barres.length; i++){
+            barres[i] *= Math.pow(0.94, tabTour[i])
+        }
+
+        return barres;
     }
 
     infosAfficher(){
