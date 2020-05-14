@@ -47,13 +47,15 @@ class Composant {
         this.nbRobots = 0;
     }
     Add(type){
-        switch(type){
-            case 0:
-                this.nbEmployes+=1;
-                return true;
-            case 1:
-                this.nbRobots+=1;
-                return true;
+        if(!this.auto){
+            switch(type){
+                case 0:
+                    this.nbEmployes+=1;
+                    return true;
+                case 1:
+                    this.nbRobots+=1;
+                    return true;
+            }
         }
         return false;
     }

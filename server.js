@@ -30,7 +30,7 @@ app.get('/game', (request, response, next) => {
         else n = Param.nb;
 
         if(Param.duree < 2) dureePartie = 2
-        else dureePartie = Param.duree;
+        else dureePartie = Param.duree+1;
 
         this.Monde.changeTaille(n)
     }
