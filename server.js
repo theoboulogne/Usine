@@ -56,7 +56,7 @@ app.get('/game', (request, response, next) => {
 });
 
 //On enregistre nos Joueurs, on lance à n joueurs
-let n = 5
+let n = 3
 this.Monde = new Univers(n); // instanciation d'un "Univers" pour générer les infos des ventes et des evenements et stocker les joueurs
 
 io.sockets.on('connection',  (socket) =>{
