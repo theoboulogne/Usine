@@ -160,7 +160,7 @@ io.sockets.on('connection',  (socket) =>{
                         Generate.AmeliorationDisplay(ameliorations)];
 
                     //On les envoi avec les différentes infos
-                    io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.barres(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
+                    io.sockets.sockets[i].emit('newTurn', evenements, envoiChoix, this.Monde.Joueurs[i].joueur.avantAchat(), this.Monde.Joueurs[i].joueur.verifSpam(), this.Monde.Joueurs[i].joueur.infosAfficher(), this.Monde.Joueurs[i].joueur.LignesDisplay(), this.Monde.Joueurs[i].joueur);
                 
                 }
                 if(this.Monde.nbTour == dureePartie) { // On génère les scores de fin
@@ -168,7 +168,7 @@ io.sockets.on('connection',  (socket) =>{
                     let Scores = this.Monde.calculScore()
                     let Barres = []
                     for(let i=0; i<Scores.length; i++){
-                        Barres.push(this.Monde.Joueurs[Scores[i][1]].joueur.barres())
+                        Barres.push(this.Monde.Joueurs[Scores[i][1]].joueur.verifSpam())
                     }
                     this.Monde.FIN = [Scores, Barres]
                 }
