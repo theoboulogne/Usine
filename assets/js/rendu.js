@@ -242,20 +242,6 @@ class Rendu{
             }
         }
     }
-    
-        /*
-        let Lignes = [{Composant:[{nbEmployes:0, nbRobots:1, auto:false}, {nbEmployes:0, nbRobots:1, auto:false}, {nbEmployes:2, nbRobots:0, auto:false}, {nbEmployes:1, nbRobots:1, auto:false}, {nbEmployes:0, nbRobots:0, auto:true}]}]
-
-        this.GenerationUsine(Lignes);
-
-        
-        let game = this;
-        let loadTest = setInterval(function() { // On attend que toutes nos pièces soient 
-            if (game.loadCheck()) {  // chargées avant de commencer à les afficher
-                clearInterval(loadTest);
-            }
-        }, 500);
-        */
 
     /////////////////////////////////////////////////////////////////////////
     // Génération des unités avec leurs coordonnées selon les données du jeu
