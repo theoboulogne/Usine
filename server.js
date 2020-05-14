@@ -190,7 +190,14 @@ io.sockets.on('connection',  (socket) =>{
     });
     socket.on('disconnect', ()=>{
         socket.emit('menu');
-        this.Monde = new Univers(n);
+
+        let nombre = 0
+        for(let i in io.sockets.sockets) {
+            nombre++;
+        }
+        if(nombre == 0){
+            this.Monde = new Univers(n);
+        }
     });
 
     console.log('Fin Connection Client (coté serveur)')

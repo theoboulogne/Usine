@@ -1,12 +1,11 @@
 .Info {
     position:absolute;
-    margin-top:6%;
+    margin-top:2%;
     margin-left: 40%;
     width: 20%;
 }
-
+ 
 body {
-    background-image:url(https://www.usinefutur.fr/wp-content/uploads/2018/10/Usine-du-Futur-Nouvelle-Aquitaine-1-1200x563.jpg);
     margin:0;
     color:black;
     background-color:white;
@@ -15,20 +14,28 @@ body {
     background-size: cover;
     overflow: hidden;
 }
-    
+   
 .ecriture{
-    color: beige;
-    font-size: 1vw;
+    color: rgb(255, 255, 255);
+    font-size: 2vw;
 }
 .ecriture_titre{
-    color: beige;
-    font-size: 3vw;
+    color: rgb(255, 255, 255);
+    font-size: 4vw;
     margin-top: 2%;
-    font-family: monospace;
+    font-family: Impact, fantasy;
+    margin-top: 7%;
+    ;
 }
 #play{
-    margin-top: 3%;
+    font-size: 500%;
+    font-family: Impact, fantasy;
+    width: 100%;
+    margin-top: 10%;
 }
 .pseudo_formulaire{
     width: 72%;
+}
+img {
+    margin-top: 3%;
 }

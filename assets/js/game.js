@@ -80,10 +80,12 @@ let DivavecBarres = (Barres, indiceJoueur)=>{
 let CadreScore = (Scores, Barres, indiceJoueur) =>{
 
     let ScoreJoueur = document.createElement("div")
+    let centre = document.createElement('center')
     let TitreScore = document.createElement("h2")
     TitreScore.setAttribute("class","ecriture1")
     TitreScore.appendChild(document.createTextNode("Score : "+String(Scores[indiceJoueur][0])))
-    ScoreJoueur.appendChild(TitreScore)
+    centre.appendChild(TitreScore)
+    ScoreJoueur.appendChild(centre)
     let passageligne = document.createElement("br")
     ScoreJoueur.appendChild(passageligne)
     let divBarresJoueur = DivavecBarres(Barres, indiceJoueur);
@@ -130,9 +132,6 @@ let Affichage = (function(){
             for(let i=0; i<Rows.length; i++){
                 document.getElementById("modal_fin-tab").appendChild(Rows[i])
             }
-
-            document.getElementById('modal_fin').style = "width: 35%;"
-            if(Scores.length>2) document.getElementById('modal_fin').style = "width: 20%;"
 
             document.getElementById('bouton_fin').addEventListener('click', function(){
                 console.log('test')
