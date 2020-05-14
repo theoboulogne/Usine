@@ -3,6 +3,7 @@ let applyValeur = (valeur,  Joueur, Ventes) => {
         Joueur.amelioration.reduire(valeur.val);
     }
     else if(valeur.type=="upgrade"){
+        Joueur.retirer_ouvriers()
         for(let i=0; i<Joueur.Lignes.length; i++){
             Joueur.Lignes[i].Composant[valeur.val - 1].auto = true;
         }

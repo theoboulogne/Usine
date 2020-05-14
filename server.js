@@ -26,7 +26,13 @@ app.get('/game', (request, response, next) => {
         n = Param.nb
         dureePartie = Param.duree
 
-        this.Monde.changeTaille(Param.nb)
+        if(Param.nb < 1) n = 1
+        else n = Param.nb;
+
+        if(Param.duree < 2) dureePartie = 2
+        else dureePartie = Param.duree;
+
+        this.Monde.changeTaille(n)
     }
 
     response.sendFile(__dirname + '/assets/views/game.html')
