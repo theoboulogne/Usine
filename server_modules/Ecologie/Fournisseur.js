@@ -1,10 +1,10 @@
 class Fournisseur {
     constructor(){
-        this.prix; // prix au KW/H
-        this.pollution; // pollution produite par KW/H fournit
-        this.coupure; // risques de coupure / possibilité de panne
+        this.prix; // prix
+        this.pollution; // pollution produite
+        this.coupure; // taux de coupure
     }
-    uptime(uptimeMax){//Méthode de calcul de l'uptime sur le mois
+    uptime(uptimeMax){// Nombre de jours actifs sur le mois
         return (1-this.coupure)*uptimeMax
     }
     uptime_Auxilliaire(uptimeMax, Principal){

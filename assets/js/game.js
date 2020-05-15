@@ -1,4 +1,4 @@
-let DivavecBarres = (Barres, indiceJoueur)=>{
+let DivavecBarres = (Barres, indiceJoueur)=>{ //Génération des barres du tableau des scores
 
     let DivBarres = document.createElement("div")
 
@@ -77,7 +77,7 @@ let DivavecBarres = (Barres, indiceJoueur)=>{
     return DivBarres
 }
 
-let CadreScore = (Scores, Barres, indiceJoueur) =>{
+let CadreScore = (Scores, Barres, indiceJoueur) =>{ //Génération du cadre d'un joueur dans le tableau des scores
 
     let ScoreJoueur = document.createElement("div")
     let centre = document.createElement('center')
@@ -99,21 +99,21 @@ let CadreScore = (Scores, Barres, indiceJoueur) =>{
 
 let Affichage = (function(){
     return{
-        createFin:(Scores, Barres, indice)=>{
+        createFin:(Scores, Barres, indice)=>{ // Créatioon et affichage du menu de fin du tableau des scores
             let status = ""
             let max = 0;
             for(let j in Scores){
                 if(Scores[j][0] > max) max = Scores[j][0];
             }
             if(max == Scores[indice][0]) status = "gagné";
-            else status = "perdu";
+            else status = "perdu"; // on récupère le status gagné ou perdu
 
             document.getElementById("modal-gagnant").innerHTML = status
             
-            document.getElementById("modal_fin-joueur").appendChild(CadreScore(Scores, Barres, indice))
+            document.getElementById("modal_fin-joueur").appendChild(CadreScore(Scores, Barres, indice)) // On ajoute le cadre de ce joueur
 
             let nb = 0
-            let Rows = []
+            let Rows = [] // On affiche le cadre des autres joueurs
             for(let i=0; i<Scores.length; i++){
                 if(i!=indice){
                     if(nb%2 == 0){
@@ -133,14 +133,12 @@ let Affichage = (function(){
                 document.getElementById("modal_fin-tab").appendChild(Rows[i])
             }
 
-            document.getElementById('bouton_fin').addEventListener('click', function(){
-                console.log('test')
+            document.getElementById('bouton_fin').addEventListener('click', function(){ // on ajoute l'event listener sur le bouton 'retourner au menu'
                 window.location.href = './'
             })
 
-            document.getElementById('modal_fin').setAttribute('style', '')
-            
-            $("#modal_fin").modal({
+            document.getElementById('modal_fin').setAttribute('style', '') 
+            $("#modal_fin").modal({// on affiche le menu des scores
                 escapeClose: false,
                 clickClose: false,
                 showClose: false,
@@ -148,13 +146,13 @@ let Affichage = (function(){
             });
             
         },
-        updateMagasin:(boutique)=>{
+        updateMagasin:(boutique)=>{ // on change les valeurs du magasin
             document.getElementById("lignes-nb").value=  boutique.boutique.lignes;
             document.getElementById("pannes-nb").value=  boutique.boutique.pannes;
             document.getElementById("robots-nb").value=  boutique.boutique.robots;
             document.getElementById("employes-nb").value=  boutique.boutique.employes;
         },
-        set_addEvent:(boutique, infos)=>{
+        set_addEvent:(boutique)=>{ // on ajoute les evenements du magasin
             document.getElementById("bouton_Magasin").addEventListener("click",function(){
                 $.modal.close();
             })
@@ -191,10 +189,10 @@ let Affichage = (function(){
                 document.getElementById("employes-nb").value =  boutique.boutique.employes;
             })
         },
-        SetBarre:(id, pourcentage)=>{
+        SetBarre:(id, pourcentage)=>{ // on change le niveau d'une barre
             document.getElementById(id).setAttribute("style","width:"+String(pourcentage)+"%");
         },
-        SetSolde:(valeur)=>{
+        SetSolde:(valeur)=>{ // on formalise et affiche le solde
             let solde = Math.trunc(valeur)
             let soldeString = ""
     
@@ -226,7 +224,7 @@ let Affichage = (function(){
         SetPub:(valeur)=>{
             document.getElementById("pub").innerHTML=valeur
         },
-        modal:(tab)=>{
+        modal:(tab)=>{ // On affiche un menu avec un texte fournit en entrée, séparé sur plusieurs menu si demandé
             if(tab.length != 0){
                     let i=1
                     let text_element = document.getElementById("text-modal")
@@ -272,7 +270,7 @@ let Affichage = (function(){
                 })
             }
         },    
-        addSlick:()=>{
+        addSlick:()=>{ // on ajoute le slider
             $(document).ready(function(){
                 $('.cadre').slick({
                     infinite: false,
@@ -282,14 +280,14 @@ let Affichage = (function(){
                 });
             });
         },
-        removeSlick:()=>{
+        removeSlick:()=>{ // on vide le slider
             while (document.getElementById('cadre').firstChild) {
                 document.getElementById('cadre').removeChild(document.getElementById('cadre').lastChild);
             }
             $('cadre').slick('unslick');
             document.getElementById('cadre').className = "cadre"
         },
-        addNewSlick:(name, description, cout, categorie)=>{
+        addNewSlick:(name, description, cout, categorie)=>{ // on ajoute un choix dans le slider
             let NewSlick = document.createElement("div")
             NewSlick.setAttribute("class", categorie+" "+"my-custom-scrollbar my-custom-scrollbar-primary"+" "+"back_slick googlescrollbare")
             let titre_ = document.createElement("h2")
@@ -351,6 +349,6 @@ let Affichage = (function(){
 
             document.getElementById("cadre").appendChild(NewSlick)
         },
-        isValider:(Categorie)=> $("input[name='"+Categorie+"']:checked").val()
+        isValider:(Categorie)=> $("input[name='"+Categorie+"']:checked").val() // on regarde si un choix est validé
     }
 })();

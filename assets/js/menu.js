@@ -1,6 +1,6 @@
 let Menu = (function(){
     return{
-        //fonction lier au bouton play
+        //fonction liée au bouton play
         Play : () => {
             event.preventDefault();
             let nb = document.getElementById("nb").value;
@@ -11,6 +11,6 @@ let Menu = (function(){
     }
 })();
 (function () {
-    let BoutonPlay = document.getElementById("play");
+    let BoutonPlay = document.getElementById("play"); // on rajoute l'event listener
     BoutonPlay.addEventListener("click", event=> Menu.Play());
 })();

@@ -1,4 +1,4 @@
-class Repetition{
+class Repetition{ // Classe permettant de définir le nombre de tour avant le prochain choix du genre et d'enregistrer les choix effectues
     constructor(){
         this.tableau = new Array();
     }

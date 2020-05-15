@@ -1,3 +1,5 @@
+// Classe permetant de gérer les améliorations afin de définir le delai avant réapparition ainsi que de savoir si l'amélioration est terminée pour l'apparition de nouveaux choix
+
 class Amelioration{
     constructor(){
         this.tableau = new Array();

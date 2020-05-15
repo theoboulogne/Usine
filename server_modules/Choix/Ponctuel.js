@@ -1,4 +1,4 @@
-class Ponctuel{
+class Ponctuel{ // Classe permettant d'enregistrer les choix effectues
     constructor(){
         this.ChoixEffectue = new Array();
     }

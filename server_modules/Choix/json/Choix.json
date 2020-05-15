@@ -258,7 +258,7 @@
                                 "type":"plusegal"
                             },
                             {
-                               "val":"30",
+                               "val":"20",
                                "type":"nbClients"
                             }
                         ]

@@ -4,17 +4,16 @@ const utils = require('../utils')
 class Composant {
 
     constructor(){
-        // a deplacer dans une fonction qui prend un json en entree si possible
     /* Variables Fixes par rapport au composant sélectionné */
         this.carte=(""); // nom et description a l'affichage
-        this.auto = false; // besoin d'un employé pour fonctionner ?
-        this.consomationNRJ = 0.003;// remonter la consomation par production
-        this.dechets = 0.026;// remonter dechets de ce composant
-        this.pollution = 0.09;// remonter pollution de ce composant
-        this.production = 0.04;// remonter nbEmployes*production ou production + (nbEmployes*prod/employe) // si pas d'employés on bloque la machine
-        this.accident = 0.002;// remonter accident * (nbEmployes + (2*nbRobots))
+        this.auto = false;
+        this.consomationNRJ = 0.003;
+        this.dechets = 0.026;
+        this.pollution = 0.09;
+        this.production = 0.04;
+        this.accident = 0.002;
     /* Variables qui évoluent */
-        this.nbEmployes = 0;//on Stocke le nombre d'assignés, varie
+        this.nbEmployes = 0;//on Stocke le nombre d'ouvriers assignés, varie
         this.nbRobots = 0;
     }
     accident_normal(securite){
@@ -24,7 +23,7 @@ class Composant {
         return ((1-this.accident)*securiteInfo.employes - 0.5)/10
     }
     production_normal(qualTravail){ 
-        return this.production * qualTravail; // 8.5
+        return this.production * qualTravail;
     }
     dechets_normal(qualTravail){
         return this.dechets * ((12 - qualTravail)) * Math.pow(1.12, this.nbRobots);
@@ -33,11 +32,11 @@ class Composant {
         return this.pollution * ((12 - qualTravail)) * Math.pow(1.12, this.nbRobots);
     }
 
-    production_auto(){ // 3.5 et 1.12 a mettre en variable en fonction d'un vars.Choix (efficacite robots)
-        return (this.production) * (Math.pow(2.8,2)); //12
+    production_auto(){
+        return (this.production) * (Math.pow(2.8,2));
     }
     dechets_auto(){
-        return this.dechets * 1.5;// on met pas la puissance pour dechets car la machine automatique est plus performante
+        return this.dechets * 1.5;
     }
     pollution_auto(){
         return this.pollution * (Math.pow(3.5,2))/3;
@@ -59,16 +58,7 @@ class Composant {
         }
         return false;
     }
-    Upgrade(){//utiliser un tableau global en fonction du composant pour tout les parametres
-        this.carte=("");// nom a mettre avec un switch et class a faire
-        this.auto = true;
-        this.consomationNRJ = 4;
-        this.dechets = 6;
-        this.pollution = 80;
-        this.accident = 0.04;
-        this.production = 50;
-    }
-    Accident(secu){ // génération d'une proba d'accident
+    Accident(secu){ // génération d'une proba d'accident et si il y a accident on regarde si il y a une panne
         if(utils.proba(this.proba_Accident(secu))){
             if(utils.proba(this.proba_Accident(secu)/2)){
                 return 2;
@@ -77,11 +67,11 @@ class Composant {
         }
         return 0;
     }
-    proba_Accident(securite){        
+    proba_Accident(securite){ // on calcule la proba d'accident pour la générer ensuite
         if(this.auto){
             return this.accident * 2;
         }
-        else {
+        else { // on calcule en fonction des choix pour les ouvriers
             let securiteInfo = securite
             if(securite.employes < 0.5) securiteInfo.employes = 0.5;
             if(securite.robots < 0.5) securiteInfo.robots = 0.5;

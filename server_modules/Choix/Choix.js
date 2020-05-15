@@ -1,3 +1,6 @@
+
+//Cette fonction permet d'appliquer les différents choix, en modifiant les données dans le joueur tout en gérant des cas 'spéciaux'
+
 let applyValeur = (valeur,  Joueur, Ventes) => {
     if(valeur.type=="R&D"){
         Joueur.amelioration.reduire(valeur.val);

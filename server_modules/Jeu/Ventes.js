@@ -2,7 +2,7 @@ class Ventes{
     constructor(n){
         //global
         this.prixVente = 45;
-        this.nbClientsTotal=n*1200;
+        this.nbClientsTotal=n*1000;
     }
  
     partDeMarche(tab/* tout les joueurs */){  // tout les calcul de cette fonction sont invente
@@ -32,7 +32,7 @@ class Ventes{
         return part;
     }
    
-    ventesJoueurs(tab){
+    ventesJoueurs(tab){ // on vient calculer la variation de stock en fonction des parts de marché et du nombre de clients
         let part = this.partDeMarche(tab);
         let indice = 0;
         for (let i in tab){

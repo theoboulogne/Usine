@@ -1,7 +1,6 @@
 //Serveur - CIRious Game
 
 //Constantes
-
 const port = 800;
 const express = require('express');
 const app = express();
@@ -22,39 +21,39 @@ app.get('/', (req, res, next) => {
 app.get('/game', (request, response, next) => {
     Param = request.query // on récupère les paramètres
 
-    if(this.Monde.NbJoueurs == 0){
+    if(this.Monde.NbJoueurs == 0){ // Si c'est le premier joueur on change les paramètres
 
-        if(Param.nb != ""){
-            if(Param.nb < 1) n = 1
-            else n = parseInt(Param.nb, 10);
+        if(Param.nb != ""){ // Si le paramètre est définit
+            if(Param.nb < 1) n = 1 // on met un minimum de 1
+            else n = parseInt(Param.nb, 10); // sinon on prend la valeur donnée
         }
 
-        if(Param.duree != ""){
-            if(Param.duree < 2) dureePartie = 2
-            else dureePartie = parseInt(Param.duree, 10)+1;
+        if(Param.duree != ""){ // si paramètre définit
+            if(Param.duree < 2) dureePartie = 2 // on définit une durée minimale de 2 tours
+            else dureePartie = parseInt(Param.duree, 10)+1; // sinon on prend sa valeur
         }
 
-        this.Monde.changeTaille(n)
+        this.Monde.changeTaille(n) // On change la taille en fonction de n
     }
-
-    response.sendFile(__dirname + '/assets/views/game.html')
+    response.sendFile(__dirname + '/assets/views/game.html') // On envoi ensuite le fichier html
 });
 
 //On enregistre nos Joueurs, on lance à n joueurs
 let n = 1
+//On enregistre la durée de la partie pour avoir une durée variable
 let dureePartie = 25
-
-this.Monde = new Univers(n); // instanciation d'un "Univers" pour générer les infos des ventes et des evenements et stocker les joueurs
+// instanciation d'un "Univers" pour générer les infos des ventes et des evenements et stocker les joueurs
+this.Monde = new Univers(n); 
 
 io.sockets.on('connection',  (socket) =>{
     console.log('Debut Connection Client (coté serveur)')
 
-    if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) {
+    if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) { // Si on a trop de joueurs déjà connectés
         console.log('send disconnect au joueur car trop de joueurs déjà connectés')
-        socket.disconnect(); 
+        socket.disconnect(); // on déconnecte le nouveau joueur
     }
     else {
-        console.log('add joueur au monde')
+        console.log('add joueur au monde') // sinon on ajoute le joueur au jeu
         this.Monde.addJoueur(socket.id);
         console.log(this.Monde);
         // on informe le client que la connection est effectuée
@@ -64,17 +63,19 @@ io.sockets.on('connection',  (socket) =>{
         if(this.Monde.NbJoueurs >= this.Monde.NbJoueursMax) io.emit('start');
     }
 
-
+    //Evenement de passage de tour
     socket.on('endTurn', (Dossiers, Magasin)=> {
         console.log('------endTurn')
-        if(this.Monde.Joueurs[socket.id].jouer == false && this.Monde.nbTour<dureePartie){ // si le joueur n'a pas deja joué
-            this.Monde.Joueurs[socket.id].jouer = true;
+        if(this.Monde.Joueurs[socket.id].jouer == false && this.Monde.nbTour<dureePartie){ // si le joueur n'a pas deja joué et que la partie n'est pas terminée
+            this.Monde.Joueurs[socket.id].jouer = true; // on définit le joueur comme ayant joué
             
             //Verification avec stockage cote serveur et application des dossiers correspondant
             for(let i=0; i<Dossiers.length; i++){
                 for(let j=0; j<this.Monde.Joueurs[socket.id].choix.length; j++){
                     for(let k=0; k<this.Monde.Joueurs[socket.id].choix[j].length; k++){
+                        //On vérifie que la catégorie est présente
                         if(this.Monde.Joueurs[socket.id].choix[j][k].categorie == Dossiers[i].categorie || (this.Monde.Joueurs[socket.id].choix[j][k].categorie == undefined && Dossiers[i].categorie=='evenement')){
+                            //On vérifie qu'une amélioration avec ce nom est présente
                             let bool = false;
                             if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == Dossiers[i].nom) bool = true;
                             else if(this.Monde.Joueurs[socket.id].choix[j][k].amelio == undefined){
@@ -82,6 +83,7 @@ io.sockets.on('connection',  (socket) =>{
                                 else if(this.Monde.Joueurs[socket.id].choix[j][k].choix.nom == Dossiers[i].nom) bool = true;
                             }
                             if(bool){
+                                // Si le choix est bien enregistré coté serveur on l'applique
                                 Choix.apply(this.Monde.Joueurs[socket.id].choix[j][k].choix, this.Monde.Joueurs[socket.id].joueur, this.Monde.Vente)
                                 switch(j){
                                     case 1://ponctuel - on retire la possibilite de ravoir ce choix
@@ -103,7 +105,7 @@ io.sockets.on('connection',  (socket) =>{
                 }
             }
 
-            //Validation Magasin :
+            //Validation et application des achats
             if(Magasin != []) this.Monde.Joueurs[socket.id].joueur.apresAchat(Magasin);
 
             //Vérification fin tour
@@ -112,20 +114,22 @@ io.sockets.on('connection',  (socket) =>{
                 if(!this.Monde.Joueurs[i].jouer) finTour = false;
             }
 
-            if(finTour){
+            if(finTour){//Si tout les joueurs ont joués
+                console.log('Fin du Tour')
 
-                //Global
+                //On augmente le nombre de tour
                 this.Monde.nbTour++;
-                //Génération des évenements + Application
+                //Génération des évenements (pour tout les joueurs en même temps)
                 let evenements = Generate.Evenement(this.Monde.nbTour);
                 let evenementsChoix = this.Monde.addEvenement(evenements, evenements.length);
                 evenements = Generate.EvenementDisplay(evenements);
 
-                for(let i in io.sockets.sockets) {
+                for(let i in io.sockets.sockets) { // On vient mettre a jour les données de tout les joueurs sur le tour en fonction des données des evenements, des choix et des achats
                     this.Monde.Joueurs[i].jouer = false;
                     this.Monde.Joueurs[i].joueur.Update_Mois();
                 }
 
+                //On viens calculer la vente du joueur
                 this.Monde.Vente.ventesJoueurs(this.Monde.Joueurs);
 
                 for(let i in io.sockets.sockets) {
@@ -161,11 +165,10 @@ io.sockets.on('connection',  (socket) =>{
         }
         else{
             if(this.Monde.nbTour>=dureePartie){ // fin du jeu, on zappe le dernier envoi du joueur
-
-                let Scores = this.Monde.FIN[0]; // on cherche son indice et on le renvoi
+                let Scores = this.Monde.FIN[0]; 
                 let indiceJoueur;
 
-                for(let i=0; i<Scores.length; i++){
+                for(let i=0; i<Scores.length; i++){// on cherche son indice et on le renvoi pour l'affichage
                     if(Scores[i][1] == socket.id) indiceJoueur = i;
                 }
 
@@ -173,10 +176,10 @@ io.sockets.on('connection',  (socket) =>{
             }
         }
     });
-    socket.on('disconnect', ()=>{
+    socket.on('disconnect', ()=>{ // on redirige sur le menu
         socket.emit('menu');
 
-        let nombre = 0
+        let nombre = 0 // si il n'y a plus de joueurs connectés on reinitialise la partie
         for(let i in io.sockets.sockets) {
             nombre++;
         }
@@ -190,131 +193,3 @@ io.sockets.on('connection',  (socket) =>{
 
 server.listen(port);
 console.log('server connected');
-
-
-
-/*
------------------------------------------------------------------------------------
-                                To-DO List :
-|------Légende:------|
-| " - " = à faire    |
-| " * " = implémenté |
-|--------------------|
-
-    Fonctionnalités principales :
-
-/-/ Environnement :
-*    Energie (methode calcul pollution)
-*    Machines (pollution + dechets)
--   Respect des Normes (à définir avec les choix + Evenements randoms)
-/-/ Vie Sociale :
-*    Employe (qualTravail + avantages)
-*    Securité (employe.accident + Energie.auxilliaire.securite?A VOIR? + choix)
-/-/ Ventes : à définir
--   Stock de produits
--   Image de marque
--   Parts de marché
--   Pubs
--   Commerciaux (impact sur les ventes)
-/-/ Production :
-*    Nb(Employes + Robots)
-*    cadence de travail(qualTravail - employe.accident + Stocks)
-*    Machine(Nb, qualité)
-*    uptimeGlobal
-/-/ 'Magasin' :
--   nbEmployés / nbRobots
--   Production visée 
--   Prix de vente
--   Gestion de la vente : Commerciaux ou Pubs ou a voir
-
-    Autre :
-
-- créer class accident pour mieux gérer tout les accidents, les pannes et la sécurité
-- Evaluer tout ce qui est améliorable ou non
-
-
------------------------------------------------------------------------------------
-
-        -///- Fonctionnement du jeu :
-    
---------------------------------------------------
-
-    -//- Initialisation des différentes classes :
-    
---------------------------------------------------
-
-----------------------------------------
- -/- Joueur :
--------------
-uptimeMax = 30; Nombre de jours dans un mois, utilisé pour l'initialisation du courant etc..
-solde = 1000000;
-stock = 0; produits en stock
-
-nbEmployes = 15; Nombre total d'ouvriers (Employes + Robots) 
-nbRobots = 0;
-nbEmployes_dispo = 15; Nombre d'ouvriers non assigné (Employes + Robots) :
-nbRobots_dispo = 0;
-
-Eco (empreinte écologique sur le tour)
-Empreinte (empreinte écologique totale)
-    avec empreinte écologique composée de : (dechet, pollution)
-Courant (Gestion de la consommation de l'usine)
-    avec un Fournisseur principal et auxilliaire chacun composé de : (pollution, prix, coupure)
-Lignes (Gestion des Lignes de production) = [] 
-    avec une Ligne au début
-----------------------------------------
-
-----------------------------------------
- -/- Ligne :
-------------
-coutReparation = 8000;  cout fixe, en cas de panne
-accident = 0; nombres d'accidents au total sur cette ligne de production
-boolaccident = false; accident sur la ligne de prod
-boolpanne = false; panne sur la ligne de prod
-Composant = []
-    avec 5 Composant
-----------------------------------------
-
-----------------------------------------
- -/- Composant :
- ---------------
-this.nbEmployes = 0; on Stocke le nombre d'ouvriers assignés, varie au cours d'une journée
-this.nbRobots = 0;
-carte=("");  Caractéristiques fixes au composant
-auto = false; besoin d'un employé sur un composant pour faire marcher la machine ou non
-consomationNRJ = 0.003;
-dechets = 8;
-pollution = 40;
-production = 30;
-this.accident = 0.02;
-----------------------------------------
-
---------------------------------------------------
-
-    -//- Fonctionnement d'un tour
-
---------------------------------------------------
-
-- Calcul du temps de fonctionnement de l'énergie en jours en fonction 
-  de la probabilité de panne des fournisseurs
-- On lance l'update de chaque jour en fonction du nombre de jours calculés, 
-  on y effectue sur les 24h :
-    - à 6h et 14h :
-        - on assigne les ouvriers(employés+robots) à chaque composant pour un maximum de 2 par composant
-    - à 12h et 18h :
-        - on retire les employés ( rajouter un système de régulation pour les robots.. )
-    - à chaque heure :
-        - on calcule la consommation énergetique en fonction des ouvriers assignés et des machines
-        - On actualise chaque Ligne de production :
-            - On vérifie qu'il y a assez d'ouvriers pour que la Ligne de production fonctionne
-            - On remonte la production, les déchets et la pollution en fonction du nombre d'ouvriers assignés
-            - On génère a chaque heure une probabilité :
-                - d'accident (coupe la production sur l'heure à partir du composant avec l'accident) 
-                - de panne (nécessite une réparation manuelle) 
-        - On récupère/enregistre les infos écologiques
-- On actualise le solde en fonction du cout de l'énergie et des salaires 
-  (rajouter cout de production + cout fixe + etc)
-
------------------------------------------------------------------------------------
-
-*/

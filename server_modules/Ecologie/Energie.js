@@ -3,7 +3,7 @@ const Fournisseur = require('./Fournisseur')
 
 class Energie {
     constructor(){//Fournisseurs :
-        this.Principal = new Fournisseur(); // Renvoi vers un fournisseur
+        this.Principal = new Fournisseur(); 
         this.Auxilliaire = new Fournisseur();
     }
     solde_NRJ1(uptimeMax){

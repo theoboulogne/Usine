@@ -2,7 +2,6 @@ const utils = require('../utils')
 const fs = require('fs');
 
 //Chargement des données à partir des fichiers en mémoire en amount pour éviter les problèmes de latence :
-//tout mettre dans une seule variable globale
 let rawdata = fs.readFileSync(__dirname+'/json/Choix.json');
 let ameliorations = JSON.parse(rawdata).ameliorations;
 let repetition = JSON.parse(rawdata).repetition;
@@ -10,6 +9,11 @@ let ponctuel = JSON.parse(rawdata).ponctuel;
 
 rawdata = fs.readFileSync(__dirname+'/json/Evenement.json');
 let evenement = JSON.parse(rawdata).evenement;
+
+
+
+//Le module permet globalement de générer les différents choix possibles en vérifiant si les conditions d'apparition du choix sont remplies et en générant la proba
+// il permet egalement de générer la version affichable du choix pour le joueur
 
 module.exports = {
     initAmelioration : () => Object.getOwnPropertyNames(ameliorations),
