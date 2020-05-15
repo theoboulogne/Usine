@@ -77,7 +77,7 @@ class Univers{
             let score = barres.reduce(reducer); // on somme le tableau
      
             for (let j in barres){
-                if(barres[j] < 10){ // si une barre est en dessou de 10% c'est perdu
+                if(barres[j] < 5){ // si une barre est en dessou de 5% c'est perdu
                     score *= 0;
                 }
                 else{  // on multiplie par un coefficient proportionel au % de chaque barre
@@ -85,11 +85,11 @@ class Univers{
                 }
             }
      
-            let Moula = Math.trunc(this.Joueurs[i].joueur.solde / 100000);  // on prend en compte l'argent du solde final
+            let Argent = Math.trunc(this.Joueurs[i].joueur.solde / 100000);  // on prend en compte l'argent du solde final
      
-            if(Moula != 0){
-                for(let j = 0; j < Math.abs(Moula); j++){  // on ajoute (ou retire) les points correspondants
-                    score += ((Moula / Math.abs(Moula)) * 20);
+            if(Argent != 0){
+                for(let j = 0; j < Math.abs(Argent); j++){  // on ajoute (ou retire) les points correspondants
+                    score += ((Argent / Math.abs(Argent)) * 20);
                 }
             }
      

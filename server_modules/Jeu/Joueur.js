@@ -64,9 +64,7 @@ class Joueur{
 
         this.solde = 1000000;// Initialisation des ventes
         this.soldePrec = 1000000;
-        this.pub = 0;
-        this.pubPrec = 0;
-
+        
         this.PrevAccidents = 0;
         this.production = 1;
         this.nbEmployes = 7;// Initialisation de la production
@@ -418,7 +416,6 @@ class Joueur{
             if(Croissance_Pub < 0) Croissance_Pub = 0
             if(Croissance_Pub > 1) Croissance_Pub = 1
             Croissance_Pub *= 0.35
-            if(this.pubPrec>1000) Croissance_Pub = 0.35
         }
         else indiceSOLDE += 0.35
 

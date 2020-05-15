@@ -15,9 +15,7 @@ class Ventes{
  
         for(let i in tab){//parcourt des joueurs
             // on rassemble les couts de pub avec le budget pub global
-            part.push((tab[i].joueur.pub + tab[i].joueur.Choix.solde) / 1000) * tab[i].joueur.pollution * tab[i].joueur.Choix.avantages;
-            tab[i].joueur.pubPrec = tab[i].joueur.pub;
-            tab[i].joueur.pub = 0;
+            part.push((tab[i].joueur.Choix.solde) / 1000) * tab[i].joueur.pollution * tab[i].joueur.Choix.avantages;
         }
  
         let imageDeMarqueTotal = part.reduce(reducer);

@@ -51,8 +51,6 @@
                             }
                         }
     
-                        console.log(choix)
-    
                         setTimeout(function(){
                             socket.emit('endTurn', choix, Game.Magasin.boutique);
                         }, 50) // Léger delai pour éviter de valider le tour suivant en même temps            
@@ -63,11 +61,6 @@
 
         socket.on('newTurn', (Events, Choix, Magasin, Barres, Infos, Lignes, joueur) => {
             console.log('Event - newTurn')
-            console.log(joueur)
-            console.log(Barres)
-            console.log(Choix)
-            console.log(Lignes)
-            console.log(Magasin)
 
             Affichage.SetBarre("economie", Barres[0])
             Affichage.SetBarre("social", Barres[1])
@@ -82,8 +75,6 @@
 
             Game.Graphique.GenerationUsine(Lignes);
 
-            console.log('Events : ')
-            console.log(Events)
             Affichage.modal(Events)
 
             Game.Dossiers = []

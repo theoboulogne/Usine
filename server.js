@@ -35,11 +35,6 @@ app.get('/game', (request, response, next) => {
         }
 
         this.Monde.changeTaille(n)
-        console.log(this.Monde)
-        console.log(Param.nb)
-        console.log(Param.duree)
-        console.log(n)
-        console.log(dureePartie)
     }
 
     response.sendFile(__dirname + '/assets/views/game.html')
