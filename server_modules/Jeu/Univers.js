@@ -28,7 +28,7 @@ class Univers{
        for(let idx in this.Joueurs) {
             for(let i=0; i<taille; i++){
                 if(Evenements[i].choix != undefined){
-                    ChoixRenvoyes.push(Evenements[i]);
+                    ChoixRenvoyes = [Evenements[i]];
                     //l'evenement génère un choix ponctuel dans choixRenvoyes
                 }
                 else{ //l'evenement affecte uniquement des variables

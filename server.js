@@ -23,20 +23,23 @@ app.get('/game', (request, response, next) => {
     Param = request.query // on récupère les paramètres
 
     if(this.Monde.NbJoueurs == 0){
-        n = Param.nb
-        dureePartie = Param.duree
 
         if(Param.nb != ""){
             if(Param.nb < 1) n = 1
-            else n = Param.nb;
+            else n = parseInt(Param.nb, 10);
         }
 
         if(Param.duree != ""){
             if(Param.duree < 2) dureePartie = 2
-            else dureePartie = Param.duree+1;
+            else dureePartie = parseInt(Param.duree, 10)+1;
         }
 
         this.Monde.changeTaille(n)
+        console.log(this.Monde)
+        console.log(Param.nb)
+        console.log(Param.duree)
+        console.log(n)
+        console.log(dureePartie)
     }
 
     response.sendFile(__dirname + '/assets/views/game.html')

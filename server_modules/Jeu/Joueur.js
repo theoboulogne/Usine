@@ -372,9 +372,7 @@ class Joueur{
         let Production_Ligne = 0.05 + ((this.Lignes.length / 5) * 0.15)
         if (Production_Ligne > 0.2) Production_Ligne = 0.2
         if (Production_Ligne < 0) Production_Ligne = 0
-
-
-
+        
         let Production = Production_Cadence + Production_Composant + Production_Employes_inactifs + Production_Securite + Production_Ligne
 
         
@@ -411,8 +409,10 @@ class Joueur{
         let indiceSOLDE = 0.5;
         let Croissance_Pub = 0;
 
+        if(this.Choix.solde < 1000) this.Choix.solde = 1000
+        if(this.Choix.solde > 10000) this.Choix.solde = 10000
+
         if(this.stock != 0 && this.solde>0){
-            if(this.Choix.solde < 1000) this.Choix.solde = 1000
 
             Croissance_Pub = this.Choix.solde / 13000
             if(Croissance_Pub < 0) Croissance_Pub = 0

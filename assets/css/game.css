@@ -298,12 +298,8 @@ h5 {
   background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
 }
 .modal-score {
-  width: 30%; /* Full width */
-  height: auto; /* Full height */
   max-height: 60vh;
   margin-top: 20vh;
-  margin-left: 35%;
-  background-color: rgba(255, 255, 255, 0.979); /* Black w/ opacity */
   overflow-y: scroll;
 }
 .modal-sm{

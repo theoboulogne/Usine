@@ -138,6 +138,7 @@ let Affichage = (function(){
                 window.location.href = './'
             })
 
+            document.getElementById('modal_fin').setAttribute('style', '')
             
             $("#modal_fin").modal({
                 escapeClose: false,
